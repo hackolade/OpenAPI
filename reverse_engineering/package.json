@@ -1,0 +1,12 @@
+{
+  "name": "OpenAPI",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Hackolade",
+  "dependencies": {
+    "js-yaml": "^3.13.0",
+    "node-uuid": "^1.4.7"
+  },
+  "type": "file",
+  "installed": false
+}

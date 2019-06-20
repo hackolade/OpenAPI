@@ -1,0 +1,32 @@
+{
+	"name": "response",
+	"erdAbbreviation": "<rspns>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"defaultValues": {
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"properties": [],
+		"dependencies": [],
+		"ignore_z_value": true,
+		"minProperties": "",
+		"snippet": "response",
+		"subtype": "snippetChildrenOnly",
+		"hackoladeMeta": {
+			"disableAdd": true,
+			"resetInsteadOfDelete": true,
+			"disableAppend": true
+		},
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": []
+	},
+	"subtypes": {
+		"snippetChildrenOnly": {
+			"childValueType": {}
+		}
+	}
+}

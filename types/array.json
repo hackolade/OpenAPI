@@ -1,0 +1,45 @@
+{
+	"name": "array",
+	"erdAbbreviation": "<arr>",
+	"dtdAbbreviation": "[...]",
+	"parentType": "array",
+	"sample": [],
+	"useSample": true,
+	"default": true,
+	"defaultValues": {
+		"properties": [],
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"additionalItems": true,
+		"minItems": "",
+		"maxItems": "",
+		"uniqueItems": false,
+		"subtype": "schema" 
+	},
+	"subtypes": {
+		"schema": {
+			"childValueType": [
+				"string",
+				"number",
+				"integer",
+				"boolean",
+				"array",
+				"object",
+				"reference",
+				"multiple"
+			]
+		},
+		"anyParameter": {
+			"childValueType": [
+				"parameter (path)",
+				"parameter (query)",
+				"parameter (header)",
+				"parameter (cookie)"
+			]
+		}
+	}
+}

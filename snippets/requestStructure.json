@@ -1,0 +1,15 @@
+{
+	"name": "requestStructure",
+	"properties": [{
+		"name": "parameters",
+		"type": "array",
+		"subtype": "anyParameter"
+	}, {
+		"name": "requestBody",
+		"type": "requestBody"
+	}, {
+		"name": "callbacks",
+		"type": "operationObject",
+		"subtype": "callback"
+	}]
+}

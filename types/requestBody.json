@@ -1,0 +1,36 @@
+{
+	"name": "requestBody",
+	"erdAbbreviation": "<request>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"defaultValues": {
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"properties": [],
+		"dependencies": [],
+		"ignore_z_value": true,
+		"minProperties": "",
+		"snippet": "requestBody",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": [],
+		"subtype": "media",
+		"hackoladeMeta": {
+			"disableAdd": false,
+			"disableDelete": false,
+			"disableAppend": true,
+			"resetInsteadOfDelete": true,
+			"disableChoices": true
+		}
+	},
+	"subtypes": {
+		"media": {
+			"childValueType": [
+				"media"
+			]
+		}
+	}
+}

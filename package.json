@@ -1,0 +1,64 @@
+{
+	"name": "OpenAPI",
+	"version": "0.1.0",
+	"versionDate": "2019-06-20",
+	"author": "hackolade",
+	"engines": {
+		"hackolade": "3.3.0",
+		"hackoladePlugin": "1.0.0"
+	},
+	"contributes": {
+		"target": {
+			"applicationTarget": "OPENAPI",
+			"title": "OpenAPI",
+			"versions": [
+				"3.0.2"
+			]
+		},
+		"features": {
+			"nestedCollections": {
+				"level": 1
+			},
+			"disableMultipleTypes": false,
+			"enableReverseEngineering": {
+				"jsonDocument": true,
+				"jsonSchema": true,
+				"ddl": false,
+				"xsd": false,
+				"plugin": true 
+			},
+			"disableDenormalization": true,
+			"enableForwardEngineering": {
+				"jsonDocument": true,
+				"jsonSchema": true,
+				"plugin": true
+			},
+			"disablePatternField": false,
+			"disableChoices": {
+				"anyOf": false,
+				"oneOf": false,
+				"not": false
+			},
+			"enableJsonType": false,
+			"disableNamingConvention": {
+				"entityLevel": true,
+				"containerLevel": true,
+				"fieldLevel": {
+					"componentObject": true
+				}
+			},
+			"disableChildren": {
+				"entityLevel": true
+			},
+			"disableDefinitions": {
+				"internal": true
+			},
+			"disableRelationships": true,
+			"disableJsonPreview": false,
+			"enableErdToggle": true,
+			"enableStackedNestedCollections": true
+		}
+	},
+	"description": "Hackolade plugin for OpenAPI",
+	"disabled": false
+}

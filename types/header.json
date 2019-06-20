@@ -1,0 +1,36 @@
+{
+	"name": "header",
+	"erdAbbreviation": "<header>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"defaultValues": {
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"properties": [],
+		"dependencies": [],
+		"ignore_z_value": true,
+		"minProperties": "",
+		"snippet": "parameter",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": [],
+		"subtype": "structuralSchema",
+		"hackoladeMeta": {
+		}
+	},
+	"subtypes": {
+		"structuralSchema": {
+			"childValueType": [
+				"string",
+				"number",
+				"integer",
+				"boolean",
+				"array",
+				"object"
+			]
+		}
+	}
+}

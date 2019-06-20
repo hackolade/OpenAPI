@@ -1,0 +1,22 @@
+{
+	"name": "string",
+	"erdAbbreviation": "<str>",
+	"dtdAbbreviation": "{ABC}",
+	"useSample": true,
+	"default": true,
+	"defaultValues": {
+		"minLength": "",
+		"maxLength": "",
+		"pattern": "",
+		"default": "",
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"enum": [],
+		"sample": "",
+		"mode": ""
+		}
+}

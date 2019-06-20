@@ -1,0 +1,227 @@
+{
+	"model": {
+		"modelName": "New resource model",
+		"dbVersion": "3.0.2",
+		"dbVendor": "OpenAPI"
+	},
+	"container": {
+		"name": "/path"
+	},
+	"collection": {
+		"collectionName": "get",
+		"entityType": "request",
+		"snippet": "requestStructure",
+		"subtype": "requestBody"
+	},
+	"nestedCollection": {
+		"collectionName": "200",
+		"entityType": "response",
+		"snippet": "responseStructure",
+		"subtype": "response"
+	},
+	"field": {
+		"hackoladeMeta": {
+			"valueDependencies": [
+				{
+					"value": {
+						"disableAdd": false
+					},
+					"dependency": {
+						"key": "childType",
+						"value": "componentObject"
+					}
+				},{
+					"value": {
+						"disableAppend": true,
+						"disableDelete": true,
+						"disableAdd": true,
+						"disableReference": true
+					},
+					"dependency": {
+						"type" : "and",
+						"values": [{
+							"key": "childType",
+							"value": "expression"
+						}, {
+							"level": "parent",
+							"key": "childType",
+							"value": "link"
+						}]
+					}
+				},
+				{
+					"value": {
+						"disableAppend": true,
+						"disableReference": false
+					},
+					"dependency": {
+						"level": "parent",
+						"key": "subtype",
+						"value": "structuralSchema"
+					}
+				},{
+					"value": {
+						"disableAdd": false,
+						"disableDelete": false,
+						"disableAppend": true,
+						"resetInsteadOfDelete": true,
+						"disableChoices": true
+					},
+					"dependency": [
+						{
+							"key": "subtype",
+							"value": "anyParameter"
+						}
+					]
+				},{
+					"value": {
+						"disableDelete": false,
+						"disableAppend": false,
+						"resetInsteadOfDelete": false,
+						"displayNameFromField": false
+					},
+					"dependency": {
+							"level": "parent",
+							"key": "childType",
+							"value": "componentObject"
+					}
+				},
+				{
+					"value": {
+						"disableReference": true
+					},
+					"dependency": {
+						"key": "childType",
+						"value": "media"
+					}
+				},
+				{
+					"value": {
+						"disableAppend": false,
+						"disableDelete": false,
+						"disableReference": false,
+						"resetInsteadOfDelete": false
+					},
+					"dependency": {	
+						"level": "parent",
+						"key": "subtype",
+						"value": "schema"
+					}
+				},{
+					"value": {
+						"disableAppend": true,
+						"disableReference": true
+					},
+					"dependency": [{
+						"type": "and",
+						"values": [{
+							"key": "childType",
+							"value": "object"
+						},{
+							"type": "not",
+							"values": {
+								"key": "subtype",
+								"value": "schema"
+							}
+						}]
+					}]
+				}
+			]
+		},
+		"name": {
+			"value": "New field",
+			"valueDependencies": [{
+				"value": "requestBody",
+				"dependency": {
+					"key": "childType",
+					"value": "requestBody" 
+				}
+			},{
+				"value": "MIMEtype/subtype",
+				"dependency": {
+					"level": "parent",
+					"key": "subtype",
+					"value": "media" 
+				}
+			},{
+				"value": "response",
+				"dependency": {
+					"level": "parent",
+					"key": "subtype",
+					"value": "response" 
+				}
+			},{
+				"value": "parameterName",
+				"dependency": {
+					"level": "parent",
+					"key": "subtype",
+					"value": "anyParameter" 
+				}
+			},{
+				"value": "schema",
+				"dependency": {
+					"level": "parent",
+					"key": "subtype",
+					"value": "structuralSchema" 
+				}
+			},{
+				"value": "schema",
+				"dependency": {
+					"level": "parent",
+					"key": "type",
+					"value": "subschema" 
+				}
+			}]
+		},
+		"structureType": {
+			"valueDependencies": [{
+				"value": true,
+				"dependency": [
+					{
+						"key": "subtype",
+						"value": "anyParameter" 
+					},
+					{
+						"type": "and",
+						"values": [{
+							"key": "childType",
+							"value": "object"
+						},{
+							"type": "not",
+							"values": [{
+								"key": "subtype",
+								"value": "schema"
+							}]
+						}]
+					}]
+			}]
+		},
+		"schemeType": "apiKey",
+		"required": {
+			"valueDependencies": [{
+				"value": true,
+				"dependency": 
+					{
+						"key": "childType",
+						"value": "parameter (path)"
+					}
+			}],
+			"value": false
+		}
+	},
+	"patternField": {
+		"name": "^New Pattern Field$"
+	},
+	"multipleField": {
+		"primaryKey": false
+	},
+	"subschema": {},
+	"arrayItem": {},
+	"choice": {},
+	"relationship": {},
+	"user": {},
+	"view": {
+		"viewOn": "",
+		"pipeline": ""
+	}
+}

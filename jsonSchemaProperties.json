@@ -1,0 +1,4 @@
+{
+	"unneededFieldProps": ["collectionName", "name", "users", "indexes", "collectionUsers", "additionalPropertieserties", "subTypes", "structureType"],
+	"removeIfPropsNegative": ["partitionKey", "sortKey"]
+}

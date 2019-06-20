@@ -1,0 +1,9 @@
+{
+	"map": "{...}",
+	"list": "[...]",
+	"string": "{ABC}",
+	"number": "{123}",
+	"bool": "{0/1}",
+	"bytes": "{BYTES}",
+	"null": "{null}"
+}

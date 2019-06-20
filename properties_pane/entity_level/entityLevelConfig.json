@@ -1,0 +1,517 @@
+/*
+* Copyright © 2016-2017 by IntegrIT S.A. dba Hackolade.  All rights reserved.
+*
+* The copyright to the computer software herein is the property of IntegrIT S.A.
+* The software may be used and/or copied only with the written permission of 
+* IntegrIT S.A. or in accordance with the terms and conditions stipulated in 
+* the agreement/contract under which the software has been supplied. 
+
+
+In order to define custom properties for any object's properties pane, you may copy/paste from the following,
+making sure that you maintain a proper JSON format.
+
+			{
+				"propertyName": "Simple text",
+				"propertyKeyword": "simpletextProp",
+				"shouldValidate": false,
+				"propertyType": "text",
+				"sampleGen": "&containerName|&entityName|&random|<value>"
+			},
+			{
+				"propertyName": "Text area",
+				"propertyKeyword": "textareaProp",
+				"propertyValidate": false,
+				"propertyTooltip": "Popup for multi-line text entry",
+				"propertyType": "details",
+				"template": "textarea"
+			},
+			{
+				"propertyName": "Dropdown selection",
+				"propertyKeyword": "dropdownProp",
+				"shouldValidate": false,
+				"propertyTooltip": "Select from list of options",
+				"propertyType": "select",
+				"options": [
+					"Option 1",
+					"Option 2",
+					"Option 3",
+					"Option 4"
+				]
+			},
+			{
+				"propertyName": "Numeric",
+				"propertyKeyword": "numericProp",
+				"propertyValidate": true,
+				"propertyType": "numeric",
+				"valueType": "number",
+				"allowNegative": false,
+				"sampleGen": "&containerName|&entityName|&random|<value>"
+			},
+			{
+				"propertyName": "Checkbox",
+				"propertyKeyword": "checkboxProp",
+				"shouldValidate": false,
+				"propertyType": "checkbox"
+			},
+			{
+				"propertyName": "Group",
+				"propertyType": "group",
+				"propertyKeyword": "grpProp",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "Simple Grp Text",
+						"propertyKeyword": "simpleGrpText",
+						"shouldValidate": false,
+						"propertyTooltip": "",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Group Number",
+						"propertyKeyword": "grpNumber",
+						"propertyValidate": true,
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false
+					}
+				]
+			},
+// “groupInput” can have the following states - 0 items, 1 item, and many items.
+// “blockInput” has only 2 states - 0 items or 1 item. 
+// This gives us an easy way to represent it as an object and not as an array internally which is beneficial for processing 
+// and forward-engineering in particular.
+			{
+				"propertyName": "Block",
+				"propertyType": "block",
+				"propertyKeyword": "grpProp",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "Simple Grp Text",
+						"propertyKeyword": "simpleGrpText",
+						"shouldValidate": false,
+						"propertyTooltip": "",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Group Number",
+						"propertyKeyword": "grpNumber",
+						"propertyValidate": true,
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false
+					}
+				]
+			},
+			{
+				"propertyName": "Field List",
+				"propertyKeyword": "keyList",
+				"shouldValidate": false,
+				"propertyType": "fieldList",
+				"template": "orderedList"
+			}, 
+			{
+				"propertyName": "List with attribute",
+				"propertyKeyword": "keyListOrder",
+				"shouldValidate": false,
+				"propertyType": "fieldList",
+				"template": "orderedList",
+				"attributeList": [
+					"ascending",
+					"descending"
+				]
+			}
+
+*/
+
+[
+	{
+		"lowerTab": "Details",
+		"structure": [
+			{
+				"propertyName": "Request operation",
+				"propertyKeyword": "collectionName",
+				"propertyTooltip": "Select from list of operations",
+				"propertyType": "select",
+				"options": [
+					"get",
+					"put",
+					"post",
+					"delete",
+					"options",
+					"head",
+					"patch",
+					"trace",
+					"$ref"
+				],
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				}
+			},
+			{
+				"propertyName": "Response",
+				"propertyKeyword": "collectionName",
+				"propertyTooltip": "Select from list of options",
+				"propertyType": "select",
+				"options": [
+					"1XX",
+					"100",
+					"101",
+					"2XX",
+					"200",
+					"201",
+					"202",
+					"203",
+					"204",
+					"205",
+					"3XX",
+					"300",
+					"301",
+					"302",
+					"303",
+					"304",
+					"305",
+					"307",
+					"4XX",
+					"400",
+					"401",
+					"402",
+					"403",
+					"404",
+					"405",
+					"406",
+					"407",
+					"408",
+					"409",
+					"410",
+					"411",
+					"412",
+					"413",
+					"414",
+					"415",
+					"417",
+					"426",
+					"5XX",
+					"500",
+					"501",
+					"502",
+					"503",
+					"504",
+					"505",
+					"default"
+				],
+				"dependency": {
+					"key": "entityType",
+					"value": "response"
+				}
+			},
+			{
+				"propertyKeyword": "additionalProperties",
+				"propertyName": "Additional Properties",
+				"propertyType": "checkbox",
+				"hidden": true
+			},
+			{
+				"propertyName": "schema",
+				"propertyKeyword": "pathItemSchema",
+				"shouldValidate": false,
+				"propertyType": "fieldList",
+				"template": "orderedList",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "collectionName",
+							"value": "$ref"
+						},{
+							"key": "entityType",
+							"value": "request"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "tags",
+				"propertyType": "group",
+				"propertyKeyword": "tags",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "tag",
+						"propertyKeyword": "tag",
+						"shouldValidate": false,
+						"propertyTooltip": "",
+						"propertyType": "text"
+					}
+				],
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				}
+			},
+			{
+				"propertyName": "summary",
+				"propertyKeyword": "summary",
+				"shouldValidate": false,
+				"propertyType": "text",
+				"sampleGen": "&containerName|&entityName|&random|<value>",
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				}
+			},
+			{
+				"propertyName": "externalDocs",
+				"propertyType": "block",
+				"propertyKeyword": "externalDocs",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				},
+				"structure": [
+					{
+						"propertyName": "url",
+						"propertyKeyword": "externalDocsUrl",
+						"shouldValidate": true,
+						"propertyTooltip": "",
+						"propertyType": "text",
+						"regex": "^([A-Za-z][A-Za-z0-9+.-]*:/{0,3})?[A-Za-z0-9{}\\[\\]._~%!$&\\'()*+,;=:@/-]*([?][A-Za-z0-9._~%!$&\\'()*+,;=:@/?-]*)?(#[A-Za-z0-9._~%!$&\\'()*+,;=:@/?-]*)?$"
+					},
+					{
+						"propertyName": "description",
+						"propertyKeyword": "externalDocsDescription",
+						"shouldValidate": false,
+						"propertyTooltip": "",
+						"propertyType": "details",
+						"template": "textarea"
+					},
+					{
+						"propertyName": "extensions",
+						"propertyType": "group",
+						"propertyKeyword": "scopesExtensions",
+						"shouldValidate": true,
+						"propertyTooltip": "",
+						"structure": [
+							{
+								"propertyName": "pattern",
+								"propertyKeyword": "extensionPattern",
+								"shouldValidate": false,
+								"propertyType": "text"
+							},
+							{
+								"propertyName": "value",
+								"propertyKeyword": "extensionValue",
+								"propertyValidate": false,
+								"propertyTooltip": "Popup for multi-line text entry",
+								"propertyType": "details",
+								"template": "textarea",
+								"markdown": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"propertyName": "operationId",
+				"propertyKeyword": "operationId",
+				"shouldValidate": false,
+				"propertyType": "text",
+				"sampleGen": "&containerName|&entityName|&random|<value>",
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				}
+			},
+			{
+				"propertyName": "deprecated",
+				"propertyKeyword": "deprecated",
+				"shouldValidate": false,
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				}
+			},
+			{
+				"propertyName": "security",
+				"propertyType": "group",
+				"propertyKeyword": "security",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern {name}",
+						"propertyKeyword": "securityRequirementName",
+						"shouldValidate": false,
+						"propertyTooltip": "",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "operation",
+						"propertyKeyword": "securityRequirementOperation",
+						"shouldValidate": false,
+						"propertyTooltip": "",
+						"propertyType": "multipleText"
+					}
+				],
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				}
+			},
+			{
+				"propertyName": "servers",
+				"propertyType": "group",
+				"propertyKeyword": "servers",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"dependency": {
+					"key": "entityType",
+					"value": "request"
+				},
+				"structure": [
+					{
+						"propertyName": "url",
+						"propertyKeyword": "serverURL",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"propertyFormat": "uri"
+					},
+					{
+						"propertyName": "description",
+						"propertyKeyword": "serverDescription",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea"
+					},
+					{
+						"propertyName": "variables",
+						"propertyType": "group",
+						"propertyKeyword": "serverVariables",
+						"shouldValidate": true,
+						"propertyTooltip": "",
+						"structure": [
+							{
+								"propertyName": "name",
+								"propertyKeyword": "serverVariableName",
+								"shouldValidate": false,
+								"propertyTooltip": "",
+								"propertyType": "text"
+							},
+							{
+								"propertyName": "enum",
+								"propertyType": "group",
+								"propertyKeyword": "serverVariableEnum",
+								"shouldValidate": true,
+								"propertyTooltip": "",
+								"structure": [
+									{
+										"propertyName": "value",
+										"propertyKeyword": "serverVariableEnumValue",
+										"shouldValidate": false,
+										"propertyTooltip": "",
+										"propertyType": "text"
+									}
+								]
+							},
+							{
+								"propertyName": "default",
+								"propertyKeyword": "serverVariableDefault",
+								"shouldValidate": false,
+								"propertyTooltip": "",
+								"propertyType": "text"
+							},
+							{
+								"propertyName": "description",
+								"propertyKeyword": "serverVariableDescription",
+								"shouldValidate": false,
+								"propertyTooltip": "",
+								"propertyType": "details",
+								"template": "textarea"
+							},
+							{
+								"propertyName": "extensions",
+								"propertyType": "group",
+								"propertyKeyword": "scopesExtensions",
+								"shouldValidate": true,
+								"propertyTooltip": "",
+								"structure": [
+									{
+										"propertyName": "pattern",
+										"propertyKeyword": "extensionPattern",
+										"shouldValidate": false,
+										"propertyType": "text"
+									},
+									{
+										"propertyName": "value",
+										"propertyKeyword": "extensionValue",
+										"propertyValidate": false,
+										"propertyTooltip": "Popup for multi-line text entry",
+										"propertyType": "details",
+										"template": "textarea",
+										"markdown": false
+									}
+								]
+							}
+						]
+					},
+					{
+						"propertyName": "extensions",
+						"propertyType": "group",
+						"propertyKeyword": "scopesExtensions",
+						"shouldValidate": true,
+						"propertyTooltip": "",
+						"structure": [
+							{
+								"propertyName": "pattern",
+								"propertyKeyword": "extensionPattern",
+								"shouldValidate": false,
+								"propertyType": "text"
+							},
+							{
+								"propertyName": "value",
+								"propertyKeyword": "extensionValue",
+								"propertyValidate": false,
+								"propertyTooltip": "Popup for multi-line text entry",
+								"propertyType": "details",
+								"template": "textarea",
+								"markdown": false
+							}
+						]
+					}
+				]
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": false,
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				]
+			}
+		]
+	}
+]

@@ -1,0 +1,30 @@
+{
+	"name": "securityScheme",
+	"erdAbbreviation": "<security>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"default": true,
+	"defaultValues": {
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"properties": [],
+		"dependencies": [],
+		"minProperties": "",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": [],
+		"hackoladeMeta": {
+			"disableAdd": true
+		},
+		"subtype": "snippetChildrenOnly"
+	},
+	"subtypes": {
+		"snippetChildrenOnly": {
+			"childValueType": {}
+		}
+	}
+}

@@ -1,0 +1,77 @@
+{
+	"name": "object",
+	"erdAbbreviation": "<obj>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"default": true,
+	"defaultValues": {
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"properties": [],
+		"dependencies": [],
+		"minProperties": "",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"additionalPropControl": "Boolean",
+		"additionalPropertiesObjectType": "integer",
+		"additionalPropertiesIntegerFormat": "int32",
+		"enum": [],
+		"subtype": "schema"
+	},
+	"subtypes": {
+		"schema": {
+			"childValueType": [
+				"string",
+				"number",
+				"integer",
+				"boolean",
+				"array",
+				"object",
+				"reference",
+				"multiple"
+			]
+		},
+		"encoding": {
+			"childValueType": [
+				"encoding"
+			]
+		},
+		"media": {
+			"childValueType": [
+				"media"
+			]
+		},
+		"example": {
+			"childValueType": [
+				"example"
+			]
+		},
+		"header": {
+			"childValueType": [
+				"header"
+			]
+		},
+		"link": {
+			"childValueType": [
+				"link"
+			]
+		},
+		"snippetChildrenOnly": {
+			"childValueType": {}
+		},
+		"requestBody": {
+			"childValueType": [
+				"requestBody"
+			]
+		},
+		"response": {
+			"childValueType": [
+				"response"
+			]
+		}
+	}
+}

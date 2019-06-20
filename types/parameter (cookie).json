@@ -1,0 +1,40 @@
+{
+	"name": "parameter (cookie)",
+	"erdAbbreviation": "<param>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"default": false,
+	"structureType": false,
+	"defaultValues": {
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"properties": [],
+		"dependencies": [],
+		"ignore_z_value": true,
+		"minProperties": "",
+		"snippet": "parameter",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": [],
+		"subtype": "structuralSchema",
+		"parameterName": "parameterName",
+		"hackoladeMeta": {
+			"displayNameFromField": "parameterName"
+		}
+	},
+	"subtypes": {
+		"structuralSchema": {
+			"childValueType": [
+				"string",
+				"number",
+				"integer",
+				"boolean",
+				"array",
+				"object"
+			]
+		}
+	}
+}

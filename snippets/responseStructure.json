@@ -1,0 +1,20 @@
+{
+	"name": "responseStructure",
+	"properties": [{
+		"name": "response",
+		"type": "response",
+		"properties": [{
+			"name": "headers",
+			"type": "object",
+			"subtype": "header"
+		}, {
+			"name": "content",
+			"subtype": "media",
+			"type": "object"
+		},{
+			"name": "links",
+			"type": "object",
+			"subtype": "link"
+		}]
+	}]
+}

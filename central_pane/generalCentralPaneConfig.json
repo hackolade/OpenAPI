@@ -1,0 +1,13 @@
+{
+    "tabs": {
+        "top": "path",
+        "bottom": "name"
+    },
+    "order": {
+        "nestedCollection": {
+            "orderBy": "collectionName",
+            "orderType": "ascending"
+        }
+    }
+
+}

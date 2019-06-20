@@ -1,0 +1,5 @@
+{
+    "menu_label": "OpenAPI File",
+    "name": "openapi",
+    "extensions": ["json", "yml", "yaml"]
+}

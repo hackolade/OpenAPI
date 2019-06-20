@@ -1,0 +1,27 @@
+{
+	"name": "callback",
+	"erdAbbreviation": "<callback>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"default": true,
+	"defaultValues": {
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"properties": [],
+		"dependencies": [],
+		"minProperties": "",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": [],
+		"subtype": "snippetChildrenOnly"
+	},
+	"subtypes": {
+		"snippetChildrenOnly": {
+			"childValueType": {}
+		}
+	}
+}

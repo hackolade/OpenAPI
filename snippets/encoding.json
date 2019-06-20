@@ -1,0 +1,10 @@
+{
+	"name": "encoding",
+	"subtype": "snippetChildrenOnly",
+	"parentType": "document",
+	"properties": [{
+		"name": "headers",
+		"type": "object",
+		"subtype": "header"
+	}]
+}

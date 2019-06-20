@@ -1,0 +1,26 @@
+{
+	"name": "definitions",
+	"erdAbbreviation": "<doc>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"defaultValues": {
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"snippet": "definitions",
+		"properties": [],
+		"dependencies": [],
+		"ignore_z_value": true,
+		"minProperties": "",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": []
+	},
+	"subtypes": {
+		"snippetChildrenOnly": {
+			"childValueType": {}
+		}
+	}
+}

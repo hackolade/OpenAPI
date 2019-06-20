@@ -1,0 +1,98 @@
+{
+	"name": "operationObject",
+	"erdAbbreviation": "<obj>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"default": false,
+	"structureType": true,
+	"defaultValues": {
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"dependencies": [],
+		"ignore_z_value": true,
+		"minProperties": "",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": [],
+		"structureType": true,
+		"properties": [],
+		"hackoladeMeta": {
+			"disableAdd": false,
+			"disableDelete": false,
+			"disableAppend": true,
+			"resetInsteadOfDelete": true,
+			"disableChoices": true
+		}
+	},
+	"subtypes": {
+		"snippetChildrenOnly": {
+			"childValueType": {}
+		},
+		"request": {
+			"childValueType": [
+				"requestBody"
+			]
+		},
+		"media": {
+			"childValueType": [
+				"media"
+			]
+		},
+		"header": {
+			"childValueType": [
+				"header"
+			]
+		},
+		"example": {
+			"childValueType": [
+				"example"
+			]
+		},
+		"response": {
+			"childValueType": [
+				"response"
+			]
+		},
+		"link": {
+			"childValueType": [
+				"link"
+			]
+		},
+		"callback": {
+			"childValueType": [
+				"callback"
+			]
+		},
+		"expression": {
+			"childValueType": [
+				"expression"
+			]
+		},
+		"securityScheme": {
+			"childValueType": [
+				"securityScheme"
+			]
+		},
+		"schema": {
+			"childValueType": [
+				"string",
+				"number",
+				"integer",
+				"boolean",
+				"array",
+				"object"
+			]
+		},
+		"anyParameter": {
+			"childValueType": [
+				"parameter (path)",
+				"parameter (query)",
+				"parameter (header)",
+				"parameter (cookie)"
+			]
+		}
+	}
+}
