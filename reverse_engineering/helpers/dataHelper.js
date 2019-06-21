@@ -39,6 +39,7 @@ const handleObject = (func, object) => {
 	}, {});
 }
 
+const resolveReference = ref => ref.replace('#/components','#/definitions');
 
 const getObjectProperties = (propsToClean, object) => {
 	if (!object) {
@@ -48,10 +49,47 @@ const getObjectProperties = (propsToClean, object) => {
 		if (propsToClean.includes(key)) {
 			return obj;
 		}
+		if (key === '$ref') {
+			return Object.assign({}, obj, {[key]: resolveReference(object[key])});
+		}
 		return Object.assign({}, obj, {[key]: object[key]});
 	}, {});
 	return Object.assign({}, getExtensionsObject(object), filteredObject);
 }
+
+const getServersData = (servers) => {
+	if (!Array.isArray(servers)) {
+		return [];
+	}
+
+	return servers.reduce((accum, server) => {
+		if (!server.url) {
+			return accum;
+		}
+		
+		const variables = server.variables ? getServersVariables(server.variables) : [];
+		return [...accum, {
+			serverURL: server.url,
+			serverDescription: server.description,
+			serverVariables: variables,
+			scopesExtensions: getExtensions(server)
+		}]
+	}, []);
+};
+
+const getServersVariables = (variables) => {
+	return Object.keys(variables).map(variable => {
+		const variableData = variables[variable];
+		return {
+			serverVariableName: variable,
+			serverVariableEnum: variableData.enum.map(enumVal => ({serverVariableEnumValue: enumVal})),
+			serverVariableDefault: variableData.default,
+			serverVariableDescription: variableData.description,
+			scopesExtensions: getExtensions(variables)
+		}
+	}, []);
+}
+
 const handleDataByConfig = (data, config) => {
 	const getContact = (contact) => ({
 		contactName: contact.name,
@@ -83,48 +121,12 @@ const handleDataByConfig = (data, config) => {
 		};
 	};
 
-	const getServersData = (servers) => {
-		if (!Array.isArray(servers)) {
-			return [];
-		}
-
-		return servers.reduce((accum, server) => {
-			if (!server.url) {
-				return accum;
-			}
-			
-			const variables = server.variables ? getServersVariables(server.variables) : [];
-			return [...accum, {
-				GUID: commonHelper.getNewId(),
-				serverURL: server.url,
-				serverDescription: server.description,
-				serverVariables: variables,
-				scopesExtensions: getExtensions(server)
-			}]
-		}, []);
-	};
-
-	const getServersVariables = (variables) => {
-		return Object.keys(variables).map(variable => {
-			const variableData = variables[variable];
-			return {
-				GUID: commonHelper.getNewId(),
-				serverVariableName: variable,
-				serverVariableEnum: variableData.enum.map(enumVal => ({serverVariableEnumValue: enumVal})),
-				serverVariableDefault: variableData.default,
-				serverVariableDescription: variableData.description,
-				scopesExtensions: getExtensions(variables)
-			}
-		}, []);
-	}
-
 	const getSecurityData = (security = []) => {
 		return security.reduce((accumulator, item) => {
 			const subItems = Object.keys(item).reduce((accum, key) => {
 				return [
 					...accum, 
 					{
-						GUID: commonHelper.getNewId(),
 						securityRequirementName: key,
 						securityRequirementOperation: item[key]
 					}
@@ -304,9 +306,12 @@ const handleExpression = (data) => {
 const handleLink = (data) => {
 	const requestBody = handleExpression(data.requestBody);
 	const parameters = handleObject(handleExpression, data.parameters);
+	const server = getServersData([data.server]) || [];
+
 	return Object.assign({}, data, {
 		type: 'link',
 		subtype: 'expression',
+		server: server[0],
 		properties: {
 			parameters: {
 				type: 'operationObject',
@@ -486,68 +491,76 @@ const handleSchemaChoices = (schema, fieldOrder) => {
 	return Object.assign({}, schema, resolvedChoices, {properties: schemaProps});
 }
 
+const handleSchemaExample = (schemaType, example) => {
+	if (schemaType === 'object' || schemaType === 'array') {
+		return JSON.stringify(example);
+	}
+	return example;
+}
+const handleSchemaXml = (data) => ({
+	xmlName: data.name,
+	xmlNamespace: data.namespace,
+	xmlPrefix: data.prefix,
+	xmlAttribute: data.attribute,
+	xmlWrapped: data.wrapped,
+	xmlExtensions: getExtensions(data)
+});
+
+const handleAdditionalProperties = (schema) => {
+	const data = schema.additionalProperties;
+	if (!data) {
+		return schema;
+	}
+	if (typeof data === "object") {
+		if (data.format) {
+			return Object.assign({}, schema, {
+				additionalPropControl: 'Object',
+				additionalPropertiesObjectType: data.type,
+				additionalPropertiesIntegerFormat: data.format
+			});
+		}
+		return Object.assign({}, schema, {
+			additionalPropControl: 'Object',
+			additionalPropertiesObjectType: data.type
+		});
+	} else {
+		return Object.assign({}, schema, {
+			additionalPropControl: 'Boolean',
+			additionalProperties: !!data
+		})
+	}
+}
+
+const handleSchemaProperty = (property, data) => {
+	switch(property) {
+		case 'xml':
+			return handleSchemaXml(data);
+		case '$ref':
+			return resolveReference(data);
+		default:
+			if (commonHelper.CHOICES.find(choice => data[choice])) {
+				return handleSchemaProps(data);
+			}
+			return data;
+	}
+};
+
+const setMissedType = (schema) => {
+	if (!schema.type && (schema.properties || schema.patternProperties ||
+		commonHelper.CHOICES.find(choiceType => schema[choiceType])
+	)) {
+		schema.type = 'object';
+	} else if (schema.items && !schema.type) {
+		schema.type = 'array';
+	}
+	return schema;
+}
+
 const handleSchemaProps = (schema, fieldOrder) => {
 	if (!schema) {
 		schema = {
 			type: 'object'
 		};
-	}
-	const handleSchemaExample = (schemaType, example) => {
-		if (schemaType === 'object' || schemaType === 'array') {
-			return JSON.stringify(example);
-		}
-		return example;
-	}
-	const handleSchemaXml = (data) => ({
-		xmlName: data.name,
-		xmlNamespace: data.namespace,
-		xmlPrefix: data.prefix,
-		xmlAttribute: data.attribute,
-		xmlWrapped: data.wrapped,
-		xmlExtensions: getExtensions(data)
-	});
-
-	const handleAdditionalProperties = (schema) => {
-		const data = schema.additionalProperties;
-		if (!data) {
-			return schema;
-		}
-		if (typeof data === "object") {
-			if (data.format) {
-				return Object.assign({}, schema, {
-					additionalPropControl: 'Object',
-					additionalPropertiesObjectType: data.type,
-					additionalPropertiesIntegerFormat: data.format
-				});
-			}
-			return Object.assign({}, schema, {
-				additionalPropControl: 'Object',
-				additionalPropertiesObjectType: data.type
-			});
-		} else {
-			return Object.assign({}, schema, {
-				additionalPropControl: 'Boolean',
-				additionalProperties: !!data
-			})
-		}
-	}
-
-	const handleSchemaProperty = (property, data) => {
-		switch(property) {
-			case 'xml':
-				return handleSchemaXml(data);
-			default:
-				return data;
-		}
-	};
-
-	const setMissedType = (schema) => {
-		if ((schema.properties || schema.patternProperties) && !schema.type) {
-			schema.type = 'object';
-		} else if (schema.items && !schema.type) {
-			schema.type = 'array';
-		}
-		return schema;
 	}
 
 	const fixedSchema = setMissedType(schema);
@@ -564,10 +577,48 @@ const handleSchemaProps = (schema, fieldOrder) => {
 					accum[key] = handleSchemaProps(reorderedSchema[property][key], fieldOrder);
 					return accum;
 				}, {});
+			} else if (commonHelper.CHOICES.includes(property)) {
+				return (reorderedSchema[property] || []).map(item => handleSchemaProps(item));
 			} else if (property === 'sample') {
 				return handleSchemaExample(reorderedSchema.type, reorderedSchema['example']);
 			} else if (property === 'items') {
 				return handleSchemaProps(reorderedSchema[property], fieldOrder);
+			} else {
+				return handleSchemaProperty(property, reorderedSchema[property]);
+			}
+		})();
+		return accumulator;
+	}, {});
+
+	return schemaWithHandledProperties;
+};
+
+const handleDefinitionSchemaProps = (schema, fieldOrder) => {
+	if (!schema) {
+		schema = {
+			type: 'object'
+		};
+	}
+
+	const fixedSchema = setMissedType(schema);
+	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(fixedSchema);
+	const reorderedSchema = commonHelper.reorderFields(schemaWithAdditionalPropertiesData, fieldOrder);
+	const schemaWithHandledProperties = Object.keys(reorderedSchema).reduce((accumulator, property) => {
+		if (property === 'example') {
+			property = 'sample';
+		}
+		accumulator[property] = (() => {
+			if (['properties', 'patternProperties'].includes(property)) {
+				return Object.keys(reorderedSchema[property]).reduce((accum, key) => {
+					accum[key] = handleSchemaProps(reorderedSchema[property][key], fieldOrder);
+					return accum;
+				}, {});
+			} else if (commonHelper.CHOICES.includes(property)) {
+				return (reorderedSchema[property] || []).map(item => handleSchemaProps(item));
+			} else if (property === 'sample') {
+				return handleSchemaExample(reorderedSchema.type, reorderedSchema['example']);
+			} else if (property === 'items') {
+				return handleDefinitionSchemaProps(reorderedSchema[property], fieldOrder);
 			} else {
 				return handleSchemaProperty(property, reorderedSchema[property]);
 			}
@@ -714,7 +765,7 @@ const getModelData = (schema) => {
 };
 
 const getComponents = (schemaComponents = {}, fieldOrder) => {
-	const schemasData = handleSchemaProps(schemaComponents.schemas || {}, fieldOrder);
+	const schemasData = handleDefinitionSchemaProps(schemaComponents.schemas || {}, fieldOrder);
 	const parametersData = handleObject(handleParameter, schemaComponents.parameters);
 	const examplesData = handleObject(handleExample, schemaComponents.examples);
 	const requestBodiesData = handleObject(handleRequestBody, schemaComponents.requestBodies);
@@ -780,21 +831,20 @@ const getComponents = (schemaComponents = {}, fieldOrder) => {
 		properties: callbacksData
 	}
 	const definitionsSchema = { 
-		properties: 
-		{ 
-			schemas,
-			responses,
-			parameters,
-			examples,
-			requestBodies,
-			headers,
-			securitySchemes,
-			links,
-			callbacks
-		}
+		definitions: 
+			{
+				schemas,
+				responses,
+				parameters,
+				examples,
+				requestBodies,
+				headers,
+				securitySchemes,
+				links,
+				callbacks
+			}
 	};
-	const handledDefinitions = handleSchemaProps(definitionsSchema, fieldOrder);
-	return JSON.stringify(handledDefinitions);
+	return JSON.stringify(definitionsSchema);
 };
 
 const getModelContent = (pathData, fieldOrder, callbacksComponent) => {
