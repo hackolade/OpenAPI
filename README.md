@@ -1,175 +1,227 @@
 # OpenAPI
 Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
-<div class="main-content">
-
-<span class="rvts6">For each object in Hackolade, we've defined a set of standard properties that appear in the properties pane.  But it is possible that your company wants to define and track additional properties for models, containers, entities, and attributes.  Hackolade let's you do just that, by leveraging our plugin architecture (used also to integrate our modeling engine with all kinds of NoSQL document databases.)</span>
+<span class="rvts78">OpenAPI Specification</span><span class="rvts77"> or OAS (formerly known as </span><span class="rvts78">Swagger Specification</span><span class="rvts77">) is an open-source format for describing and documenting APIs. It has become a de-facto standard,</span> <span class="rvts6">language-agnostic interface</span> <span class="rvts77">for designing and describing RESTful APIs</span> <span class="rvts6">which allow both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection.  When properly defined via OpenAPI, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.</span><span class="rvts77">The latest version of OpenAPI is </span><span class="rvts78">3.0.2</span><span class="rvts77">. OpenAPI definitions can be written in JSON or YAML.</span>
 
 <span class="rvts6">  
 </span>
 
-## <span class="rvts0"><span class="rvts16">1) Download and enable plugin</span></span>
-
-<span class="rvts6">To enable the custom properties capability, you first need to download a plugin for each database target for which you wish to add properties.  To do so, go to Help > DB Target Plugin Manager</span>
-
-<img src="lib/Plugin-managermenu.png" width="25%" height="25%">
+<span class="rvts6">OpenAPI is a</span> [formal specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md) <span class="rvts6">surrounded by a large ecosystem of tools, which includes everything from front-end user interfaces, low-level code libraries and commercial API management solutions.</span>
 
 <span class="rvts6">  
 </span>
 
-<span class="rvts6">You may choose which plugin to install on your computer.</span>
+<span class="rvts6">To perform model-first design of a REST API using OpenAPI 3 with Hackolade, you must first download the OpenAPI</span> [plugin](DownloadadditionalDBtargetplugin.html)<span class="rvts6">.  This plugin is strictly compliant with version 3.0.2 of the OpenAPI specification.  If you need support version 2 of the specification (a.k.a. Swagger) you need another plugin described</span> [here](SwaggerAPI.html)<span class="rvts6">.</span>
 
-<img src="lib/Plugin-manageravailablecustomprops.png" width="50%" height="50%">
+<span class="rvts21">  
+</span>
+
+<span class="rvts21">Creating APIs is not easy! And writing OpenAPI documentation in a design-first approach can be tedious at best, generally error-prone and frustrating...  Hackolade takes a visual schema-centric approach so you can focus on the content of requests and responses. The application also assists with all the metadata to produce validated OpenAPI files and test the transactions.  You can also reverse-engineer existing OpenAPI 3 files in JSON or YAML to produce a graphical representation of your APIs.</span>
+
+<span class="rvts6">Hackolade was specially adapted to support the API design of OAS, including all the necessary metadata for the API, the requests and responses.  The application closely follows the terminology of the specification.  The visual tool puts the focus on what really matters in an API: the schema of the information being exchanged between systems.  At the same time, it provides assistance to modelers and does not require perfect mastery of the OpenAPI 3 syntax.  It generates validated files that are syntactically correct and compatible with the specification thereby greatly improving productivity and quality.</span>
 
 <span class="rvts6">  
 </span>
 
-<span class="rvts6">This will result in the plugin appearing in the Installed tab of the plugin manager.</span>
+<span class="rvts6">The diagram below results from the reverse-engineering of the</span> [Pet Store](https://mermade.org.uk/examples/openapi.json) <span class="rvts6">sample API.</span>
 
-<img src="lib/Plugin-Managerinstalledcustomprops.png" width="50%" height="50%">
+![](lib/OpenAPI Workspace.png)
+
+<span class="rvts78">  
+</span>
+
+<span class="rvts77">Note the toolbar button to toogle the level of details displayed in the ER Diagram view.  </span>
+
+![](lib/OpenAPI - Toggle field details.png)
+
+<span class="rvts77">  
+</span>
+
+<span class="rvts77">By default Hackolade displays all the various ways an API can be defined in OpenAPI.  Once you're done creating your design, you may wish to hide the extraneous structures and adjust the layout to take advantage of the extra real estate on screen.</span>
+
+<span class="rvts77">  
+</span>
+
+## <span class="rvts0"><span class="rvts15">Data Types</span></span>
+
+<span class="rvts6">The OpenAPI specification describes primitives (or scalar) data types which can have an optional property modifier,</span> <span class="rvts69">format</span><span class="rvts6">, plus a file primitive type.  Complex types such as arrays and sub-objects, plus combinations thereof, are also allowed.</span>
 
 <span class="rvts6">  
 </span>
 
-## <span class="rvts0"><span class="rvts16">2) Access plugin configuration files</span></span>
-
-<span class="rvts6">You are now ready to add custom properties via editing of configuration files.  The plugin configurations files can be found by going to Help > Show plugin directory:</span>
-
-<img src="lib/Plugin-Showplugindirectory.png" width="25%" height="25%">
+![](lib/Swagger data types.png) <span class="rvts6"></span>![](lib/Swagger data types - string.png) <span class="rvts6"></span>![](lib/Swagger data types - number.png) <span class="rvts6"></span>![](lib/Swagger data types - integer.png) <span class="rvts6"></span>
 
 <span class="rvts6">  
 </span>
 
-<span class="rvts6">For each custom properties plugin, you will find the a directory structure similar to this one:</span>
+## <span class="rvts0"><span class="rvts15">API metadata</span></span>
 
-<img src="lib/Plugin-CustomPropdirectorystructure.png" width="25%" height="25%">
-
-<span class="rvts18">Notes:</span><span class="rvts6"></span>
-
-<span class="rvts6">i) do NOT make any changes to the package.json file!  Only the <object>LevelConfig.json files should be edited according to the specifications below.</span>
-
-<span class="rvts6">ii) it is advised to keep a backup of the files before making changes, so you can revert back in case of errors.</span>
-
-<span class="rvts6">iii) it is always necessary to restart the application after having saved changes before you can see these changes relected in the properties pane.</span>
-
-<span class="rvts6">iv) for field-level definitions, since field types have different property lists, it may be necessary to define custom properties for multiple field types.</span>
-
-## <span class="rvts0"><span class="rvts16">3) Levels</span></span>
-
-<span class="rvts6">As a reminder, terminology differs between NoSQL database:</span>
-
-<span class="rvts6">- container means: dbs in MongoDB, region in DynamoDB, bucket in Couchbase, collection in Cosmos DB</span>
-
-<span class="rvts6">- entity means: collection in MongoDB, table in DynamoDB, document kind in Couchbase, and document type in Cosmos DB</span>
-
-<span class="rvts6">- field means: field in MongoDB, Couchbase, and Cosmos DB.  And attribute in DynamoDB</span>
+<span class="rvts6">The info object, as well as the host, basePath, schemes, consumes, produces, the securityDefinitions object, the security object, the tags object, and externalDocs object are fixed fields treated as metadata and maintained at model-level in Hackolade.</span>
 
 <span class="rvts6">  
 </span>
 
-<span class="rvts6">You need to edit the corresponding <object>LevelConfig.json file to add custom properties.</span>
+![](lib/OpenAPI - Info object 1.png) <span class="rvts78"></span>![](lib/OpenAPI - Info object 2.png) <span class="rvts78"></span>![](lib/OpenAPI - Info object 3.png)
+
+<span class="rvts78">  
+</span>
+
+## <span class="rvts0"><span class="rvts15">Components</span></span>
+
+[Component objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#components-object) <span class="rvts34">hold a set of reusable objects</span> <span class="rvts80">that can be used across multiple endpoints in the same API</span><span class="rvts34">: schema, parameter, request body, response, example, header, security scheme, link, or callback. All objects defined within the components object will have no effect on the API unless they are explicitly referenced from properties outside the components object by using a $ref reference in any path item.</span>
+
+<span class="rvts34">  
+</span>
+
+<span class="rvts79">As you expose more resources and operations against your API, your API may repeat a lot of existing parameters or response descriptions in many different paths and operations.  By creating reusable component objects, you avoid time-consuming rewriting as well as the risk of inconsistencies.</span>
+
+<span class="rvts79">  
+</span>
+
+<span class="rvts34">Data types can be objects, but also primitives and arrays. This object is based on the </span>[JSON Schema Specification Wright Draft 00 (a.k.a. Draft-05)](http://json-schema.org/)<span class="rvts34"> and uses a predefined subset of it. On top of this subset, there are extensions provided by this specification to allow for more complete documentation.</span>
+
+<span class="rvts34">  
+</span>
+
+![](lib/OpenAPI - Components.png)
+
+<span class="rvts34">  
+</span>
+
+<span class="rvts6">Consult</span> [this page](Reusableobjectsdefinitions.html) <span class="rvts6">or more information on how to use definitions.  For OpenAPI, you should limit yourself to Hackolade model definitions.</span>
+
+## <span class="rvts0"><span class="rvts15">Resource</span></span>
+
+<span class="rvts6">The resource path object is a container representing the relative path to an individual endpoint.  The field name must start with a slash ("/").  The path is appended to the basePath in order to construct the full URL.  Path templating (</span><span class="rvts34">usage of curly braces ("{}") to mark a section of a URL path as replaceable using path parameters</span><span class="rvts6">) is allowed.</span>
 
 <span class="rvts6">  
 </span>
 
-## <span class="rvts0"><span class="rvts16">4) Lower tabs</span></span>
+<span class="rvts6">Each resource contains one or more "</span>[path item objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#pathItemObject)<span class="rvts6">" made of a request and one or more responses:</span>
 
-<span class="rvts6">For each level, the Hackolade properties pane may have one or more lower tab:</span>
-
-<span class="rvts6">- MongoDB model lower tab:</span>
-
-<img src="lib/MongoDBmodellowertab.png" width="50%" height="50%">
-
-<span class="rvts6">- MongoDB dbs lower tab:</span>
-
-<img src="lib/MongoDBdbslowertab.png" width="50%" height="50%">
-
-<span class="rvts6">- MongoDB collection lower tab:</span>
-
-<img src="lib/MongoDBcollectionlowertab.png" width="50%" height="50%">
-
-<span class="rvts6">- MongoDB field lower tab:</span>
-
-<img src="lib/MongoDBfieldlowertab.png" width="50%" height="50%">
+![](lib/OpenAPI - Resource container.png)
 
 <span class="rvts6">  
 </span>
 
-<span class="rvts6">If the level allows multiple tabs, you need to choose to which lower tab you want to add properties.</span>
+<span class="rvts6">You may create a new resource via right-click anywhere in the ERD view and choosing the contextual menu option:</span>
+
+![](lib/Swagger - Add resource contextual menu.png)
 
 <span class="rvts6">  
 </span>
 
-## <span class="rvts0"><span class="rvts16">5) Property types</span></span>
+<span class="rvts6">or via the menu:</span>
 
-<span class="rvts6">The following controls are possible for user-defined properties:</span>
-
-<img src="lib/Plugin-possiblepropertytypes.png" width="50%" height="50%">
-
-*   <span class="rvts6">simple text: one line of text</span>
-*   <span class="rvts6">text area: popup for multi-line text entry</span>
-*   <span class="rvts6">dropdown selection from a deined list of options</span>
-*   <span class="rvts6">numeric-only field</span>
-*   <span class="rvts6">checkbox: for true/false entry</span>  
-    <span class="rvts6">  
-    </span>
+![](lib/Swagger - Add resource action menu.png)
 
 <span class="rvts6">  
 </span>
 
-## <span class="rvts0"><span class="rvts16">6) Property definition</span></span>
+<span class="rvts6">or the toolbar:</span>
 
-<span class="rvts6">Examples are provided in the comments section of each config file.  Here's an overview of the schema:</span>
-
-<img src="lib/Plugin-propertyschema.png" width="50%" height="50%">
-
-<span class="rvts6">Here's another view, consolidated:</span>
-
-<img src="lib/Plugin-custompropsconsolidatedschema.png" width="50%" height="50%">
-
-<span class="rvts6">- propertyName: mandatory, this is the property label that will appear in the Property Pane</span>
-
-<span class="rvts6">- propertyKeyword: mandatory, this is the unique key for the property</span>
-
-<span class="rvts6">- shouldValidate: optional, boolean true/false to define whether to validate the regular expression of the text input [default: false]</span>
-
-<span class="rvts6">- propertyTooltip: optional, in the case of input types textarea and select, it is possible to display a tooltip  defined here</span>
-
-<span class="rvts6">- propertyType: mandatory, this is the control definition, with possible values: text, details, select (i.e. dropdown), checkbox</span>
-
-<span class="rvts6">- options: optional, this is the array of possible checkbox options</span>
-
-<span class="rvts6">- template: optional, this is needed in the case of propertyType = details, to define a popup multi-line text.  Possible value: textarea</span>
-
-<span class="rvts6">- valueType: optional, this is needed in to specify that a property is numberic only.  Possible values: numeric</span>
+![](lib/Swagger - Add resource toolbar button.png)
 
 <span class="rvts6">  
 </span>
 
-## <span class="rvts0"><span class="rvts16">7) Share customization with team members</span></span>
+## <span class="rvts0"><span class="rvts15">Requests</span></span>
 
-<span class="rvts6">After making, saving and testing your changes, you should share them with everyone on your team to insure consistency. This is a 3-step process:</span>
-
-<span class="rvts6">- return to the plugin directory via Help > Show plugin directory, and zip up the whole plugin directory where you made your changes;</span>
-
-<span class="rvts6">- transfer this zip file to each team member using Hackolade;</span>
-
-<span class="rvts6">- on each team member's computer, start Hackolade, go to Help > DB target plugin manager, then click the button 'Install from zip file', and choose the zip file file.</span>
+<span class="rvts6">A request is an object with a type, associated data, relationships to other resources, and a set of methods that operate on it.  Only a few standard methods are defined for the resource (corresponding to the standard HTTP GET, POST, PUT and DELETE methods</span><span class="rvts44">.</span><span class="rvts6">)</span>
 
 <span class="rvts6">  
 </span>
 
-<span class="rvts6">For the changes to take effect on each computer, it is required to exit Hackolade and restart it.</span>
+<span class="rvts6">The</span> [Parameter Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#parameterObject) <span class="rvts6">d</span><span class="rvts74">escribes a single operation parameter defined by a combination of a </span><span class="rvts21">name</span><span class="rvts74"> and </span><span class="rvts21">location</span><span class="rvts74">.  Hackolade provides a handy template of parameter types allowing the description of the payload either by adding adding individual fields or by referencing an existing component:</span>
+
+![](lib/OpenAPI - Request Parameter 1.png)
+
+![](lib/OpenAPI - Request Parameter 2.png)
+
+<span class="rvts78">  
+</span>
+
+<span class="rvts6">To create a request within a resource container, you may:</span>
+
+<span class="rvts6">- right-click inside the container area of the ERD pane, and choose the contextual menu option:</span>
+
+![](lib/Swagger - Add request contextual menu.png)
+
+<span class="rvts6">- choose the Action menu:</span>
+
+![](lib/Swagger - Add request action menu.png)
+
+<span class="rvts6">- choose the toolbar button:</span>
+
+![](lib/Swagger - Add request toolbar button.png)
 
 <span class="rvts6">  
 </span>
 
+<span class="rvts6">It is easy to maintain the metadata for a request in the properties pane:</span>
 
+![](lib/OpenAPI - Request Properties.png)
 
-</div>
+<span class="rvts78">  
+</span>
 
-</div>
+## <span class="rvts0"><span class="rvts15">Responses</span></span>
 
-</article>
+[Response objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#responses-object) <span class="rvts34">describe responses from API operations.  For each request, you may create one or more responses.</span>
 
-</div>
+![](lib/OpenAPI - Responses.png)
+
+<span class="rvts78">  
+</span>
+
+<span class="rvts34">A response may have a schema that is defined as individual fields or references a component:</span>
+
+![](lib/OpenAPI - Response schema.png)
+
+<span class="rvts34">  
+</span>
+
+<span class="rvts6">To create a response for a given request, you may:</span>
+
+<span class="rvts6">- right-click on the request in the ERD and choose the contextual menu option:</span>
+
+![](lib/Swagger - Add response contextual menu.png)
+
+<span class="rvts6">- or choose the Action menu:</span>
+
+![](lib/Swagger - Add response action menu.png)
+
+<span class="rvts6">- or choose the toolbar button:</span>
+
+![](lib/Swagger - Add response toolbar button.png)
+
+<span class="rvts6">  
+</span>
+
+<span class="rvts6">It is easy to maintain the metadata for a response in the properties pane:</span>
+
+![](lib/OpenAPI - Response properties.png)
+
+<span class="rvts78">  
+</span>
+
+## <span class="rvts0"><span class="rvts15">Forward-Engineering</span></span>
+
+<span class="rvts34">The files describing the RESTful API in accordance with the OpenAPI specification OAS are represented as JSON objects and conform to the JSON standards.  Hackolade generates OpenAPI documentation in JSON format or YAML format.  The schema exposes two types of fields. Fixed fields, which have a declared name, and patterned fields, which declare a regex pattern for the field name. Patterned fields can have multiple occurrences as long as each has a unique name.  The OpenAPI representation of the API is made of a single file. However, parts of the definitions can be split into separate files, at the discretion of the user. This is applicable for $ref fields in the specification as follows from the </span>[JSON Schema](http://json-schema.org/) [](http://json-schema.org/) <span class="rvts34">definitions.</span>
+
+<span class="rvts34">  
+</span>
+
+![](lib/OpenAPI - Forward-Engineering.png)
+
+<span class="rvts78">  
+</span>
+
+<span class="rvts34">An internal OpenAPI syntax validator ensures that the generated file is valid, and the right-hand pane allows interactions with the API and testing.</span>
+
+<span class="rvts6">  
+</span>
+
+## <span class="rvts0"><span class="rvts15">Reverse-Engineering</span></span>
+
+<span class="rvts6">This function lets you take a OpenAPI file in JSON or YAML format and generate a Hackolade model.  Then, you may enrich the model with comments, generate standard Hackolade documentation, and make the API evolve to generate a new OpenAPI file through forward-engineering.</span>
