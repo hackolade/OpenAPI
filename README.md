@@ -32,7 +32,7 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts77">Note the toolbar button to toogle the level of details displayed in the ER Diagram view.  </span>
 
-<img src="lib/OpenAPI - Toggle field details.png" width="10%" height="10%">
+<img src="lib/OpenAPI - Toggle field details.png" width="25%" height="25%">
 
 <span class="rvts77">  
 </span>
@@ -108,21 +108,21 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts6">You may create a new resource via right-click anywhere in the ERD view and choosing the contextual menu option:</span>
 
-<img src="lib/Swagger - Add resource contextual menu.png" width="10%" height="10%">
+<img src="lib/Swagger - Add resource contextual menu.png" width="25%" height="25%">
 
 <span class="rvts6">  
 </span>
 
 <span class="rvts6">or via the menu:</span>
 
-<img src="lib/Swagger - Add resource action menu.png" width="10%" height="10%">
+<img src="lib/Swagger - Add resource action menu.png" width="25%" height="25%">
 
 <span class="rvts6">  
 </span>
 
 <span class="rvts6">or the toolbar:</span>
 
-<img src="lib/Swagger - Add resource toolbar button.png" width="10%" height="10%">
+<img src="lib/Swagger - Add resource toolbar button.png" width="25%" height="25%">
 
 <span class="rvts6">  
 </span>
@@ -146,15 +146,15 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts6">- right-click inside the container area of the ERD pane, and choose the contextual menu option:</span>
 
-<img src="lib/Swagger - Add request contextual menu.png" width="10%" height="10%">
+<img src="lib/Swagger - Add request contextual menu.png" width="25%" height="25%">
 
 <span class="rvts6">- choose the Action menu:</span>
 
-<img src="lib/Swagger - Add request action menu.png" width="10%" height="10%">
+<img src="lib/Swagger - Add request action menu.png" width="25%" height="25%">
 
 <span class="rvts6">- choose the toolbar button:</span>
 
-<img src="lib/Swagger - Add request toolbar button.png" width="10%" height="10%">
+<img src="lib/Swagger - Add request toolbar button.png" width="25%" height="25%">
 
 <span class="rvts6">  
 </span>
