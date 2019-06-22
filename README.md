@@ -25,14 +25,14 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts6">The diagram below results from the reverse-engineering of the</span> [Pet Store](https://mermade.org.uk/examples/openapi.json) <span class="rvts6">sample API.</span>
 
-![](lib/OpenAPI Workspace.png)
+<img src="lib/OpenAPI Workspace.png" width="100%" height="100%">
 
 <span class="rvts78">  
 </span>
 
 <span class="rvts77">Note the toolbar button to toogle the level of details displayed in the ER Diagram view.  </span>
 
-![](lib/OpenAPI - Toggle field details.png)
+<img src="lib/OpenAPI - Toggle field details.png" width="10%" height="10%">
 
 <span class="rvts77">  
 </span>
@@ -49,7 +49,8 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 <span class="rvts6">  
 </span>
 
-![](lib/Swagger data types.png) <span class="rvts6"></span>![](lib/Swagger data types - string.png) <span class="rvts6"></span>![](lib/Swagger data types - number.png) <span class="rvts6"></span>![](lib/Swagger data types - integer.png) <span class="rvts6"></span>
+<img src="lib/Swagger data types.png" width="25%" height="25%"><img src="lib/Swagger data types - string.png" width="25%" height="25%"><img src="lib/Swagger data types - number.png" width="25%" height="25%"><img src="lib/Swagger data types - integer.png" width="25%" height="25%">
+
 
 <span class="rvts6">  
 </span>
@@ -61,7 +62,8 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 <span class="rvts6">  
 </span>
 
-![](lib/OpenAPI - Info object 1.png) <span class="rvts78"></span>![](lib/OpenAPI - Info object 2.png) <span class="rvts78"></span>![](lib/OpenAPI - Info object 3.png)
+<img src="lib/OpenAPI - Info object 1.png" width="33%" height="33%"><img src="lib/OpenAPI - Info object 2.png" width="33%" height="33%">
+<img src="lib/OpenAPI - Info object 3.png" width="33%" height="33%">
 
 <span class="rvts78">  
 </span>
@@ -83,7 +85,7 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 <span class="rvts34">  
 </span>
 
-![](lib/OpenAPI - Components.png)
+<img src="lib/OpenAPI - Components.png" width="66%" height="66%">
 
 <span class="rvts34">  
 </span>
@@ -99,28 +101,28 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts6">Each resource contains one or more "</span>[path item objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#pathItemObject)<span class="rvts6">" made of a request and one or more responses:</span>
 
-![](lib/OpenAPI - Resource container.png)
+<img src="lib/OpenAPI - Resource container.png" width="66%" height="66%">
 
 <span class="rvts6">  
 </span>
 
 <span class="rvts6">You may create a new resource via right-click anywhere in the ERD view and choosing the contextual menu option:</span>
 
-![](lib/Swagger - Add resource contextual menu.png)
+<img src="lib/Swagger - Add resource contextual menu.png" width="10%" height="10%">
 
 <span class="rvts6">  
 </span>
 
 <span class="rvts6">or via the menu:</span>
 
-![](lib/Swagger - Add resource action menu.png)
+<img src="lib/Swagger - Add resource action menu.png" width="10%" height="10%">
 
 <span class="rvts6">  
 </span>
 
 <span class="rvts6">or the toolbar:</span>
 
-![](lib/Swagger - Add resource toolbar button.png)
+<img src="lib/Swagger - Add resource toolbar button.png" width="10%" height="10%">
 
 <span class="rvts6">  
 </span>
@@ -134,9 +136,8 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts6">The</span> [Parameter Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#parameterObject) <span class="rvts6">d</span><span class="rvts74">escribes a single operation parameter defined by a combination of a </span><span class="rvts21">name</span><span class="rvts74"> and </span><span class="rvts21">location</span><span class="rvts74">.  Hackolade provides a handy template of parameter types allowing the description of the payload either by adding adding individual fields or by referencing an existing component:</span>
 
-![](lib/OpenAPI - Request Parameter 1.png)
-
-![](lib/OpenAPI - Request Parameter 2.png)
+<img src="lib/OpenAPI - Request Parameter 1.png" width="75%" height="75%">
+<img src="lib/OpenAPI - Request Parameter 2.png" width="75%" height="75%">
 
 <span class="rvts78">  
 </span>
@@ -145,22 +146,22 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts6">- right-click inside the container area of the ERD pane, and choose the contextual menu option:</span>
 
-![](lib/Swagger - Add request contextual menu.png)
+<img src="lib/Swagger - Add request contextual menu.png" width="10%" height="10%">
 
 <span class="rvts6">- choose the Action menu:</span>
 
-![](lib/Swagger - Add request action menu.png)
+<img src="lib/Swagger - Add request action menu.png" width="10%" height="10%">
 
 <span class="rvts6">- choose the toolbar button:</span>
 
-![](lib/Swagger - Add request toolbar button.png)
+<img src="lib/Swagger - Add request toolbar button.png" width="10%" height="10%">
 
 <span class="rvts6">  
 </span>
 
 <span class="rvts6">It is easy to maintain the metadata for a request in the properties pane:</span>
 
-![](lib/OpenAPI - Request Properties.png)
+<img src="lib/OpenAPI - Request Properties.png" width="25%" height="25%">
 
 <span class="rvts78">  
 </span>
@@ -169,6 +170,7 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 [Response objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#responses-object) <span class="rvts34">describe responses from API operations.  For each request, you may create one or more responses.</span>
 
+<img src="lib/OpenAPI - Request Properties.png" width="25%" height="25%">
 ![](lib/OpenAPI - Responses.png)
 
 <span class="rvts78">  
@@ -176,7 +178,7 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts34">A response may have a schema that is defined as individual fields or references a component:</span>
 
-![](lib/OpenAPI - Response schema.png)
+<img src="lib/OpenAPI - Response schema.png" width="75%" height="75%">
 
 <span class="rvts34">  
 </span>
@@ -185,22 +187,22 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 
 <span class="rvts6">- right-click on the request in the ERD and choose the contextual menu option:</span>
 
-![](lib/Swagger - Add response contextual menu.png)
+<img src="lib/Swagger - Add response contextual menu.png" width="10%" height="10%">
 
 <span class="rvts6">- or choose the Action menu:</span>
 
-![](lib/Swagger - Add response action menu.png)
+<img src="lib/Swagger - Add response action menu.png" width="10%" height="10%">
 
 <span class="rvts6">- or choose the toolbar button:</span>
 
-![](lib/Swagger - Add response toolbar button.png)
+<img src="lib/Swagger - Add response toolbar button.png" width="10%" height="10%">
 
 <span class="rvts6">  
 </span>
 
 <span class="rvts6">It is easy to maintain the metadata for a response in the properties pane:</span>
 
-![](lib/OpenAPI - Response properties.png)
+<img src="lib/OpenAPI - Response properties.png" width="15%" height="15%">
 
 <span class="rvts78">  
 </span>
@@ -212,7 +214,7 @@ Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
 <span class="rvts34">  
 </span>
 
-![](lib/OpenAPI - Forward-Engineering.png)
+<img src="lib/OpenAPI - Forward-Engineering.png" width="100%" height="100%">
 
 <span class="rvts78">  
 </span>
