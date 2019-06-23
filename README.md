@@ -1,5 +1,7 @@
 # OpenAPI
-Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.
+Plugin to enable OpenAPI 3 as a target in Hackolade data modeling.  Requires prior download of the Hackolade application from our [download page](https://hackolade.com/download.html)
+
+This plugin is for OpenAPI 3.  If instead you need Swagger 2, you need a separate plugin accessible [here](https://github.com/hackolade/Swagger).
 
 <span class="rvts78">OpenAPI Specification</span><span class="rvts77"> or OAS (formerly known as </span><span class="rvts78">Swagger Specification</span><span class="rvts77">) is an open-source format for describing and documenting APIs. It has become a de-facto standard,</span> <span class="rvts6">language-agnostic interface</span> <span class="rvts77">for designing and describing RESTful APIs</span> <span class="rvts6">which allow both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection.  When properly defined via OpenAPI, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.</span><span class="rvts77">The latest version of OpenAPI is </span><span class="rvts78">3.0.2</span><span class="rvts77">. OpenAPI definitions can be written in JSON or YAML.</span>
 
