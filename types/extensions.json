@@ -1,0 +1,33 @@
+{
+	"name": "extensions",
+	"erdAbbreviation": "<ext>",
+	"dtdAbbreviation": "{...}",
+	"parentType": "document",
+	"structureType": true,
+	"defaultValues": {
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"dependencies": [],
+		"ignore_z_value": true,
+		"structureType": true,
+		"minProperties": "",
+		"subtype": "snippetChildrenOnly",
+		"maxProperties": "",
+		"additionalProperties": false,
+		"enum": [],
+		"hackoladeMeta": {
+			"disableAdd": true,
+			"disableReference": true,
+			"disableDelete": true,
+			"disableAppend": true
+		}
+	},
+	"subtypes": {
+		"snippetChildrenOnly": {
+			"childValueType": {}
+		}
+	}
+}

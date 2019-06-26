@@ -2,7 +2,10 @@ const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
 const { hasRef } = require('./typeHelper');
 
-function mapEnum(enums = [], key) {
+function mapEnum(enums, key) {
+	if (!enums) {
+		return;
+	}
 	return enums
 		.filter(item => item[key])
 		.map(item => item[key]);

@@ -1,6 +1,7 @@
+const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
 
-function getType(data) {
+function getType(data, key) {
 	if (!data) {
 		return;
 	}
@@ -13,10 +14,10 @@ function getType(data) {
 		return getRef(data);
 	}
 	
-	return getTypeProps(data);
+	return getTypeProps(data, key);
 }
 
-function getTypeProps(data) {
+function getTypeProps(data, key) {
 	const { type, properties, items, required } = data;
 
 	switch (type) {
@@ -30,9 +31,9 @@ function getTypeProps(data) {
 				uniqueItems: data.uniqueItems || undefined,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
-				xml: getXml(data.xml),
+				xml: getXml(data.xml)
 			};
-			const arrayChoices = getChoices(data);
+			const arrayChoices = getChoices(data, key);
 
 			return Object.assign({}, arrayProps, arrayChoices);
 		}
@@ -50,7 +51,7 @@ function getTypeProps(data) {
 				example: parseExample(data.sample),
 				xml: getXml(data.xml)
 			};
-			const objectChoices = getChoices(data);
+			const objectChoices = getChoices(data, key);
 
 			return Object.assign({}, objectProps, objectChoices);
 		}
@@ -87,7 +88,7 @@ function getObjectProperties(properties) {
 		return;
 	}
 	return Object.keys(properties).reduce((acc, propName) => {
-		acc[propName] = getType(properties[propName]);
+		acc[propName] = getType(properties[propName], propName);
 		return acc;
 	}, {});
 }
@@ -151,19 +152,31 @@ function getAdditionalProperties(data) {
 	return getAdditionalPropsObject(data);
 }
 
-function getChoices(data) {
-	const choices = {};
-	const multipleChoices = ['allOf', 'anyOf', 'oneOf'];
-	multipleChoices.forEach(choiceName => {
-		if (data[choiceName]) {
-			choices[choiceName] = data[choiceName].map(getType);
+function getChoices(data, key) {
+	const mapChoice = (item, key) => {
+		const choiceValue = get(item, `properties.${key}`); 
+		if (choiceValue) {
+			return getType(choiceValue);
 		}
-	})
-	if (data.not) {
-		choices.not = getType(data.not);
+		return getType(item);
 	}
 
-	return choices;
+	if (!data) {
+		return;
+	}
+	const { allOf, anyOf, oneOf, not } = data;
+	const multipleChoices = ['allOf', 'anyOf', 'oneOf', 'not'];
+
+	return multipleChoices.reduce((acc, choice) => {
+		if (acc[choice]) {
+			if (choice === 'not') {
+				acc[choice] = mapChoice(acc[choice], key);
+			} else {
+				acc[choice] = acc[choice].map(item => mapChoice(item, key)); 
+			}
+		}
+		return acc;
+	}, { allOf, anyOf, oneOf, not });
 }
 
 function hasChoice(data) {

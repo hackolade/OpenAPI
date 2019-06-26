@@ -164,8 +164,9 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "pattern",
 						"propertyKeyword": "extensionPattern",
-						"shouldValidate": false,
-						"propertyType": "text"
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex":"^x-"
 					},
 					{
 						"propertyName": "value",

@@ -2,29 +2,22 @@
 	"name": "expression",
 	"erdAbbreviation": "<expr>",
 	"dtdAbbreviation": "{...}",
-	"parentType": "document",
+	"parentType": "string",
 	"defaultValues": {
 		"relationshipType": "",
 		"parentRelationship": "",
 		"childRelationships": [],
 		"foreignCollection": "",
 		"foreignField": [],
-		"properties": [],
 		"dependencies": [],
 		"ignore_z_value": true,
 		"minProperties": "",
-		"subtype": "snippetChildrenOnly",
 		"maxProperties": "",
 		"additionalProperties": false,
 		"enum": [],
 		"hackoladeMeta": {
 			"disableAdd": true,
 			"disableReference": true
-		}
-	},
-	"subtypes": {
-		"snippetChildrenOnly": {
-			"childValueType": {}
 		}
 	}
 }

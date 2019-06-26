@@ -2,8 +2,7 @@
 	"name": "callback",
 	"erdAbbreviation": "<callback>",
 	"dtdAbbreviation": "{...}",
-	"parentType": "document",
-	"default": true,
+	"parentType": "string",
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",
@@ -11,17 +10,13 @@
 		"childRelationships": [],
 		"foreignCollection": "",
 		"foreignField": [],
-		"properties": [],
 		"dependencies": [],
 		"minProperties": "",
 		"maxProperties": "",
 		"additionalProperties": false,
 		"enum": [],
-		"subtype": "snippetChildrenOnly"
-	},
-	"subtypes": {
-		"snippetChildrenOnly": {
-			"childValueType": {}
+		"hackoladeMeta": {
+			"disableAdd": true
 		}
 	}
 }

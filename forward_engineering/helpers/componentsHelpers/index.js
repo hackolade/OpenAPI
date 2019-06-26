@@ -7,12 +7,12 @@ const { getSecuritySchemes } = require('./securitySchemesHelper');
 const { getExamples } = require('./examplesHelper');
 const { getLinks } = require('./linksHelper');
 const { getCallbacks } = require('../pathHelper');
-
+const getExtensions = require('../extensionsHelper');
 
 function getComponents(data) {
-	const componentsData = get(JSON.parse(data.modelDefinitions), 'properties', {});
+    const componentsData = get(JSON.parse(data.modelDefinitions), 'properties', {});
 
-	const schemas = getSchemas(componentsData.schemas);
+    const schemas = getSchemas(componentsData.schemas);
     const responses = getResponses(componentsData.responses);
     const parameters = getParameters(componentsData.parameters);
     const examples = getExamples(componentsData.examples);
@@ -22,17 +22,23 @@ function getComponents(data) {
     const links = getLinks(componentsData.links);
     const callbacks = getCallbacks(componentsData.callbacks, data.containers);
 
-	return {
-        schemas,
-        responses,
-        parameters,
-        examples,
-        requestBodies,
-        headers,
-        securitySchemes,
-        links,
-        callbacks
-	};
+    const extensions = getExtensions(get(componentsData, `['Specification Extensions'].scopesExtensions`));
+
+    return Object.assign(
+        {}, 
+        {
+            schemas,
+            responses,
+            parameters,
+            examples,
+            requestBodies,
+            headers,
+            securitySchemes,
+            links,
+            callbacks
+        },
+        extensions
+    );
 }
 
 module.exports = getComponents;

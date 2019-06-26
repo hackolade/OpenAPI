@@ -8,5 +8,5 @@
     "node-uuid": "^1.4.7"
   },
   "type": "file",
-  "installed": false
+  "installed": true
 }

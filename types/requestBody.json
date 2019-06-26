@@ -13,7 +13,6 @@
 		"dependencies": [],
 		"ignore_z_value": true,
 		"minProperties": "",
-		"snippet": "requestBody",
 		"maxProperties": "",
 		"additionalProperties": false,
 		"enum": [],

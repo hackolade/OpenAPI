@@ -38,7 +38,7 @@ function mapParameter(data, required) {
 		style: data.style,
 		explode: data.explode,
 		allowReserved: data.allowReserved,
-		schema: mapSchema(get(data, 'properties.schema')),
+		schema: mapSchema(get(data, 'properties.schema'), 'schema'),
 		example: data.sample,
 		examples: getExamples(get(data, 'properties.examples')),
 		content: getContent(get(data, 'properties.content'))
@@ -107,7 +107,7 @@ function mapMediaTypeObject(data) {
     if (!data || !data.properties) {
         return;
     }
-	let schema = mapSchema(get(data, 'properties.schema'));
+	let schema = mapSchema(get(data, 'properties.schema'), 'schema');
 	if (!schema && hasChoice(data)) {
 		schema = mapSchema({
 			type: 'object',
@@ -115,7 +115,7 @@ function mapMediaTypeObject(data) {
 			oneOf: data.oneOf,
 			anyOf: data.anyOf,
 			not: data.not
-		});
+		}, 'schema');
 	}
     const examples = getExamples(get(data, 'properties.examples'));
     const encoding = mapEncoding(get(data, 'properties.encoding'));

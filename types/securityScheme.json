@@ -3,7 +3,6 @@
 	"erdAbbreviation": "<security>",
 	"dtdAbbreviation": "{...}",
 	"parentType": "document",
-	"default": true,
 	"defaultValues": {
 		"primaryKey": false,
 		"relationshipType": "",
@@ -11,7 +10,6 @@
 		"childRelationships": [],
 		"foreignCollection": "",
 		"foreignField": [],
-		"properties": [],
 		"dependencies": [],
 		"minProperties": "",
 		"maxProperties": "",

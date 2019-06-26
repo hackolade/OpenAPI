@@ -38,5 +38,8 @@
 		"name": "callbacks",
 		"type": "componentObject",
 		"subtype": "callback"
+	},{
+		"name": "Specification Extensions",
+		"type": "extensions"
 	}]
 }
