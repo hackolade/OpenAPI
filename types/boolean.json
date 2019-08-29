@@ -14,6 +14,7 @@
 		"childRelationships": [],
 		"foreignEntity": "",
 		"foreignField": [],
-		"sample": ""
+		"sample": "",
+		"nullable": false
 	}
 }

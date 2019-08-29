@@ -23,6 +23,7 @@
 		"foreignField": [],
 		"enum": [],
 		"mode": "float",
-		"sample": ""
+		"sample": "",
+		"nullable": false
 	}
 }

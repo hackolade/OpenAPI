@@ -304,6 +304,13 @@ making sure that you maintain a proper JSON format.
 				"shouldValidate": true
 			},
 			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"shouldValidate": false,
+				"propertyType": "checkbox",
+				"enableForReference": true
+			},
+			{
 				"propertyName": "discriminator",
 				"propertyKeyword": "discriminator",
 				"shouldValidate": false,
@@ -489,6 +496,13 @@ making sure that you maintain a proper JSON format.
 				"shouldValidate": true
 			},
 			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"shouldValidate": false,
+				"propertyType": "checkbox",
+				"enableForReference": true
+			},
+			{
 				"propertyName": "discriminator",
 				"propertyKeyword": "discriminator",
 				"shouldValidate": false,
@@ -672,6 +686,13 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
+			},
+			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"shouldValidate": false,
+				"propertyType": "checkbox",
+				"enableForReference": true
 			},
 			{
 				"propertyName": "discriminator",
@@ -878,6 +899,17 @@ making sure that you maintain a proper JSON format.
 			"maxItems",
 			"uniqueItems",
 			"additionalItems",
+			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"shouldValidate": false,
+				"propertyType": "checkbox",
+				"enableForReference": true,
+				"dependency": {
+					"key": "subtype",
+					"value": "schema"
+				}
+			},
 			{
 				"propertyName": "discriminator",
 				"propertyKeyword": "discriminator",
@@ -1180,6 +1212,17 @@ making sure that you maintain a proper JSON format.
 							"value": "integer"
 						}
 					]
+				}
+			},
+			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"shouldValidate": false,
+				"propertyType": "checkbox",
+				"enableForReference": true,
+				"dependency": {
+					"key": "subtype",
+					"value": "schema"
 				}
 			},
 			{

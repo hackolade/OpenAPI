@@ -23,6 +23,7 @@
 		"foreignField": [],
 		"enum": [],
 		"mode": "int32",
-		"sample": ""
+		"sample": "",
+		"nullable": false
 	}
 }
