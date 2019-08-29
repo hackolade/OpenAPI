@@ -1,5 +1,6 @@
 const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
+const { prepareReferenceName } = require('../utils/utils');
 
 function getType(data, key) {
 	if (!data) {
@@ -67,9 +68,10 @@ function getTypeProps(data, key) {
 
 function getRef({ $ref: ref }) {
 	if (ref.startsWith('#')) {
-		return { $ref: ref.replace('#model/definitions', '#/components') };
+		ref = ref.replace('#model/definitions', '#/components');
 	}
-	return { $ref: ref };
+
+	return { $ref: prepareReferenceName(ref) };
 }
 
 function hasRef(data = {}) {
