@@ -17,6 +17,7 @@
 		"foreignField": [],
 		"enum": [],
 		"sample": "",
-		"mode": ""
+		"mode": "",
+		"nullable": false
 	}
 }

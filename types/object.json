@@ -20,7 +20,8 @@
 		"additionalPropertiesObjectType": "integer",
 		"additionalPropertiesIntegerFormat": "int32",
 		"enum": [],
-		"subtype": "schema"
+		"subtype": "schema",
+		"nullable": false
 	},
 	"subtypes": {
 		"schema": {
