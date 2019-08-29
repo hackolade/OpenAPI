@@ -30,6 +30,7 @@ function getTypeProps(data, key) {
 				minItems: data.minItems,
 				maxItems: data.maxItems,
 				uniqueItems: data.uniqueItems || undefined,
+				nullable: data.nullable,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
 				xml: getXml(data.xml)
@@ -47,6 +48,7 @@ function getTypeProps(data, key) {
 				minProperties: data.minProperties,
 				maxProperties: data.maxProperties,
 				additionalProperties: getAdditionalProperties(data),
+				nullable: data.nullable,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
 				example: parseExample(data.sample),
@@ -110,7 +112,7 @@ function getXml(data) {
 }
 
 function getPrimitiveTypeProps(data) {
-	return {
+	const properties = {
 		type: data.type,
 		format: data.format || data.mode,
 		description: data.description,
@@ -127,6 +129,8 @@ function getPrimitiveTypeProps(data) {
 		xml: getXml(data.xml),
 		example: data.sample
 	};
+
+	return addIfTrue(properties, 'nullable', data.nullable);
 }
 
 function getAdditionalProperties(data) {
@@ -197,6 +201,16 @@ function parseExample(data) {
 	} catch(err) {
 		return data;
 	}
+}
+
+function addIfTrue(data, propertyName, value) {
+	if (!value) {
+		return data;
+	}
+
+	return Object.assign({}, data, {
+		[propertyName]: value
+	});
 }
 
 module.exports = {
