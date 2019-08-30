@@ -18,7 +18,8 @@
 		"minItems": "",
 		"maxItems": "",
 		"uniqueItems": false,
-		"subtype": "schema" 
+		"subtype": "schema",
+		"nullable": false
 	},
 	"subtypes": {
 		"schema": {

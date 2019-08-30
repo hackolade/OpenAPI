@@ -1,5 +1,6 @@
 const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
+const { prepareReferenceName } = require('../utils/utils');
 
 function getType(data, key) {
 	if (!data) {
@@ -29,6 +30,7 @@ function getTypeProps(data, key) {
 				minItems: data.minItems,
 				maxItems: data.maxItems,
 				uniqueItems: data.uniqueItems || undefined,
+				nullable: data.nullable,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
 				xml: getXml(data.xml)
@@ -46,6 +48,7 @@ function getTypeProps(data, key) {
 				minProperties: data.minProperties,
 				maxProperties: data.maxProperties,
 				additionalProperties: getAdditionalProperties(data),
+				nullable: data.nullable,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
 				example: parseExample(data.sample),
@@ -67,9 +70,10 @@ function getTypeProps(data, key) {
 
 function getRef({ $ref: ref }) {
 	if (ref.startsWith('#')) {
-		return { $ref: ref.replace('#model/definitions', '#/components') };
+		ref = ref.replace('#model/definitions', '#/components');
 	}
-	return { $ref: ref };
+
+	return { $ref: prepareReferenceName(ref) };
 }
 
 function hasRef(data = {}) {
@@ -108,7 +112,7 @@ function getXml(data) {
 }
 
 function getPrimitiveTypeProps(data) {
-	return {
+	const properties = {
 		type: data.type,
 		format: data.format || data.mode,
 		description: data.description,
@@ -125,6 +129,8 @@ function getPrimitiveTypeProps(data) {
 		xml: getXml(data.xml),
 		example: data.sample
 	};
+
+	return addIfTrue(properties, 'nullable', data.nullable);
 }
 
 function getAdditionalProperties(data) {
@@ -195,6 +201,16 @@ function parseExample(data) {
 	} catch(err) {
 		return data;
 	}
+}
+
+function addIfTrue(data, propertyName, value) {
+	if (!value) {
+		return data;
+	}
+
+	return Object.assign({}, data, {
+		[propertyName]: value
+	});
 }
 
 module.exports = {
