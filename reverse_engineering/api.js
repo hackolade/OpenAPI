@@ -4,6 +4,7 @@ const commonHelper = require('./helpers/commonHelper');
 const dataHelper = require('./helpers/dataHelper');
 const errorHelper = require('./helpers/errorHelper');
 const adaptJsonSchema = require('./helpers/adaptJsonSchema/adaptJsonSchema');
+const validationHelper = require('../forward_engineering/helpers/validationHelper')
 
 module.exports = {
 	reFromFile(data, logger, callback) {
@@ -14,13 +15,31 @@ module.exports = {
             return handleOpenAPIData(openAPISchema, fieldOrder);
         }).then(reversedData => {
             return callback(null, reversedData.hackoladeData, reversedData.modelData, [], 'multipleSchema')
-        }).
-        catch(errorObject => {
-            const { error, title } = errorObject;
-            const handledError =  commonHelper.handleErrorObject(error, title);
-            logger.log('error', handledError, title);
-            callback(handledError);
-        });
+        }, ({ error, openAPISchema }) => {
+			validationHelper.validate(filterSchema(openAPISchema))
+				.then((messages) => {
+					if (!Array.isArray(messages) || !messages.length) {
+						this.handleErrors(error, logger, callback);
+					}
+
+					const message = `${messages[0].label}: ${messages[0].title}`;
+					const errorData = error.error || {};
+
+					this.handleErrors(errorHelper.getValidationError({ stack: errorData.stack, message }), logger, callback);
+				})
+				.catch(err => {
+					this.handleErrors(error, logger, callback);
+				});
+		}).catch(errorObject => {
+            this.handleErrors(errorObject, logger, callback);
+		});
+	},
+
+	handleErrors(errorObject, logger, callback) {
+		const { error, title } = errorObject;
+		const handledError =  commonHelper.handleErrorObject(error, title);
+		logger.log('error', handledError, title);
+		callback(handledError);
 	},
 
     adaptJsonSchema(data, logger, callback) {
@@ -94,6 +113,12 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) => new Promise((resolve, r
         }, []);
         return resolve({ hackoladeData, modelData });
     } catch (error) {
-        return reject(errorHelper.getConvertError(error));
+        return reject({ error: errorHelper.getConvertError(error), openAPISchema });
     }
 });
+
+const filterSchema = schema => {
+	delete schema.modelName;
+
+	return schema;
+};
