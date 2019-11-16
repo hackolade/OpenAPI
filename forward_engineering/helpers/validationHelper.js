@@ -46,8 +46,8 @@ const getInnerErrors = (inner, depth = 0) => {
 
 const uniqStrings = (items) => Object.keys(items.reduce((result, item) => Object.assign({}, result, { [item]: '' }), {}));
 
-const validate = (script) => new Promise((resolve, reject) => {
-	SwaggerParser.validate(script, (err, api) => {
+const validate = (script, options = {}) => new Promise((resolve, reject) => {
+	SwaggerParser.validate(script, options, (err, api) => {
 		if (!err) {
 			return resolve([{
 				type: 'success',

@@ -4,7 +4,7 @@ const commonHelper = require('./helpers/commonHelper');
 const dataHelper = require('./helpers/dataHelper');
 const errorHelper = require('./helpers/errorHelper');
 const adaptJsonSchema = require('./helpers/adaptJsonSchema/adaptJsonSchema');
-const validationHelper = require('../forward_engineering/helpers/validationHelper')
+const validationHelper = require('../forward_engineering/helpers/validationHelper');
 
 module.exports = {
 	reFromFile(data, logger, callback) {
@@ -14,9 +14,13 @@ module.exports = {
             const fieldOrder = data.fieldInference.active;
             return handleOpenAPIData(openAPISchema, fieldOrder);
         }).then(reversedData => {
-            return callback(null, reversedData.hackoladeData, reversedData.modelData, [], 'multipleSchema')
+            return callback(null, reversedData.hackoladeData, reversedData.modelData, [], 'multipleSchema');
         }, ({ error, openAPISchema }) => {
-			validationHelper.validate(filterSchema(openAPISchema))
+			if (!openAPISchema) {
+				return this.handleErrors(error, logger, callback);
+			}
+
+			validationHelper.validate(filterSchema(openAPISchema), { resolve: { external: false }})
 				.then((messages) => {
 					if (!Array.isArray(messages) || !messages.length) {
 						this.handleErrors(error, logger, callback);
@@ -79,10 +83,10 @@ const getOpenAPISchema = (data, filePath) => new Promise((resolve, reject) => {
         if (isValidOpenAPISchema) {
             return resolve(openAPISchemaWithModelName);
         } else {
-            return reject(errorHelper.getValidationError(new Error('Selected file is not a valid OpenAPI 3.0.2 schema')));
+            return reject({ error: errorHelper.getValidationError(new Error('Selected file is not a valid OpenAPI 3.0.2 schema')) });
         }
     } catch (error) {
-        return reject(errorHelper.getParseError(error));
+        return reject({ error: errorHelper.getParseError(error) });
     }
 });
 
