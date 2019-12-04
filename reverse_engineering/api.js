@@ -4,6 +4,7 @@ const commonHelper = require('./helpers/commonHelper');
 const dataHelper = require('./helpers/dataHelper');
 const errorHelper = require('./helpers/errorHelper');
 const adaptJsonSchema = require('./helpers/adaptJsonSchema/adaptJsonSchema');
+const validationHelper = require('../forward_engineering/helpers/validationHelper');
 
 module.exports = {
 	reFromFile(data, logger, callback) {
@@ -13,14 +14,36 @@ module.exports = {
             const fieldOrder = data.fieldInference.active;
             return handleOpenAPIData(openAPISchema, fieldOrder);
         }).then(reversedData => {
-            return callback(null, reversedData.hackoladeData, reversedData.modelData, [], 'multipleSchema')
-        }).
-        catch(errorObject => {
-            const { error, title } = errorObject;
-            const handledError =  commonHelper.handleErrorObject(error, title);
-            logger.log('error', handledError, title);
-            callback(handledError);
-        });
+            return callback(null, reversedData.hackoladeData, reversedData.modelData, [], 'multipleSchema');
+        }, ({ error, openAPISchema }) => {
+			if (!openAPISchema) {
+				return this.handleErrors(error, logger, callback);
+			}
+
+			validationHelper.validate(filterSchema(openAPISchema), { resolve: { external: false }})
+				.then((messages) => {
+					if (!Array.isArray(messages) || !messages.length) {
+						this.handleErrors(error, logger, callback);
+					}
+
+					const message = `${messages[0].label}: ${messages[0].title}`;
+					const errorData = error.error || {};
+
+					this.handleErrors(errorHelper.getValidationError({ stack: errorData.stack, message }), logger, callback);
+				})
+				.catch(err => {
+					this.handleErrors(error, logger, callback);
+				});
+		}).catch(errorObject => {
+            this.handleErrors(errorObject, logger, callback);
+		});
+	},
+
+	handleErrors(errorObject, logger, callback) {
+		const { error, title } = errorObject;
+		const handledError =  commonHelper.handleErrorObject(error, title);
+		logger.log('error', handledError, title);
+		callback(handledError);
 	},
 
     adaptJsonSchema(data, logger, callback) {
@@ -60,10 +83,10 @@ const getOpenAPISchema = (data, filePath) => new Promise((resolve, reject) => {
         if (isValidOpenAPISchema) {
             return resolve(openAPISchemaWithModelName);
         } else {
-            return reject(errorHelper.getValidationError(new Error('Selected file is not a valid OpenAPI 3.0.2 schema')));
+            return reject({ error: errorHelper.getValidationError(new Error('Selected file is not a valid OpenAPI 3.0.2 schema')) });
         }
     } catch (error) {
-        return reject(errorHelper.getParseError(error));
+        return reject({ error: errorHelper.getParseError(error) });
     }
 });
 
@@ -94,6 +117,12 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) => new Promise((resolve, r
         }, []);
         return resolve({ hackoladeData, modelData });
     } catch (error) {
-        return reject(errorHelper.getConvertError(error));
+        return reject({ error: errorHelper.getConvertError(error), openAPISchema });
     }
 });
+
+const filterSchema = schema => {
+	delete schema.modelName;
+
+	return schema;
+};

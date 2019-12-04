@@ -864,12 +864,29 @@ const getModelContent = (pathData, fieldOrder, callbacksComponent) => {
 const getOpenAPIJsonSchema = (data, fileName, extension) => {
 	const schema = extension !== '.json' ? commonHelper.convertYamlToJson(data) : data;
 	const openAPISchema = typeof schema === 'string' ? JSON.parse(schema) : schema;
-	const openAPISchemaWithModelName = Object.assign({}, openAPISchema, {
+	const updatedOpenApiSchema = copyPathItemLevelParametersToOperationObject(openAPISchema);
+	const openAPISchemaWithModelName = Object.assign({}, updatedOpenApiSchema, {
 		modelName: fileName
 	});
 	return openAPISchemaWithModelName;
 };
 
+const copyPathItemLevelParametersToOperationObject = (schema) => {
+	const operations = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
+	if (schema.paths) {
+		for (const path in schema.paths) {
+			if (Array.isArray(schema.paths[path].parameters)) {
+				for (const pathItem in schema.paths[path]) {
+					if (operations.includes(pathItem)) {
+						schema.paths[path][pathItem].parameters =
+							[...schema.paths[path][pathItem].parameters || [], ...schema.paths[path].parameters];
+					}
+				}
+			}
+		}
+	}
+	return schema;
+}
 
 const validateOpenAPISchema = (schema) => {
 	const openapi = schema.openapi;
