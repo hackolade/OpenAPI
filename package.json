@@ -23,7 +23,10 @@
 			"enableReverseEngineering": {
 				"jsonDocument": true,
 				"jsonSchema": true,
-				"ddl": false,
+				"ddl": {
+					"entities": false,
+					"model_definitions": true
+				},
 				"xsd": false,
 				"plugin": true 
 			},

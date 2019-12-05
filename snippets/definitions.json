@@ -5,7 +5,10 @@
 	"properties": [{
 		"name": "schemas",
 		"type": "componentObject",
-		"subtype": "schema"
+		"subtype": "schema",
+		"hackoladeMeta": {
+			"source": true
+		}
 	},{
 		"name": "responses",
 		"type": "componentObject",
