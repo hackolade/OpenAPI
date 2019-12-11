@@ -21,13 +21,22 @@
 			},
 			"disableMultipleTypes": false,
 			"enableReverseEngineering": {
-				"jsonDocument": true,
-				"jsonSchema": true,
+				"jsonDocument": {
+					"entities": false,
+					"model_definitions": true
+				},
+				"jsonSchema": {
+					"entities": false,
+					"model_definitions": true
+				},
 				"ddl": {
 					"entities": false,
 					"model_definitions": true
 				},
-				"xsd": false,
+				"xsd": {
+					"entities": false,
+					"model_definitions": true
+				},
 				"plugin": true 
 			},
 			"disableDenormalization": true,
