@@ -115,7 +115,17 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) => new Promise((resolve, r
                 })
             ];
         }, []);
-        return resolve({ hackoladeData, modelData });
+		if (hackoladeData.length) {
+			return resolve({ hackoladeData, modelData });
+		}
+
+		return resolve({
+			hackoladeData: [{
+				objectNames: {},
+				doc: { modelDefinitions: definitions }
+			}],
+			modelData
+		});
     } catch (error) {
         return reject({ error: errorHelper.getConvertError(error), openAPISchema });
     }
