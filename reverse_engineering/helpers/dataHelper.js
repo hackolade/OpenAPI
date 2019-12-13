@@ -766,7 +766,7 @@ const getModelData = (schema) => {
 };
 
 const getComponents = (schemaComponents = {}, fieldOrder) => {
-	const schemasData = handleDefinitionSchemaProps(schemaComponents.schemas || {}, fieldOrder);
+	const schemasData = handleObject(schemas => handleDefinitionSchemaProps(schemas || {}, fieldOrder), schemaComponents.schemas);
 	const parametersData = handleObject(handleParameter, schemaComponents.parameters);
 	const examplesData = handleObject(handleExample, schemaComponents.examples);
 	const requestBodiesData = handleObject(handleRequestBody, schemaComponents.requestBodies);
