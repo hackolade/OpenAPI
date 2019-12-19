@@ -71,10 +71,31 @@ function getTypeProps(data, key) {
 function getRef({ $ref: ref }) {
 	if (ref.startsWith('#')) {
 		ref = ref.replace('#model/definitions', '#/components');
+		return { $ref: prepareReferenceName(ref) };
 	}
 
-	return { $ref: prepareReferenceName(ref) };
-}
+	const [ pathToFile, relativePath] = ref.split('#/');
+	if (!relativePath) {
+		return { $ref: prepareReferenceName(ref) };
+	}
+
+	const path = relativePath.replace(/\/properties/g, '').split('/');
+	if (path[0] === 'definitions') {
+		return { $ref: `${pathToFile}#/components/${path.slice(1).join('/')}` };
+	}
+
+	if (path[3] !== 'response') {
+		return { $ref: `${pathToFile}#/paths/${path.join('/')}` };
+	}
+
+	const bucketWithRequest = path.slice(0,2);
+	const response = path[2];
+	const pathToItem = path.slice(4)
+
+	const pathWithResponses = [ ...bucketWithRequest, 'responses', response, ...pathToItem ];
+
+	return { $ref: `${pathToFile}#/paths/${pathWithResponses.join('/')}` };
+};
 
 function hasRef(data = {}) {
 	return data.$ref ? true : false;

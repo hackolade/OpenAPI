@@ -71,6 +71,7 @@
 			"disableRelationships": true,
 			"disableJsonPreview": false,
 			"enableErdToggle": true,
+			"externalDefinitionsFromTargetSchema": true,
 			"enableStackedNestedCollections": true
 		}
 	},
