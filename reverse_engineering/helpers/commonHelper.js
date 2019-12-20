@@ -46,7 +46,7 @@ const reorderFields = (data, filedOrder) => {
 };
 
 const sortObject = (obj) => {
-    return Object.keys(obj).sort().reduce((acc,key)=>{
+    return Object.keys(obj || {}).sort().reduce((acc,key)=>{
 		if (CHOICES.includes(key)) {
 			acc[key] = obj[key];
 			return acc;
