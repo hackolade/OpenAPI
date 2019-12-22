@@ -11,7 +11,7 @@ const getExtensions = (schema) => {
 	const isExtension = (keyword) => keyword.substring(0, 2) === EXTENSION_SYMBOL;
 	const getExtension = (keyword, data) => ({
 		extensionPattern: keyword,
-		extensionValue: data
+		extensionValue: typeof data === 'object' ? JSON.stringify(data) : data
 	});
 	
 	return Object.keys(schema).reduce((accumulator, key) => {
