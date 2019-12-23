@@ -4,6 +4,7 @@ const commonHelper = require('./helpers/commonHelper');
 const dataHelper = require('./helpers/dataHelper');
 const errorHelper = require('./helpers/errorHelper');
 const adaptJsonSchema = require('./helpers/adaptJsonSchema/adaptJsonSchema');
+const resolveExternalDefinitionPathHelper = require('./helpers/resolveExternalDefinitionPathHelper');
 const validationHelper = require('../forward_engineering/helpers/validationHelper');
 
 module.exports = {
@@ -119,7 +120,17 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) => new Promise((resolve, r
                 })
             ];
         }, []);
-        return resolve({ hackoladeData, modelData });
+		if (hackoladeData.length) {
+			return resolve({ hackoladeData, modelData });
+		}
+
+		return resolve({
+			hackoladeData: [{
+				objectNames: {},
+				doc: { modelDefinitions: definitions }
+			}],
+			modelData
+		});
     } catch (error) {
         return reject({ error: errorHelper.getConvertError(error), openAPISchema });
     }
