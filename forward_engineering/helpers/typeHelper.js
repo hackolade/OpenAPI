@@ -79,20 +79,26 @@ function getRef({ $ref: ref }) {
 		return { $ref: prepareReferenceName(ref) };
 	}
 
-	const path = relativePath.replace(/\/properties/g, '').split('/');
+	const path = relativePath.split('/');
 	if (path[0] === 'definitions') {
-		return { $ref: `${pathToFile}#/components/${path.slice(1).join('/')}` };
+		if (path[2] === 'schemas') {
+			return { $ref: `${pathToFile}#/components/${path.slice(4).join('/')}` }
+		}
 	}
 
-	if (path[3] !== 'response') {
-		return { $ref: `${pathToFile}#/paths/${path.join('/')}` };
+	const schemaIndex = path.indexOf('schema');
+	const schemaPath = path.slice(schemaIndex);
+	const pathWithoutSlashes = path.slice(0, schemaIndex).filter(item => item !== 'properties');
+
+	if (pathWithoutSlashes[3] !== 'response') {
+		return { $ref: `${pathToFile}#/paths/${[ ...pathWithoutSlashes, ...schemaPath].join('/')}` };
 	}
 
-	const bucketWithRequest = path.slice(0,2);
-	const response = path[2];
-	const pathToItem = path.slice(4)
+	const bucketWithRequest = pathWithoutSlashes.slice(0,2);
+	const response = pathWithoutSlashes[2];
+	const pathToItem = pathWithoutSlashes.slice(4)
 
-	const pathWithResponses = [ ...bucketWithRequest, 'responses', response, ...pathToItem ];
+	const pathWithResponses = [ ...bucketWithRequest, 'responses', response, ...pathToItem, ...schemaPath ];
 
 	return { $ref: `${pathToFile}#/paths/${pathWithResponses.join('/')}` };
 };
