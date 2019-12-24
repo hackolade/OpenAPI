@@ -9,8 +9,8 @@ const resolvePath = (data, callback) => {
 			message: 'External definition path is not valid'
 		}, data.path || '');
 	}
-	if (path[0] === 'components') {
-		return callback(null, 'definitions' + addPropertiesToPath(path));
+	if (path[0] === 'components' || path[0] === 'definitions') {
+		return callback(null, 'definitions' + addPropertiesToPath(path.slice(1)));
 	}
 
 	const bucket = path[1];
