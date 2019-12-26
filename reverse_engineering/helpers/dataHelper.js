@@ -197,8 +197,8 @@ const getContainersFromRequestCallbacks = request => {
 
 const getContainersFromCallbacks = callbacks => {
 	return Object.keys(callbacks).reduce((accum, callbackName) => {
-		const rawCallbackPath = callbacks[callbackName];
-		return Object.keys(rawCallbackPath).map(pathName => {
+		const rawCallbackPath = callbacks[callbackName] || {};
+		const containers = Object.keys(rawCallbackPath).map(pathName => {
 			const callbackPath = rawCallbackPath[pathName];
 			if (callbackPath.$ref) {
 				return accum;
@@ -208,11 +208,14 @@ const getContainersFromCallbacks = callbacks => {
 			const requestCallbacksPathsData = requestsNames.reduce((accum, requestName) => {
 				return accum.concat(getContainersFromRequestCallbacks(callbackPath[requestName]));
 			}, []);
-			return accum.concat({
+
+			return [{
 				data: Object.assign({}, {name: pathName}, extensionsObject),
 				callbackPath
-			}, requestCallbacksPathsData);
+			}, ...requestCallbacksPathsData];
 		});
+
+		return accum.concat(containers);
 	}, []);
 }
 
