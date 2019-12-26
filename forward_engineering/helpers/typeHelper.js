@@ -82,12 +82,12 @@ function getRef({ $ref: ref }) {
 	const path = relativePath.split('/');
 	if (path[0] === 'definitions') {
 		if (path[2] === 'schemas') {
-			return { $ref: `${pathToFile}#/components/${path.slice(4).join('/')}` }
+			return { $ref: `${pathToFile}#/components/schemas/${path.slice(4).join('/')}` };
 		}
 	}
 
 	const schemaIndex = path.indexOf('schema');
-	const schemaPath = path.slice(schemaIndex);
+	const schemaPath = schemaIndex === -1 ? [] : path.slice(schemaIndex);
 	const pathWithoutSlashes = path.slice(0, schemaIndex).filter(item => item !== 'properties');
 
 	if (pathWithoutSlashes[3] !== 'response') {
