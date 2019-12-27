@@ -6,7 +6,6 @@ const yaml = require('js-yaml');
 const errorHelper = require('./errorHelper');
 
 const CHOICES = ['allOf', 'oneOf', 'anyOf', 'not'];
-const ALLOWED_EXTENSIONS = ['.json', '.yaml'];
 
 const getFileData = (filePath) => new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf-8', (error, content) => {
@@ -18,43 +17,10 @@ const getFileData = (filePath) => new Promise((resolve, reject) => {
     });
 });
 
-const isJson = data => {
-	try {
-		JSON.parse(data);
-
-		return true;
-	} catch (err) {
-		return false;
-	}
-};
-
-const isYaml = data => {
-	try {
-		yaml.load(data);
-
-		return true;
-	} catch (err) {
-		return false;
-	}
-};
-
-const getPathData = (data, filePath) => {
+const getPathData = (filePath) => {
     const extension = path.extname(filePath);
     const fileName = path.basename(filePath, extension);
-
-	if (ALLOWED_EXTENSIONS.includes(extension)) {
-		return { extension, fileName };
-	}
-
-	if (isJson(data)) {
-		return { extension: '.json', fileName };
-	}
-
-	if (isYaml(data)) {
-		return { extension: '.yaml', fileName };
-	}
-
-	return { extension, fileName };
+    return {extension, fileName };
 };
 
 const handleErrorObject = (error, title) => {
@@ -80,7 +46,7 @@ const reorderFields = (data, filedOrder) => {
 };
 
 const sortObject = (obj) => {
-    return Object.keys(obj).sort().reduce((acc,key)=>{
+    return Object.keys(obj || {}).sort().reduce((acc,key)=>{
 		if (CHOICES.includes(key)) {
 			acc[key] = obj[key];
 			return acc;

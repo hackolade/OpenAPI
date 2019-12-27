@@ -62,11 +62,7 @@ module.exports = {
         } catch(e) {
             callback(commonHelper.handleErrorObject(e, 'Adapt JSON Schema'), data);
         }
-    },
-
-	resolveExternalDefinitionPath(data, logger, callback) {
-		resolveExternalDefinitionPathHelper.resolvePath(data, callback);
-	}
+    }
 };
 
 const convertOpenAPISchemaToHackolade = (openAPISchema, fieldOrder) => {
@@ -79,7 +75,7 @@ const convertOpenAPISchemaToHackolade = (openAPISchema, fieldOrder) => {
 };
 
 const getOpenAPISchema = (data, filePath) => new Promise((resolve, reject) => {
-    const { extension, fileName } = commonHelper.getPathData(data, filePath);
+    const { extension, fileName } = commonHelper.getPathData(filePath);
 
     try {
         const openAPISchemaWithModelName = dataHelper.getOpenAPIJsonSchema(data, fileName, extension);

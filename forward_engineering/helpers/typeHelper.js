@@ -71,7 +71,6 @@ function getTypeProps(data, key) {
 function getRef({ $ref: ref }) {
 	if (ref.startsWith('#')) {
 		ref = ref.replace('#model/definitions', '#/components');
-		return { $ref: prepareReferenceName(ref) };
 	}
 
 	const [ pathToFile, relativePath] = ref.split('#/');

@@ -1,7 +1,7 @@
 {
 	"name": "OpenAPI",
-	"version": "0.1.7",
-	"versionDate": "2019-11-30",
+	"version": "0.1.10",
+	"versionDate": "2019-12-23",
 	"author": "hackolade",
 	"engines": {
 		"hackolade": "3.3.0",
@@ -71,7 +71,6 @@
 			"disableRelationships": true,
 			"disableJsonPreview": false,
 			"enableErdToggle": true,
-			"externalDefinitionsFromTargetSchema": true,
 			"enableStackedNestedCollections": true
 		}
 	},
