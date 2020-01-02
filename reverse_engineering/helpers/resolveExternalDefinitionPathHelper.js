@@ -23,7 +23,7 @@ const resolvePath = (data, callback) => {
 	return callback(null, `${bucket}/${request}${addPropertiesToPath(path.slice(3))}`);
 };
 
-const addPropertiesToPath = path => path.length ? '/properties/' + path.join('/properties/') : '';
+const addPropertiesToPath = path => path.length ? '/properties/' + path.filter(item => item !== 'properties').join('/properties/') : '';
 
 module.exports = {
 	resolvePath
