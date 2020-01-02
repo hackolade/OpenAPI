@@ -6,6 +6,7 @@ const yaml = require('js-yaml');
 const errorHelper = require('./errorHelper');
 
 const CHOICES = ['allOf', 'oneOf', 'anyOf', 'not'];
+const ALLOWED_EXTENSIONS = ['.json', '.yaml'];
 
 const getFileData = (filePath) => new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf-8', (error, content) => {
@@ -17,10 +18,43 @@ const getFileData = (filePath) => new Promise((resolve, reject) => {
     });
 });
 
-const getPathData = (filePath) => {
+const isJson = data => {
+	try {
+		JSON.parse(data);
+
+		return true;
+	} catch (err) {
+		return false;
+	}
+};
+
+const isYaml = data => {
+	try {
+		yaml.load(data);
+
+		return true;
+	} catch (err) {
+		return false;
+	}
+};
+
+const getPathData = (data, filePath) => {
     const extension = path.extname(filePath);
     const fileName = path.basename(filePath, extension);
-    return {extension, fileName };
+
+	if (ALLOWED_EXTENSIONS.includes(extension)) {
+		return { extension, fileName };
+	}
+
+	if (isJson(data)) {
+		return { extension: '.json', fileName };
+	}
+
+	if (isYaml(data)) {
+		return { extension: '.yaml', fileName };
+	}
+
+	return { extension, fileName };
 };
 
 const handleErrorObject = (error, title) => {
