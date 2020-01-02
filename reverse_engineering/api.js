@@ -4,6 +4,7 @@ const commonHelper = require('./helpers/commonHelper');
 const dataHelper = require('./helpers/dataHelper');
 const errorHelper = require('./helpers/errorHelper');
 const adaptJsonSchema = require('./helpers/adaptJsonSchema/adaptJsonSchema');
+const resolveExternalDefinitionPathHelper = require('./helpers/resolveExternalDefinitionPathHelper');
 const validationHelper = require('../forward_engineering/helpers/validationHelper');
 
 module.exports = {
