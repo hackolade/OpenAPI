@@ -71,7 +71,8 @@
 			"disableRelationships": true,
 			"disableJsonPreview": false,
 			"enableErdToggle": true,
-			"enableStackedNestedCollections": true
+			"enableStackedNestedCollections": true,
+			"externalDefinitionsFromTargetSchema": true
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
