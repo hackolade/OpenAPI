@@ -32,7 +32,7 @@ function mapParameter(data, required) {
 		name: data.parameterName,
 		in: getIn(data.type),
 		description: data.description,
-		required: (required || data.required) || undefined,
+		required: !!(required || data.required) || undefined,
 		deprecated: data.deprecated,
 		allowEmptyValue: data.allowEmptyValue,
 		style: data.style,

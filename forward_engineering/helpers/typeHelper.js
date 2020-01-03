@@ -71,10 +71,44 @@ function getTypeProps(data, key) {
 function getRef({ $ref: ref }) {
 	if (ref.startsWith('#')) {
 		ref = ref.replace('#model/definitions', '#/components');
+
+		return { $ref: prepareReferenceName(ref) };
 	}
 
-	return { $ref: prepareReferenceName(ref) };
-}
+	const [ pathToFile, relativePath] = ref.split('#/');
+	if (!relativePath) {
+		return { $ref: prepareReferenceName(ref) };
+	}
+
+	let path = relativePath.split('/');
+	if (path[0] === 'definitions') {
+		if (path[2] === 'schemas') {
+			return { $ref: `${pathToFile}#/components/schemas/${path.slice(4).join('/')}` };
+		}
+
+		path = ['', ...path];
+	}
+
+	const schemaIndex = path.indexOf('schema');
+	const schemaPath = schemaIndex === -1 ? [] : path.slice(schemaIndex);
+	const pathWithoutProperties = path.slice(0, schemaIndex).filter(item => item !== 'properties');
+	const bucketWithRequest = (path[1] === 'definitions') ? path[1] : pathWithoutProperties.slice(0,2);
+
+	if (pathWithoutProperties[3] !== 'response') {
+		if (pathWithoutProperties[2] !== 'requestBody') {
+			return { $ref: `${pathToFile}#/paths/${[ ...pathWithoutProperties, ...schemaPath].join('/')}` };
+		}
+
+		return { $ref: `${pathToFile}#/paths/${[ ...bucketWithRequest, 'requestBody', 'content', ...pathWithoutProperties.slice(3), ...schemaPath].join('/')}` };
+	}
+
+	const response = pathWithoutProperties[2];
+	const pathToItem = pathWithoutProperties.slice(4)
+
+	const pathWithResponses = [ ...bucketWithRequest, 'responses', response, ...pathToItem, ...schemaPath ];
+
+	return { $ref: `${pathToFile}#/paths/${pathWithResponses.join('/')}` };
+};
 
 function hasRef(data = {}) {
 	return data.$ref ? true : false;

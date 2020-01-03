@@ -1,7 +1,7 @@
 {
 	"name": "OpenAPI",
-	"version": "0.1.11",
-	"versionDate": "2019-12-26",
+	"version": "0.1.12",
+	"versionDate": "2020-01-03",
 	"author": "hackolade",
 	"engines": {
 		"hackolade": "3.3.0",
@@ -71,7 +71,8 @@
 			"disableRelationships": true,
 			"disableJsonPreview": false,
 			"enableErdToggle": true,
-			"enableStackedNestedCollections": true
+			"enableStackedNestedCollections": true,
+			"externalDefinitionsFromTargetSchema": true
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",

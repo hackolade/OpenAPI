@@ -4,6 +4,7 @@ const commonHelper = require('./helpers/commonHelper');
 const dataHelper = require('./helpers/dataHelper');
 const errorHelper = require('./helpers/errorHelper');
 const adaptJsonSchema = require('./helpers/adaptJsonSchema/adaptJsonSchema');
+const resolveExternalDefinitionPathHelper = require('./helpers/resolveExternalDefinitionPathHelper');
 const validationHelper = require('../forward_engineering/helpers/validationHelper');
 
 module.exports = {
@@ -61,7 +62,11 @@ module.exports = {
         } catch(e) {
             callback(commonHelper.handleErrorObject(e, 'Adapt JSON Schema'), data);
         }
-    }
+    },
+
+	resolveExternalDefinitionPath(data, logger, callback) {
+		resolveExternalDefinitionPathHelper.resolvePath(data, callback);
+	}
 };
 
 const convertOpenAPISchemaToHackolade = (openAPISchema, fieldOrder) => {
@@ -74,7 +79,7 @@ const convertOpenAPISchemaToHackolade = (openAPISchema, fieldOrder) => {
 };
 
 const getOpenAPISchema = (data, filePath) => new Promise((resolve, reject) => {
-    const { extension, fileName } = commonHelper.getPathData(filePath);
+    const { extension, fileName } = commonHelper.getPathData(data, filePath);
 
     try {
         const openAPISchemaWithModelName = dataHelper.getOpenAPIJsonSchema(data, fileName, extension);
