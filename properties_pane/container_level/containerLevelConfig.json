@@ -140,6 +140,11 @@ making sure that you maintain a proper JSON format.
 				"regex": "^/"
 			},
 			{
+				"propertyName": "Activated",
+				"propertyKeyword": "isActivated",
+				"propertyType": "checkbox"
+			},
+			{
 				"propertyName": "Description",
 				"propertyKeyword": "description",
 				"shouldValidate": false,
