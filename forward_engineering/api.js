@@ -1,4 +1,5 @@
 const yaml = require('js-yaml');
+const get = require('lodash.get');
 const validationHelper = require('./helpers/validationHelper');
 const getInfo = require('./helpers/infoHelper');
 const { getPaths } = require('./helpers/pathHelper');
@@ -51,9 +52,12 @@ module.exports = {
 				}
 				case 'json':
 				default: {
-					const schema = JSON.stringify(resultSchema, null, 2);
-					const schemaWithComments = addCommentsSigns(schema, 'json');
-					cb(null, schemaWithComments);
+					const schemaString = JSON.stringify(resultSchema, null, 2);
+					let schema = addCommentsSigns(schemaString, 'json');
+					if (!get(data, 'options.isCalledFromFEPage')) {
+						schema = removeCommentLines(schema);
+					}
+					cb(null, schema);
 				}
 			}
 		} catch (err) {
@@ -64,13 +68,8 @@ module.exports = {
 
 	validate(data, logger, cb) {
 		const { script, targetScriptOptions } = data;
-		const isCommentedLine = /\s*#/i;
 		try {
-			const filteredScript = script
-				.split('\n')
-				.filter(line => !isCommentedLine.test(line))
-				.join('\n')
-				.replace(/(.*?),\s*(\}|])/g, "$1$2");
+			const filteredScript = removeCommentLines(script);
 			let parsedScript = {};
 
 			switch (targetScriptOptions.format) {
@@ -128,4 +127,14 @@ const addCommentsSigns = (string, format) => {
 	}, { isCommented: false, result: '' });
 
 	return result;
+}
+
+const removeCommentLines = (scriptString) => {
+	const isCommentedLine = /\s*#/i;
+
+	return scriptString
+		.split('\n')
+		.filter(line => !isCommentedLine.test(line))
+		.join('\n')
+		.replace(/(.*?),\s*(\}|])/g, '$1$2');
 }
