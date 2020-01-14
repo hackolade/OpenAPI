@@ -140,11 +140,6 @@ making sure that you maintain a proper JSON format.
 				"regex": "^/"
 			},
 			{
-				"propertyName": "Activated",
-				"propertyKeyword": "isActivated",
-				"propertyType": "checkbox"
-			},
-			{
 				"propertyName": "Description",
 				"propertyKeyword": "description",
 				"shouldValidate": false,
@@ -158,6 +153,12 @@ making sure that you maintain a proper JSON format.
 				"shouldValidate": false,
 				"propertyType": "text",
 				"sampleGen": "&containerName|&entityName|&random|<value>"
+			},
+			{
+				"propertyName": "Activated",
+				"propertyKeyword": "isActivated",
+				"propertyType": "checkbox",
+				"propertyTooltip": "Deactivated item will be commented out in the schema"
 			},
 			{
 				"propertyName": "extensions",
