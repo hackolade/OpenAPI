@@ -54,7 +54,7 @@ module.exports = {
 				default: {
 					const schemaString = JSON.stringify(resultSchema, null, 2);
 					let schema = addCommentsSigns(schemaString, 'json');
-					if (!get(data, 'options.isCalledFromFEPage')) {
+					if (!get(data, 'options.isCalledFromFETab')) {
 						schema = removeCommentLines(schema);
 					}
 					cb(null, schema);
