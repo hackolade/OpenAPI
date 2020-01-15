@@ -5,19 +5,22 @@
 		"dbVendor": "OpenAPI"
 	},
 	"container": {
-		"name": "/path"
+		"name": "/path",
+		"isActivated": true
 	},
 	"collection": {
 		"collectionName": "get",
 		"entityType": "request",
 		"snippet": "requestStructure",
-		"subtype": "requestBody"
+		"subtype": "requestBody",
+		"isActivated": true
 	},
 	"nestedCollection": {
 		"collectionName": "200",
 		"entityType": "response",
 		"snippet": "responseStructure",
-		"subtype": "response"
+		"subtype": "response",
+		"isActivated": true
 	},
 	"field": {
 		"hackoladeMeta": {
