@@ -710,7 +710,8 @@ const handleRequestData = (requestData, request, fieldOrder) => {
 		entityType: REQUEST,
 		subtype: 'requestBody',
 		collectionName: request,
-		properties: requestSchema
+		properties: requestSchema,
+		isActivated: true
 	});
 	return { jsonSchema, responses };
 };
@@ -742,7 +743,8 @@ const handleResponseData = (responseObj, response, request, fieldOrder) => {
 		parentCollection: request,
 		properties: {
 			response: responseData
-		}
+		},
+		isActivated: true
 	};
 	return jsonSchema;
 };
