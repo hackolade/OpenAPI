@@ -1,7 +1,7 @@
 {
 	"name": "OpenAPI",
-	"version": "0.1.12",
-	"versionDate": "2020-01-03",
+	"version": "0.1.13",
+	"versionDate": "2020-01-16",
 	"author": "hackolade",
 	"engines": {
 		"hackolade": "3.3.0",
@@ -37,7 +37,7 @@
 					"entities": false,
 					"model_definitions": true
 				},
-				"plugin": true
+				"plugin": true 
 			},
 			"disableDenormalization": true,
 			"enableForwardEngineering": {

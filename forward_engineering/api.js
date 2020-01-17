@@ -130,7 +130,7 @@ const addCommentsSigns = (string, format) => {
 }
 
 const removeCommentLines = (scriptString) => {
-	const isCommentedLine = /\s*#/i;
+	const isCommentedLine = /^\s*#\s+/i;
 
 	return scriptString
 		.split('\n')
