@@ -22,7 +22,7 @@ function getResponses(data) {
 		}, {});
 }
 
-function mapResponse(data, responseCollectionDescription) {
+function mapResponse(data, responseCollectionDescription, shouldResponseBeCommented = false) {
 	if (!data) {
 		return;
 	} 
@@ -34,8 +34,18 @@ function mapResponse(data, responseCollectionDescription) {
 	const content = getContent(get(data, `properties.content`));
 	const links = getLinks(get(data, `properties.links`));
 	const extensions = getExtensions(data.scopesExtensions);
+	const response = {};
+	if (shouldResponseBeCommented) {
+		response[`hackoladeInnerCommentStart`] = true;
+	}
 
-	return Object.assign({}, { description, headers, content, links }, extensions);
+	Object.assign(response, { description, headers, content, links }, extensions);
+	
+	if (shouldResponseBeCommented) {
+		response[`hackoladeInnerCommentEnd`] = true;
+	}
+
+	return response;
 }
 
 module.exports = {
