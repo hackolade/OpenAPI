@@ -235,6 +235,12 @@ making sure that you maintain a proper JSON format.
 				"hidden": true
 			},
 			{
+				"propertyName": "Activated",
+				"propertyKeyword": "isActivated",
+				"propertyType": "checkbox",
+				"propertyTooltip": "Deactivated item will be commented out in the schema"
+			},
+			{
 				"propertyName": "schema",
 				"propertyKeyword": "pathItemSchema",
 				"shouldValidate": false,
