@@ -140,7 +140,7 @@
 					"value": "requestBody" 
 				}
 			},{
-				"value": "MIMEtype/subtype",
+				"value": "application/json",
 				"dependency": {
 					"level": "parent",
 					"key": "subtype",
