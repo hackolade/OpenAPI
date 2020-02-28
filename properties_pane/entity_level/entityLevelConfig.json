@@ -135,17 +135,7 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "collectionName",
 				"propertyTooltip": "Select from list of operations",
 				"propertyType": "select",
-				"options": [
-					"get",
-					"put",
-					"post",
-					"delete",
-					"options",
-					"head",
-					"patch",
-					"trace",
-					"$ref"
-				],
+				"options": ["get", "put", "post", "delete", "options", "head", "patch", "trace", "$ref"],
 				"dependency": {
 					"key": "entityType",
 					"value": "request"
@@ -157,71 +147,331 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
-					"1XX",
-					"100",
-					"101",
-					"2XX",
-					"200",
-					"201",
-					"202",
-					"203",
-					"204",
-					"205",
-					"206",
-					"207",
-					"226",
-					"3XX",
-					"300",
-					"301",
-					"302",
-					"303",
-					"304",
-					"305",
-					"307",
-					"308",
-					"4XX",
-					"400",
-					"401",
-					"402",
-					"403",
-					"404",
-					"405",
-					"406",
-					"407",
-					"408",
-					"409",
-					"410",
-					"411",
-					"412",
-					"413",
-					"414",
-					"415",
-					"416",
-					"417",
-					"418",
-					"421",
-					"422",
-					"423",
-					"424",
-					"425",
-					"426",
-					"428",
-					"429",
-					"431",
-					"451",
-					"5XX",
-					"500",
-					"501",
-					"502",
-					"503",
-					"504",
-					"505",
-					"506",
-					"507",
-					"508",
-					"510",
-					"511",
-					"default"
+					{
+						"name": "1XX",
+						"value": "1XX",
+						"tooltip": "Informational"
+					},
+					{
+						"name": "100",
+						"value": "100",
+						"tooltip": "Continue"
+					},
+					{
+						"name": "101",
+						"value": "101",
+						"tooltip": "Switching Protocols"
+					},
+					{
+						"name": "2XX",
+						"value": "2XX",
+						"tooltip": "Successful"
+					},
+					{
+						"name": "200",
+						"value": "200",
+						"tooltip": "OK"
+					},
+					{
+						"name": "201",
+						"value": "201",
+						"tooltip": "Created"
+					},
+					{
+						"name": "202",
+						"value": "202",
+						"tooltip": "Accepted"
+					},
+					{
+						"name": "203",
+						"value": "203",
+						"tooltip": "Non-Authoritative Information"
+					},
+					{
+						"name": "204",
+						"value": "204",
+						"tooltip": "No Content"
+					},
+					{
+						"name": "205",
+						"value": "205",
+						"tooltip": "Reset Content"
+					},
+					{
+						"name": "206",
+						"value": "206",
+						"tooltip": "Partial Content"
+					},
+					{
+						"name": "207",
+						"value": "207",
+						"tooltip": "Multi-Status"
+					},
+					{
+						"name": "226",
+						"value": "226",
+						"tooltip": "IM Used"
+					},
+					{
+						"name": "3XX",
+						"value": "3XX",
+						"tooltip": "Redirection"
+					},
+					{
+						"name": "300",
+						"value": "300",
+						"tooltip": "Multiple Choices"
+					},
+					{
+						"name": "301",
+						"value": "301",
+						"tooltip": "Moved Permanently"
+					},
+					{
+						"name": "302",
+						"value": "302",
+						"tooltip": "Found"
+					},
+					{
+						"name": "303",
+						"value": "303",
+						"tooltip": "See Other"
+					},
+					{
+						"name": "304",
+						"value": "304",
+						"tooltip": "Not Modified"
+					},
+					{
+						"name": "305",
+						"value": "305",
+						"tooltip": "Use Proxy"
+					},
+					{
+						"name": "307",
+						"value": "307",
+						"tooltip": "Temporary Redirect"
+					},
+					{
+						"name": "308",
+						"value": "308",
+						"tooltip": "Permanent Redirect"
+					},
+					{
+						"name": "4XX",
+						"value": "4XX",
+						"tooltip": "Client Error"
+					},
+					{
+						"name": "400",
+						"value": "400",
+						"tooltip": "Bad Request"
+					},
+					{
+						"name": "401",
+						"value": "401",
+						"tooltip": "Unauthorized"
+					},
+					{
+						"name": "402",
+						"value": "402",
+						"tooltip": "Payment Required"
+					},
+					{
+						"name": "403",
+						"value": "403",
+						"tooltip": "Forbidden"
+					},
+					{
+						"name": "404",
+						"value": "404",
+						"tooltip": "Not Found"
+					},
+					{
+						"name": "405",
+						"value": "405",
+						"tooltip": "Method Not Allowed"
+					},
+					{
+						"name": "406",
+						"value": "406",
+						"tooltip": "Not Acceptable"
+					},
+					{
+						"name": "407",
+						"value": "407",
+						"tooltip": "Proxy Authentication Required"
+					},
+					{
+						"name": "408",
+						"value": "408",
+						"tooltip": "Request Timeout"
+					},
+					{
+						"name": "409",
+						"value": "409",
+						"tooltip": "Conflict"
+					},
+					{
+						"name": "410",
+						"value": "410",
+						"tooltip": "Gone"
+					},
+					{
+						"name": "411",
+						"value": "411",
+						"tooltip": "Length Required"
+					},
+					{
+						"name": "412",
+						"value": "412",
+						"tooltip": "Precondition Failed"
+					},
+					{
+						"name": "413",
+						"value": "413",
+						"tooltip": "Request Entity Too Large"
+					},
+					{
+						"name": "414",
+						"value": "414",
+						"tooltip": "Request-URI Too Long"
+					},
+					{
+						"name": "415",
+						"value": "415",
+						"tooltip": "Unsupported Media Type"
+					},
+					{
+						"name": "416",
+						"value": "416",
+						"tooltip": "Requested Range Not Satisfiable"
+					},
+					{
+						"name": "417",
+						"value": "417",
+						"tooltip": "Expectation Failed"
+					},
+					{
+						"name": "418",
+						"value": "418",
+						"tooltip": "I'm a teapot"
+					},
+					{
+						"name": "421",
+						"value": "421",
+						"tooltip": "Misdirected Request"
+					},
+					{
+						"name": "422",
+						"value": "422",
+						"tooltip": "Unprocessable Entity"
+					},
+					{
+						"name": "423",
+						"value": "423",
+						"tooltip": "Locked"
+					},
+					{
+						"name": "424",
+						"value": "424",
+						"tooltip": "Failed Dependency"
+					},
+					{
+						"name": "425",
+						"value": "425",
+						"tooltip": "Too Early"
+					},
+					{
+						"name": "426",
+						"value": "426",
+						"tooltip": "Upgrade Required"
+					},
+					{
+						"name": "428",
+						"value": "428",
+						"tooltip": "Precondition Required"
+					},
+					{
+						"name": "429",
+						"value": "429",
+						"tooltip": "Too Many Requests"
+					},
+					{
+						"name": "431",
+						"value": "431",
+						"tooltip": "Request Header Fields Too Large"
+					},
+					{
+						"name": "451",
+						"value": "451",
+						"tooltip": "Unavailable For Legal Reasons"
+					},
+					{
+						"name": "5XX",
+						"value": "5XX",
+						"tooltip": "Server Error"
+					},
+					{
+						"name": "500",
+						"value": "500",
+						"tooltip": "Internal Server Error"
+					},
+					{
+						"name": "501",
+						"value": "501",
+						"tooltip": "Not Implemented"
+					},
+					{
+						"name": "502",
+						"value": "502",
+						"tooltip": "Bad Gateway"
+					},
+					{
+						"name": "503",
+						"value": "503",
+						"tooltip": "Service Unavailable"
+					},
+					{
+						"name": "504",
+						"value": "504",
+						"tooltip": "Gateway Timeout"
+					},
+					{
+						"name": "505",
+						"value": "505",
+						"tooltip": "HTTP Version Not Supported"
+					},
+					{
+						"name": "506",
+						"value": "506",
+						"tooltip": "Variant Also Negotiates"
+					},
+					{
+						"name": "507",
+						"value": "507",
+						"tooltip": "Insufficient Storage"
+					},
+					{
+						"name": "508",
+						"value": "508",
+						"tooltip": "Loop Detected"
+					},
+					{
+						"name": "510",
+						"value": "510",
+						"tooltip": "Not Extended"
+					},
+					{
+						"name": "511",
+						"value": "511",
+						"tooltip": "Network Authentication Required"
+					},
+					{
+						"name": "default",
+						"value": "default",
+						"tooltip": "default"
+					}
 				],
 				"dependency": {
 					"key": "entityType",
@@ -252,7 +502,8 @@ making sure that you maintain a proper JSON format.
 						{
 							"key": "collectionName",
 							"value": "$ref"
-						},{
+						},
+						{
 							"key": "entityType",
 							"value": "request"
 						}
@@ -329,7 +580,7 @@ making sure that you maintain a proper JSON format.
 								"propertyKeyword": "extensionPattern",
 								"shouldValidate": true,
 								"propertyType": "text",
-								"regex":"^x-"
+								"regex": "^x-"
 							},
 							{
 								"propertyName": "value",
@@ -475,7 +726,7 @@ making sure that you maintain a proper JSON format.
 										"propertyKeyword": "extensionPattern",
 										"shouldValidate": true,
 										"propertyType": "text",
-										"regex":"^x-"
+										"regex": "^x-"
 									},
 									{
 										"propertyName": "value",
@@ -502,7 +753,7 @@ making sure that you maintain a proper JSON format.
 								"propertyKeyword": "extensionPattern",
 								"shouldValidate": true,
 								"propertyType": "text",
-								"regex":"^x-"
+								"regex": "^x-"
 							},
 							{
 								"propertyName": "value",
@@ -518,6 +769,12 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
+				"propertyName": "Activated",
+				"propertyKeyword": "isActivated",
+				"propertyType": "checkbox",
+				"propertyTooltip": "Deactivated item will be commented out in the schema"
+			},
+			{
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
@@ -529,7 +786,7 @@ making sure that you maintain a proper JSON format.
 						"propertyKeyword": "extensionPattern",
 						"shouldValidate": true,
 						"propertyType": "text",
-						"regex":"^x-"
+						"regex": "^x-"
 					},
 					{
 						"propertyName": "value",
