@@ -17,8 +17,7 @@
 		},
 		"features": {
 			"nestedCollections": {
-				"level": 1,
-				"apiTarget": true
+				"level": 1
 			},
 			"disableMultipleTypes": false,
 			"enableReverseEngineering": {
@@ -73,7 +72,8 @@
 			"disableJsonPreview": false,
 			"enableErdToggle": true,
 			"enableStackedNestedCollections": true,
-			"externalDefinitionsFromTargetSchema": true
+			"externalDefinitionsFromTargetSchema": true,
+			"apiTarget": true
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
