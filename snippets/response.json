@@ -8,7 +8,11 @@
 	}, {
 		"name": "content",
 		"subtype": "media",
-		"type": "object"
+		"type": "object",
+		"properties": [{
+			"name": "application/json",
+			"type": "media"
+		}]
 	},{
 		"name": "links",
 		"type": "object",

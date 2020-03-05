@@ -16,6 +16,7 @@
 		"maxProperties": "",
 		"additionalProperties": false,
 		"enum": [],
+		"snippet": "requestBody",
 		"subtype": "media",
 		"hackoladeMeta": {
 			"disableAdd": false,
