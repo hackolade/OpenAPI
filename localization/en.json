@@ -70,7 +70,7 @@
 	"CONTEXT_MENU___PATTERN_FIELD": "Pattern Field",
 	"CONTEXT_MENU___ARRAY_ITEM": "Array Item",
 	"MODAL_WINDOW___COLLECTION": "request:",
-	"MODAL_WINDOW___NESTED_COLLECTIONS": "Responses",
+	"MODAL_WINDOW___NESTED_COLLECTIONS": "responses",
 	"MODAL_WINDOW___EMPTY_MODEL_MESSAGE": "The Model does not contain any resources.",
 	"MODAL_WINDOW___FIELD_INFERENCE": "Field Inference",
 	"MODAL_WINDOW___KEEP_FIELD_ORDER": "Keep field order",
