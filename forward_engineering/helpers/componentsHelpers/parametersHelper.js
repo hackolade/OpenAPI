@@ -95,9 +95,13 @@ function getContent(data) {
     }
 
     return Object.keys(data.properties).reduce((acc, key) => {
-        if (!get(data, `properties[${key}].properties`)) {
+		const properties = get(data, `properties[${key}].properties`);
+        if (!properties) {
             return;
-        }
+		}
+		if (properties.schema && get(properties.schema, 'type') === 'object' && !get(properties.schema, 'properties')) {
+			return;
+		}
         acc[key] = mapMediaTypeObject(data.properties[key]);
         return acc;
     }, {});

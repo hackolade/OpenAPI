@@ -1,4 +1,8 @@
 {
 	"name": "requestBody",
-	"parentType": "document"
+	"parentType": "document",
+	"properties": [{
+		"name": "application/json",
+		"type": "media"
+	}]
 }
