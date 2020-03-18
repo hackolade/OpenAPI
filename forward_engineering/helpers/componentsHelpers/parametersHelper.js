@@ -99,7 +99,9 @@ function getContent(data) {
         if (!properties) {
             return;
 		}
-		if (properties.schema && get(properties.schema, 'type') === 'object' && !get(properties.schema, 'properties')) {
+		const isSchemaEmpty = properties.schema && get(properties.schema, 'type') === 'object' && !get(properties.schema, 'properties');
+		const isExamplesEmpty = !get(properties, 'examples.properties');
+		if (isSchemaEmpty && isExamplesEmpty) {
 			return;
 		}
         acc[key] = mapMediaTypeObject(data.properties[key]);
