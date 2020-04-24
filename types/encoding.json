@@ -14,8 +14,10 @@
 		"minProperties": "",
 		"maxProperties": "",
 		"snippet": "encoding",
+		"properties": [],
 		"additionalProperties": false,
 		"enum": [],
+		"subtype": "snippetChildrenOnly",
 		"hackoladeMeta": {
 			"disableAdd": true
 		}

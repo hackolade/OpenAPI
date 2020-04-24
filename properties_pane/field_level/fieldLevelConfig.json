@@ -1432,7 +1432,11 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"key": "subtype",
+					"value": "schema"
+				}
 			},
 			"comments"
 		],
@@ -2564,6 +2568,31 @@ making sure that you maintain a proper JSON format.
 								"markdown": false
 							}
 						]
+					}
+				]
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex":"^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
 					}
 				]
 			}
