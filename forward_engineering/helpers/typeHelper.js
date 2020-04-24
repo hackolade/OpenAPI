@@ -55,8 +55,9 @@ function getTypeProps(data, key) {
 				xml: getXml(data.xml)
 			};
 			const objectChoices = getChoices(data, key);
+    		const extensions = getExtensions(data.scopesExtensions);
 
-			return Object.assign({}, objectProps, objectChoices);
+			return Object.assign({}, objectProps, objectChoices, extensions);
 		}
 		case 'parameter':
 			if (!properties || properties.length === 0) {

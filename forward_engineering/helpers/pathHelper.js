@@ -62,7 +62,7 @@ function getRequestData(collections, containers, containerId, containersPath = [
 				methodName: data.collectionName,
 				isActivated: data.isActivated
 			};
-			const extensions = getExtensions(data.operationExtensions);
+			const extensions = getExtensions(data.scopesExtensions);
 
 			return Object.assign({}, request, extensions);
 		})
@@ -103,9 +103,10 @@ function mapResponses(collections, collectionId, isParentActivated) {
 		.map(collection => {
 			const responseCode = collection.collectionName;
 			const shouldResponseBeCommented = !collection.isActivated && isParentActivated;
+			const extensions = getExtensions(collection.scopesExtensions);
 			const response = mapResponse(get(collection, 'properties.response'), collection.description, shouldResponseBeCommented);
 
-			return { responseCode, response };
+			return { responseCode, response: { ...response, ...extensions } };
 		})
 		.reduce((acc, { responseCode, response }) => {
 			acc[responseCode] = response;
@@ -137,8 +138,9 @@ function getCallbacks(data, containers, containerId, containersPath = []) {
 				containers,
 				[...containersPath, containerId]
 			);
+			const extensions = getExtensions(value.scopesExtensions);
 
-			return { [key]: { [value.callbackExpression]: callbackData }};
+			return { [key]: { [value.callbackExpression]: callbackData, ...extensions }};
 
 		})
 		.reduce((acc, item) => {
