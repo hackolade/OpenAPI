@@ -21,6 +21,8 @@ function getType(data, key) {
 function getTypeProps(data, key) {
 	const { type, properties, items, required } = data;
 
+    const extensions = getExtensions(data.scopesExtensions);
+
 	switch (type) {
 		case 'array': {
 			const arrayProps = {
@@ -37,7 +39,7 @@ function getTypeProps(data, key) {
 			};
 			const arrayChoices = getChoices(data, key);
 
-			return Object.assign({}, arrayProps, arrayChoices);
+			return Object.assign({}, arrayProps, arrayChoices, extensions);
 		}
 		case 'object': {
 			const objectProps = {
@@ -55,7 +57,6 @@ function getTypeProps(data, key) {
 				xml: getXml(data.xml)
 			};
 			const objectChoices = getChoices(data, key);
-    		const extensions = getExtensions(data.scopesExtensions);
 
 			return Object.assign({}, objectProps, objectChoices, extensions);
 		}
@@ -168,7 +169,8 @@ function getPrimitiveTypeProps(data) {
 		maxLength: data.maxLength,
 		multipleOf: data.multipleOf,
 		xml: getXml(data.xml),
-		example: data.sample
+		example: data.sample,
+		...getExtensions(data.scopesExtensions)
 	};
 
 	return addIfTrue(properties, 'nullable', data.nullable);
