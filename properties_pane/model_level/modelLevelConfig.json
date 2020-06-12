@@ -156,7 +156,10 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "DB version",
 				"propertyType": "select",
 				"options": [
-					"3.0.2"
+					"3.0.3",
+					"3.0.2",
+					"3.0.1",
+					"3.0.0"
 				],
 				"disabledOption": false
 			},
