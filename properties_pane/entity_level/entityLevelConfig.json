@@ -493,7 +493,6 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "schema",
 				"propertyKeyword": "pathItemSchema",
-				"shouldValidate": false,
 				"propertyType": "fieldList",
 				"template": "orderedList",
 				"dependency": {
@@ -520,7 +519,6 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "tag",
 						"propertyKeyword": "tag",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "text"
 					}
@@ -533,7 +531,6 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "summary",
 				"propertyKeyword": "summary",
-				"shouldValidate": false,
 				"propertyType": "text",
 				"sampleGen": "&containerName|&entityName|&random|<value>",
 				"dependency": {
@@ -563,7 +560,6 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "description",
 						"propertyKeyword": "externalDocsDescription",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "details",
 						"template": "textarea"
@@ -598,7 +594,6 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "operationId",
 				"propertyKeyword": "operationId",
-				"shouldValidate": false,
 				"propertyType": "text",
 				"sampleGen": "&containerName|&entityName|&random|<value>",
 				"dependency": {
@@ -609,7 +604,6 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "deprecated",
 				"propertyKeyword": "deprecated",
-				"shouldValidate": false,
 				"propertyType": "checkbox",
 				"dependency": {
 					"key": "entityType",
@@ -626,14 +620,12 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "pattern {name}",
 						"propertyKeyword": "securityRequirementName",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "text"
 					},
 					{
 						"propertyName": "operation",
 						"propertyKeyword": "securityRequirementOperation",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "multipleText"
 					}
@@ -679,7 +671,6 @@ making sure that you maintain a proper JSON format.
 							{
 								"propertyName": "name",
 								"propertyKeyword": "serverVariableName",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "text"
 							},
@@ -693,7 +684,6 @@ making sure that you maintain a proper JSON format.
 									{
 										"propertyName": "value",
 										"propertyKeyword": "serverVariableEnumValue",
-										"shouldValidate": false,
 										"propertyTooltip": "",
 										"propertyType": "text"
 									}
@@ -702,14 +692,12 @@ making sure that you maintain a proper JSON format.
 							{
 								"propertyName": "default",
 								"propertyKeyword": "serverVariableDefault",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "text"
 							},
 							{
 								"propertyName": "description",
 								"propertyKeyword": "serverVariableDescription",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "details",
 								"template": "textarea"
