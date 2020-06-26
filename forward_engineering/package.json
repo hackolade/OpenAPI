@@ -6,7 +6,7 @@
   "dependencies": {
     "js-yaml": "^3.13.1",
     "lodash.get": "^4.4.2",
-    "swagger-parser": "^8.0.4"
+    "swagger-parser": "9.0.1"
   },
   "installed": true
 }
