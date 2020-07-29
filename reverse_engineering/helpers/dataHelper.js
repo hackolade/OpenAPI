@@ -66,7 +66,7 @@ const getServersData = (servers) => {
 		if (!server.url) {
 			return accum;
 		}
-		
+
 		const variables = server.variables ? getServersVariables(server.variables) : [];
 		return [...accum, {
 			serverURL: server.url,
@@ -82,7 +82,7 @@ const getServersVariables = (variables) => {
 		const variableData = variables[variable];
 		return {
 			serverVariableName: variable,
-			serverVariableEnum: variableData.enum.map(enumVal => ({serverVariableEnumValue: enumVal})),
+			serverVariableEnum: (variableData.enum || []).map(enumVal => ({serverVariableEnumValue: enumVal})),
 			serverVariableDefault: variableData.default,
 			serverVariableDescription: variableData.description,
 			scopesExtensions: getExtensions(variables)

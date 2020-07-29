@@ -23,7 +23,7 @@ module.exports = {
 
 			validationHelper.validate(filterSchema(openAPISchema), { resolve: { external: false }})
 				.then((messages) => {
-					if (!Array.isArray(messages) || !messages.length) {
+					if (!Array.isArray(messages) || !messages.length || (messages.length === 1 && messages[0].type === 'success')) {
 						this.handleErrors(error, logger, callback);
 					}
 
@@ -41,8 +41,8 @@ module.exports = {
 	},
 
 	handleErrors(errorObject, logger, callback) {
-		const { error, title } = errorObject;
-		const handledError =  commonHelper.handleErrorObject(error, title);
+		const { error, title, name } = errorObject;
+		const handledError =  commonHelper.handleErrorObject(error || errorObject, title || name);
 		logger.log('error', handledError, title);
 		callback(handledError);
 	},
