@@ -21,5 +21,6 @@
 		{ "name": "YAML", "keyword": "yaml", "fileExtensions": [ {
 			"label": "application/yaml", "value": "yaml"
 		} ] }
-	]
+	],
+	"isApiSchema": true
 }

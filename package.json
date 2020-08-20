@@ -43,7 +43,8 @@
 			"enableForwardEngineering": {
 				"jsonDocument": true,
 				"jsonSchema": true,
-				"plugin": true
+				"plugin": true,
+				"apiSchema": false
 			},
 			"disablePatternField": false,
 			"disableChoices": {
