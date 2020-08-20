@@ -21,6 +21,8 @@ function getType(data, key) {
 function getTypeProps(data, key) {
 	const { type, properties, items, required } = data;
 
+    const extensions = getExtensions(data.scopesExtensions);
+
 	switch (type) {
 		case 'array': {
 			const arrayProps = {
@@ -37,7 +39,7 @@ function getTypeProps(data, key) {
 			};
 			const arrayChoices = getChoices(data, key);
 
-			return Object.assign({}, arrayProps, arrayChoices);
+			return Object.assign({}, arrayProps, arrayChoices, extensions);
 		}
 		case 'object': {
 			const objectProps = {
@@ -56,7 +58,7 @@ function getTypeProps(data, key) {
 			};
 			const objectChoices = getChoices(data, key);
 
-			return Object.assign({}, objectProps, objectChoices);
+			return Object.assign({}, objectProps, objectChoices, extensions);
 		}
 		case 'parameter':
 			if (!properties || properties.length === 0) {
@@ -90,16 +92,22 @@ function getRef({ $ref: ref }) {
 	}
 
 	const schemaIndex = path.indexOf('schema');
-	const schemaPath = schemaIndex === -1 ? [] : path.slice(schemaIndex);
-	const pathWithoutProperties = path.slice(0, schemaIndex).filter(item => item !== 'properties');
-	const bucketWithRequest = (path[1] === 'definitions') ? path[1] : pathWithoutProperties.slice(0,2);
-
+	const hasSchema = schemaIndex !== -1;
+	const isComponents = (path[1] === 'definitions');
+	const schemaPath = !hasSchema ? [] : path.slice(schemaIndex);
+	const pathWithoutProperties = (hasSchema ? path.slice(0, schemaIndex) : path).filter(item => item !== 'properties');
+	const bucketWithRequest = isComponents ? ['components'] : pathWithoutProperties.slice(0,2);
+	const parentElementName = isComponents ? 'components' : 'paths';
 	if (pathWithoutProperties[3] !== 'response') {
 		if (pathWithoutProperties[2] !== 'requestBody') {
-			return { $ref: `${pathToFile}#/paths/${[ ...pathWithoutProperties, ...schemaPath].join('/')}` };
+			if (isComponents) {
+				return { $ref: `${pathToFile}#/${parentElementName}/${[ ...pathWithoutProperties.slice(2), ...schemaPath].join('/')}` };
+			}
+
+			return { $ref: `${pathToFile}#/${parentElementName}/${[ ...pathWithoutProperties , ...schemaPath].join('/')}` };
 		}
 
-		return { $ref: `${pathToFile}#/paths/${[ ...bucketWithRequest, 'requestBody', 'content', ...pathWithoutProperties.slice(3), ...schemaPath].join('/')}` };
+		return { $ref: `${pathToFile}#/${parentElementName}/${[ ...bucketWithRequest, 'requestBody', 'content', ...pathWithoutProperties.slice(3), ...schemaPath].join('/')}` };
 	}
 
 	const response = pathWithoutProperties[2];
@@ -161,7 +169,8 @@ function getPrimitiveTypeProps(data) {
 		maxLength: data.maxLength,
 		multipleOf: data.multipleOf,
 		xml: getXml(data.xml),
-		example: data.sample
+		example: data.sample,
+		...getExtensions(data.scopesExtensions)
 	};
 
 	return addIfTrue(properties, 'nullable', data.nullable);

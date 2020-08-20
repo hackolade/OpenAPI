@@ -143,7 +143,6 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Target",
 				"propertyKeyword": "dbVendor",
-				"shouldValidate": false,
 				"propertyTooltip": "DB vendor",
 				"propertyType": "select",
 				"options": [
@@ -154,11 +153,13 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Target version",
 				"propertyKeyword": "dbVersion",
-				"shouldValidate": false,
 				"propertyTooltip": "DB version",
 				"propertyType": "select",
 				"options": [
-					"3.0.2"
+					"3.0.3",
+					"3.0.2",
+					"3.0.1",
+					"3.0.0"
 				],
 				"disabledOption": false
 			},
@@ -171,13 +172,11 @@ making sure that you maintain a proper JSON format.
 				"labelName": "info:",
 				"propertyName": "title",
 				"propertyKeyword": "title",
-				"shouldValidate": false,
 				"propertyType": "text"
 			},
 			{
 				"propertyName": "terms of service",
 				"propertyKeyword": "termsOfService",
-				"shouldValidate": false,
 				"propertyType": "text"
 			},
 			{
@@ -191,13 +190,11 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "name",
 						"propertyKeyword": "contactName",
-						"shouldValidate": false,
 						"propertyType": "text"
 					},
 					{
 						"propertyName": "url",
 						"propertyKeyword": "contactURL",
-						"shouldValidate": true,
 						"propertyType": "text",
 						"propertyFormat": "uri"
 					},
@@ -205,7 +202,6 @@ making sure that you maintain a proper JSON format.
 						"propertyName": "email",
 						"propertyKeyword": "contactemail",
 						"propertyFormat": "email",
-						"shouldValidate": true,
 						"propertyType": "text"
 					},
 					{
@@ -245,7 +241,6 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "name",
 						"propertyKeyword": "licenseName",
-						"shouldValidate": false,
 						"propertyType": "text"
 					},
 					{
@@ -285,7 +280,6 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "version",
 				"propertyKeyword": "modelVersion",
-				"shouldValidate": false,
 				"propertyType": "text"
 			},
 			{
@@ -345,7 +339,6 @@ making sure that you maintain a proper JSON format.
 							{
 								"propertyName": "name",
 								"propertyKeyword": "serverVariableName",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "text"
 							},
@@ -359,7 +352,6 @@ making sure that you maintain a proper JSON format.
 									{
 										"propertyName": "value",
 										"propertyKeyword": "serverVariableEnumValue",
-										"shouldValidate": false,
 										"propertyTooltip": "",
 										"propertyType": "text"
 									}
@@ -368,14 +360,12 @@ making sure that you maintain a proper JSON format.
 							{
 								"propertyName": "default",
 								"propertyKeyword": "serverVariableDefault",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "text"
 							},
 							{
 								"propertyName": "description",
 								"propertyKeyword": "serverVariableDescription",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "details",
 								"template": "textarea"
@@ -443,14 +433,12 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "pattern {name}",
 						"propertyKeyword": "securityRequirementName",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "text"
 					},
 					{
 						"propertyName": "description",
 						"propertyKeyword": "securityRequirementOperation",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "multipleText"
 					}
@@ -466,14 +454,12 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "name",
 						"propertyKeyword": "tagName",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "text"
 					},
 					{
 						"propertyName": "description",
 						"propertyKeyword": "tagDescription",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "details",
 						"template": "textarea"
@@ -488,14 +474,12 @@ making sure that you maintain a proper JSON format.
 							{
 								"propertyName": "url",
 								"propertyKeyword": "tagExternalDocsUrl",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "text"
 							},
 							{
 								"propertyName": "description",
 								"propertyKeyword": "tagExternalDocsDescription",
-								"shouldValidate": false,
 								"propertyTooltip": "",
 								"propertyType": "details",
 								"template": "textarea"
@@ -572,7 +556,6 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "description",
 						"propertyKeyword": "externalDocsDescription",
-						"shouldValidate": false,
 						"propertyTooltip": "",
 						"propertyType": "details",
 						"template": "textarea"
@@ -632,7 +615,6 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Comments",
 				"propertyKeyword": "comments",
-				"shouldValidate": false,
 				"propertyTooltip": "comments",
 				"propertyType": "details",
 				"template": "textarea"

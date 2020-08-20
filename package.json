@@ -1,10 +1,10 @@
 {
 	"name": "OpenAPI",
-	"version": "0.1.14",
-	"versionDate": "2020-01-18",
+	"version": "0.1.21",
+	"versionDate": "2020-07-31",
 	"author": "hackolade",
 	"engines": {
-		"hackolade": "3.3.0",
+		"hackolade": "3.6.8",
 		"hackoladePlugin": "1.0.0"
 	},
 	"contributes": {
@@ -12,7 +12,7 @@
 			"applicationTarget": "OPENAPI",
 			"title": "OpenAPI",
 			"versions": [
-				"3.0.2"
+				"3.0.3"
 			]
 		},
 		"features": {
@@ -43,7 +43,8 @@
 			"enableForwardEngineering": {
 				"jsonDocument": true,
 				"jsonSchema": true,
-				"plugin": true
+				"plugin": true,
+				"apiSchema": false
 			},
 			"disablePatternField": false,
 			"disableChoices": {
@@ -72,7 +73,8 @@
 			"disableJsonPreview": false,
 			"enableErdToggle": true,
 			"enableStackedNestedCollections": true,
-			"externalDefinitionsFromTargetSchema": true
+			"externalDefinitionsFromTargetSchema": true,
+			"apiTarget": true
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",

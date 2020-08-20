@@ -1,7 +1,7 @@
 {
 	"model": {
 		"modelName": "New resource model",
-		"dbVersion": "3.0.2",
+		"dbVersion": "3.0.3",
 		"dbVendor": "OpenAPI"
 	},
 	"container": {
@@ -140,7 +140,7 @@
 					"value": "requestBody" 
 				}
 			},{
-				"value": "MIMEtype/subtype",
+				"value": "application/json",
 				"dependency": {
 					"level": "parent",
 					"key": "subtype",
