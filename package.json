@@ -1,7 +1,7 @@
 {
 	"name": "OpenAPI",
-	"version": "0.1.21",
-	"versionDate": "2020-07-31",
+	"version": "0.1.22",
+	"versionDate": "2020-08-29",
 	"author": "hackolade",
 	"engines": {
 		"hackolade": "3.6.8",
