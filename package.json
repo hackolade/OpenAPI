@@ -37,7 +37,7 @@
 					"entities": false,
 					"model_definitions": true
 				},
-				"plugin": true 
+				"plugin": true
 			},
 			"disableDenormalization": true,
 			"enableForwardEngineering": {
@@ -74,7 +74,8 @@
 			"enableErdToggle": true,
 			"enableStackedNestedCollections": true,
 			"externalDefinitionsFromTargetSchema": true,
-			"apiTarget": true
+			"apiTarget": true,
+			"FEScriptCommentsSupported": true
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
