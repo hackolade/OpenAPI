@@ -1,7 +1,7 @@
 {
 	"name": "OpenAPI",
-	"version": "0.1.20",
-	"versionDate": "2020-06-27",
+	"version": "0.1.22",
+	"versionDate": "2020-08-29",
 	"author": "hackolade",
 	"engines": {
 		"hackolade": "3.6.8",
@@ -43,7 +43,8 @@
 			"enableForwardEngineering": {
 				"jsonDocument": true,
 				"jsonSchema": true,
-				"plugin": true
+				"plugin": true,
+				"apiSchema": false
 			},
 			"disablePatternField": false,
 			"disableChoices": {
