@@ -11,8 +11,8 @@ function getSchemas(data) {
 	}, {});
 }
 
-function mapSchema(data, key) {
-	return typeHelper.getType(data, key);
+function mapSchema(data, key, isParentActivated = false) {
+	return typeHelper.getType(data, key, isParentActivated);
 }
 
 module.exports = {
