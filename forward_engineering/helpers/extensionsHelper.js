@@ -1,4 +1,8 @@
 function getExtensions(data = []) {
+	if (!Array.isArray(data)) {
+		return {};
+	}
+
 	return data
 		.filter(filterExtensionsByPrefix)
 		.reduce((acc, { extensionPattern, extensionValue }) => {
