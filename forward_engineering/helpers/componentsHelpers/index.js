@@ -22,8 +22,8 @@ const renameComponents = (components) => {
     }, {});
 };
 
-function getComponents(data) {
-    const componentsData = get(JSON.parse(data.modelDefinitions), 'properties', {});
+function getComponents(definitions, containers) {
+    const componentsData = get(definitions, 'properties', {});
 
     const schemas = renameComponents(getSchemas(componentsData.schemas));
     const responses = renameComponents(getResponses(componentsData.responses));
@@ -33,7 +33,7 @@ function getComponents(data) {
     const headers = renameComponents(getHeaders(componentsData.headers));
     const securitySchemes = renameComponents(getSecuritySchemes(componentsData.securitySchemes));
     const links = renameComponents(getLinks(componentsData.links));
-    const callbacks = renameComponents(getCallbacks(componentsData.callbacks, data.containers));
+    const callbacks = renameComponents(getCallbacks(componentsData.callbacks, containers));
 
     const extensions = getExtensions(get(componentsData, `['Specification Extensions'].scopesExtensions`));
 

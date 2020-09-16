@@ -71,52 +71,8 @@ function getTypeProps(data, key, isParentActivated) {
 	}
 }
 
-function getRef({ $ref: ref }) {
-	if (ref.startsWith('#')) {
-		ref = ref.replace('#model/definitions', '#/components');
-
-		return { $ref: prepareReferenceName(ref) };
-	}
-
-	const [ pathToFile, relativePath] = ref.split('#/');
-	if (!relativePath) {
-		return { $ref: prepareReferenceName(ref) };
-	}
-
-	let path = relativePath.split('/');
-	if (path[0] === 'definitions') {
-		if (path[2] === 'schemas') {
-			return { $ref: `${pathToFile}#/components/schemas/${path.slice(4).join('/')}` };
-		}
-
-		path = ['', ...path];
-	}
-
-	const schemaIndex = path.indexOf('schema');
-	const hasSchema = schemaIndex !== -1;
-	const isComponents = (path[1] === 'definitions');
-	const schemaPath = !hasSchema ? [] : path.slice(schemaIndex);
-	const pathWithoutProperties = (hasSchema ? path.slice(0, schemaIndex) : path).filter(item => item !== 'properties');
-	const bucketWithRequest = isComponents ? ['components'] : pathWithoutProperties.slice(0,2);
-	const parentElementName = isComponents ? 'components' : 'paths';
-	if (pathWithoutProperties[3] !== 'response') {
-		if (pathWithoutProperties[2] !== 'requestBody') {
-			if (isComponents) {
-				return { $ref: `${pathToFile}#/${parentElementName}/${[ ...pathWithoutProperties.slice(2), ...schemaPath].join('/')}` };
-			}
-
-			return { $ref: `${pathToFile}#/${parentElementName}/${[ ...pathWithoutProperties , ...schemaPath].join('/')}` };
-		}
-
-		return { $ref: `${pathToFile}#/${parentElementName}/${[ ...bucketWithRequest, 'requestBody', 'content', ...pathWithoutProperties.slice(3), ...schemaPath].join('/')}` };
-	}
-
-	const response = pathWithoutProperties[2];
-	const pathToItem = pathWithoutProperties.slice(4)
-
-	const pathWithResponses = [ ...bucketWithRequest, 'responses', response, ...pathToItem, ...schemaPath ];
-
-	return { $ref: `${pathToFile}#/paths/${pathWithResponses.join('/')}` };
+function getRef({ $ref }) {
+	return { $ref };
 };
 
 function hasRef(data = {}) {

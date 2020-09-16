@@ -7,6 +7,8 @@ const getComponents = require('./helpers/componentsHelpers');
 const commonHelper = require('./helpers/commonHelper');
 const { getServers } = require('./helpers/serversHelper');
 const getExtensions = require('./helpers/extensionsHelper');
+const handleReferencePath = require('./helpers/handleReferencePath');
+const mapJsonSchema = require('../reverse_engineering/helpers/adaptJsonSchema/mapJsonSchema');
 
 module.exports = {
 	generateModelScript(data, logger, cb) {
@@ -23,8 +25,12 @@ module.exports = {
 
 			const info = getInfo(data.modelData[0]);
 			const servers = getServers(modelServers);
-			const paths = getPaths(data.containers, containersIdsFromCallbacks);
-			const components = getComponents(data);
+			const externalDefinitions = JSON.parse(data.externalDefinitions || '{}').properties || {};
+			const containers = handleRefInContainers(data.containers, externalDefinitions);
+			const paths = getPaths(containers, containersIdsFromCallbacks);
+			const definitions = JSON.parse(data.modelDefinitions) || {};
+			const definitionsWithHandledReferences = mapJsonSchema(definitions, handleRef(externalDefinitions));
+			const components = getComponents(definitionsWithHandledReferences, data.containers);
 			const security = commonHelper.mapSecurity(modelSecurity);
 			const tags = commonHelper.mapTags(modelTags);
 			const externalDocs = commonHelper.mapExternalDocs(modelExternalDocs);
@@ -143,3 +149,43 @@ const removeCommentLines = (scriptString) => {
 		.join('\n')
 		.replace(/(.*?),\s*(\}|])/g, '$1$2');
 }
+
+const handleRefInContainers = (containers, externalDefinitions) => {
+	return containers.map(container => {
+		try {
+			const updatedSchemas = Object.keys(container.jsonSchema).reduce((schemas, id) => {
+				const json = container.jsonSchema[id];
+				try {
+					const updatedSchema = mapJsonSchema(JSON.parse(json), handleRef(externalDefinitions));
+
+					return {
+						...schemas,
+						[id]: JSON.stringify(updatedSchema)
+					};
+				} catch (err) {
+					return { ...schemas, [id]: json }
+				}
+			}, {});
+
+			return {
+				...container,
+				jsonSchema: updatedSchemas
+			};
+		} catch (err) {
+			return container;
+		}
+	});
+};
+
+
+const handleRef = externalDefinitions => field => {
+	if (!field.$ref) {
+		return field;
+	}
+	const ref = handleReferencePath(externalDefinitions, field);
+	if (!ref.$ref) {
+		return ref;
+	}
+
+	return { ...field, ...ref }; 
+};
