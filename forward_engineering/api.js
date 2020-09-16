@@ -101,9 +101,14 @@ const addCommentsSigns = (string, format) => {
 	const commentsEnd = /hackoladeCommentEnd\d+/i;
 	const innerCommentStart = /hackoladeInnerCommentStart/i;
 	const innerCommentEnd = /hackoladeInnerCommentEnd/i;
+	const innerCommentStartYamlArrayItem = /- hackoladeInnerCommentStart/i;
 	
 	const { result } = string.split('\n').reduce(({ isCommented, result }, line, index, array) => {
 		if (commentsStart.test(line) || innerCommentStart.test(line)) {
+			if (innerCommentStartYamlArrayItem.test(line)) {
+				const lineBeginsAt = array[index + 1].search(/\S/);
+				array[index + 1] = array[index + 1].slice(0, lineBeginsAt) + '- ' + array[index + 1].slice(lineBeginsAt);
+			}
 			return { isCommented: true, result: result };
 		}
 		if (commentsEnd.test(line)) {
@@ -117,7 +122,7 @@ const addCommentsSigns = (string, format) => {
 		}
 
 		const isNextLineInnerCommentStart = index + 1 < array.length && innerCommentStart.test(array[index + 1]);
-		if (isCommented || isNextLineInnerCommentStart) {
+		if ((isCommented || isNextLineInnerCommentStart) && !innerCommentStartYamlArrayItem.test(array[index + 1])) {
 			result = result + '# ' + line + '\n';
 		} else {
 			result = result + line + '\n';
