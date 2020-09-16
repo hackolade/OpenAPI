@@ -30,8 +30,8 @@ function mapResponse(data, responseCollectionDescription, shouldResponseBeCommen
 		return getRef(data);
 	}
 	const description = data.description || responseCollectionDescription || '';
-	const headers = getHeaders(get(data, `properties.headers`));
-	const content = getContent(get(data, `properties.content`));
+	const headers = getHeaders(get(data, `properties.headers`), !shouldResponseBeCommented);
+	const content = getContent(get(data, `properties.content`), !shouldResponseBeCommented);
 	const links = getLinks(get(data, `properties.links`));
 	const extensions = getExtensions(data.scopesExtensions);
 	const response = {};
