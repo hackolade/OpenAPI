@@ -27,9 +27,20 @@ const handleReferencePath = (externalDefinitions, { $ref: ref }) => {
 		return { $ref: updateOpenApiPath(pathToFile, relativePath) };
 	} else if (externalDefinition.fileType === 'hackoladeSchema') {
 		return externalDefinition;
+	}  else if (externalDefinition.fileType === 'jsonSchema') {
+		return { $ref: fixJsonSchemaPath(pathToFile, relativePath) };;
 	}
 
 	return  { $ref: prepareReferenceName(ref) };
+};
+
+const fixJsonSchemaPath = (pathToFile, relativePath) => {
+	const namePath = relativePath.split('/');
+	if (['properties', 'items'].includes(namePath[0])) {
+		return `${pathToFile}#/${relativePath}`;
+	}
+
+	return `${pathToFile}#/${namePath.slice(1).join('/')}`; 
 };
 
 const findExternalDefinition = (externalDefinitions, pathToFile, relativePath) => {
