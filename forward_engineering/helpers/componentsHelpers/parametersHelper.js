@@ -3,6 +3,7 @@ const getExtensions = require('../extensionsHelper');
 const { mapSchema } = require('./schemasHelper');
 const { getExamples } = require('./examplesHelper');
 const { getRef, hasRef, hasChoice } = require('../typeHelper');
+const { commentDeactivatedItemInner } = require('../commentsHelper');
 
 function getParameters(data) {
 	if (!data || !data.properties) {
@@ -20,14 +21,14 @@ function getParameters(data) {
 		}, {});
 }
 
-function mapParameter(data, required) {
+function mapParameter(data, required, isParentActivated = false) {
 	if (!data) {
 		return;
 	}
 	if (hasRef(data)) {
-		return getRef(data);
+		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
 	}
-
+	const isActivated = data.isActivated && isParentActivated;
 	const parameter = {
 		name: data.parameterName,
 		in: getIn(data.type),
@@ -38,14 +39,14 @@ function mapParameter(data, required) {
 		style: data.style,
 		explode: data.explode,
 		allowReserved: data.allowReserved,
-		schema: mapSchema(get(data, 'properties.schema'), 'schema'),
+		schema: mapSchema(get(data, 'properties.schema'), 'schema', isActivated),
 		example: data.sample,
 		examples: getExamples(get(data, 'properties.examples')),
-		content: getContent(get(data, 'properties.content'))
+		content: getContent(get(data, 'properties.content'), isActivated)
 	};
 	const extensions = getExtensions(data.scopesExtensions);
 
-	return Object.assign({}, parameter, extensions);
+	return commentDeactivatedItemInner(Object.assign({}, parameter, extensions), data.isActivated, isParentActivated);
 }
 
 function getIn(parameterType) {
@@ -59,37 +60,39 @@ function getIn(parameterType) {
 	return parameterTypeToIn[parameterType];
 }
 
-function getHeaders(data) {
+function getHeaders(data, isParentActivated = false) {
 	if (!data || !data.properties) {
 		return;
 	}
 
 	return Object.entries(data.properties)
 		.map(([key, value]) => {
+			const isActivated = value.isActivated;
 			return {
 				key,
-				value: mapHeader(value)
+				value: mapHeader(value, isActivated && isParentActivated),
+				isActivated
 			};
 		})
-		.reduce((acc, { key, value }) => {
-			acc[key] = value;
+		.reduce((acc, { key, value, isActivated }) => {
+			acc[key] = commentDeactivatedItemInner(value, isActivated, isParentActivated);
 			return acc;
 		}, {});
 }
 
-function mapHeader(data) {
+function mapHeader(data, isParentActivated = false) {
 	if (!data) {
 		return;
 	} 
 	if (hasRef(data)) {
-		return getRef(data);
+		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
 	}
 
 	delete data.parameterName;
-    return mapParameter(data);
+    return mapParameter(data, false, isParentActivated);
 }
 
-function getContent(data) {
+function getContent(data, isParentActivated) {
     if (!data || !data.properties) {
         return;
     }
@@ -104,16 +107,24 @@ function getContent(data) {
 		if (isSchemaEmpty && isExamplesEmpty) {
 			return;
 		}
-        acc[key] = mapMediaTypeObject(data.properties[key]);
+		const isActivated = data.properties[key].isActivated;
+        acc[key] = commentDeactivatedItemInner(
+			mapMediaTypeObject(
+				data.properties[key],
+				isActivated && isParentActivated
+			),
+			isActivated,
+			isParentActivated
+		);
         return acc;
     }, {});
 }
 
-function mapMediaTypeObject(data) {
+function mapMediaTypeObject(data, isParentActivated = false) {
     if (!data || !data.properties) {
         return;
     }
-	let schema = mapSchema(get(data, 'properties.schema'), 'schema');
+	let schema = mapSchema(get(data, 'properties.schema'), 'schema', isParentActivated);
 	if (!schema && hasChoice(data)) {
 		schema = mapSchema({
 			type: 'object',
@@ -121,7 +132,7 @@ function mapMediaTypeObject(data) {
 			oneOf: data.oneOf,
 			anyOf: data.anyOf,
 			not: data.not
-		}, 'schema');
+		}, 'schema', isParentActivated);
 	}
     const examples = getExamples(get(data, 'properties.examples'));
     const encoding = mapEncoding(get(data, 'properties.encoding'));

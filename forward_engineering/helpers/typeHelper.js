@@ -1,25 +1,26 @@
 const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
 const { prepareReferenceName } = require('../utils/utils');
+const { commentDeactivatedItemInner } = require('./commentsHelper');
 
-function getType(data, key) {
+function getType(data, key, isParentActivated = false) {
 	if (!data) {
 		return;
 	}
 
 	if (Array.isArray(data.type)) {
-		return getType(Object.assign({}, data, { type: data.type[0] }));
+		return getType(Object.assign({}, data, { type: data.type[0] }), '', isParentActivated);
 	}
 
 	if (hasRef(data)) {
-		return getRef(data);
+		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
 	}
 	
-	return getTypeProps(data, key);
+	return commentDeactivatedItemInner(getTypeProps(data, key, isParentActivated), data.isActivated, isParentActivated);
 }
 
-function getTypeProps(data, key) {
-	const { type, properties, items, required } = data;
+function getTypeProps(data, key, isParentActivated) {
+	const { type, properties, items, required, isActivated } = data;
 
     const extensions = getExtensions(data.scopesExtensions);
 
@@ -27,7 +28,7 @@ function getTypeProps(data, key) {
 		case 'array': {
 			const arrayProps = {
 				type,
-				items: getArrayItemsType(items),
+				items: getArrayItemsType(items, isActivated && isParentActivated),
 				collectionFormat: data.collectionFormat,
 				minItems: data.minItems,
 				maxItems: data.maxItems,
@@ -46,7 +47,7 @@ function getTypeProps(data, key) {
 				type,
 				description: data.description || undefined,
 				required: required || undefined,
-				properties: getObjectProperties(properties),
+				properties: getObjectProperties(properties, isActivated && isParentActivated),
 				minProperties: data.minProperties,
 				maxProperties: data.maxProperties,
 				additionalProperties: getAdditionalProperties(data),
@@ -64,77 +65,38 @@ function getTypeProps(data, key) {
 			if (!properties || properties.length === 0) {
 				return;
 			}
-			return getType(properties[Object.keys(properties)[0]]);
+			return getType(properties[Object.keys(properties)[0]], '', isActivated && isParentActivated);
 		default:
 			return getPrimitiveTypeProps(data);
 	}
 }
 
-function getRef({ $ref: ref }) {
-	if (ref.startsWith('#')) {
-		ref = ref.replace('#model/definitions', '#/components');
-
-		return { $ref: prepareReferenceName(ref) };
-	}
-
-	const [ pathToFile, relativePath] = ref.split('#/');
-	if (!relativePath) {
-		return { $ref: prepareReferenceName(ref) };
-	}
-
-	let path = relativePath.split('/');
-	if (path[0] === 'definitions') {
-		if (path[2] === 'schemas') {
-			return { $ref: `${pathToFile}#/components/schemas/${path.slice(4).join('/')}` };
-		}
-
-		path = ['', ...path];
-	}
-
-	const schemaIndex = path.indexOf('schema');
-	const hasSchema = schemaIndex !== -1;
-	const isComponents = (path[1] === 'definitions');
-	const schemaPath = !hasSchema ? [] : path.slice(schemaIndex);
-	const pathWithoutProperties = (hasSchema ? path.slice(0, schemaIndex) : path).filter(item => item !== 'properties');
-	const bucketWithRequest = isComponents ? ['components'] : pathWithoutProperties.slice(0,2);
-	const parentElementName = isComponents ? 'components' : 'paths';
-	if (pathWithoutProperties[3] !== 'response') {
-		if (pathWithoutProperties[2] !== 'requestBody') {
-			if (isComponents) {
-				return { $ref: `${pathToFile}#/${parentElementName}/${[ ...pathWithoutProperties.slice(2), ...schemaPath].join('/')}` };
-			}
-
-			return { $ref: `${pathToFile}#/${parentElementName}/${[ ...pathWithoutProperties , ...schemaPath].join('/')}` };
-		}
-
-		return { $ref: `${pathToFile}#/${parentElementName}/${[ ...bucketWithRequest, 'requestBody', 'content', ...pathWithoutProperties.slice(3), ...schemaPath].join('/')}` };
-	}
-
-	const response = pathWithoutProperties[2];
-	const pathToItem = pathWithoutProperties.slice(4)
-
-	const pathWithResponses = [ ...bucketWithRequest, 'responses', response, ...pathToItem, ...schemaPath ];
-
-	return { $ref: `${pathToFile}#/paths/${pathWithResponses.join('/')}` };
+function getRef({ $ref }) {
+	return { $ref };
 };
 
 function hasRef(data = {}) {
 	return data.$ref ? true : false;
 }
 
-function getArrayItemsType(items) {
+function getArrayItemsType(items, isParentActivated) {
 	if (Array.isArray(items)) {
-		return Object.assign({}, items.length > 0 ? getType(items[0]) : {});
+		return Object.assign({}, items.length > 0 ? getType(items[0], '', isParentActivated) : {});
 	}
-	return Object.assign({}, items ? getType(items) : {});
+	return Object.assign({}, items ? getType(items, '', isParentActivated) : {});
 }
 
-function getObjectProperties(properties) {
+function getObjectProperties(properties, isParentActivated) {
 	if (!properties) {
 		return;
 	}
+
 	return Object.keys(properties).reduce((acc, propName) => {
-		acc[propName] = getType(properties[propName], propName);
+		acc[propName] = commentDeactivatedItemInner(
+			getType(properties[propName], propName, isParentActivated),
+			properties[propName].isActivated,
+			isParentActivated
+		);
 		return acc;
 	}, {});
 }
