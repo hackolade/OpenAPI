@@ -26,7 +26,10 @@ const handleReferencePath = (externalDefinitions, { $ref: ref }) => {
 	if (externalDefinition.fileType === 'targetSchema') {
 		return { $ref: updateOpenApiPath(pathToFile, relativePath) };
 	} else if (externalDefinition.fileType === 'hackoladeSchema') {
-		return externalDefinition;
+		const definition =  { ...externalDefinition };
+		delete definition.$ref;
+
+		return definition;
 	}  else if (externalDefinition.fileType === 'jsonSchema') {
 		return { $ref: fixJsonSchemaPath(pathToFile, relativePath) };;
 	}
