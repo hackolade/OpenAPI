@@ -4,6 +4,7 @@ const { mapSchema } = require('./schemasHelper');
 const { getExamples } = require('./examplesHelper');
 const { getRef, hasRef, hasChoice } = require('../typeHelper');
 const { commentDeactivatedItemInner } = require('../commentsHelper');
+const { activateItem } = require('../commonHelper');
 
 function getParameters(data) {
 	if (!data || !data.properties) {
@@ -13,7 +14,7 @@ function getParameters(data) {
 	return Object.entries(data.properties)
 		.map(([key, value]) => {
 			const required = data.required ? data.required.includes(key) : false;
-			return { key, value: mapParameter(value, required) };
+			return { key, value: mapParameter(activateItem(value), required, true) };
 		})
 		.reduce((acc, { key, value }) => {
 			acc[key] = value;
@@ -172,10 +173,23 @@ function mapEncoding(data) {
         }, {});
 }
 
+function prepareHeadersComponents(headers) {
+	if (!headers || !headers.properties) {
+		return;
+	}
+
+	for (const header in headers.properties) {
+		headers.properties[header] = activateItem(headers.properties[header]);
+	}
+
+	return headers;
+}
+
 module.exports = {
 	getParameters,
 	mapParameter,
 	getHeaders,
 	mapHeader,
-	getContent
+	getContent,
+	prepareHeadersComponents
 };

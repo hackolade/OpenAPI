@@ -3,6 +3,7 @@ const { getContent } = require('./parametersHelper');
 const getExtensions = require('../extensionsHelper');
 const { getRef, hasRef } = require('../typeHelper');
 const { commentDeactivatedItemInner } = require('../commentsHelper');
+const { activateItem } = require('../commonHelper');
 
 function getRequestBodies(data) {
 	if (!data || !data.properties) {
@@ -13,7 +14,7 @@ function getRequestBodies(data) {
         .map(([key, value]) => {
             return {
                 key,
-                value: mapRequestBody(value, get(data, 'required', []).includes(key))
+                value: mapRequestBody(activateItem(value), get(data, 'required', []).includes(key), true)
             };
         })
         .reduce((acc, { key, value }) => {

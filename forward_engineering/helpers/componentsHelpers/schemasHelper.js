@@ -1,3 +1,4 @@
+const { activateItem } = require('../commonHelper');
 const typeHelper = require('../typeHelper');
 
 function getSchemas(data) {
@@ -6,7 +7,7 @@ function getSchemas(data) {
 	}
 
 	return Object.keys(data.properties).reduce((acc, key) => {
-		acc[key] = mapSchema(data.properties[key], key);
+		acc[key] = mapSchema(activateItem(data.properties[key]), key, true);
 		return acc;
 	}, {});
 }
