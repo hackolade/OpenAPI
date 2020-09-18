@@ -1,3 +1,6 @@
+
+const mapJsonSchema = require('../../reverse_engineering/helpers/adaptJsonSchema/mapJsonSchema');
+
 const COMPONENTS_SCHEMAS_OBJECT_INDEX = 2;
 const REQUEST_BODY_OBJECT_INDEX = 2;
 const RESPONSE_NAME_INDEX = 2;
@@ -26,10 +29,16 @@ const handleReferencePath = (externalDefinitions, { $ref: ref }) => {
 	if (externalDefinition.fileType === 'targetSchema') {
 		return { $ref: updateOpenApiPath(pathToFile, relativePath) };
 	} else if (externalDefinition.fileType === 'hackoladeSchema') {
-		const definition =  { ...externalDefinition };
-		delete definition.$ref;
+		return mapJsonSchema(externalDefinition, field => {
+			if (!field.$ref || field.type === 'reference') {
+				return field;
+			}
 
-		return definition;
+			const definition = { ...field };
+			delete definition.$ref;
+
+			return definition;
+		});
 	}  else if (externalDefinition.fileType === 'jsonSchema') {
 		return { $ref: fixJsonSchemaPath(pathToFile, relativePath) };;
 	}
