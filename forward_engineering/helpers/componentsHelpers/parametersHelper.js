@@ -29,6 +29,7 @@ function mapParameter(data, required, isParentActivated = false) {
 	if (hasRef(data)) {
 		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
 	}
+	const schemaKeyword = getSchemaKeyword(data.properties);
 	const isActivated = data.isActivated && isParentActivated;
 	const parameter = {
 		name: data.parameterName,
@@ -40,7 +41,7 @@ function mapParameter(data, required, isParentActivated = false) {
 		style: data.style,
 		explode: data.explode,
 		allowReserved: data.allowReserved,
-		schema: mapSchema(get(data, 'properties.schema'), 'schema', isActivated),
+		schema: mapSchema(get(data, ['properties', schemaKeyword]), 'schema', isActivated),
 		example: data.sample,
 		examples: getExamples(get(data, 'properties.examples')),
 		content: getContent(get(data, 'properties.content'), isActivated)
@@ -103,7 +104,8 @@ function getContent(data, isParentActivated) {
         if (!properties) {
             return;
 		}
-		const isSchemaEmpty = properties.schema && get(properties.schema, 'type') === 'object' && !get(properties.schema, 'properties');
+		const schemaKeyword = getSchemaKeyword(properties);
+		const isSchemaEmpty = properties[schemaKeyword] && get(properties, [schemaKeyword, 'type']) === 'object' && !get(properties, [schemaKeyword, 'properties']);
 		const isExamplesEmpty = !get(properties, 'examples.properties');
 		if (isSchemaEmpty && isExamplesEmpty) {
 			return;
@@ -124,8 +126,9 @@ function getContent(data, isParentActivated) {
 function mapMediaTypeObject(data, isParentActivated = false) {
     if (!data || !data.properties) {
         return;
-    }
-	let schema = mapSchema(get(data, 'properties.schema'), 'schema', isParentActivated);
+	}
+	const schemaKeyword = getSchemaKeyword(data.properties);
+	let schema = mapSchema(get(data, ['properties', schemaKeyword]), 'schema', isParentActivated);
 	if (!schema && hasChoice(data)) {
 		schema = mapSchema({
 			type: 'object',
@@ -183,6 +186,18 @@ function prepareHeadersComponents(headers) {
 	}
 
 	return headers;
+}
+
+function getSchemaKeyword(properties = {}) {
+	const defaultKeyword = 'schema'; 
+	const restRequestPropNames = ['content', 'examples', 'encoding'];
+
+	if (get(properties, defaultKeyword)) {
+		return defaultKeyword;
+	}
+
+	const schemaKey = Object.keys(properties).find(key => !restRequestPropNames.includes(key));
+	return schemaKey;
 }
 
 module.exports = {
