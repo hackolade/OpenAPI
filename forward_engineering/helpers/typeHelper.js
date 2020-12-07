@@ -36,7 +36,7 @@ function getTypeProps(data, key, isParentActivated) {
 				nullable: data.nullable,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
-				example: parseExample(data.sample),
+				example: parseExample(data.sample) || getArrayItemsExample(items),
 				xml: getXml(data.xml)
 			};
 			const arrayChoices = getChoices(data, key);
@@ -217,6 +217,22 @@ function addIfTrue(data, propertyName, value) {
 	return Object.assign({}, data, {
 		[propertyName]: value
 	});
+}
+
+function getArrayItemsExample(items) {
+	const supportedDataTypes = ['object', 'string', 'number', 'integer', 'boolean'];
+	if (Array.isArray(items) && items.length > 1) {
+		const itemsExample = items.filter(item => item.isActivated !== false).reduce((acc, item) => {
+			if (supportedDataTypes.includes(item.type) && item.sample) {
+				const example = item.type === 'object' ? parseExample(item.sample) : item.sample;
+				return acc.concat(example);
+			}
+			return acc;
+		}, []);
+		if (itemsExample.length > 1) {
+			return itemsExample;
+		}
+	}
 }
 
 module.exports = {
