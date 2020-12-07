@@ -36,6 +36,7 @@ function getTypeProps(data, key, isParentActivated) {
 				nullable: data.nullable,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
+				example: parseExample(data.sample),
 				xml: getXml(data.xml)
 			};
 			const arrayChoices = getChoices(data, key);

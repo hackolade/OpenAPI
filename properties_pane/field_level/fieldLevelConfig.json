@@ -1033,6 +1033,16 @@ making sure that you maintain a proper JSON format.
 				],
 				"enableForReference": true
 			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "details",
+				"template": "textAreaJson",
+				"dependency": {
+					"key": "subtype",
+					"value": "schema"
+				}
+			},
 			"comments"
 		],
 		"object": [
