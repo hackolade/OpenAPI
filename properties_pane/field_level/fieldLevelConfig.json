@@ -280,6 +280,11 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
+			},
+			{
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
@@ -455,6 +460,11 @@ making sure that you maintain a proper JSON format.
 					"float",
 					"double"
 				]
+			},
+			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
 			},
 			{
 				"propertyKeyword": "description",
@@ -638,6 +648,11 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
+			},
+			{
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
@@ -810,6 +825,11 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"type",
 			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
+			},
+			{
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
@@ -855,6 +875,11 @@ making sure that you maintain a proper JSON format.
 					"key": "subtype",
 					"value": "anyParameter"
 				}
+			},
+			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
 			},
 			{
 				"propertyKeyword": "description",
@@ -1095,6 +1120,11 @@ making sure that you maintain a proper JSON format.
 						"value": "schema"
 					}
 				}
+			},
+			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
 			},
 			{
 				"propertyKeyword": "description",
