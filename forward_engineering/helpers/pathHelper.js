@@ -49,7 +49,7 @@ function getRequestData(collections, containers, containerId, containersPath = [
 		.map(data => {
 			const isRequestActivated = data.isActivated && isPathActivated;
 			const requestBodyPropKeyword = getRequestBodyPropKeyword(data.properties);
-			const request = {
+			let request = {
 				tags: commonHelper.mapArrayFieldByName(data.tags, 'tag'),
 				summary: data.summary,
 				description: data.description,
@@ -58,12 +58,20 @@ function getRequestData(collections, containers, containerId, containersPath = [
 				parameters: mapRequestParameters(
 					get(data, 'properties.parameters'),
 					isRequestActivated
-				),
-				requestBody: mapRequestBody(
+				)
+			};
+			const extensions = getExtensions(data.scopesExtensions);
+
+			if (!['get', 'delete'].includes(String(data.collectionName).toLowerCase())) {
+				request.requestBody = mapRequestBody(
 					get(data.properties, requestBodyPropKeyword),
 					get(data, 'required', []).includes(requestBodyPropKeyword),
 					isRequestActivated
-				),
+				);
+			}
+
+			request = {
+				...request,
 				responses: mapResponses(
 					collections,
 					data.GUID,
@@ -81,7 +89,6 @@ function getRequestData(collections, containers, containerId, containersPath = [
 				methodName: data.collectionName,
 				isActivated: data.isActivated,
 			};
-			const extensions = getExtensions(data.scopesExtensions);
 
 			return Object.assign({}, request, extensions);
 		})
