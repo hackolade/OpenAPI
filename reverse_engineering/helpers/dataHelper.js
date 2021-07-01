@@ -1,6 +1,7 @@
 
 const commonHelper = require('./commonHelper');
 const propertiesConfig = require('../propertiesConfig');
+const jsonComment = require('comment-json');
 
 const REQUEST = 'request';
 const RESPONSE = 'response';
@@ -868,7 +869,7 @@ const getModelContent = (pathData, fieldOrder, callbacksComponent) => {
 
 const getOpenAPIJsonSchema = (data, fileName, extension) => {
 	const schema = extension !== '.json' ? commonHelper.convertYamlToJson(data) : data;
-	const openAPISchema = typeof schema === 'string' ? JSON.parse(schema) : schema;
+	const openAPISchema = typeof schema === 'string' ? jsonComment.parse(schema.replace(/^#.+$/mg, '')) : schema;
 	const updatedOpenApiSchema = copyPathItemLevelParametersToOperationObject(openAPISchema);
 	const openAPISchemaWithModelName = Object.assign({}, updatedOpenApiSchema, {
 		modelName: fileName
