@@ -99,16 +99,21 @@ function getContent(data, isParentActivated) {
         return;
     }
 
-    return Object.keys(data.properties).reduce((acc, key) => {
+    const result = Object.keys(data.properties).reduce((acc, key) => {
 		const properties = get(data, `properties[${key}].properties`);
         if (!properties) {
-            return;
+            return acc;
 		}
 		const schemaKeyword = getSchemaKeyword(properties);
+
+		if (!schemaKeyword) {
+			return acc;
+		}
+
 		const isSchemaEmpty = properties[schemaKeyword] && get(properties, [schemaKeyword, 'type']) === 'object' && !get(properties, [schemaKeyword, 'properties']);
 		const isExamplesEmpty = !get(properties, 'examples.properties');
 		if (isSchemaEmpty && isExamplesEmpty) {
-			return;
+			return acc;
 		}
 		const isActivated = data.properties[key].isActivated;
         acc[key] = commentDeactivatedItemInner(
@@ -121,6 +126,12 @@ function getContent(data, isParentActivated) {
 		);
         return acc;
     }, {});
+
+	if (!Object.keys(result).length) {
+		return;
+	}
+
+	return result;
 }
 
 function mapMediaTypeObject(data, isParentActivated = false) {
