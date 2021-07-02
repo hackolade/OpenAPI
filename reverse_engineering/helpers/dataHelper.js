@@ -869,7 +869,7 @@ const getModelContent = (pathData, fieldOrder, callbacksComponent) => {
 
 const getOpenAPIJsonSchema = (data, fileName, extension) => {
 	const schema = extension !== '.json' ? commonHelper.convertYamlToJson(data) : data;
-	const openAPISchema = typeof schema === 'string' ? jsonComment.parse(schema.replace(/^#.+$/mg, '')) : schema;
+	const openAPISchema = typeof schema === 'string' ? jsonComment.parse(schema.replace(/^\s*#.+$/mg, '')) : schema;
 	const updatedOpenApiSchema = copyPathItemLevelParametersToOperationObject(openAPISchema);
 	const openAPISchemaWithModelName = Object.assign({}, updatedOpenApiSchema, {
 		modelName: fileName
