@@ -46,9 +46,28 @@ const getInnerErrors = (inner, depth = 0) => {
 
 const uniqStrings = (items) => Object.keys(items.reduce((result, item) => Object.assign({}, result, { [item]: '' }), {}));
 
+const getValidatorErrors = (error) => {
+	if (!error) {
+		return [];
+	}
+
+	if (Array.isArray(error.details)) {
+		return error.details.map(getError);
+	} else {
+		return [{
+			type: 'error',
+			label: error.name,
+			title: error.message,
+			context: ''
+		}];
+	}
+};
+
 const validate = (script, options = {}) => new Promise((resolve, reject) => {
 	SwaggerParser.validate(script, options, (err, api) => {
-		if (!err) {
+		const errors = getValidatorErrors(err).concat(checkPathParameters(script));
+		
+		if (errors.length === 0) {
 			return resolve([{
 				type: 'success',
 				label: '',
@@ -59,18 +78,53 @@ const validate = (script, options = {}) => new Promise((resolve, reject) => {
 					basePath: api.basePath
 				}
 			}]);
-		} else if (Array.isArray(err.details)) {
-			resolve(err.details.map(getError));
 		} else {
-			resolve([{
-				type: 'error',
-				label: err.name,
-				title: err.message,
-				context: ''
-			}]);
+			resolve(errors);
 		}
 	});
 });
+
+const getPathParameters = (pathName) => {
+	const regExp = /\{([\s\S]+?)\}/;
+
+	return (pathName.match(new RegExp(regExp, 'g')) || []).map((parameter) => {
+		return parameter.match(regExp)[1];
+	});
+};
+
+const createPathParameterError = (pathName, parameter) => {
+	return {
+		type: 'error',
+		label: 'Semantic Error',
+		title: 'Semantic error at ' + `paths.${pathName}`,
+		context: `Declared path parameter "${parameter}" needs to be defined as a path parameter at either the path or operation level`
+	};
+};
+
+const checkPathParameters = (schema) => {
+	return Object.keys(schema.paths).reduce((errors, pathName) => {
+		const pathParameters = getPathParameters(pathName);
+		const requests = schema.paths[pathName] || {};
+
+		return pathParameters.reduce((errors, parameter) => {
+			return Object.keys(requests).reduce((errors, requestName) => {
+				const request = requests[requestName];
+
+				if (!Array.isArray(request.parameters)) {
+					return errors.concat(createPathParameterError(pathName, parameter));
+				}
+
+				const param = request.parameters.find((param) => param.name === parameter && param.in === 'path');
+
+				if (param) {
+					return errors;
+				}
+
+				return errors.concat(createPathParameterError(pathName, parameter));
+			}, errors);
+		}, errors);
+	}, []);
+};
 
 module.exports = {
 	validate
