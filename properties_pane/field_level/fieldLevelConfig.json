@@ -2626,7 +2626,10 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
-					"form"
+					"",
+					"matrix",
+					"label",
+					"simple"
 				],
 				"enableForReference": true
 			},
@@ -2705,7 +2708,11 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
-					"form"
+					"",
+					"form",
+					"spaceDelimited",
+					"pipeDelimited",
+					"deepObject"
 				],
 				"enableForReference": true
 			},
@@ -2784,7 +2791,8 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
-					"form"
+					"",
+					"simple"
 				],
 				"enableForReference": true
 			},
@@ -2863,6 +2871,7 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
+					"",
 					"form"
 				],
 				"enableForReference": true
