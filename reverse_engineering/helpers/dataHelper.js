@@ -537,6 +537,9 @@ const handleAdditionalProperties = (schema) => {
 }
 
 const handleSchemaProperty = (property, data) => {
+	if (!data) {
+		return data;
+	}
 	switch(property) {
 		case 'xml':
 			return handleSchemaXml(data);
