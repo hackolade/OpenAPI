@@ -564,6 +564,19 @@ const setMissedType = (schema) => {
 	return schema;
 }
 
+const convertFormatToMode = schema => {
+	switch (schema.type) {
+		case 'number':
+		case 'integer': {
+			const { format, ...schemaData } = schema;
+
+			return { ...schemaData, mode: format };
+		}
+		default:
+			return schema;
+	}
+};
+
 const handleSchemaProps = (schema, fieldOrder) => {
 	if (!schema) {
 		schema = {
@@ -571,7 +584,7 @@ const handleSchemaProps = (schema, fieldOrder) => {
 		};
 	}
 
-	const fixedSchema = setMissedType(schema);
+	const fixedSchema = convertFormatToMode(setMissedType(schema));
 	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(fixedSchema);
 	const schemaWithChoices = handleSchemaChoices(schemaWithAdditionalPropertiesData, fieldOrder);
 	const reorderedSchema = commonHelper.reorderFields(schemaWithChoices, fieldOrder);
@@ -608,7 +621,7 @@ const handleDefinitionSchemaProps = (schema, fieldOrder) => {
 		};
 	}
 
-	const fixedSchema = setMissedType(schema);
+	const fixedSchema = convertFormatToMode(setMissedType(schema));
 	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(fixedSchema);
 	const reorderedSchema = commonHelper.reorderFields(schemaWithAdditionalPropertiesData, fieldOrder);
 	const schemaWithHandledProperties = Object.keys(reorderedSchema).reduce((accumulator, property) => {
