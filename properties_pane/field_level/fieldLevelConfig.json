@@ -639,7 +639,7 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"type",
 			{
-				"propertyName": "format",
+				"propertyName": "Format",
 				"propertyKeyword": "mode",
 				"propertyType": "select",
 				"options": [
