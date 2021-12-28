@@ -19,7 +19,7 @@
 			"nestedCollections": {
 				"level": 1
 			},
-			"disableMultipleTypes": false,
+			"disableMultipleTypes": true,
 			"enableReverseEngineering": {
 				"jsonDocument": {
 					"entities": false,
