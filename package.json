@@ -75,7 +75,10 @@
 			"enableStackedNestedCollections": true,
 			"externalDefinitionsFromTargetSchema": true,
 			"apiTarget": true,
-			"FEScriptCommentsSupported": true
+			"FEScriptCommentsSupported": true,
+			"displayOptions": {
+				"hideNonNullableAttributes": true
+			}
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
