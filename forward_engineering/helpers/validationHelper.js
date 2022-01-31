@@ -102,12 +102,14 @@ const createPathParameterError = (pathName, parameter) => {
 };
 
 const checkPathParameters = (schema) => {
+	const requestNames = ["get", "put", "post", "delete", "options", "head", "patch", "trace", "$ref"];
+
 	return Object.keys(schema.paths).reduce((errors, pathName) => {
 		const pathParameters = getPathParameters(pathName);
 		const requests = schema.paths[pathName] || {};
 
 		return pathParameters.reduce((errors, parameter) => {
-			return Object.keys(requests).reduce((errors, requestName) => {
+			return requestNames.filter(requestName => requests[requestName]).reduce((errors, requestName) => {
 				const request = requests[requestName];
 
 				if (!Array.isArray(request.parameters)) {

@@ -1,7 +1,7 @@
 {
 	"name": "OpenAPI",
-	"version": "0.1.35",
-	"versionDate": "2021-11-01",
+	"version": "0.1.40",
+	"versionDate": "2022-01-28",
 	"author": "hackolade",
 	"engines": {
 		"hackolade": "4.3.15",
@@ -19,7 +19,7 @@
 			"nestedCollections": {
 				"level": 1
 			},
-			"disableMultipleTypes": false,
+			"disableMultipleTypes": true,
 			"enableReverseEngineering": {
 				"jsonDocument": {
 					"entities": false,
@@ -75,7 +75,10 @@
 			"enableStackedNestedCollections": true,
 			"externalDefinitionsFromTargetSchema": true,
 			"apiTarget": true,
-			"FEScriptCommentsSupported": true
+			"FEScriptCommentsSupported": true,
+			"displayOptions": {
+				"hideNonNullableAttributes": true
+			}
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
