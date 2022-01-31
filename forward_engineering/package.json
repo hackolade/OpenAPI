@@ -4,9 +4,9 @@
   "description": "",
   "author": "Hackolade",
   "dependencies": {
+    "@apidevtools/swagger-parser": "^10.0.3",
     "js-yaml": "^3.13.1",
-    "lodash.get": "^4.4.2",
-    "swagger-parser": "9.0.1"
+    "lodash.get": "^4.4.2"
   },
   "installed": true
 }

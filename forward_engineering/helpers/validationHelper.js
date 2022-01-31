@@ -1,4 +1,4 @@
-const SwaggerParser = require('swagger-parser');
+const SwaggerParser = require('@apidevtools/swagger-parser');
 
 const getError = (errorItem) => {
 	if (errorItem.inner) {

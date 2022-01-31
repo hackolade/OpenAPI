@@ -2,8 +2,8 @@ Swagger Methods
 ============================
 #### HTTP methods that are supported by Swagger 2.0
 
-[![Cross-Platform Compatibility](https://apitools.dev/img/badges/os-badges.svg)](https://github.com/APIDevTools/swagger-methods/blob/master/.github/workflows/CI-CD.yaml)
-[![Build Status](https://github.com/APIDevTools/swagger-methods/workflows/CI-CD/badge.svg)](https://github.com/APIDevTools/swagger-methods/blob/master/.github/workflows/CI-CD.yaml)
+[![Cross-Platform Compatibility](https://apitools.dev/img/badges/os-badges.svg)](https://github.com/APIDevTools/swagger-methods/actions)
+[![Build Status](https://github.com/APIDevTools/swagger-methods/workflows/CI-CD/badge.svg)](https://github.com/APIDevTools/swagger-methods/actions)
 
 [![Coverage Status](https://coveralls.io/repos/github/APIDevTools/swagger-methods/badge.svg?branch=master)](https://coveralls.io/github/APIDevTools/swagger-methods?branch=master)
 [![Dependencies](https://david-dm.org/APIDevTools/swagger-methods.svg)](https://david-dm.org/APIDevTools/swagger-methods)
@@ -50,7 +50,7 @@ methods.forEach(function(method) {
 
 Contributing
 --------------------------
-I welcome any contributions, enhancements, and bug-fixes.  [File an issue](https://github.com/APIDevTools/swagger-methods/issues) on GitHub and [submit a pull request](https://github.com/APIDevTools/swagger-methods/pulls).
+I welcome any contributions, enhancements, and bug-fixes.  [Open an issue](https://github.com/APIDevTools/swagger-methods/issues) on GitHub and [submit a pull request](https://github.com/APIDevTools/swagger-methods/pulls).
 
 #### Building/Testing
 To build/test the project locally on your computer:
