@@ -4,6 +4,7 @@
   "description": "",
   "author": "Hackolade",
   "dependencies": {
+    "comment-json": "^4.1.0",
     "js-yaml": "^3.13.0",
     "lodash.isplainobject": "^4.0.6",
     "lodash.partial": "^4.2.1",

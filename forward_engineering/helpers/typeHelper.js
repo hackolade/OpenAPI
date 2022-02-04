@@ -28,6 +28,7 @@ function getTypeProps(data, key, isParentActivated) {
 		case 'array': {
 			const arrayProps = {
 				type,
+				title: data.title || undefined,
 				items: getArrayItemsType(items, isActivated && isParentActivated),
 				collectionFormat: data.collectionFormat,
 				minItems: data.minItems,
@@ -36,6 +37,7 @@ function getTypeProps(data, key, isParentActivated) {
 				nullable: data.nullable,
 				discriminator: data.discriminator,
 				readOnly: data.readOnly,
+				example: parseExample(data.sample) || getArrayItemsExample(items),
 				xml: getXml(data.xml)
 			};
 			const arrayChoices = getChoices(data, key);
@@ -45,6 +47,7 @@ function getTypeProps(data, key, isParentActivated) {
 		case 'object': {
 			const objectProps = {
 				type,
+				title: data.title || undefined,
 				description: data.description || undefined,
 				required: required || undefined,
 				properties: getObjectProperties(properties, isActivated && isParentActivated),
@@ -119,6 +122,7 @@ function getPrimitiveTypeProps(data) {
 	const properties = {
 		type: data.type,
 		format: data.format || data.mode,
+		title: data.title || undefined,
 		description: data.description,
 		exclusiveMinimum: data.exclusiveMinimum,
 		exclusiveMaximum: data.exclusiveMaximum,
@@ -216,6 +220,22 @@ function addIfTrue(data, propertyName, value) {
 	return Object.assign({}, data, {
 		[propertyName]: value
 	});
+}
+
+function getArrayItemsExample(items) {
+	const supportedDataTypes = ['object', 'string', 'number', 'integer', 'boolean'];
+	if (Array.isArray(items) && items.length > 1) {
+		const itemsExample = items.filter(item => item.isActivated !== false).reduce((acc, item) => {
+			if (supportedDataTypes.includes(item.type) && item.sample) {
+				const example = item.type === 'object' ? parseExample(item.sample) : item.sample;
+				return acc.concat(example);
+			}
+			return acc;
+		}, []);
+		if (itemsExample.length > 1) {
+			return itemsExample;
+		}
+	}
 }
 
 module.exports = {

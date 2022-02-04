@@ -1,5 +1,7 @@
 "use strict";
 
+const { ParserError } = require("../util/errors");
+
 module.exports = {
   /**
    * The order that this parser will run, in relation to other parsers.
@@ -21,7 +23,7 @@ module.exports = {
    * Parsers that don't match will be skipped, UNLESS none of the parsers match, in which case
    * every parser will be tried.
    *
-   * @type {RegExp|string[]|function}
+   * @type {RegExp|string|string[]|function}
    */
   canParse: ".json",
 
@@ -34,25 +36,28 @@ module.exports = {
    * @param {*}      file.data      - The file contents. This will be whatever data type was returned by the resolver
    * @returns {Promise}
    */
-  parse (file) {
-    return new Promise(((resolve, reject) => {
-      let data = file.data;
-      if (Buffer.isBuffer(data)) {
-        data = data.toString();
-      }
+  async parse (file) {      // eslint-disable-line require-await
+    let data = file.data;
+    if (Buffer.isBuffer(data)) {
+      data = data.toString();
+    }
 
-      if (typeof data === "string") {
-        if (data.trim().length === 0) {
-          resolve(undefined);  // This mirrors the YAML behavior
-        }
-        else {
-          resolve(JSON.parse(data));
-        }
+    if (typeof data === "string") {
+      if (data.trim().length === 0) {
+        return; // This mirrors the YAML behavior
       }
       else {
-        // data is already a JavaScript value (object, array, number, null, NaN, etc.)
-        resolve(data);
+        try {
+          return JSON.parse(data);
+        }
+        catch (e) {
+          throw new ParserError(e.message, file.url);
+        }
       }
-    }));
+    }
+    else {
+      // data is already a JavaScript value (object, array, number, null, NaN, etc.)
+      return data;
+    }
   }
 };

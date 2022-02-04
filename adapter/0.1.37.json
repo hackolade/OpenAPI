@@ -1,0 +1,93 @@
+/**
+ * Copyright © 2016-2018 by IntegrIT S.A. dba Hackolade.  All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of IntegrIT S.A.
+ * The software may be used and/or copied only with the written permission of 
+ * IntegrIT S.A. or in accordance with the terms and conditions stipulated in 
+ * the agreement/contract under which the software has been supplied. 
+ * 
+ * {
+ * 		"add": {
+ * 			"entity": [<names of new property>],
+ * 			"container": [<names of new property>],
+ * 			"model": [<names of new property>],
+ * 			"view": [<names of new property>],
+ *			"field": {
+ *				"<type>": [<names of new property>]
+ *			}
+ * 		},
+ * 		"remove": {
+ * 			"entity": [<names of new property>],
+ * 			"container": [<names of new property>],
+ * 			"model": [<names of new property>],
+ * 			"view": [<names of new property>],
+ *			"field": {
+ *				"<type>": [<names of new property>]
+ *			}
+ * 		},
+ * 		"modify": {
+ *	 		"entity": [
+ *	 			{
+ *					"from": { <properties that identify record> },
+ *					"to": { <properties that need to be changed> }
+ *				}
+ *			],
+ *			"container": [],
+ *			"model": [],
+ *			"view": [],
+ *			"field": []
+ * 		},
+ * }
+ */
+{
+    "modify": {
+        "field": [
+            {
+                "from": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "to": {
+                    "mode": "int64"
+                }
+            },
+            {
+                "from": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "to": {
+                    "mode": "int32"
+                }
+            },
+            {
+                "from": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "to": {
+                    "mode": "float"
+                }
+            },
+            {
+                "from": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "to": {
+                    "mode": "double"
+                }
+            }
+        ]
+    },
+    "delete": {
+        "field": {
+            "integer": [
+                "format"
+            ],
+            "number": [
+                "format"
+            ]
+        }
+    }
+}

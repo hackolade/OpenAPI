@@ -48,7 +48,8 @@ function getRequestData(collections, containers, containerId, containersPath = [
 		.filter(collection => collection.entityType === 'request')
 		.map(data => {
 			const isRequestActivated = data.isActivated && isPathActivated;
-			const request = {
+			const requestBodyPropKeyword = getRequestBodyPropKeyword(data.properties);
+			let request = {
 				tags: commonHelper.mapArrayFieldByName(data.tags, 'tag'),
 				summary: data.summary,
 				description: data.description,
@@ -57,12 +58,20 @@ function getRequestData(collections, containers, containerId, containersPath = [
 				parameters: mapRequestParameters(
 					get(data, 'properties.parameters'),
 					isRequestActivated
-				),
-				requestBody: mapRequestBody(
-					get(data, 'properties.requestBody'),
-					get(data, 'required', []).includes('requestBody'),
+				)
+			};
+			const extensions = getExtensions(data.scopesExtensions);
+
+			if (!['get', 'delete'].includes(String(data.collectionName).toLowerCase())) {
+				request.requestBody = mapRequestBody(
+					get(data.properties, requestBodyPropKeyword),
+					get(data, 'required', []).includes(requestBodyPropKeyword),
 					isRequestActivated
-				),
+				);
+			}
+
+			request = {
+				...request,
 				responses: mapResponses(
 					collections,
 					data.GUID,
@@ -80,7 +89,6 @@ function getRequestData(collections, containers, containerId, containersPath = [
 				methodName: data.collectionName,
 				isActivated: data.isActivated,
 			};
-			const extensions = getExtensions(data.scopesExtensions);
 
 			return Object.assign({}, request, extensions);
 		})
@@ -121,7 +129,7 @@ function mapResponses(collections, collectionId, isParentActivated) {
 			const responseCode = collection.collectionName;
 			const shouldResponseBeCommented = !collection.isActivated && isParentActivated;
 			const extensions = getExtensions(collection.scopesExtensions);
-			const response = mapResponse(get(collection, 'properties.response'), collection.description, shouldResponseBeCommented);
+			const response = mapResponse(get(collection, ['properties', Object.keys(collection.properties)[0]]), collection.description, shouldResponseBeCommented);
 
 			return { responseCode, response: { ...response, ...extensions } };
 		})
@@ -164,6 +172,18 @@ function getCallbacks(data, containers, containerId, containersPath = []) {
 			acc = Object.assign({}, acc, item);
 			return acc;
 		}, {});
+}
+
+function getRequestBodyPropKeyword(properties = {}) {
+	const defaultKeyword = 'requestBody'; 
+	const restRequestPropNames = ['parameters', 'callbacks'];
+
+	if (get(properties, defaultKeyword)) {
+		return defaultKeyword;
+	}
+
+	const requestBodyKey = Object.keys(properties).find(key => !restRequestPropNames.includes(key));
+	return requestBodyKey
 }
 
 module.exports = {

@@ -1,18 +1,26 @@
+/* eslint-disable no-unused-vars */
 "use strict";
 
-const Options = require("./options");
 const $Refs = require("./refs");
-const parse = require("./parse");
+const _parse = require("./parse");
 const normalizeArgs = require("./normalize-args");
 const resolveExternal = require("./resolve-external");
-const bundle = require("./bundle");
-const dereference = require("./dereference");
+const _bundle = require("./bundle");
+const _dereference = require("./dereference");
 const url = require("./util/url");
+const { JSONParserError, InvalidPointerError, MissingPointerError, ResolverError, ParserError, UnmatchedParserError, UnmatchedResolverError, isHandledError, JSONParserErrorGroup } = require("./util/errors");
 const maybe = require("call-me-maybe");
 const { ono } = require("@jsdevtools/ono");
 
 module.exports = $RefParser;
-module.exports.YAML = require("./util/yaml");
+module.exports.default = $RefParser;
+module.exports.JSONParserError = JSONParserError;
+module.exports.InvalidPointerError = InvalidPointerError;
+module.exports.MissingPointerError = MissingPointerError;
+module.exports.ResolverError = ResolverError;
+module.exports.ParserError = ParserError;
+module.exports.UnmatchedParserError = UnmatchedParserError;
+module.exports.UnmatchedResolverError = UnmatchedResolverError;
 
 /**
  * This class parses a JSON schema, builds a map of its JSON references and their resolved values,
@@ -49,7 +57,7 @@ function $RefParser () {
  * @param {function} [callback] - An error-first callback. The second parameter is the parsed JSON schema object.
  * @returns {Promise} - The returned promise resolves with the parsed JSON schema object.
  */
-$RefParser.parse = function (path, schema, options, callback) {
+$RefParser.parse = function parse (path, schema, options, callback) {
   let Class = this; // eslint-disable-line consistent-this
   let instance = new Class();
   return instance.parse.apply(instance, arguments);
@@ -66,7 +74,7 @@ $RefParser.parse = function (path, schema, options, callback) {
  * @param {function} [callback] - An error-first callback. The second parameter is the parsed JSON schema object.
  * @returns {Promise} - The returned promise resolves with the parsed JSON schema object.
  */
-$RefParser.prototype.parse = async function (path, schema, options, callback) {
+$RefParser.prototype.parse = async function parse (path, schema, options, callback) {
   let args = normalizeArgs(arguments);
   let promise;
 
@@ -104,23 +112,35 @@ $RefParser.prototype.parse = async function (path, schema, options, callback) {
   }
   else {
     // Parse the schema file/url
-    promise = parse(args.path, this.$refs, args.options);
+    promise = _parse(args.path, this.$refs, args.options);
   }
 
   let me = this;
   try {
     let result = await promise;
 
-    if (!result || typeof result !== "object" || Buffer.isBuffer(result)) {
-      throw ono.syntax(`"${me.$refs._root$Ref.path || result}" is not a valid JSON Schema`);
-    }
-    else {
+    if (result !== null && typeof result === "object" && !Buffer.isBuffer(result)) {
       me.schema = result;
       return maybe(args.callback, Promise.resolve(me.schema));
     }
+    else if (args.options.continueOnError) {
+      me.schema = null; // it's already set to null at line 79, but let's set it again for the sake of readability
+      return maybe(args.callback, Promise.resolve(me.schema));
+    }
+    else {
+      throw ono.syntax(`"${me.$refs._root$Ref.path || result}" is not a valid JSON Schema`);
+    }
   }
-  catch (e) {
-    return maybe(args.callback, Promise.reject(e));
+  catch (err) {
+    if (!args.options.continueOnError || !isHandledError(err)) {
+      return maybe(args.callback, Promise.reject(err));
+    }
+
+    if (this.$refs._$refs[url.stripHash(args.path)]) {
+      this.$refs._$refs[url.stripHash(args.path)].addError(err);
+    }
+
+    return maybe(args.callback, Promise.resolve(null));
   }
 };
 
@@ -137,7 +157,7 @@ $RefParser.prototype.parse = async function (path, schema, options, callback) {
  * @returns {Promise}
  * The returned promise resolves with a {@link $Refs} object containing the resolved JSON references
  */
-$RefParser.resolve = function (path, schema, options, callback) {
+$RefParser.resolve = function resolve (path, schema, options, callback) {
   let Class = this; // eslint-disable-line consistent-this
   let instance = new Class();
   return instance.resolve.apply(instance, arguments);
@@ -156,13 +176,14 @@ $RefParser.resolve = function (path, schema, options, callback) {
  * @returns {Promise}
  * The returned promise resolves with a {@link $Refs} object containing the resolved JSON references
  */
-$RefParser.prototype.resolve = async function (path, schema, options, callback) {
+$RefParser.prototype.resolve = async function resolve (path, schema, options, callback) {
   let me = this;
   let args = normalizeArgs(arguments);
 
   try {
     await this.parse(args.path, args.schema, args.options);
     await resolveExternal(me, args.options);
+    finalize(me);
     return maybe(args.callback, Promise.resolve(me.$refs));
   }
   catch (err) {
@@ -181,7 +202,7 @@ $RefParser.prototype.resolve = async function (path, schema, options, callback) 
  * @param {function} [callback] - An error-first callback. The second parameter is the bundled JSON schema object
  * @returns {Promise} - The returned promise resolves with the bundled JSON schema object.
  */
-$RefParser.bundle = function (path, schema, options, callback) {
+$RefParser.bundle = function bundle (path, schema, options, callback) {
   let Class = this; // eslint-disable-line consistent-this
   let instance = new Class();
   return instance.bundle.apply(instance, arguments);
@@ -198,13 +219,14 @@ $RefParser.bundle = function (path, schema, options, callback) {
  * @param {function} [callback] - An error-first callback. The second parameter is the bundled JSON schema object
  * @returns {Promise} - The returned promise resolves with the bundled JSON schema object.
  */
-$RefParser.prototype.bundle = async function (path, schema, options, callback) {
+$RefParser.prototype.bundle = async function bundle (path, schema, options, callback) {
   let me = this;
   let args = normalizeArgs(arguments);
 
   try {
     await this.resolve(args.path, args.schema, args.options);
-    bundle(me, args.options);
+    _bundle(me, args.options);
+    finalize(me);
     return maybe(args.callback, Promise.resolve(me.schema));
   }
   catch (err) {
@@ -222,7 +244,7 @@ $RefParser.prototype.bundle = async function (path, schema, options, callback) {
  * @param {function} [callback] - An error-first callback. The second parameter is the dereferenced JSON schema object
  * @returns {Promise} - The returned promise resolves with the dereferenced JSON schema object.
  */
-$RefParser.dereference = function (path, schema, options, callback) {
+$RefParser.dereference = function dereference (path, schema, options, callback) {
   let Class = this; // eslint-disable-line consistent-this
   let instance = new Class();
   return instance.dereference.apply(instance, arguments);
@@ -238,16 +260,24 @@ $RefParser.dereference = function (path, schema, options, callback) {
  * @param {function} [callback] - An error-first callback. The second parameter is the dereferenced JSON schema object
  * @returns {Promise} - The returned promise resolves with the dereferenced JSON schema object.
  */
-$RefParser.prototype.dereference = async function (path, schema, options, callback) {
+$RefParser.prototype.dereference = async function dereference (path, schema, options, callback) {
   let me = this;
   let args = normalizeArgs(arguments);
 
   try {
     await this.resolve(args.path, args.schema, args.options);
-    dereference(me, args.options);
+    _dereference(me, args.options);
+    finalize(me);
     return maybe(args.callback, Promise.resolve(me.schema));
   }
   catch (err) {
     return maybe(args.callback, Promise.reject(err));
   }
 };
+
+function finalize (parser) {
+  const errors = JSONParserErrorGroup.getParserErrors(parser);
+  if (errors.length > 0) {
+    throw new JSONParserErrorGroup(parser);
+  }
+}

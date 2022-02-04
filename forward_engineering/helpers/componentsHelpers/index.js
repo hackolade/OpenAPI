@@ -2,7 +2,7 @@ const get = require('lodash.get');
 const { getSchemas } = require('./schemasHelper');
 const { getRequestBodies } = require('./requestBodiesHelper');
 const { getResponses } = require('./responsesHelper');
-const { getParameters, getHeaders } = require('./parametersHelper');
+const { getParameters, getHeaders, prepareHeadersComponents } = require('./parametersHelper');
 const { getSecuritySchemes } = require('./securitySchemesHelper');
 const { getExamples } = require('./examplesHelper');
 const { getLinks } = require('./linksHelper');
@@ -30,7 +30,7 @@ function getComponents(definitions, containers) {
     const parameters = renameComponents(getParameters(componentsData.parameters));
     const examples = renameComponents(getExamples(componentsData.examples));
     const requestBodies = renameComponents(getRequestBodies(componentsData.requestBodies));
-    const headers = renameComponents(getHeaders(componentsData.headers));
+    const headers = renameComponents(getHeaders(prepareHeadersComponents(componentsData.headers), true));
     const securitySchemes = renameComponents(getSecuritySchemes(componentsData.securitySchemes));
     const links = renameComponents(getLinks(componentsData.links));
     const callbacks = renameComponents(getCallbacks(componentsData.callbacks, containers));

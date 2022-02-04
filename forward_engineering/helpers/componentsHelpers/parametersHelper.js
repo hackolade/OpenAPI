@@ -4,6 +4,7 @@ const { mapSchema } = require('./schemasHelper');
 const { getExamples } = require('./examplesHelper');
 const { getRef, hasRef, hasChoice } = require('../typeHelper');
 const { commentDeactivatedItemInner } = require('../commentsHelper');
+const { activateItem } = require('../commonHelper');
 
 function getParameters(data) {
 	if (!data || !data.properties) {
@@ -13,7 +14,7 @@ function getParameters(data) {
 	return Object.entries(data.properties)
 		.map(([key, value]) => {
 			const required = data.required ? data.required.includes(key) : false;
-			return { key, value: mapParameter(value, required) };
+			return { key, value: mapParameter(activateItem(value), required, true) };
 		})
 		.reduce((acc, { key, value }) => {
 			acc[key] = value;
@@ -28,6 +29,7 @@ function mapParameter(data, required, isParentActivated = false) {
 	if (hasRef(data)) {
 		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
 	}
+	const schemaKeyword = getSchemaKeyword(data.properties);
 	const isActivated = data.isActivated && isParentActivated;
 	const parameter = {
 		name: data.parameterName,
@@ -39,7 +41,7 @@ function mapParameter(data, required, isParentActivated = false) {
 		style: data.style,
 		explode: data.explode,
 		allowReserved: data.allowReserved,
-		schema: mapSchema(get(data, 'properties.schema'), 'schema', isActivated),
+		schema: mapSchema(get(data, ['properties', schemaKeyword]), 'schema', isActivated),
 		example: data.sample,
 		examples: getExamples(get(data, 'properties.examples')),
 		content: getContent(get(data, 'properties.content'), isActivated)
@@ -97,15 +99,21 @@ function getContent(data, isParentActivated) {
         return;
     }
 
-    return Object.keys(data.properties).reduce((acc, key) => {
+    const result = Object.keys(data.properties).reduce((acc, key) => {
 		const properties = get(data, `properties[${key}].properties`);
         if (!properties) {
-            return;
+            return acc;
 		}
-		const isSchemaEmpty = properties.schema && get(properties.schema, 'type') === 'object' && !get(properties.schema, 'properties');
+		const schemaKeyword = getSchemaKeyword(properties);
+
+		if (!schemaKeyword) {
+			return acc;
+		}
+
+		const isSchemaEmpty = properties[schemaKeyword] && get(properties, [schemaKeyword, 'type']) === 'object' && !get(properties, [schemaKeyword, 'properties']);
 		const isExamplesEmpty = !get(properties, 'examples.properties');
 		if (isSchemaEmpty && isExamplesEmpty) {
-			return;
+			return acc;
 		}
 		const isActivated = data.properties[key].isActivated;
         acc[key] = commentDeactivatedItemInner(
@@ -118,13 +126,20 @@ function getContent(data, isParentActivated) {
 		);
         return acc;
     }, {});
+
+	if (!Object.keys(result).length) {
+		return;
+	}
+
+	return result;
 }
 
 function mapMediaTypeObject(data, isParentActivated = false) {
     if (!data || !data.properties) {
         return;
-    }
-	let schema = mapSchema(get(data, 'properties.schema'), 'schema', isParentActivated);
+	}
+	const schemaKeyword = getSchemaKeyword(data.properties);
+	let schema = mapSchema(get(data, ['properties', schemaKeyword]), 'schema', isParentActivated);
 	if (!schema && hasChoice(data)) {
 		schema = mapSchema({
 			type: 'object',
@@ -172,10 +187,35 @@ function mapEncoding(data) {
         }, {});
 }
 
+function prepareHeadersComponents(headers) {
+	if (!headers || !headers.properties) {
+		return;
+	}
+
+	for (const header in headers.properties) {
+		headers.properties[header] = activateItem(headers.properties[header]);
+	}
+
+	return headers;
+}
+
+function getSchemaKeyword(properties = {}) {
+	const defaultKeyword = 'schema'; 
+	const restRequestPropNames = ['content', 'examples', 'encoding'];
+
+	if (get(properties, defaultKeyword)) {
+		return defaultKeyword;
+	}
+
+	const schemaKey = Object.keys(properties).find(key => !restRequestPropNames.includes(key));
+	return schemaKey;
+}
+
 module.exports = {
 	getParameters,
 	mapParameter,
 	getHeaders,
 	mapHeader,
-	getContent
+	getContent,
+	prepareHeadersComponents
 };

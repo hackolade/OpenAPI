@@ -105,11 +105,22 @@ function getContainersIdsFromCallbacks(callbacks = {}) {
 	}, []);
 }
 
+function activateItem(item) {
+	if (!item || typeof item !== 'object') {
+		return item;
+	}
+	return {
+		...item,
+		isActivated: true
+	};
+}
+
 module.exports = {
 	mapEnum,
 	mapExternalDocs,
 	mapTags,
 	mapSecurity,
 	mapArrayFieldByName,
-	getContainersIdsForCallbacks
+	getContainersIdsForCallbacks,
+	activateItem,
 };

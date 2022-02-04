@@ -1,6 +1,7 @@
 
 const commonHelper = require('./commonHelper');
 const propertiesConfig = require('../propertiesConfig');
+const jsonComment = require('comment-json');
 
 const REQUEST = 'request';
 const RESPONSE = 'response';
@@ -536,6 +537,9 @@ const handleAdditionalProperties = (schema) => {
 }
 
 const handleSchemaProperty = (property, data) => {
+	if (!data) {
+		return data;
+	}
 	switch(property) {
 		case 'xml':
 			return handleSchemaXml(data);
@@ -560,6 +564,19 @@ const setMissedType = (schema) => {
 	return schema;
 }
 
+const convertFormatToMode = schema => {
+	switch (schema.type) {
+		case 'number':
+		case 'integer': {
+			const { format, ...schemaData } = schema;
+
+			return { ...schemaData, mode: format };
+		}
+		default:
+			return schema;
+	}
+};
+
 const handleSchemaProps = (schema, fieldOrder) => {
 	if (!schema) {
 		schema = {
@@ -567,7 +584,7 @@ const handleSchemaProps = (schema, fieldOrder) => {
 		};
 	}
 
-	const fixedSchema = setMissedType(schema);
+	const fixedSchema = convertFormatToMode(setMissedType(schema));
 	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(fixedSchema);
 	const schemaWithChoices = handleSchemaChoices(schemaWithAdditionalPropertiesData, fieldOrder);
 	const reorderedSchema = commonHelper.reorderFields(schemaWithChoices, fieldOrder);
@@ -604,7 +621,7 @@ const handleDefinitionSchemaProps = (schema, fieldOrder) => {
 		};
 	}
 
-	const fixedSchema = setMissedType(schema);
+	const fixedSchema = convertFormatToMode(setMissedType(schema));
 	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(fixedSchema);
 	const reorderedSchema = commonHelper.reorderFields(schemaWithAdditionalPropertiesData, fieldOrder);
 	const schemaWithHandledProperties = Object.keys(reorderedSchema).reduce((accumulator, property) => {
@@ -868,7 +885,7 @@ const getModelContent = (pathData, fieldOrder, callbacksComponent) => {
 
 const getOpenAPIJsonSchema = (data, fileName, extension) => {
 	const schema = extension !== '.json' ? commonHelper.convertYamlToJson(data) : data;
-	const openAPISchema = typeof schema === 'string' ? JSON.parse(schema) : schema;
+	const openAPISchema = typeof schema === 'string' ? jsonComment.parse(schema.replace(/^\s*#.+$/mg, '')) : schema;
 	const updatedOpenApiSchema = copyPathItemLevelParametersToOperationObject(openAPISchema);
 	const openAPISchemaWithModelName = Object.assign({}, updatedOpenApiSchema, {
 		modelName: fileName

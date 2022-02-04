@@ -280,6 +280,11 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
+			},
+			{
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
@@ -457,6 +462,11 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
+			},
+			{
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
@@ -629,13 +639,18 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"type",
 			{
-				"propertyName": "format",
+				"propertyName": "Format",
 				"propertyKeyword": "mode",
 				"propertyType": "select",
 				"options": [
 					"int32",
 					"int64"
 				]
+			},
+			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
 			},
 			{
 				"propertyKeyword": "description",
@@ -810,6 +825,11 @@ making sure that you maintain a proper JSON format.
 			"schemaId",
 			"type",
 			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
+			},
+			{
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
@@ -855,6 +875,11 @@ making sure that you maintain a proper JSON format.
 					"key": "subtype",
 					"value": "anyParameter"
 				}
+			},
+			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
 			},
 			{
 				"propertyKeyword": "description",
@@ -1033,6 +1058,16 @@ making sure that you maintain a proper JSON format.
 				],
 				"enableForReference": true
 			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "details",
+				"template": "textAreaJson",
+				"dependency": {
+					"key": "subtype",
+					"value": "schema"
+				}
+			},
 			"comments"
 		],
 		"object": [
@@ -1085,6 +1120,11 @@ making sure that you maintain a proper JSON format.
 						"value": "schema"
 					}
 				}
+			},
+			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
 			},
 			{
 				"propertyKeyword": "description",
@@ -2586,7 +2626,10 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
-					"form"
+					"",
+					"matrix",
+					"label",
+					"simple"
 				],
 				"enableForReference": true
 			},
@@ -2665,7 +2708,11 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
-					"form"
+					"",
+					"form",
+					"spaceDelimited",
+					"pipeDelimited",
+					"deepObject"
 				],
 				"enableForReference": true
 			},
@@ -2744,7 +2791,8 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
-					"form"
+					"",
+					"simple"
 				],
 				"enableForReference": true
 			},
@@ -2823,6 +2871,7 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "Select from list of options",
 				"propertyType": "select",
 				"options": [
+					"",
 					"form"
 				],
 				"enableForReference": true

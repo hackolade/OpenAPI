@@ -84,7 +84,9 @@ exports.run = function (plugins, method, file, $refs) {
           // A synchronous result was returned
           onSuccess(result);
         }
-        // else { the callback will be called }
+        else if (index === plugins.length) {
+          throw new Error("No promise has been returned or callback has been called.");
+        }
       }
       catch (e) {
         onError(e);
@@ -108,9 +110,12 @@ exports.run = function (plugins, method, file, $refs) {
       });
     }
 
-    function onError (err) {
+    function onError (error) {
       // console.log('    %s', err.message || err);
-      lastError = err;
+      lastError = {
+        plugin,
+        error,
+      };
       runNextPlugin();
     }
   }));
