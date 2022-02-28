@@ -11,19 +11,7 @@
 		"type": "object",
 		"properties": [{
 			"name": "application/json",
-			"type": "media",
-			"properties": [{
-				"name": "schema",
-				"type": "object"
-			}, {
-				"name": "examples",
-				"type": "object",
-				"subtype": "example"
-			}, {
-				"name": "encoding",
-				"type": "object",
-				"subtype": "encoding"
-			}]
+			"type": "media"
 		}]
 	},{
 		"name": "links",
