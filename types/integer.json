@@ -25,5 +25,26 @@
 		"mode": "int32",
 		"sample": "",
 		"nullable": false
-	}
+	},
+	"descriptor": [
+		{
+			"schema": {
+				"mode": "int32"
+			},
+			"capacity": 4
+		},
+		{
+			"schema": {
+				"mode": "int64"
+			},
+			"capacity": 8
+		},
+		{
+			"schema": {
+				"mode": "int64"
+			},
+			"capacity": 16,
+			"mode": "decimal"
+		}
+	]
 }

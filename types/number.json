@@ -25,5 +25,21 @@
 		"mode": "float",
 		"sample": "",
 		"nullable": false
-	}
+	},
+	"descriptor": [
+		{
+			"schema": {
+				"mode": "float"
+			},
+			"capacity": 4,
+			"mode": "floating"
+		},
+		{
+			"schema": {
+				"mode": "double"
+			},
+			"capacity": 8,
+			"mode": "floating"
+		}
+	]
 }
