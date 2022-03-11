@@ -47,7 +47,7 @@
 					"type": "date"
 				},
 				"to": {
-					"type": "string",
+					"type": "varchar",
 					"format": "date"
 				}
 			},
@@ -56,7 +56,7 @@
 					"type": "time"
 				},
 				"to": {
-					"type": "string",
+					"type": "varchar",
 					"format": "date-time"
 				}
 			},
@@ -65,7 +65,7 @@
 					"type": "timestamp_ltz"
 				},
 				"to": {
-					"type": "string",
+					"type": "varchar",
 					"format": "date-time"
 				}
 			},
@@ -74,7 +74,7 @@
 					"type": "timestamp_ntz"
 				},
 				"to": {
-					"type": "string",
+					"type": "varchar",
 					"format": "date-time"
 				}
 			},
@@ -83,7 +83,7 @@
 					"type": "timestamp_tz"
 				},
 				"to": {
-					"type": "string",
+					"type": "varchar",
 					"format": "date-time"
 				}
 			}
