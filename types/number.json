@@ -40,6 +40,13 @@
 			},
 			"capacity": 8,
 			"mode": "floating"
+		},
+		{
+			"schema": {
+				"mode": "double"
+			},
+			"capacity": 16,
+			"mode": "decimal"
 		}
 	]
 }
