@@ -38,6 +38,12 @@
 				"mode": "int64"
 			},
 			"capacity": 8
+		},
+		{
+			"schema": {
+				"mode": "int64"
+			},
+			"capacity": 12
 		}
 	]
 }
