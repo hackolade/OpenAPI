@@ -95,9 +95,17 @@ const prettifyValidationWarning = warning => {
 		return warning;
 	}
 
+	const toString = (value) => {
+		if (typeof value === 'object') {
+			return JSON.stringify(warning.context);
+		} else {
+			return warning.context || '';
+		}
+	};
+
 	return {
 		...warning,
-		context: '\n' + tab(warning.context || '').replace(/\t/gm, '  '),
+		context: '\n' + tab(toString(warning.context)).replace(/\t/gm, '  '),
 	}
 };
 
