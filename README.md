@@ -18,7 +18,7 @@ This plugin is for OpenAPI 3.  If instead you need Swagger 2, you need a separat
 <span class="rvts21">  
 </span>
 
-<span class="rvts21">Creating APIs is not easy! And writing OpenAPI documentation in a design-first approach can be tedious at best, generally error-prone and frustrating...  Hackolade takes a visual schema-centric approach so you can focus on the content of requests and responses. The application also assists with all the metadata to produce validated OpenAPI files and test the transactions.  You can also reverse-engineer existing OpenAPI 3 files in JSON or YAML to produce a graphical representation of your APIs.</span>
+<span class="rvts21">Creating APIs is not easy! And writing OpenAPI documentation in a design-first approach can be tedious at best, generally error-prone and frustrating...  Hackolade takes a visual schema-centric approach so you can focus on the content of requests and responses. The application also assists with all the metadata to produce validated OpenAPI files and test the transactions.  You can also reverse-engineer existing OpenAPI 3 files in JSON or YAML to produce a graphical representation of your APIs.  You may want to consult our </span>[step-by-step tutorial](https://hackolade.com/help/CreateaRESTAPImodel.html)
 
 <span class="rvts6">Hackolade was specially adapted to support the API design of OAS, including all the necessary metadata for the API, the requests and responses.  The application closely follows the terminology of the specification.  The visual tool puts the focus on what really matters in an API: the schema of the information being exchanged between systems.  At the same time, it provides assistance to modelers and does not require perfect mastery of the OpenAPI 3 syntax.  It generates validated files that are syntactically correct and compatible with the specification thereby greatly improving productivity and quality.</span>
 
@@ -172,8 +172,7 @@ This plugin is for OpenAPI 3.  If instead you need Swagger 2, you need a separat
 
 [Response objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#responses-object) <span class="rvts34">describe responses from API operations.  For each request, you may create one or more responses.</span>
 
-<img src="lib/OpenAPI - Request Properties.png" width="25%" height="25%">
-![](lib/OpenAPI - Responses.png)
+<img src="lib/OpenAPI - Responses.png" width="75%" height="75%">
 
 <span class="rvts78">  
 </span>
