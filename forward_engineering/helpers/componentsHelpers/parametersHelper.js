@@ -100,7 +100,7 @@ function getContent(data, isParentActivated) {
     }
 
     const result = Object.keys(data.properties).reduce((acc, key) => {
-		const properties = get(data, `properties[${key}].properties`);
+		const properties = get(data, ['properties', key, 'properties']);
         if (!properties) {
             return acc;
 		}
