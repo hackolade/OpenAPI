@@ -9,6 +9,7 @@ const validationHelper = require('../forward_engineering/helpers/validationHelpe
 
 module.exports = {
 	reFromFile(data, logger, callback) {
+		logger.clear();
 		commonHelper.getFileData(data.filePath).then(fileData => {
 			return getOpenAPISchema(fileData, data.filePath);
 		}).then(openAPISchema => {
@@ -26,7 +27,7 @@ module.exports = {
 					message: "Review the log file for more details.",
 					openLog: true,
 				};
-				logger.log('error', { validationErrors }, '[Warning] Invalid OpenAPI Schema');
+				logger.log('error', { validationErrors: validationErrors.map(prettifyValidationWarning) }, '[Warning] Invalid OpenAPI Schema');
 			}
 
 			return callback(null, reversedData.hackoladeData, { ...reversedData.modelData, warning }, [], 'multipleSchema');
@@ -88,6 +89,22 @@ const validateSchema = async (openApiSchema) => {
 
 	return messages?.filter(error => error?.type !== 'success');
 };
+
+const prettifyValidationWarning = warning => {
+	if (!warning?.context) {
+		return warning;
+	}
+
+	return {
+		...warning,
+		context: '\n' + tab(warning.context || '').replace(/\t/gm, '  '),
+	}
+};
+
+const tab = (text, tab = '        ') => text
+	.split('\n')
+	.map(line => tab + line)
+	.join('\n');
 
 const convertOpenAPISchemaToHackolade = (openAPISchema, fieldOrder) => {
 	const modelData = dataHelper.getModelData(openAPISchema);
