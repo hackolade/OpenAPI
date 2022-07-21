@@ -78,7 +78,8 @@
 			"FEScriptCommentsSupported": true,
 			"displayOptions": {
 				"hideNonNullableAttributes": true
-			}
+			},
+			"openModelDefinitionsTabIfNoCollections": true
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
