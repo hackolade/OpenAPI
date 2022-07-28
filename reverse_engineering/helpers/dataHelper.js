@@ -685,15 +685,18 @@ const getParametersData = (parameters, fieldOrder) => {
 const handleSecuritySchemes = (data) => {
 	const propsToClean = ['name', 'type'];
 	if (data.flows) {
-		data.flows = Object.keys(data.flows).reduce((accum, flow) => {
+		const flows = Object.keys(data.flows).reduce((accum, flow) => {
 			const flowObject = data.flows[flow];
+			let scopes;
 			if (flowObject) {
-				flowObject.scopes = Object.keys(flowObject.scopes).reduce((scopeAccum, scopeKey) => {
+				scopes = Object.keys(flowObject.scopes).reduce((scopeAccum, scopeKey) => {
 					return scopeAccum.concat({scopeName: scopeKey, scopeDescription: flowObject.scopes[scopeKey]});
 				}, [])
 			}
-			return Object.assign({}, accum, {[flow]: flowObject});
+			return Object.assign({}, accum, {[flow]: scopes ? {...flowObject, scopes} : flowObject });
 		}, {});
+
+		data = Object.assign({}, data, { flows });
 	}
 	return Object.assign({}, getObjectProperties(propsToClean, data),{
 		type: "securityScheme",
