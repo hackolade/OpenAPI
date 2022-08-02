@@ -1,6 +1,37 @@
 const getExtensions = require('../extensionsHelper');
 const { getRef, hasRef } = require('../typeHelper');
 
+const isEmpty = (item) => {
+    if (!item) {
+        return true;
+    }
+
+    if (Array.isArray(item)) {
+        return item.length === 0;
+    }
+
+    if (typeof item === 'object') {
+        return Object.keys(item).length === 0;
+    }
+
+    return false;
+};
+
+const cleanUp = (obj) => {
+    if (typeof obj === 'object' && obj !== null) {
+        return Object.keys(obj).reduce((acc, key) => {
+            const value = cleanUp(obj[key]);
+            if (isEmpty(value)) {
+                return acc;
+            }
+
+            return Object.assign({}, acc, { [key]: value });
+        }, {});
+    }
+
+    return obj;
+};
+
 function getSecuritySchemes(data) {
     if (!data || !data.properties) {
         return;
@@ -39,9 +70,9 @@ function mapSecurityScheme(data) {
             };
             break;
         case 'oauth2':
-            securitySchemeProps = {
-                flows: mapOAuthFlows(data.flows)
-            };
+            const flows = mapOAuthFlows(data.flows);
+
+            securitySchemeProps = { flows };
             break;
         case 'openIdConnect':
             securitySchemeProps = {
@@ -64,17 +95,22 @@ function mapOAuthFlows(data) {
         return;
     }
     const flowsNames = ['implicit', 'password', 'clientCredentials', 'authorizationCode'];
-    const flows = {};
-
-    flowsNames.forEach(flowName => {
+    const flows = flowsNames.reduce((flows, flowName) => {
+        let flow;
         if (data[flowName]) {
-            flows[flowName] = mapOAuthFlowObject(data[flowName]);
+            flow = mapOAuthFlowObject(data[flowName]);
         }
-    });
+
+        if (!isEmpty(flow)) {
+            flows[flowName] = flow;
+        }
+
+        return flows;
+    }, {});
 
     const extensions = getExtensions(data.scopesExtensions);
 
-    return Object.assign({}, flows, extensions);
+    return cleanUp(Object.assign({}, flows, extensions));
 }
 
 function mapOAuthFlowObject({ authorizationUrl, tokenUrl, refreshUrl, scopes, scopesExtensions }) {
