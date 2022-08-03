@@ -29,13 +29,13 @@ const getExtensionsObject = (data, keyword = 'scopesExtensions') => {
 	return { [keyword]: extensions };
 };
 
-const handleObject = (func, object) => {
+const handleObject = (func, object, includeKey) => {
 	if (!object) {
 		return {};
 	}
 	return Object.keys(object).reduce((accum, key) => {
 		return Object.assign({}, accum, {
-			[key]: func(object[key])
+			[key]: func(object[key], includeKey ? key : undefined)
 		})
 	}, {});
 }
@@ -233,7 +233,7 @@ const getContainers = (pathData, callbacks) => {
 			updatedPathData = Object.assign({}, updatedPathData, {[pathData.data.name]: pathData.callbackPath});
 			return pathData.data;
 		})
-		return accum.concat(Object.assign({}, { name: key }, extensionsObject), containersData);
+		return accum.concat(Object.assign({}, { name: key, summary: path.summary }, extensionsObject), containersData);
 	}, []);
 	
 	if (callbacks) {
@@ -650,7 +650,7 @@ const handleDefinitionSchemaProps = (schema, fieldOrder) => {
 	return schemaWithHandledProperties;
 };
 
-const handleParameter = (parameter, fieldOrder) => {
+const handleParameter = (parameter, parameterName, fieldOrder) => {
 	const getParameterType = parameter => {
 		const type = `parameter (${parameter.in})`;
 		return type;
@@ -665,6 +665,7 @@ const handleParameter = (parameter, fieldOrder) => {
 		examples: parameterExamples
 	});
 	const newParameter = Object.assign({}, parameterSchemaObject, parameter, {
+		name: parameterName || parameter.name,
 		parameterName: parameter.name,
 		sample: getExampleStringValue(parameter.example),
 		type: parameterType,
@@ -676,7 +677,7 @@ const handleParameter = (parameter, fieldOrder) => {
 
 const getParametersData = (parameters, fieldOrder) => {
 	const parametersData = (parameters || []).reduce((accumulator, parameter) => {
-		return [...accumulator, handleParameter(parameter, fieldOrder)];
+		return [...accumulator, handleParameter(parameter, '', fieldOrder)];
 	}, []);
 
 	return parametersData;
@@ -792,7 +793,7 @@ const getModelData = (schema) => {
 
 const getComponents = (schemaComponents = {}, fieldOrder) => {
 	const schemasData = handleObject(schemas => handleDefinitionSchemaProps(schemas || {}, fieldOrder), schemaComponents.schemas);
-	const parametersData = handleObject(handleParameter, schemaComponents.parameters);
+	const parametersData = handleObject(handleParameter, schemaComponents.parameters, true);
 	const examplesData = handleObject(handleExample, schemaComponents.examples);
 	const requestBodiesData = handleObject(handleRequestBody, schemaComponents.requestBodies);
 	const headersData = handleObject(handleHeader, schemaComponents.headers);
