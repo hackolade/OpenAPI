@@ -643,6 +643,7 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "mode",
 				"propertyType": "select",
 				"options": [
+					"",
 					"int32",
 					"int64"
 				]
