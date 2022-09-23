@@ -15,12 +15,33 @@
 		"model": true
 	},
 	"options": [
-		{ "name": "JSON", "keyword": "json", "fileExtensions": [ {
-			"label": "application/json", "value": "json"
-		} ] },
-		{ "name": "YAML", "keyword": "yaml", "fileExtensions": [ {
-			"label": "application/yaml", "value": "yaml"
-		} ] }
+		{
+			"name": "JSON",
+			"keyword": "json",
+			"fileExtensions": [
+				{
+					"label": "application/json",
+					"value": "json"
+				}
+			]
+		},
+		{
+			"name": "YAML",
+			"keyword": "yaml",
+			"fileExtensions": [
+				{
+					"label": "application/yaml",
+					"value": "yaml"
+				}
+			]
+		}
+	],
+	"additionalOptions": [
+		{
+			"id": "resolvedExternalReferences",
+			"name": "Resolve external references",
+			"value": false
+		}
 	],
 	"isApiSchema": true
 }

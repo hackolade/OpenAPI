@@ -19,18 +19,22 @@ module.exports = {
 				externalDocs: modelExternalDocs,
 				tags: modelTags,
 				security: modelSecurity,
-				servers: modelServers
+				servers: modelServers,
 			} = data.modelData[0];
 
 			const containersIdsFromCallbacks = commonHelper.getContainersIdsForCallbacks(data);
 
+			const resolvedExternalReferences = data.options?.additionalOptions?.find(
+				option => option.id === 'resolvedExternalReferences',
+			)?.value;
+
 			const info = getInfo(data.modelData[0]);
 			const servers = getServers(modelServers);
 			const externalDefinitions = JSON.parse(data.externalDefinitions || '{}').properties || {};
-			const containers = handleRefInContainers(data.containers, externalDefinitions);
+			const containers = handleRefInContainers(data.containers, externalDefinitions, resolvedExternalReferences);
 			const paths = getPaths(containers, containersIdsFromCallbacks);
 			const definitions = JSON.parse(data.modelDefinitions) || {};
-			const definitionsWithHandledReferences = mapJsonSchema(definitions, handleRef(externalDefinitions));
+			const definitionsWithHandledReferences = mapJsonSchema(definitions, handleRef(externalDefinitions, resolvedExternalReferences));
 			const components = getComponents(definitionsWithHandledReferences, data.containers);
 			const security = commonHelper.mapSecurity(modelSecurity);
 			const tags = commonHelper.mapTags(modelTags);
@@ -169,13 +173,13 @@ const replaceRelativePathByAbsolute=(script, modelDirectory)=>{
     return JSON.parse(fixedScript);
 }
 
-const handleRefInContainers = (containers, externalDefinitions) => {
+const handleRefInContainers = (containers, externalDefinitions, resolvedExternalReferences) => {
 	return containers.map(container => {
 		try {
 			const updatedSchemas = Object.keys(container.jsonSchema).reduce((schemas, id) => {
 				const json = container.jsonSchema[id];
 				try {
-					const updatedSchema = mapJsonSchema(JSON.parse(json), handleRef(externalDefinitions));
+					const updatedSchema = mapJsonSchema(JSON.parse(json), handleRef(externalDefinitions, resolvedExternalReferences));
 
 					return {
 						...schemas,
@@ -197,11 +201,11 @@ const handleRefInContainers = (containers, externalDefinitions) => {
 };
 
 
-const handleRef = externalDefinitions => field => {
+const handleRef = (externalDefinitions, resolvedExternalReferences) => field => {
 	if (!field.$ref) {
 		return field;
 	}
-	const ref = handleReferencePath(externalDefinitions, field);
+	const ref = handleReferencePath(externalDefinitions, field, resolvedExternalReferences);
 	if (!ref.$ref) {
 		return ref;
 	}
