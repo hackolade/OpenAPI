@@ -8,7 +8,7 @@ const PATH_START_INDEX = 4;
 
 const { prepareReferenceName } = require('../utils/utils');
 
-const handleReferencePath = (externalDefinitions, { $ref: ref }, resolvedExternalReferences) => {
+const handleReferencePath = (externalDefinitions, { $ref: ref }, resolveApiExternalRefs) => {
 	if (ref.startsWith('#')) {
 		ref = ref.replace('#model/definitions', '#/components');
 
@@ -25,7 +25,7 @@ const handleReferencePath = (externalDefinitions, { $ref: ref }, resolvedExterna
 		return { $ref: prepareReferenceName(ref) };
 	}
 
-	if (externalDefinition.fileType === 'hackoladeSchema' || resolvedExternalReferences) {
+	if (externalDefinition.fileType === 'hackoladeSchema' || resolveApiExternalRefs) {
 		return mapJsonSchema(externalDefinition, field => {
 			if (!field.$ref || field.type === 'reference') {
 				return field;
