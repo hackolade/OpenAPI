@@ -38,7 +38,7 @@
 	],
 	"additionalOptions": [
 		{
-			"id": "resolvedExternalReferences",
+			"id": "resolveApiExternalRefs",
 			"name": "Resolve external references",
 			"value": false
 		}
