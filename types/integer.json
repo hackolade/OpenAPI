@@ -22,7 +22,7 @@
 		"foreignCollection": "",
 		"foreignField": [],
 		"enum": [],
-		"mode": "int32",
+		"mode": "",
 		"sample": "",
 		"nullable": false
 	},
