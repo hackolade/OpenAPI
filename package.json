@@ -79,7 +79,11 @@
 			"displayOptions": {
 				"hideNonNullableAttributes": true
 			},
-			"openModelDefinitionsTabIfNoCollections": true
+			"openModelDefinitionsTabIfNoCollections": true,
+			"erdView": {
+				"enabled": true,
+				"propertyNames": ["schemas"]
+			}
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
