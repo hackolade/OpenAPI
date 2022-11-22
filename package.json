@@ -80,7 +80,7 @@
 				"hideNonNullableAttributes": true
 			},
 			"openModelDefinitionsTabIfNoCollections": true,
-			"erdView": {
+			"erdDefinitions": {
 				"enabled": true,
 				"propertyNames": ["schemas"]
 			}
