@@ -288,6 +288,22 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			"required",
 			{
 				"propertyName": "Deprecated",
@@ -469,6 +485,22 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyKeyword": "description",
 				"enableForReference": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
 			},
 			"required",
 			{
@@ -657,6 +689,22 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			"required",
 			{
 				"propertyName": "Deprecated",
@@ -833,6 +881,22 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyKeyword": "description",
 				"enableForReference": true
+			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
 			},
 			"required",
 			{
