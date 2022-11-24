@@ -69,7 +69,10 @@
 			"disableDefinitions": {
 				"internal": true
 			},
-			"disableRelationships": true,
+			"disableRelationships": false,
+			"relationships": {
+				"definitionRelationships": true
+			},
 			"disableJsonPreview": false,
 			"enableErdToggle": true,
 			"enableStackedNestedCollections": true,
@@ -79,7 +82,11 @@
 			"displayOptions": {
 				"hideNonNullableAttributes": true
 			},
-			"openModelDefinitionsTabIfNoCollections": true
+			"openModelDefinitionsTabIfNoCollections": true,
+			"erdDefinitions": {
+				"enabled": true,
+				"propertyNames": ["schemas"]
+			}
 		}
 	},
 	"description": "Hackolade plugin for OpenAPI",
