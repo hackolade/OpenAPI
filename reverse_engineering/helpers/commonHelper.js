@@ -66,7 +66,7 @@ const handleErrorObject = (error, title) => {
 };
 
 const convertYamlToJson = (fileData) => {
-    return yaml.load(fileData);
+    return yaml.load(fileData, { schema: yaml.JSON_SCHEMA });
 };
 
 const getNewId = () => uuid.v1();
