@@ -29,6 +29,7 @@ function getTypeProps(data, key, isParentActivated) {
 			const arrayProps = {
 				type,
 				title: data.title || undefined,
+				description: data.description || undefined,
 				items: getArrayItemsType(items, isActivated && isParentActivated),
 				collectionFormat: data.collectionFormat,
 				minItems: data.minItems,
