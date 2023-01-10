@@ -344,10 +344,8 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Foreign definition",
 				"propertyKeyword": "foreignCollection",
-				"propertyType": "selecthashed",
 				"template": "definitions",
 				"disableForDefinitions": false,
-				"withEmptyOption": true,
 				"dependency": {
 					"type": "and",
 					"values": [
@@ -361,10 +359,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Foreign field",
 				"propertyKeyword": "foreignField",
-				"propertyType": "detailshashed",
-				"template": "collectiontree",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -379,10 +374,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship type",
 				"propertyKeyword": "relationshipType",
-				"propertyType": "select",
-				"options": ["", "Foreign Key", "Foreign Master"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -397,9 +389,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship name",
 				"propertyKeyword": "relationshipName",
-				"propertyType": "text",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -414,10 +404,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Cardinality",
 				"propertyKeyword": "cardinality",
-				"propertyType": "select",
-				"options": ["1", "n", "0..1", "0..n", "1..n"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -636,10 +623,8 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Foreign definition",
 				"propertyKeyword": "foreignCollection",
-				"propertyType": "selecthashed",
 				"template": "definitions",
 				"disableForDefinitions": false,
-				"withEmptyOption": true,
 				"dependency": {
 					"type": "and",
 					"values": [
@@ -653,10 +638,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Foreign field",
 				"propertyKeyword": "foreignField",
-				"propertyType": "detailshashed",
-				"template": "collectiontree",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -671,10 +653,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship type",
 				"propertyKeyword": "relationshipType",
-				"propertyType": "select",
-				"options": ["", "Foreign Key", "Foreign Master"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -689,9 +668,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship name",
 				"propertyKeyword": "relationshipName",
-				"propertyType": "text",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -706,10 +683,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Cardinality",
 				"propertyKeyword": "cardinality",
-				"propertyType": "select",
-				"options": ["1", "n", "0..1", "0..n", "1..n"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -929,10 +903,8 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Foreign definition",
 				"propertyKeyword": "foreignCollection",
-				"propertyType": "selecthashed",
 				"template": "definitions",
 				"disableForDefinitions": false,
-				"withEmptyOption": true,
 				"dependency": {
 					"type": "and",
 					"values": [
@@ -946,10 +918,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Foreign field",
 				"propertyKeyword": "foreignField",
-				"propertyType": "detailshashed",
-				"template": "collectiontree",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -964,10 +933,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship type",
 				"propertyKeyword": "relationshipType",
-				"propertyType": "select",
-				"options": ["", "Foreign Key", "Foreign Master"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -982,9 +948,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship name",
 				"propertyKeyword": "relationshipName",
-				"propertyType": "text",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -999,10 +963,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Cardinality",
 				"propertyKeyword": "cardinality",
-				"propertyType": "select",
-				"options": ["1", "n", "0..1", "0..n", "1..n"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -1179,10 +1140,8 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "Foreign definition",
 				"propertyKeyword": "foreignCollection",
-				"propertyType": "selecthashed",
 				"template": "definitions",
 				"disableForDefinitions": false,
-				"withEmptyOption": true,
 				"dependency": {
 					"type": "and",
 					"values": [
@@ -1196,10 +1155,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Foreign field",
 				"propertyKeyword": "foreignField",
-				"propertyType": "detailshashed",
-				"template": "collectiontree",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -1214,10 +1170,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship type",
 				"propertyKeyword": "relationshipType",
-				"propertyType": "select",
-				"options": ["", "Foreign Key", "Foreign Master"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -1232,9 +1185,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Relationship name",
 				"propertyKeyword": "relationshipName",
-				"propertyType": "text",
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
@@ -1249,10 +1200,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Cardinality",
 				"propertyKeyword": "cardinality",
-				"propertyType": "select",
-				"options": ["1", "n", "0..1", "0..n", "1..n"],
 				"disableForDefinitions": false,
 				"dependency": {
 					"type": "and",
