@@ -342,6 +342,83 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
 				"propertyName": "xml",
 				"propertyType": "block",
 				"propertyKeyword": "xml",
@@ -542,6 +619,83 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "readOnly",
 				"propertyType": "checkbox",
 				"enableForReference": true
+			},
+			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "xml",
@@ -747,6 +901,83 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
 				"propertyName": "xml",
 				"propertyType": "block",
 				"propertyKeyword": "xml",
@@ -906,6 +1137,83 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			"default",
+			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
