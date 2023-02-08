@@ -4,7 +4,7 @@
   "description": "",
   "author": "Hackolade",
   "dependencies": {
-    "@apidevtools/swagger-parser": "^10.0.3",
+    "@apidevtools/swagger-parser": "^10.1.0",
     "js-yaml": "^3.13.1",
     "lodash.get": "^4.4.2"
   },
