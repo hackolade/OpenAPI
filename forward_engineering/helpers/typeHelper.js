@@ -36,7 +36,6 @@ function getTypeProps(data, key, isParentActivated) {
 				maxItems: data.maxItems,
 				uniqueItems: data.uniqueItems || undefined,
 				nullable: data.nullable,
-				discriminator: data.discriminator,
 				readOnly: data.readOnly,
 				example: parseExample(data.sample) || getArrayItemsExample(items),
 				xml: getXml(data.xml)
@@ -46,6 +45,7 @@ function getTypeProps(data, key, isParentActivated) {
 			return Object.assign({}, arrayProps, arrayChoices, extensions);
 		}
 		case 'object': {
+			const discriminator = getDiscriminator(data.discriminator);
 			const objectProps = {
 				type,
 				title: data.title || undefined,
@@ -56,7 +56,7 @@ function getTypeProps(data, key, isParentActivated) {
 				maxProperties: data.maxProperties,
 				additionalProperties: getAdditionalProperties(data),
 				nullable: data.nullable,
-				discriminator: data.discriminator,
+				...(discriminator ? { discriminator } : {}),
 				readOnly: data.readOnly,
 				example: parseExample(data.sample),
 				xml: getXml(data.xml)
@@ -237,6 +237,22 @@ function getArrayItemsExample(items) {
 			return itemsExample;
 		}
 	}
+}
+
+function getDiscriminator(discriminator) {
+	if (!discriminator || !discriminator.propertyName) {
+		return null;
+	}
+	const mapping = (!discriminator.mapping || discriminator.mapping.length === 0) ? null : discriminator.mapping.reduce((acc, mappingItem) => {
+		acc[mappingItem.discriminatorValue] = mappingItem.discriminatorSchema;
+		return acc;
+	}, {});
+
+	return {
+		propertyName: discriminator.propertyName,
+		...(mapping && { mapping })
+
+	};
 }
 
 module.exports = {
