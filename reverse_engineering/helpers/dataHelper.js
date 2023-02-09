@@ -545,6 +545,8 @@ const handleSchemaProperty = (property, data) => {
 			return handleSchemaXml(data);
 		case '$ref':
 			return resolveReference(data);
+		case 'discriminator':
+			return handleDiscriminator(data);
 		default:
 			if (commonHelper.CHOICES.find(choice => data[choice])) {
 				return handleSchemaProps(data);
@@ -918,6 +920,18 @@ const validateOpenAPISchema = (schema) => {
 	const openapi = schema.openapi;
 	const isCorrectVersion = openapi && openapi.slice(0, 4) === '3.0.';
 	return isCorrectVersion;
+};
+
+const handleDiscriminator = (discriminator) => {
+	if (discriminator) {
+		const { propertyName, mapping } = discriminator;
+		const preparedMapping = mapping ? Object.keys(mapping).reduce((acc, key) => {
+			acc.push({ discriminatorValue: key, discriminatorSchema: mapping[key] });
+			return acc;
+		}, []) : [];
+		return { propertyName, mapping: preparedMapping };
+	}
+	return {};
 };
 
 module.exports = {

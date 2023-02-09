@@ -329,13 +329,6 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
-				"enableForReference": true
-			},
-			{
 				"propertyName": "readOnly",
 				"propertyKeyword": "readOnly",
 				"propertyType": "checkbox",
@@ -605,13 +598,6 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "nullable",
 				"propertyKeyword": "nullable",
 				"propertyType": "checkbox",
-				"enableForReference": true
-			},
-			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
 				"enableForReference": true
 			},
 			{
@@ -885,13 +871,6 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "nullable",
 				"propertyKeyword": "nullable",
 				"propertyType": "checkbox",
-				"enableForReference": true
-			},
-			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
 				"enableForReference": true
 			},
 			{
@@ -1274,17 +1253,6 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
-				"enableForReference": true,
-				"dependency": {
-					"key": "subtype",
-					"value": "schema"
-				}
-			},
-			{
 				"propertyName": "readOnly",
 				"propertyKeyword": "readOnly",
 				"propertyType": "checkbox",
@@ -1592,10 +1560,34 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "discriminator",
+				"propertyName": "Discriminator",
 				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
+				"propertyType": "block",
+				"structure": [
+					{
+						"propertyName": "Property name",
+						"propertyKeyword": "propertyName",
+						"propertyTooltip": "",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Mapping",
+						"propertyType": "group",
+						"propertyKeyword": "mapping",
+						"structure": [
+							{
+								"propertyName": "Discriminator value",
+								"propertyKeyword": "discriminatorValue",
+								"propertyType": "text"
+							},
+							{
+								"propertyName": "Schema name or reference",
+								"propertyKeyword": "discriminatorSchema",
+								"propertyType": "text"
+							}
+						]
+					}
+				],
 				"dependency": {
 					"key": "subtype",
 					"value": "schema"
