@@ -251,6 +251,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"string": [
@@ -1199,6 +1203,12 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "text",
 				"shouldValidate": true
 			},
+			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"propertyType": "checkbox",
+				"enableForReference": true
+			},
 			"comments"
 		],
 		"array": [
@@ -1409,7 +1419,11 @@ making sure that you maintain a proper JSON format.
 					"value": "schema"
 				}
 			},
-			"comments"
+			"comments",
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
+			}
 		],
 		"object": [
 			{
@@ -1788,7 +1802,11 @@ making sure that you maintain a proper JSON format.
 					"value": "schema"
 				}
 			},
-			"comments"
+			"comments",
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
+			}
 		],
 		"___1": [],
 		"requestBody": [
@@ -1847,6 +1865,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"response": [
@@ -1920,6 +1942,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"media": [
@@ -2060,6 +2086,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"encoding": [
@@ -2127,6 +2157,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"example": [
@@ -2180,6 +2214,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"header": [
@@ -2258,6 +2296,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"securityScheme": [
@@ -2701,6 +2743,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"callback": [
@@ -3040,6 +3086,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"parameter (query)":[
@@ -3123,6 +3173,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"parameter (header)": [
@@ -3203,6 +3257,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"parameter (cookie)": [
@@ -3283,6 +3341,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"choice": [{
