@@ -446,6 +446,18 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
+				"propertyName": "jsonSchemaDialect",
+				"propertyKeyword": "jsonSchemaDialect",
+				"propertyTooltip": "",
+				"propertyType": "text",
+				"disabled": true,
+				"dependency": {
+					"level": "model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+			},
+			{
 				"propertyName": "tags",
 				"propertyType": "group",
 				"propertyKeyword": "tags",
