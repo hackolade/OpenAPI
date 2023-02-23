@@ -20,7 +20,19 @@
 			"nestedCollections": {
 				"level": 1
 			},
-			"disableMultipleTypes": true,
+			"disableMultipleTypes": {
+				"dependencies": [
+					{ "dependency":
+						{
+							"level": "model",
+							"key": "dbVersion",
+							"value": "3.1.0"
+						},
+						"value": false
+					}
+				],
+				"defaultValue": true
+			},
 			"enableReverseEngineering": {
 				"jsonDocument": {
 					"entities": false,
