@@ -850,6 +850,44 @@ making sure that you maintain a proper JSON format.
 			},
 			"comments"
 		],
+		"null": [
+			{
+				"fieldName": "Name",
+				"fieldKeyword": "name",
+				"fieldType": "coupled"
+			},
+			{
+				"fieldName": "Technical name",
+				"fieldKeyword": "code",
+				"fieldType": "coupled"
+			},
+			"schemaId",
+			"type",
+			{
+				"propertyName": "Title",
+				"propertyKeyword": "title",
+				"propertyType": "text"
+			},
+			{
+				"propertyKeyword": "description",
+				"enableForReference": true
+			},
+			"required",
+			{
+				"propertyName": "Deprecated",
+				"propertyKeyword": "deprecated",
+				"propertyType": "checkbox",
+				"enableForReference": true
+			},
+			"default",
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "text",
+				"shouldValidate": true
+			},
+			"comments"
+		],
 		"array": [
 			{
 				"fieldName": "Name",
