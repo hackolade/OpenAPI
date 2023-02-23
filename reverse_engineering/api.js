@@ -67,7 +67,7 @@ module.exports = {
 		try {
 			const jsonSchema = JSON.parse(data.jsonSchema);
 
-			const adaptedJsonSchema = adaptJsonSchema(jsonSchema);
+			const adaptedJsonSchema = adaptJsonSchema(jsonSchema, data.options?.targetDBVersion);
 
 			logger.log('info', 'Adaptation of JSON Schema finished.', 'Adapt JSON Schema');
 
