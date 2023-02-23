@@ -277,7 +277,50 @@ making sure that you maintain a proper JSON format.
 					"date",
 					"date-time",
 					"password"
-				]
+				],
+				"dependency": {
+					"type": "not",
+						"values": [
+							{
+								"level": "model",
+								"key": "dbVersion",
+								"value": "3.1.0"
+							}
+						]
+				}
+			},
+			{
+				"propertyName": "Format",
+				"propertyKeyword": "format",
+				"propertyType": "select",
+				"options": [
+					"",
+					"date-time",
+					"date",
+					"time",
+					"duration",
+					"email",
+					"idn-email",
+					"hostname",
+					"idn-hostname",
+					"ipv4",
+					"ipv6",
+					"uri",
+					"uri-reference",
+					"iri",
+					"iri-reference",
+					"uri-template",
+					"uuid",
+					"json-pointer",
+					"relative-json-pointer",
+					"regex",
+					"password"
+				],
+				"dependency": {
+					"level": "model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
 			},
 			{
 				"propertyName": "Title",
@@ -299,7 +342,9 @@ making sure that you maintain a proper JSON format.
 			"minLength",
 			"maxLength",
 			"pattern",
+			"const",
 			"enum",
+			"examples",
 			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
@@ -310,18 +355,27 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "nullable",
 				"propertyKeyword": "nullable",
 				"propertyType": "checkbox",
-				"enableForReference": true
-			},
-			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
-				"enableForReference": true
+				"enableForReference": true,
+				"dependency": {
+					"type": "not",
+						"values": [
+							{
+								"level": "model",
+								"key": "dbVersion",
+								"value": "3.1.0"
+							}
+						]
+				}
 			},
 			{
 				"propertyName": "readOnly",
 				"propertyKeyword": "readOnly",
+				"propertyType": "checkbox",
+				"enableForReference": true
+			},
+			{
+				"propertyName": "writeOnly",
+				"propertyKeyword": "writeOnly",
 				"propertyType": "checkbox",
 				"enableForReference": true
 			},
@@ -478,14 +532,16 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			"default",
-			"unit",
 			"minimum",
 			"exclusiveMinimum",
+			"exclusiveMinimum_draft_06",
 			"maximum",
 			"exclusiveMaximum",
+			"exclusiveMaximum_draft_06",
 			"multipleOf",
-			"divisibleBy",
+			"const",
 			"enum",
+			"examples",
 			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
@@ -496,14 +552,17 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "nullable",
 				"propertyKeyword": "nullable",
 				"propertyType": "checkbox",
-				"enableForReference": true
-			},
-			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
-				"enableForReference": true
+				"enableForReference": true,
+				"dependency": {
+					"type": "not",
+						"values": [
+							{
+								"level": "model",
+								"key": "dbVersion",
+								"value": "3.1.0"
+							}
+						]
+				}
 			},
 			{
 				"propertyName": "readOnly",
@@ -511,6 +570,7 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "checkbox",
 				"enableForReference": true
 			},
+			"writeOnly",
 			{
 				"propertyName": "xml",
 				"propertyType": "block",
@@ -665,14 +725,17 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			"default",
-			"unit",
 			"minimum",
 			"exclusiveMinimum",
+			"exclusiveMinimum_draft_06",
 			"maximum",
 			"exclusiveMaximum",
+			"exclusiveMaximum_draft_06",
 			"multipleOf",
 			"divisibleBy",
+			"const",
 			"enum",
+			"examples",
 			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
@@ -683,14 +746,17 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "nullable",
 				"propertyKeyword": "nullable",
 				"propertyType": "checkbox",
-				"enableForReference": true
-			},
-			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
-				"enableForReference": true
+				"enableForReference": true,
+				"dependency": {
+					"type": "not",
+						"values": [
+							{
+								"level": "model",
+								"key": "dbVersion",
+								"value": "3.1.0"
+							}
+						]
+				}
 			},
 			{
 				"propertyName": "readOnly",
@@ -698,6 +764,7 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "checkbox",
 				"enableForReference": true
 			},
+			"writeOnly",
 			{
 				"propertyName": "xml",
 				"propertyType": "block",
@@ -835,6 +902,7 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			"required",
+			"const",
 			{
 				"propertyName": "Deprecated",
 				"propertyKeyword": "deprecated",
@@ -842,11 +910,24 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			"default",
+			"examples",
 			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
+			},
+			{
+				"propertyName": "readOnly",
+				"propertyKeyword": "readOnly",
+				"propertyType": "checkbox",
+				"enableForReference": true
+			},
+			{
+				"propertyName": "writeOnly",
+				"propertyKeyword": "writeOnly",
+				"propertyType": "checkbox",
+				"enableForReference": true
 			},
 			"comments"
 		],
@@ -929,9 +1010,38 @@ making sure that you maintain a proper JSON format.
 			"maxItems",
 			"uniqueItems",
 			"additionalItems",
+			"unevaluatedItems",
+			"contains",
+			"maxContains",
+			"minContains",
 			{
 				"propertyName": "nullable",
 				"propertyKeyword": "nullable",
+				"propertyType": "checkbox",
+				"enableForReference": true,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "not",
+								"values": [
+									{
+										"level": "model",
+										"key": "dbVersion",
+										"value": "3.1.0"
+									}
+								]
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "readOnly",
+				"propertyKeyword": "readOnly",
 				"propertyType": "checkbox",
 				"enableForReference": true,
 				"dependency": {
@@ -940,19 +1050,8 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "discriminator",
-				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
-				"enableForReference": true,
-				"dependency": {
-					"key": "subtype",
-					"value": "schema"
-				}
-			},
-			{
-				"propertyName": "readOnly",
-				"propertyKeyword": "readOnly",
+				"propertyName": "writeOnly",
+				"propertyKeyword": "writeOnly",
 				"propertyType": "checkbox",
 				"enableForReference": true,
 				"dependency": {
@@ -1097,6 +1196,7 @@ making sure that you maintain a proper JSON format.
 				],
 				"enableForReference": true
 			},
+			"examplesComplex",
 			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
@@ -1247,14 +1347,31 @@ making sure that you maintain a proper JSON format.
 					]
 				}
 			},
+			"unevaluatedProperties",
+			"propertyNames",
 			{
 				"propertyName": "nullable",
 				"propertyKeyword": "nullable",
 				"propertyType": "checkbox",
 				"enableForReference": true,
 				"dependency": {
-					"key": "subtype",
-					"value": "schema"
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "not",
+								"values": [
+									{
+										"level": "model",
+										"key": "dbVersion",
+										"value": "3.1.0"
+									}
+								]
+						}
+					]
 				}
 			},
 			{
@@ -1271,6 +1388,16 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "readOnly",
 				"propertyKeyword": "readOnly",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "subtype",
+					"value": "schema"
+				},
+				"enableForReference": true
+			},
+			{
+				"propertyName": "writeOnly",
+				"propertyKeyword": "writeOnly",
 				"propertyType": "checkbox",
 				"dependency": {
 					"key": "subtype",
@@ -1423,6 +1550,7 @@ making sure that you maintain a proper JSON format.
 				],
 				"enableForReference": true
 			},
+			"examplesComplex",
 			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
