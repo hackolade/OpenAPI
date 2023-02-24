@@ -15,7 +15,7 @@ module.exports = {
 	generateModelScript(data, logger, cb) {
 		try {
 			const {
-				dbVersion,
+				dbVersion: specVersion,
 				externalDocs: modelExternalDocs,
 				tags: modelTags,
 				security: modelSecurity,
@@ -31,13 +31,13 @@ module.exports = {
 			const paths = getPaths(containers, containersIdsFromCallbacks);
 			const definitions = JSON.parse(data.modelDefinitions) || {};
 			const definitionsWithHandledReferences = mapJsonSchema(definitions, handleRef(externalDefinitions));
-			const components = getComponents(definitionsWithHandledReferences, data.containers);
+			const components = getComponents({ definitions: definitionsWithHandledReferences, containers: data.containers, specVersion });
 			const security = commonHelper.mapSecurity(modelSecurity);
 			const tags = commonHelper.mapTags(modelTags);
 			const externalDocs = commonHelper.mapExternalDocs(modelExternalDocs);
 
 			const openApiSchema = {
-				openapi: dbVersion,
+				openapi: specVersion,
 				info,
 				servers,
 				paths,

@@ -3,13 +3,13 @@ const getExtensions = require('./extensionsHelper');
 const { prepareReferenceName } = require('../utils/utils');
 const { commentDeactivatedItemInner } = require('./commentsHelper');
 
-function getType(data, key, isParentActivated = false) {
+function getType({ data, key, isParentActivated = false, specVersion }) {
 	if (!data) {
 		return;
 	}
 
 	if (Array.isArray(data.type)) {
-		return getType(Object.assign({}, data, { type: data.type[0] }), '', isParentActivated);
+		return getType({ data: Object.assign({}, data, { type: data.type[0] }), key: '', isParentActivated, specVersion });
 	}
 
 	if (hasRef(data)) {
