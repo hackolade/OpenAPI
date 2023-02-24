@@ -251,6 +251,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"string": [
@@ -331,6 +335,22 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			"required",
 			{
 				"propertyName": "Deprecated",
@@ -378,6 +398,83 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "writeOnly",
 				"propertyType": "checkbox",
 				"enableForReference": true
+			},
+			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
 			},
 			{
 				"propertyName": "xml",
@@ -524,6 +621,22 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			"required",
 			{
 				"propertyName": "Deprecated",
@@ -571,6 +684,83 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			"writeOnly",
+			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "xml",
 				"propertyType": "block",
@@ -717,6 +907,22 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			"required",
 			{
 				"propertyName": "Deprecated",
@@ -765,6 +971,83 @@ making sure that you maintain a proper JSON format.
 				"enableForReference": true
 			},
 			"writeOnly",
+			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			{
 				"propertyName": "xml",
 				"propertyType": "block",
@@ -901,6 +1184,22 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "description",
 				"enableForReference": true
 			},
+			{
+				"propertyName": "Primary key",
+				"propertyType": "checkbox",
+				"propertyKeyword": "primaryKey",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
 			"required",
 			"const",
 			{
@@ -962,10 +1261,93 @@ making sure that you maintain a proper JSON format.
 			},
 			"default",
 			{
+				"propertyName": "Foreign definition",
+				"propertyKeyword": "foreignCollection",
+				"template": "definitions",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "foreignField",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipType",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "relationshipName",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
+				"propertyKeyword": "cardinality",
+				"disableForDefinitions": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"level": "parent",
+							"key": "type",
+							"value": "definitions",
+							"inDepthParentSearch": true
+						}
+					]
+				}
+			},
+			{
 				"propertyName": "example",
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
+			},
+			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"propertyType": "checkbox",
+				"enableForReference": true
 			},
 			"comments"
 		],
@@ -1207,7 +1589,11 @@ making sure that you maintain a proper JSON format.
 					"value": "schema"
 				}
 			},
-			"comments"
+			"comments",
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
+			}
 		],
 		"object": [
 			{
@@ -1375,10 +1761,34 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "discriminator",
+				"propertyName": "Discriminator",
 				"propertyKeyword": "discriminator",
-				"propertyType": "text",
-				"sampleGen": "&containerName|&entityName|&random|<value>",
+				"propertyType": "block",
+				"structure": [
+					{
+						"propertyName": "Property name",
+						"propertyKeyword": "propertyName",
+						"propertyTooltip": "",
+						"propertyType": "text"
+					},
+					{
+						"propertyName": "Mapping",
+						"propertyType": "group",
+						"propertyKeyword": "mapping",
+						"structure": [
+							{
+								"propertyName": "Discriminator value",
+								"propertyKeyword": "discriminatorValue",
+								"propertyType": "text"
+							},
+							{
+								"propertyName": "Schema name or reference",
+								"propertyKeyword": "discriminatorSchema",
+								"propertyType": "text"
+							}
+						]
+					}
+				],
 				"dependency": {
 					"key": "subtype",
 					"value": "schema"
@@ -1590,7 +2000,11 @@ making sure that you maintain a proper JSON format.
 					"value": "schema"
 				}
 			},
-			"comments"
+			"comments",
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
+			}
 		],
 		"___1": [],
 		"requestBody": [
@@ -1649,6 +2063,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"response": [
@@ -1722,6 +2140,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"media": [
@@ -1862,6 +2284,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"encoding": [
@@ -1929,6 +2355,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"example": [
@@ -1982,6 +2412,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"header": [
@@ -2060,6 +2494,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"securityScheme": [
@@ -2503,6 +2941,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"callback": [
@@ -2842,6 +3284,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"parameter (query)":[
@@ -2925,6 +3371,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"parameter (header)": [
@@ -3005,6 +3455,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"parameter (cookie)": [
@@ -3085,6 +3539,10 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyKeyword": "subtype",
+				"hidden": true
 			}
 		],
 		"choice": [{

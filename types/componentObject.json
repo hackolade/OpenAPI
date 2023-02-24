@@ -78,7 +78,8 @@
 				"boolean",
 				"array",
 				"object",
-				"null"
+				"null",
+				"reference"
 			]
 		},
 		"anyParameter": {

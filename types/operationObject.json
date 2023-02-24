@@ -83,7 +83,8 @@
 				"integer",
 				"boolean",
 				"array",
-				"object"
+				"object",
+				"reference"
 			]
 		},
 		"anyParameter": {

@@ -6,7 +6,6 @@
 	"sample": 15,
 	"useSample": true,
 	"defaultValues": {
-		"index": true,
 		"unit": "",
 		"minimum": "",
 		"exclusiveMinimum": false,
@@ -22,7 +21,7 @@
 		"foreignCollection": "",
 		"foreignField": [],
 		"enum": [],
-		"mode": "int32",
+		"mode": "",
 		"sample": "",
 		"nullable": false
 	},

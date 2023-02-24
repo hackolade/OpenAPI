@@ -6,7 +6,6 @@
 	"sample": true,
 	"useSample": true,
 	"defaultValues": {
-		"index": true,
 		"default": "",
 		"enum": [],
 		"relationshipType": "",
