@@ -33,6 +33,7 @@
 				],
 				"defaultValue": true
 			},
+			"disableMultipleNonScalarTypes": false,
 			"enableReverseEngineering": {
 				"jsonDocument": {
 					"entities": false,
