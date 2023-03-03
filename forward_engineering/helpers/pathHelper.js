@@ -8,12 +8,12 @@ const { mapResponse } = require('./componentsHelpers/responsesHelper');
 const { hasRef, getRef } = require('./typeHelper');
 const { commentDeactivatedItemInner } = require('./commentsHelper');
 
-function getPaths(containers, containersIdsForCallbacks = []) {
+function getPaths(containers, containersIdsForCallbacks = [], specVersion) {
 	return containers
 		.filter(({ id }) => !containersIdsForCallbacks.includes(id))
 		.reduce((acc, container, index) => {
 			const { name, isActivated } = container.containerData[0];
-			const containerData = getRequestsForContainer(container, containers, [], isActivated);
+			const containerData = getRequestsForContainer({ container, containers, containersPath: [], isPathActivated: isActivated, specVersion });
 
 			if (!isActivated) {
 				acc[`hackoladeCommentStart${index}`] = true; 
@@ -28,11 +28,11 @@ function getPaths(containers, containersIdsForCallbacks = []) {
 		}, {});
 }
 
-function getRequestsForContainer(container, containers, containersPath = [], isPathActivated = true) {
+function getRequestsForContainer({ container, containers, containersPath = [], isPathActivated = true, specVersion }) {
 	const { contactExtensions, summary, description } = container.containerData[0];
 
 	const collections = container.entities.map(collectionId => JSON.parse(container.jsonSchema[collectionId]));
-	const containerData = getRequestData(collections, containers, container.id, containersPath, isPathActivated);
+	const containerData = getRequestData({ collections, containers, containerId: container.id, containersPath, isPathActivated, specVersion });
 	const additionalContainerData = {
 		summary,
 		description: description || undefined 
@@ -43,7 +43,7 @@ function getRequestsForContainer(container, containers, containersPath = [], isP
 	return Object.assign({}, containerData, additionalContainerData, containerExtensions);
 }
 
-function getRequestData(collections, containers, containerId, containersPath = [], isPathActivated = true) {
+function getRequestData({ collections, containers, containerId, containersPath = [], isPathActivated = true, specVersion }) {
 	return collections
 		.filter(collection => collection.entityType === 'request')
 		.map(data => {
@@ -55,19 +55,21 @@ function getRequestData(collections, containers, containerId, containersPath = [
 				description: data.description,
 				externalDocs: commonHelper.mapExternalDocs(data.externalDocs),
 				operationId: data.operationId,
-				parameters: mapRequestParameters(
-					get(data, 'properties.parameters'),
-					isRequestActivated
-				)
+				parameters: mapRequestParameters({
+					parameter: get(data, 'properties.parameters'),
+					isParentActivated: isRequestActivated,
+					specVersion
+				})
 			};
 			const extensions = getExtensions(data.scopesExtensions);
 
 			if (!['get', 'delete'].includes(String(data.collectionName).toLowerCase())) {
-				request.requestBody = mapRequestBody(
-					get(data.properties, requestBodyPropKeyword),
-					get(data, 'required', []).includes(requestBodyPropKeyword),
-					isRequestActivated
-				);
+				request.requestBody = mapRequestBody({
+					data: get(data.properties, requestBodyPropKeyword),
+					required: get(data, 'required', []).includes(requestBodyPropKeyword),
+					isParentActivated: isRequestActivated,
+					specVersion
+				});
 			}
 
 			request = {
@@ -77,12 +79,13 @@ function getRequestData(collections, containers, containerId, containersPath = [
 					data.GUID,
 					isRequestActivated
 				),
-				callbacks: getCallbacks(
-					get(data, 'properties.callbacks'),
+				callbacks: getCallbacks({
+					data: get(data, 'properties.callbacks'),
 					containers,
 					containerId,
-					containersPath
-				),
+					containersPath,
+					specVersion
+				}),
 				deprecated: data.deprecated,
 				security: commonHelper.mapSecurity(data.security),
 				servers: getServers(data.servers),
@@ -108,14 +111,14 @@ function getRequestData(collections, containers, containerId, containersPath = [
 		}, {});
 }
 
-function mapRequestParameters(parameters, isParentActivated = false) {
+function mapRequestParameters({ parameters, isParentActivated = false, specVersion }) {
 	if (!parameters || !parameters.items) {
 		return;
 	}
 	if (Array.isArray(parameters.items)) {
-		return parameters.items.map(item => mapParameter(item, false, isParentActivated));
+		return parameters.items.map(item => mapParameter({ data: item, required: false, isParentActivated, specVersion }));
 	}
-	return [mapParameter(parameters.items, false, isParentActivated)];
+	return [mapParameter({ data: parameters.items, required: false, isParentActivated, specVersion })];
 }
 
 function mapResponses(collections, collectionId, isParentActivated) {
@@ -141,7 +144,7 @@ function mapResponses(collections, collectionId, isParentActivated) {
 	return responses;
 }
 
-function getCallbacks(data, containers, containerId, containersPath = []) {
+function getCallbacks({ data, containers, containerId, containersPath = [], specVersion }) {
 	if (!data || !data.properties || containersPath.includes(containerId)) {
 		return;
 	}
@@ -158,11 +161,12 @@ function getCallbacks(data, containers, containerId, containersPath = []) {
 			if (!containerForCallback) {
 				return;
 			}
-			const callbackData = getRequestsForContainer(
-				containerForCallback,
+			const callbackData = getRequestsForContainer({
+				container: containerForCallback,
 				containers,
-				[...containersPath, containerId]
-			);
+				containersPath: [...containersPath, containerId],
+				specVersion
+			});
 			const extensions = getExtensions(value.scopesExtensions);
 
 			return { [key]: { [value.callbackExpression]: callbackData, ...extensions }};

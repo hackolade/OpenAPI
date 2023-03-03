@@ -1,19 +1,19 @@
 const { activateItem } = require('../commonHelper');
 const typeHelper = require('../typeHelper');
 
-function getSchemas(data) {
+function getSchemas(data, specVersion) {
 	if (!data || !data.properties) {
 		return;
 	}
 
 	return Object.keys(data.properties).reduce((acc, key) => {
-		acc[key] = mapSchema(activateItem(data.properties[key]), key, true);
+		acc[key] = mapSchema({ data: activateItem(data.properties[key]), key, isParentActivated: true, specVersion });
 		return acc;
 	}, {});
 }
 
-function mapSchema(data, key, isParentActivated = false) {
-	return typeHelper.getType(data, key, isParentActivated);
+function mapSchema({ data, key, isParentActivated = false, specVersion }) {
+	return typeHelper.getType({ data, key, isParentActivated, specVersion });
 }
 
 module.exports = {

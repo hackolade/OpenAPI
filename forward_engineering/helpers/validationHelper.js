@@ -4,7 +4,7 @@ const getError = (errorItem) => {
 	if (errorItem.inner) {
 		return {
 			type: 'error',
-			label: '#/' + errorItem.path.join('/'),
+			label: `#${errorItem.instancePath}`,
 			title: errorItem.message,
 			context: getInnerErrors(errorItem.inner)
 		};
@@ -12,7 +12,7 @@ const getError = (errorItem) => {
 
 	return {
 		type: 'error',
-		label: '#/' + errorItem.path.join('/'),
+		label: `#${errorItem.instancePath}`,
 		title: errorItem.message,
 		context: {
 			description: errorItem.description
