@@ -27,7 +27,7 @@ function mapParameter({ data, required, isParentActivated = false, specVersion})
 		return;
 	}
 	if (hasRef(data)) {
-		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
+		return commentDeactivatedItemInner(getRef(data, specVersion), data.isActivated, isParentActivated);
 	}
 	const schemaKeyword = getSchemaKeyword(data.properties);
 	const isActivated = data.isActivated && isParentActivated;
@@ -43,7 +43,7 @@ function mapParameter({ data, required, isParentActivated = false, specVersion})
 		allowReserved: data.allowReserved,
 		schema: mapSchema({ data: get(data, ['properties', schemaKeyword]), key: 'schema', isParentActivated: isActivated, specVersion }),
 		example: data.sample,
-		examples: getExamples(get(data, 'properties.examples')),
+		examples: getExamples(get(data, 'properties.examples'), specVersion),
 		content: getContent({ data: get(data, 'properties.content'), isParentActivated: isActivated, specVersion })
 	};
 	const extensions = getExtensions(data.scopesExtensions);
@@ -87,7 +87,7 @@ function mapHeader({ data, isParentActivated = false, specVersion }) {
 		return;
 	} 
 	if (hasRef(data)) {
-		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
+		return commentDeactivatedItemInner(getRef(data, specVersion), data.isActivated, isParentActivated);
 	}
 
 	delete data.parameterName;
@@ -150,7 +150,7 @@ function mapMediaTypeObject({ data, isParentActivated = false, specVersion }) {
 			not: data.not
 		}, key: 'schema', isParentActivated, specVersion });
 	}
-    const examples = getExamples(get(data, 'properties.examples'));
+    const examples = getExamples(get(data, 'properties.examples'), specVersion);
     const encoding = mapEncoding({ data: get(data, 'properties.encoding'), specVersion });
 	let example;
 	try {

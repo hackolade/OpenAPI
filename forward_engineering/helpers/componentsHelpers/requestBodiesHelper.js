@@ -28,7 +28,7 @@ function mapRequestBody({ data, required, isParentActivated = false, specVersion
         return;
     }
     if (hasRef(data)) {
-		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
+		return commentDeactivatedItemInner(getRef(data, specVersion), data.isActivated, isParentActivated);
 	}
 
     const content = getContent({ data, isParentActivated: data.isActivated && isParentActivated, specVersion });

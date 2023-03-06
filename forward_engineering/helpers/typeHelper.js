@@ -23,7 +23,7 @@ function getType({ data, key, isParentActivated = false, specVersion }) {
 	}
 
 	if (hasRef(data)) {
-		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
+		return commentDeactivatedItemInner(getRef(data, specVersion), data.isActivated, isParentActivated);
 	}
 	
 	return commentDeactivatedItemInner(getTypeProps({ data, key, isParentActivated, specVersion }), data.isActivated, isParentActivated);
@@ -87,7 +87,10 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 	}
 }
 
-function getRef({ $ref }) {
+function getRef({ $ref, refDescription, summary }, specVersion) {
+	if (isTargetVersionJSONSchemaCompatible(specVersion)) {
+		return { $ref, summary, description: refDescription }
+	}
 	return { $ref };
 };
 

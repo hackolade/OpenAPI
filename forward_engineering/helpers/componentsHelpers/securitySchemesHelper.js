@@ -32,14 +32,14 @@ const cleanUp = (obj) => {
     return obj;
 };
 
-function getSecuritySchemes(data) {
+function getSecuritySchemes(data, specVersion) {
     if (!data || !data.properties) {
         return;
     }
 
     return Object.entries(data.properties)
         .map(([key, value]) => {
-            return { key, value: mapSecurityScheme(value) };
+            return { key, value: mapSecurityScheme(value, specVersion) };
         })
         .reduce((acc, { key, value }) => {
             acc[key] = value;
@@ -47,12 +47,12 @@ function getSecuritySchemes(data) {
         }, {});
 }
 
-function mapSecurityScheme(data) {
+function mapSecurityScheme(data, specVersion) {
     if (!data) {
 		return;
 	} 
 	if (hasRef(data)) {
-		return getRef(data);
+		return getRef(data, specVersion);
     }
     
     let securitySchemeProps = {};
@@ -136,5 +136,4 @@ function mapScopes(data) {
 
 module.exports = {
     getSecuritySchemes,
-    mapSecurityScheme
 };

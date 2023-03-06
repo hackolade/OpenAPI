@@ -6,7 +6,6 @@ const { mapParameter } = require('./componentsHelpers/parametersHelper');
 const { mapRequestBody } = require('./componentsHelpers/requestBodiesHelper');
 const { mapResponse } = require('./componentsHelpers/responsesHelper');
 const { hasRef, getRef } = require('./typeHelper');
-const { commentDeactivatedItemInner } = require('./commentsHelper');
 
 function getPaths(containers, containersIdsForCallbacks = [], specVersion) {
 	return containers
@@ -74,11 +73,12 @@ function getRequestData({ collections, containers, containerId, containersPath =
 
 			request = {
 				...request,
-				responses: mapResponses(
+				responses: mapResponses({
 					collections,
-					data.GUID,
-					isRequestActivated
-				),
+					collectionId: data.GUID,
+					isRequestActivated,
+					specVersion
+				}),
 				callbacks: getCallbacks({
 					data: get(data, 'properties.callbacks'),
 					containers,
@@ -121,7 +121,7 @@ function mapRequestParameters({ parameters, isParentActivated = false, specVersi
 	return [mapParameter({ data: parameters.items, required: false, isParentActivated, specVersion })];
 }
 
-function mapResponses(collections, collectionId, isParentActivated) {
+function mapResponses({ collections, collectionId, isParentActivated, specVersion }) {
 	if (!collections || !collectionId) {
 		return;
 	}
@@ -132,7 +132,7 @@ function mapResponses(collections, collectionId, isParentActivated) {
 			const responseCode = collection.collectionName;
 			const shouldResponseBeCommented = !collection.isActivated && isParentActivated;
 			const extensions = getExtensions(collection.scopesExtensions);
-			const response = mapResponse(get(collection, ['properties', Object.keys(collection.properties)[0]]), collection.description, shouldResponseBeCommented);
+			const response = mapResponse({ data: get(collection, ['properties', Object.keys(collection.properties)[0]]), responseCollectionDescription: collection.description, shouldResponseBeCommented, specVersion });
 
 			return { responseCode, response: { ...response, ...extensions } };
 		})
@@ -155,7 +155,7 @@ function getCallbacks({ data, containers, containerId, containersPath = [], spec
 				return;
 			}
 			if (hasRef(value)) {
-				return { [key]: { [value.callbackExpression]: getRef(value) }};
+				return { [key]: { [value.callbackExpression]: getRef(value, specVersion) }};
 			}
 			const containerForCallback = containers.find(({ id }) => id === value.bucketId && id !== containerId);
 			if (!containerForCallback) {

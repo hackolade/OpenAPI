@@ -1,7 +1,7 @@
 const getExtensions = require('../extensionsHelper');
 const { getRef, hasRef } = require('../typeHelper');
 
-function getExamples(data) {
+function getExamples(data, specVersion) {
 	if (!data || !data.properties) {
 		return;
 	}
@@ -10,7 +10,7 @@ function getExamples(data) {
 		.map(([key, value]) => {
 			return {
 				key,
-				value: mapExample(value)
+				value: mapExample(value, specVersion)
 			};
 		})
 		.reduce((acc, { key, value }) => {
@@ -19,12 +19,12 @@ function getExamples(data) {
 		}, {});
 }
 
-function mapExample(data) {
+function mapExample(data, specVersion) {
 	if (!data) {
 		return;
 	} 
 	if (hasRef(data)) {
-		return getRef(data);
+		return getRef(data, specVersion);
 	}
 	
 	const { summary, description, value, externalValue, scopesExtensions } = data;
