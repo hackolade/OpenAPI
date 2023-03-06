@@ -2374,7 +2374,8 @@ making sure that you maintain a proper JSON format.
 			{
 				"fieldName": "Summary",
 				"fieldKeyword": "summary",
-				"fieldType": "text"
+				"fieldType": "text",
+				"enableForReference": true
 			},
 			{
 				"fieldName": "Value",
