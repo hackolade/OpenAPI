@@ -121,7 +121,7 @@ function mapRequestParameters({ parameters, isParentActivated = false, specVersi
 		parametersData = [parametersData];
 	}
 	
-	return parameters.items.map(item => mapParameter({ data: item, required: false, isParentActivated, specVersion }));
+	return parametersData.map(item => mapParameter({ data: item, required: false, isParentActivated, specVersion }));
 }
 
 function mapResponses({ collections, collectionId, isParentActivated, specVersion }) {
