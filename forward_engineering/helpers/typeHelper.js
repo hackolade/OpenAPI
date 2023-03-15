@@ -2,7 +2,7 @@ const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
 const { prepareReferenceName } = require('../utils/utils');
 const { commentDeactivatedItemInner } = require('./commentsHelper');
-const { isTargetVersionJSONSchemaCompatible } = require('./sharedHelper');
+const { isTargetVersionJSONSchemaCompatible, getArrayItems } = require('./sharedHelper');
 
 const CONDITIONAL_ITEM_NAME = '<conditional>';
 
@@ -30,7 +30,7 @@ function getType({ data, key, isParentActivated = false, specVersion }) {
 }
 
 function getTypeProps({ data, key, isParentActivated, specVersion }) {
-	const { type, properties, items, required, isActivated } = data;
+	const { type, properties, items, prefixItems, required, isActivated } = data;
 
     const extensions = getExtensions(data.scopesExtensions);
 
@@ -40,15 +40,20 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				type,
 				title: data.title || undefined,
 				description: data.description || undefined,
-				items: getArrayItemsType(items, isActivated && isParentActivated, specVersion),
+				...getArrayItemsProps({ items, prefixItems, isParentActivated: isActivated && isParentActivated, specVersion }),
+				unevaluatedItems: data.unevaluatedItems || undefined,
 				collectionFormat: data.collectionFormat,
 				minItems: data.minItems,
 				maxItems: data.maxItems,
 				uniqueItems: data.uniqueItems || undefined,
-				nullable: data.nullable,
+				...(!isTargetVersionJSONSchemaCompatible(specVersion) && { nullable: data.nullable }),
+				contains: parseJSONValue(data.contains) || undefined,
+				maxContains: data.maxContains,
+				minContains: data.minContains,
 				readOnly: data.readOnly || undefined,
 				writeOnly: data.writeOnly || undefined,
-				example: parseExample(data.sample) || getArrayItemsExample(items),
+				example: parseExample(data.sample) || (!data.examples ? getArrayItemsExample(getArrayItems({ items, prefixItems })) : undefined),
+				examples: data.examples,
 				xml: getXml(data.xml)
 			};
 			const arrayChoices = getChoices(data, key, specVersion);
@@ -66,10 +71,14 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				minProperties: data.minProperties,
 				maxProperties: data.maxProperties,
 				additionalProperties: getAdditionalProperties(data),
-				nullable: data.nullable,
+				unevaluatedProperties: data.unevaluatedProperties || undefined,
+				propertyNames: data.propertyNames || undefined,
+				...(!isTargetVersionJSONSchemaCompatible(specVersion) && { nullable: data.nullable }),
 				...(discriminator ? { discriminator } : {}),
 				readOnly: data.readOnly,
+				writeOnly: data.writeOnly || undefined,
 				example: parseExample(data.sample),
+				examples: data.examples,
 				xml: getXml(data.xml)
 			};
 			const objectChoices = getChoices(data, key, specVersion);
@@ -98,11 +107,35 @@ function hasRef(data = {}) {
 	return data.$ref ? true : false;
 }
 
-function getArrayItemsType(items, isParentActivated, specVersion) {
+function getArrayItemsProps({ items, prefixItems, isParentActivated, specVersion }) {
+	if (isTargetVersionJSONSchemaCompatible(specVersion)) {
+		return getArrayItemsPropsJSONSchemaSpec({ items, prefixItems, isParentActivated, specVersion });
+	}
+	return { items: getArrayItemsPropsOpenAPISpec({ items, prefixItems, isParentActivated, specVersion }) };
+}
+
+function getArrayItemsPropsOpenAPISpec({ items, prefixItems, isParentActivated, specVersion }) {
 	if (Array.isArray(items)) {
 		return Object.assign({}, items.length > 0 ? getType({ data: items[0], key: '', isParentActivated, specVersion }) : {});
 	}
 	return Object.assign({}, items ? getType({ data: items, key: '', isParentActivated, specVersion }) : {});
+}
+
+function getArrayItemsPropsJSONSchemaSpec({ items, prefixItems, isParentActivated, specVersion }) {
+	if (Array.isArray(prefixItems) || typeof items === 'boolean') {
+		if (!prefixItems) {
+			return {
+				items
+			};
+		}
+		return {
+			prefixItems: prefixItems.map(item => getType({ data: item, key: '', isParentActivated, specVersion })),
+			items
+		};
+	}
+	return {
+		items: getType({ data: items, key: '', isParentActivated, specVersion })
+	};
 }
 
 function getObjectProperties(properties, isParentActivated, specVersion) {
@@ -257,6 +290,14 @@ function parseExample(data) {
 	}
 }
 
+function parseJSONValue(data) {
+	try {
+		return JSON.parse(data);
+	} catch(err) {
+		return undefined;
+	}
+}
+
 function addIfTrue(data, propertyName, value) {
 	if (!value) {
 		return data;
@@ -281,6 +322,7 @@ function getArrayItemsExample(items) {
 			return itemsExample;
 		}
 	}
+	return undefined;
 }
 
 function getDiscriminator(discriminator) {
