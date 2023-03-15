@@ -6,6 +6,7 @@ const { mapParameter } = require('./componentsHelpers/parametersHelper');
 const { mapRequestBody } = require('./componentsHelpers/requestBodiesHelper');
 const { mapResponse } = require('./componentsHelpers/responsesHelper');
 const { hasRef, getRef } = require('./typeHelper');
+const { getArrayItems } = require('./sharedHelper');
 
 function getPaths(containers, containersIdsForCallbacks = [], specVersion) {
 	return containers
@@ -55,7 +56,7 @@ function getRequestData({ collections, containers, containerId, containersPath =
 				externalDocs: commonHelper.mapExternalDocs(data.externalDocs),
 				operationId: data.operationId,
 				parameters: mapRequestParameters({
-					parameter: get(data, 'properties.parameters'),
+					parameters: get(data, 'properties.parameters'),
 					isParentActivated: isRequestActivated,
 					specVersion
 				})
@@ -112,13 +113,15 @@ function getRequestData({ collections, containers, containerId, containersPath =
 }
 
 function mapRequestParameters({ parameters, isParentActivated = false, specVersion }) {
-	if (!parameters || !parameters.items) {
+	let parametersData = getArrayItems({ items: parameters?.items, prefixItems: parameters?.prefixItems, specVersion });
+	if (!parametersData) {
 		return;
 	}
-	if (Array.isArray(parameters.items)) {
-		return parameters.items.map(item => mapParameter({ data: item, required: false, isParentActivated, specVersion }));
+	if (!Array.isArray(parametersData)) {
+		parametersData = [parametersData];
 	}
-	return [mapParameter({ data: parameters.items, required: false, isParentActivated, specVersion })];
+	
+	return parameters.items.map(item => mapParameter({ data: item, required: false, isParentActivated, specVersion }));
 }
 
 function mapResponses({ collections, collectionId, isParentActivated, specVersion }) {

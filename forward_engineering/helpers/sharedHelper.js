@@ -3,7 +3,10 @@ function isTargetVersionJSONSchemaCompatible(specVersion) {
 	return splitVersion[0] === '3' && splitVersion[1] >= '1';
 }
 
-function getArrayItems({ items, prefixItems }) {
+function getArrayItems({ items, prefixItems, specVersion }) {
+	if (!isTargetVersionJSONSchemaCompatible(specVersion)) {
+		return items;
+	}
 	if (Array.isArray(prefixItems) || typeof items === 'boolean') {
 		return prefixItems;
 	}

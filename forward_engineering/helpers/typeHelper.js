@@ -51,7 +51,7 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				minContains: data.minContains,
 				readOnly: data.readOnly || undefined,
 				writeOnly: data.writeOnly || undefined,
-				example: parseExample(data.sample) || (!data.examples ? getArrayItemsExample(getArrayItems({ items, prefixItems })) : undefined),
+				example: parseExample(data.sample) || (!data.examples ? getArrayItemsExample(getArrayItems({ items, prefixItems, specVersion })) : undefined),
 				examples: data.examples,
 				xml: getXml(data.xml)
 			};
@@ -110,10 +110,10 @@ function getArrayItemsProps({ items, prefixItems, isParentActivated, specVersion
 	if (isTargetVersionJSONSchemaCompatible(specVersion)) {
 		return getArrayItemsPropsJSONSchemaSpec({ items, prefixItems, isParentActivated, specVersion });
 	}
-	return { items: getArrayItemsPropsOpenAPISpec({ items, prefixItems, isParentActivated, specVersion }) };
+	return { items: getArrayItemsPropsOpenAPISpec({ items, isParentActivated, specVersion }) };
 }
 
-function getArrayItemsPropsOpenAPISpec({ items, prefixItems, isParentActivated, specVersion }) {
+function getArrayItemsPropsOpenAPISpec({ items, isParentActivated, specVersion }) {
 	if (Array.isArray(items)) {
 		return Object.assign({}, items.length > 0 ? getType({ data: items[0], key: '', isParentActivated, specVersion }) : {});
 	}
