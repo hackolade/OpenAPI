@@ -1,6 +1,5 @@
 const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
-const { prepareReferenceName } = require('../utils/utils');
 const { commentDeactivatedItemInner } = require('./commentsHelper');
 const { isTargetVersionJSONSchemaCompatible, getArrayItems } = require('./sharedHelper');
 
@@ -92,7 +91,7 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 			}
 			return getType({ data: properties[Object.keys(properties)[0]], key: '', isParentActivated: isActivated && isParentActivated, specVersion });
 		default:
-			return getPrimitiveTypeProps(data);
+			return getPrimitiveTypeProps(data, specVersion);
 	}
 }
 
@@ -170,7 +169,7 @@ function getXml(data) {
 	}, getExtensions(data.scopesExtensions));
 }
 
-function getPrimitiveTypeProps(data) {
+function getPrimitiveTypeProps(data, specVersion) {
 	const properties = {
 		type: data.type,
 		format: data.format || data.mode,
@@ -180,6 +179,7 @@ function getPrimitiveTypeProps(data) {
 		exclusiveMaximum: data.exclusiveMaximum,
 		minimum: data.minimum,
 		maximum: data.maximum,
+		const: data.const,
 		enum: data.enum,
 		pattern: data.pattern,
 		default: data.default,
@@ -187,11 +187,14 @@ function getPrimitiveTypeProps(data) {
 		maxLength: data.maxLength,
 		multipleOf: data.multipleOf,
 		xml: getXml(data.xml),
+		readOnly: data.readOnly || undefined,
+		writeOnly: data.writeOnly || undefined,
 		example: data.sample,
+		examples: data.examples,
 		...getExtensions(data.scopesExtensions)
 	};
 
-	return addIfTrue(properties, 'nullable', data.nullable);
+	return addIfTrue(properties, 'nullable', isTargetVersionJSONSchemaCompatible(specVersion) ? false: data.nullable);
 }
 
 function getAdditionalProperties(data) {
@@ -342,7 +345,7 @@ function getDiscriminator(discriminator) {
 }
 
 module.exports = {
-	getType, // TODO: fix get type arguments
+	getType,
 	getRef,
 	hasRef,
 	hasChoice
