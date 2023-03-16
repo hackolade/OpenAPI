@@ -918,7 +918,8 @@ const copyPathItemLevelParametersToOperationObject = (schema) => {
 
 const validateOpenAPISchema = (schema) => {
 	const openapi = schema.openapi;
-	const isCorrectVersion = openapi && openapi.slice(0, 4) === '3.0.';
+	const openapiVersion = openapi && openapi.slice(0, 4);
+	const isCorrectVersion = ['3.0.', '3.1.'].includes(openapiVersion);
 	return isCorrectVersion;
 };
 
