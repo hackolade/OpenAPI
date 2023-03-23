@@ -32,7 +32,9 @@ module.exports = {
 			const servers = getServers(modelServers);
 			const externalDefinitions = JSON.parse(data.externalDefinitions || '{}').properties || {};
 			const containers = handleRefInContainers(data.containers, externalDefinitions, resolveApiExternalRefs);
-			const paths = getPaths(containers, containersIdsFromCallbacks, specVersion);
+			const { pathContainers, webhookContainers } = separatePathAndWebhooks(containers);
+			const paths = getPaths(pathContainers, containersIdsFromCallbacks, specVersion);
+			const webhooks = getPaths(webhookContainers, containersIdsFromCallbacks, specVersion);
 			const definitions = JSON.parse(data.modelDefinitions) || {};
 			const definitionsWithHandledReferences = mapJsonSchema(definitions, handleRef(externalDefinitions, resolveApiExternalRefs));
 			const components = getComponents({ definitions: definitionsWithHandledReferences, containers: data.containers, specVersion });
@@ -45,6 +47,7 @@ module.exports = {
 				info,
 				servers,
 				paths,
+				...(webhooks && Object.keys(webhooks).length ? { webhooks } : {}),
 				components,
 				security,
 				tags,
@@ -212,3 +215,17 @@ const handleRef = (externalDefinitions, resolveApiExternalRefs) => field => {
 
 	return { ...field, ...ref }; 
 };
+
+const separatePathAndWebhooks = containers => {
+	const pathContainers = [];
+	const webhookContainers = [];
+	containers.forEach(container => {
+		if (container.containerData?.[0]?.webhook) {
+			webhookContainers.push(container);
+		} else {
+			pathContainers.push(container);
+		}
+	});
+
+	return { pathContainers, webhookContainers };
+}

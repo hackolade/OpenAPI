@@ -220,7 +220,7 @@ const getContainersFromCallbacks = callbacks => {
 	}, []);
 }
 
-const getContainers = (pathData, callbacks) => {
+const getContainers = ({ pathData, callbacks, webhookNames }) => {
 	let updatedPathData = Object.assign({}, pathData);
 	const containers = Object.keys(pathData).reduce((accum, key) => {
 		const path = pathData[key];
@@ -233,7 +233,8 @@ const getContainers = (pathData, callbacks) => {
 			updatedPathData = Object.assign({}, updatedPathData, {[pathData.data.name]: pathData.callbackPath});
 			return pathData.data;
 		})
-		return accum.concat(Object.assign({}, { name: key, summary: path.summary }, extensionsObject), containersData);
+		const isWebhook = webhookNames.includes(key);
+		return accum.concat(Object.assign({}, { name: key, summary: path.summary, ...( isWebhook && { webhook: true } ) }, extensionsObject), containersData);
 	}, []);
 	
 	if (callbacks) {
@@ -883,8 +884,9 @@ const getComponents = (schemaComponents = {}, fieldOrder) => {
 	return JSON.stringify(definitionsSchema);
 };
 
-const getModelContent = (pathData, fieldOrder, callbacksComponent) => {
-	const { updatedPathData, containers } = getContainers(pathData, callbacksComponent);
+const getModelContent = ({ pathData = {}, webhookData = {}, fieldOrder, callbacksComponent }) => {
+	const webhookNames = Object.keys(webhookData);
+	const { updatedPathData, containers } = getContainers({ pathData: { ...pathData, ...webhookData}, callbacks: callbacksComponent, webhookNames });
 	const entities = getEntities(updatedPathData, containers, fieldOrder);
 	return { containers, entities };
 };

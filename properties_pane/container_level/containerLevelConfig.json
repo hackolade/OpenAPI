@@ -137,7 +137,38 @@ making sure that you maintain a proper JSON format.
 				"shouldValidate": true,
 				"propertyTooltip": "resource path",
 				"propertyType": "text",
-				"regex": "^/"
+				"regex": "^/",
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "webhook",
+							"value": true
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "Webhook name",
+				"propertyKeyword": "name",
+				"shouldValidate": true,
+				"propertyTooltip": "Webhook name",
+				"propertyType": "text",
+				"dependency": {
+					"key": "webhook",
+					"value": true
+				}
+			},
+			{
+				"propertyName": "Webhook",
+				"propertyKeyword": "webhook",
+				"propertyType": "checkbox",
+				"propertyTooltip": "Check if this is a webhook",
+				"dependency": {
+					"level": "model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
 			},
 			{
 				"propertyName": "Activated",

@@ -119,7 +119,7 @@ const convertOpenAPISchemaToHackolade = (openAPISchema, fieldOrder) => {
 	const components = openAPISchema.components;
 	const definitions = dataHelper.getComponents(openAPISchema.components, fieldOrder);
 	const callbacksComponent = components && components.callbacks;
-	const modelContent = dataHelper.getModelContent(openAPISchema.paths || {}, fieldOrder, callbacksComponent);
+	const modelContent = dataHelper.getModelContent({ pathData: openAPISchema.paths || {}, webhookData: openAPISchema.webhooks, fieldOrder, callbacksComponent });
 	return { modelData, modelContent, definitions };
 };
 
