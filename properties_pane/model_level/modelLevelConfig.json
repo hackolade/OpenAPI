@@ -242,7 +242,19 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "name",
 						"propertyKeyword": "licenseName",
-						"propertyType": "text"
+						"propertyType": "text",
+						"propertyTooltip": "The license name used for the API."
+					},
+					{
+						"propertyName": "identifier",
+						"propertyKeyword": "licenseIdentifier",
+						"propertyType": "text",
+						"propertyTooltip": "An SPDX license expression for the API. The identifier field is mutually exclusive of the url field",
+						"dependency" : {
+							"level": "model",
+							"key": "dbVersion",
+							"value": "3.1.0"
+						}
 					},
 					{
 						"propertyName": "url",

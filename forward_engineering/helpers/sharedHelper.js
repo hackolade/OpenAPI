@@ -14,7 +14,12 @@ function getArrayItems({ items, prefixItems, specVersion }) {
 	return items;
 }
 
+function isNotEmptyString(value) {
+	return typeof value === 'string' && value.trim() !== '';
+}
+
 module.exports = {
 	isTargetVersionJSONSchemaCompatible,
 	getArrayItems,
+	isNotEmptyString,
 }

@@ -101,6 +101,7 @@ const handleDataByConfig = (data, config) => {
 
 	const getLicense = (license) => ({
 		licenseName: license.name,
+		licenseIdentifier: license.identifier,
 		licenseURL: license.url,
 		group: {},
 		licenseExtensions: getExtensions(license)
