@@ -173,19 +173,35 @@ making sure that you maintain a proper JSON format.
 				"labelName": "info:",
 				"propertyName": "title",
 				"propertyKeyword": "title",
-				"propertyType": "text"
+				"propertyType": "text",
+				"propertyTooltip": "The title of the API"
+			},
+			{
+				"labelName": "summary",
+				"propertyName": "summary",
+				"propertyKeyword": "summary",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false,
+				"propertyTooltip": "A short summary of the API",
+				"dependency" : {
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+
 			},
 			{
 				"propertyName": "terms of service",
 				"propertyKeyword": "termsOfService",
-				"propertyType": "text"
+				"propertyType": "text",
+				"propertyTooltip": "A URL to the Terms of Service for the API. This MUST be in the form of a URL"
 			},
 			{
 				"propertyName": "contact",
 				"propertyType": "block",
 				"propertyKeyword": "contact",
 				"shouldValidate": true,
-				"propertyTooltip": "",
+				"propertyTooltip": "The contact information for the exposed API",
 				"groupItemLimit": 1,
 				"structure": [
 					{
@@ -237,7 +253,7 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "block",
 				"propertyKeyword": "license",
 				"shouldValidate": true,
-				"propertyTooltip": "",
+				"propertyTooltip": "The license information for the exposed API",
 				"structure": [
 					{
 						"propertyName": "name",
@@ -261,7 +277,8 @@ making sure that you maintain a proper JSON format.
 						"propertyKeyword": "licenseURL",
 						"shouldValidate": true,
 						"propertyType": "text",
-						"propertyFormat": "uri"
+						"propertyFormat": "uri",
+						"propertyTooltip": "A URL to the license used for the API. This MUST be in the form of a URL. The url field is mutually exclusive of the identifier field (OpenAPI 3.1.x)."
 					},
 					{
 						"propertyName": "extensions",
@@ -293,7 +310,8 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "version",
 				"propertyKeyword": "modelVersion",
-				"propertyType": "text"
+				"propertyType": "text",
+				"propertyTooltip": "The version of the OpenAPI document (which is distinct from the OpenAPI Specification version or the API implementation version)."
 			},
 			{
 				"propertyName": "info extensions",

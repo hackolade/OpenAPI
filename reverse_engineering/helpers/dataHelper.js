@@ -116,6 +116,7 @@ const handleDataByConfig = (data, config) => {
 			description: info.description,
 			modelVersion: info.version,
 			title: info.title,
+			summary: info.summary,
 			termsOfService: info.termsOfService,
 			contact,
 			license,

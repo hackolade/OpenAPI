@@ -2,9 +2,10 @@
 const getExtensions = require('./extensionsHelper');
 const { isNotEmptyString } = require('./sharedHelper');
 
-function getInfo({ description, version, modelVersion, title = '', termsOfService, contact, license, infoExtensions }) {
+function getInfo({ description, version, modelVersion, title = '', termsOfService, contact, license, infoExtensions, summary }) {
 	const info = {
 		title,
+		summary,
 		description,
 		termsOfService,
 		contact: getContact(contact),
