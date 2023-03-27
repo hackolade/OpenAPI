@@ -95,9 +95,11 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 	}
 }
 
-function getRef({ $ref, refDescription, summary }, specVersion) {
+function getRef({ $ref, refDescription, description, summary, referenceDiff }, specVersion) {
 	if (isTargetVersionJSONSchemaCompatible(specVersion)) {
-		return { $ref, summary, description: refDescription }
+		const descriptionValue = refDescription || referenceDiff?.refDescription || description;
+		const summaryValue = summary || referenceDiff?.summary;
+		return { $ref, summary: summaryValue, description: descriptionValue }
 	}
 	return { $ref };
 };
