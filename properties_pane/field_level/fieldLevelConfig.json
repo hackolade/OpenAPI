@@ -2517,7 +2517,36 @@ making sure that you maintain a proper JSON format.
 					"http",
 					"oauth2",
 					"openIdConnect"
-				]
+				],
+				"dependency": {
+					"type": "not",
+						"values": [
+							{
+								"level": "model",
+								"key": "dbVersion",
+								"value": "3.1.0"
+							}
+						]
+				}
+			},
+			{
+				"propertyName": "Subtype",
+				"propertyKeyword": "schemeType",
+				"shouldValidate": true,
+				"propertyTooltip": "The type of the security scheme.",
+				"propertyType": "select",
+				"options": [
+					"apiKey",
+					"http",
+					"mutualTLS",
+					"oauth2",
+					"openIdConnect"
+				],
+				"dependency": {
+					"level": "model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
 			},
 			{
 				"propertyName": "apiKey name",
