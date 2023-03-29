@@ -2,8 +2,7 @@
 	"model": {
 		"modelName": "New resource model",
 		"dbVersion": "3.0.3",
-		"dbVendor": "OpenAPI",
-		"jsonSchemaDialect": "https://spec.openapis.org/oas/3.1/dialect/base"
+		"dbVendor": "OpenAPI"
 	},
 	"container": {
 		"name": "/path",
