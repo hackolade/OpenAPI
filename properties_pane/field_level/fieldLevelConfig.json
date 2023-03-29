@@ -1217,6 +1217,12 @@ making sure that you maintain a proper JSON format.
 				"shouldValidate": true
 			},
 			{
+				"propertyName": "nullable",
+				"propertyKeyword": "nullable",
+				"propertyType": "checkbox",
+				"enableForReference": true
+			},
+			{
 				"propertyName": "readOnly",
 				"propertyKeyword": "readOnly",
 				"propertyType": "checkbox",
