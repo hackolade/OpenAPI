@@ -29,7 +29,7 @@ function getComponents({ definitions, containers, specVersion }) {
     const responses = renameComponents(getResponses(componentsData.responses, specVersion));
     const parameters = renameComponents(getParameters(componentsData.parameters, specVersion));
     const examples = renameComponents(getExamples(componentsData.examples, specVersion));
-    const requestBodies = renameComponents(getRequestBodies(componentsData.requestBodies), specVersion);
+    const requestBodies = renameComponents(getRequestBodies(componentsData.requestBodies, specVersion));
     const headers = renameComponents(getHeaders({ data: prepareHeadersComponents(componentsData.headers), isParentActivated: true, specVersion }));
     const securitySchemes = renameComponents(getSecuritySchemes(componentsData.securitySchemes, specVersion));
     const links = renameComponents(getLinks(componentsData.links, specVersion));
