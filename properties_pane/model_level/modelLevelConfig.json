@@ -264,7 +264,9 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "identifier",
 						"propertyKeyword": "licenseIdentifier",
-						"propertyType": "text",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false,
 						"propertyTooltip": "An SPDX license expression for the API. The identifier field is mutually exclusive of the url field",
 						"dependency" : {
 							"level": "model",
