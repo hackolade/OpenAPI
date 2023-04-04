@@ -1435,12 +1435,6 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "text",
 				"shouldValidate": true
 			},
-			{
-				"propertyName": "nullable",
-				"propertyKeyword": "nullable",
-				"propertyType": "checkbox",
-				"enableForReference": true
-			},
 			"comments"
 		],
 		"array": [
