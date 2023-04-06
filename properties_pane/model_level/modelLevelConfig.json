@@ -269,9 +269,32 @@ making sure that you maintain a proper JSON format.
 						"markdown": false,
 						"propertyTooltip": "An SPDX license expression for the API. The identifier field is mutually exclusive of the url field",
 						"dependency" : {
-							"level": "model",
-							"key": "dbVersion",
-							"value": "3.1.0"
+							"type": "and",
+							"values": [
+								{
+									"level": "model",
+									"key": "dbVersion",
+									"value": "3.1.0"
+								},
+								{
+									"type": "or",
+									"values": [
+										{
+											"key": "licenseURL",
+											"pattern": "^\\s*$"
+										},
+										{
+											"type": "not",
+											"values": [
+												{
+													"key": "licenseURL",
+													"exist": true
+												}
+											]
+										}
+									]
+								}
+							]
 						}
 					},
 					{
@@ -280,7 +303,24 @@ making sure that you maintain a proper JSON format.
 						"shouldValidate": true,
 						"propertyType": "text",
 						"propertyFormat": "uri",
-						"propertyTooltip": "A URL to the license used for the API. This MUST be in the form of a URL. The url field is mutually exclusive of the identifier field (OpenAPI 3.1.x)."
+						"propertyTooltip": "A URL to the license used for the API. This MUST be in the form of a URL. The url field is mutually exclusive of the identifier field (OpenAPI 3.1.x).",
+						"dependency" : {
+							"type": "or",
+							"values": [
+								{
+									
+								},
+								{
+									"type": "not",
+									"values": [
+										{
+											"key": "licenseIdentifier",
+											"exist": true
+										}
+									]
+								}
+							]
+						}
 					},
 					{
 						"propertyName": "extensions",
