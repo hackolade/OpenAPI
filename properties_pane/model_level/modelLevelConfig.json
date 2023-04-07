@@ -339,6 +339,14 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
+				"propertyName": "jsonSchemaDialect",
+				"propertyKeyword": "jsonSchemaDialect",
+				"propertyType": "text",
+				"propertyFormat": "uri",
+				"shouldValidate": true,
+				"propertyTooltip": ""
+			},
+			{
 				"propertyName": "servers",
 				"propertyType": "group",
 				"propertyKeyword": "servers",

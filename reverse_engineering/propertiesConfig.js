@@ -3,6 +3,7 @@ const modelConfig = {
     openapi: 'dbVersion',
     termsOfService: 'termsOfService',
     info: 'info',
+    jsonSchemaDialect: "jsonSchemaDialect",
     servers: 'servers',
     security: 'security',
     tags: [{

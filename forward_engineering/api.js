@@ -20,6 +20,7 @@ module.exports = {
 				tags: modelTags,
 				security: modelSecurity,
 				servers: modelServers,
+				jsonSchemaDialect,
 			} = data.modelData[0];
 
 			const containersIdsFromCallbacks = commonHelper.getContainersIdsForCallbacks(data);
@@ -45,6 +46,7 @@ module.exports = {
 			const openApiSchema = {
 				openapi: specVersion,
 				info,
+				...(jsonSchemaDialect && { jsonSchemaDialect }),
 				servers,
 				paths,
 				...(webhooks && Object.keys(webhooks).length ? { webhooks } : {}),
