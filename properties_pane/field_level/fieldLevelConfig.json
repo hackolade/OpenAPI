@@ -366,7 +366,7 @@ making sure that you maintain a proper JSON format.
 			"enum",
 			"examples",
 			{
-				"propertyName": "example",
+				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
@@ -656,7 +656,7 @@ making sure that you maintain a proper JSON format.
 			"enum",
 			"examples",
 			{
-				"propertyName": "example",
+				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
@@ -942,7 +942,7 @@ making sure that you maintain a proper JSON format.
 			"enum",
 			"examples",
 			{
-				"propertyName": "example",
+				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
@@ -1287,7 +1287,7 @@ making sure that you maintain a proper JSON format.
 			},
 			"examples",
 			{
-				"propertyName": "example",
+				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
@@ -1430,7 +1430,7 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "example",
+				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "text",
 				"shouldValidate": true
@@ -1666,7 +1666,7 @@ making sure that you maintain a proper JSON format.
 			},
 			"examplesComplex",
 			{
-				"propertyName": "example",
+				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "details",
 				"template": "textAreaJson",
@@ -2048,7 +2048,7 @@ making sure that you maintain a proper JSON format.
 			},
 			"examplesComplex",
 			{
-				"propertyName": "example",
+				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "details",
 				"template": "textAreaJson",
