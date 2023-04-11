@@ -308,7 +308,8 @@ making sure that you maintain a proper JSON format.
 							"type": "or",
 							"values": [
 								{
-									
+									"key": "licenseIdentifier",
+									"pattern": "^\\s*$"
 								},
 								{
 									"type": "not",
