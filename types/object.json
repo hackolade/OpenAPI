@@ -33,7 +33,8 @@
 				"array",
 				"object",
 				"reference",
-				"multiple"
+				"multiple",
+				"null"
 			]
 		},
 		"encoding": {

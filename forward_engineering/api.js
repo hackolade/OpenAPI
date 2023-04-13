@@ -15,11 +15,12 @@ module.exports = {
 	generateModelScript(data, logger, cb) {
 		try {
 			const {
-				dbVersion,
+				dbVersion: specVersion,
 				externalDocs: modelExternalDocs,
 				tags: modelTags,
 				security: modelSecurity,
 				servers: modelServers,
+				jsonSchemaDialect,
 			} = data.modelData[0];
 
 			const containersIdsFromCallbacks = commonHelper.getContainersIdsForCallbacks(data);
@@ -32,19 +33,23 @@ module.exports = {
 			const servers = getServers(modelServers);
 			const externalDefinitions = JSON.parse(data.externalDefinitions || '{}').properties || {};
 			const containers = handleRefInContainers(data.containers, externalDefinitions, resolveApiExternalRefs);
-			const paths = getPaths(containers, containersIdsFromCallbacks);
+			const { pathContainers, webhookContainers } = separatePathAndWebhooks(containers);
+			const paths = getPaths(pathContainers, containersIdsFromCallbacks, specVersion);
+			const webhooks = getPaths(webhookContainers, containersIdsFromCallbacks, specVersion);
 			const definitions = JSON.parse(data.modelDefinitions) || {};
 			const definitionsWithHandledReferences = mapJsonSchema(definitions, handleRef(externalDefinitions, resolveApiExternalRefs));
-			const components = getComponents(definitionsWithHandledReferences, data.containers);
+			const components = getComponents({ definitions: definitionsWithHandledReferences, containers: data.containers, specVersion });
 			const security = commonHelper.mapSecurity(modelSecurity);
 			const tags = commonHelper.mapTags(modelTags);
 			const externalDocs = commonHelper.mapExternalDocs(modelExternalDocs);
 
 			const openApiSchema = {
-				openapi: dbVersion,
+				openapi: specVersion,
 				info,
+				...(jsonSchemaDialect && { jsonSchemaDialect }),
 				servers,
 				paths,
+				...(webhooks && Object.keys(webhooks).length ? { webhooks } : {}),
 				components,
 				security,
 				tags,
@@ -212,3 +217,17 @@ const handleRef = (externalDefinitions, resolveApiExternalRefs) => field => {
 
 	return { ...field, ...ref }; 
 };
+
+const separatePathAndWebhooks = containers => {
+	const pathContainers = [];
+	const webhookContainers = [];
+	containers.forEach(container => {
+		if (container.containerData?.[0]?.webhook) {
+			webhookContainers.push(container);
+		} else {
+			pathContainers.push(container);
+		}
+	});
+
+	return { pathContainers, webhookContainers };
+}

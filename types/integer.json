@@ -8,9 +8,7 @@
 	"defaultValues": {
 		"unit": "",
 		"minimum": "",
-		"exclusiveMinimum": false,
 		"maximum": "",
-		"exclusiveMaximum": false,
 		"multipleOf": "",
 		"divisibleBy": "",
 		"default": "",

@@ -4,7 +4,7 @@
 	"versionDate": "2023-02-10",
 	"author": "hackolade",
 	"engines": {
-		"hackolade": "5.4.7",
+		"hackolade": "6.9.11",
 		"hackoladePlugin": "1.0.0"
 	},
 	"contributes": {
@@ -12,14 +12,28 @@
 			"applicationTarget": "OPENAPI",
 			"title": "OpenAPI",
 			"versions": [
-				"3.0.3"
+				"3.0.3",
+				"3.1.0"
 			]
 		},
 		"features": {
 			"nestedCollections": {
 				"level": 1
 			},
-			"disableMultipleTypes": true,
+			"disableMultipleTypes": {
+				"dependencies": [
+					{ "dependency":
+						{
+							"level": "model",
+							"key": "dbVersion",
+							"value": "3.1.0"
+						},
+						"value": false
+					}
+				],
+				"defaultValue": true
+			},
+			"disableMultipleNonScalarTypes": false,
 			"enableReverseEngineering": {
 				"jsonDocument": {
 					"entities": false,
@@ -83,6 +97,11 @@
 				"hideNonNullableAttributes": true
 			},
 			"openModelDefinitionsTabIfNoCollections": true,
+			"jsonSchemaSpec": {
+				"version": "draft-2020-12",
+				"schema": "https://json-schema.org/draft/2020-12/schema",
+				"targetDBVersions": ["3.1.0"]
+			},
 			"erdDefinitions": {
 				"enabled": true,
 				"propertyNames": ["schemas"]

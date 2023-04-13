@@ -1,0 +1,23 @@
+
+{
+	"name": "null",
+	"erdAbbreviation": "<null>",
+	"dtdAbbreviation": "{null}",
+	"useSample": true,
+	"dependency": {
+		"level": "model",
+		"key": "dbVersion",
+		"value": "3.1.0"
+	},
+	"defaultValues": {
+		"default": null,
+		"type": "null",
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignEntity": "",
+		"foreignField": [],
+		"format": ""
+	}
+}

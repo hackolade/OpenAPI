@@ -44,17 +44,18 @@ const handleNumericType = (jsonSchema) => {
 	return jsonSchema;
 };
 
-const adaptJsonSchema = (jsonSchema) => {
+const adaptJsonSchema = (jsonSchema, targetDBVersion) => {
+	const isJSONSchemaCompatibleTargetVersion = targetDBVersion?.split('.')?.[1] >= '1'; // 3.1.0 or higher
 	return mapJsonSchema(jsonSchema, (jsonSchemaItem) => {
-		if (Array.isArray(jsonSchemaItem.type)) {
+		if (Array.isArray(jsonSchemaItem.type) && !isJSONSchemaCompatibleTargetVersion) {
 			return convertMultipleTypeToType(jsonSchemaItem);
 		} else if (jsonSchemaItem.type === 'number') {
 			return handleNumericType(jsonSchemaItem);
-		} else if (jsonSchemaItem.type !== 'null') {
-			return jsonSchemaItem;
+		} else if (jsonSchemaItem.type === 'null' && !isJSONSchemaCompatibleTargetVersion) {
+			return convertToString(jsonSchemaItem);
 		}
-
-		return convertToString(jsonSchemaItem);
+		
+		return jsonSchemaItem;
 	});
 };
 

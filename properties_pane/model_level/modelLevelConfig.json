@@ -156,12 +156,13 @@ making sure that you maintain a proper JSON format.
 				"propertyTooltip": "DB version",
 				"propertyType": "select",
 				"options": [
+					"3.1.0",
 					"3.0.3",
 					"3.0.2",
 					"3.0.1",
 					"3.0.0"
 				],
-				"disabledOption": false
+				"disabledOption": true
 			},
 			{
 				"propertyName": "info",
@@ -172,19 +173,35 @@ making sure that you maintain a proper JSON format.
 				"labelName": "info:",
 				"propertyName": "title",
 				"propertyKeyword": "title",
-				"propertyType": "text"
+				"propertyType": "text",
+				"propertyTooltip": "The title of the API"
+			},
+			{
+				"labelName": "summary",
+				"propertyName": "summary",
+				"propertyKeyword": "summary",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false,
+				"propertyTooltip": "A short summary of the API",
+				"dependency" : {
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+
 			},
 			{
 				"propertyName": "terms of service",
 				"propertyKeyword": "termsOfService",
-				"propertyType": "text"
+				"propertyType": "text",
+				"propertyTooltip": "A URL to the Terms of Service for the API. This MUST be in the form of a URL"
 			},
 			{
 				"propertyName": "contact",
 				"propertyType": "block",
 				"propertyKeyword": "contact",
 				"shouldValidate": true,
-				"propertyTooltip": "",
+				"propertyTooltip": "The contact information for the exposed API",
 				"groupItemLimit": 1,
 				"structure": [
 					{
@@ -236,19 +253,75 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "block",
 				"propertyKeyword": "license",
 				"shouldValidate": true,
-				"propertyTooltip": "",
+				"propertyTooltip": "The license information for the exposed API",
 				"structure": [
 					{
 						"propertyName": "name",
 						"propertyKeyword": "licenseName",
-						"propertyType": "text"
+						"propertyType": "text",
+						"propertyTooltip": "The license name used for the API."
+					},
+					{
+						"propertyName": "identifier",
+						"propertyKeyword": "licenseIdentifier",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false,
+						"propertyTooltip": "An SPDX license expression for the API. The identifier field is mutually exclusive of the url field",
+						"dependency" : {
+							"type": "and",
+							"values": [
+								{
+									"level": "model",
+									"key": "dbVersion",
+									"value": "3.1.0"
+								},
+								{
+									"type": "or",
+									"values": [
+										{
+											"key": "licenseURL",
+											"pattern": "^\\s*$"
+										},
+										{
+											"type": "not",
+											"values": [
+												{
+													"key": "licenseURL",
+													"exist": true
+												}
+											]
+										}
+									]
+								}
+							]
+						}
 					},
 					{
 						"propertyName": "url",
 						"propertyKeyword": "licenseURL",
 						"shouldValidate": true,
 						"propertyType": "text",
-						"propertyFormat": "uri"
+						"propertyFormat": "uri",
+						"propertyTooltip": "A URL to the license used for the API. This MUST be in the form of a URL. The url field is mutually exclusive of the identifier field (OpenAPI 3.1.x).",
+						"dependency" : {
+							"type": "or",
+							"values": [
+								{
+									"key": "licenseIdentifier",
+									"pattern": "^\\s*$"
+								},
+								{
+									"type": "not",
+									"values": [
+										{
+											"key": "licenseIdentifier",
+											"exist": true
+										}
+									]
+								}
+							]
+						}
 					},
 					{
 						"propertyName": "extensions",
@@ -280,7 +353,8 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "version",
 				"propertyKeyword": "modelVersion",
-				"propertyType": "text"
+				"propertyType": "text",
+				"propertyTooltip": "The version of the OpenAPI document (which is distinct from the OpenAPI Specification version or the API implementation version)."
 			},
 			{
 				"propertyName": "info extensions",
@@ -306,6 +380,14 @@ making sure that you maintain a proper JSON format.
 						"markdown": false
 					}
 				]
+			},
+			{
+				"propertyName": "jsonSchemaDialect",
+				"propertyKeyword": "jsonSchemaDialect",
+				"propertyType": "text",
+				"propertyFormat": "uri",
+				"shouldValidate": true,
+				"propertyTooltip": ""
 			},
 			{
 				"propertyName": "servers",

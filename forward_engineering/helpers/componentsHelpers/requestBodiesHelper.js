@@ -5,7 +5,7 @@ const { getRef, hasRef } = require('../typeHelper');
 const { commentDeactivatedItemInner } = require('../commentsHelper');
 const { activateItem } = require('../commonHelper');
 
-function getRequestBodies(data) {
+function getRequestBodies(data, specVersion) {
 	if (!data || !data.properties) {
 		return;
     }
@@ -14,7 +14,7 @@ function getRequestBodies(data) {
         .map(([key, value]) => {
             return {
                 key,
-                value: mapRequestBody(activateItem(value), get(data, 'required', []).includes(key), true)
+                value: mapRequestBody({ data: activateItem(value), required: get(data, 'required', []).includes(key), isParentActivated: true, specVersion }),
             };
         })
         .reduce((acc, { key, value }) => {
@@ -23,15 +23,15 @@ function getRequestBodies(data) {
         }, {});
 }
 
-function mapRequestBody(data, required, isParentActivated = false) {
+function mapRequestBody({ data, required, isParentActivated = false, specVersion }) {
     if (!data) {
         return;
     }
     if (hasRef(data)) {
-		return commentDeactivatedItemInner(getRef(data), data.isActivated, isParentActivated);
+		return commentDeactivatedItemInner(getRef(data, specVersion), data.isActivated, isParentActivated);
 	}
 
-    const content = getContent(data, data.isActivated && isParentActivated);
+    const content = getContent({ data, isParentActivated: data.isActivated && isParentActivated, specVersion });
     if (!content) {
         return;
     }

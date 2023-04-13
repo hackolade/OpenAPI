@@ -67,7 +67,7 @@ module.exports = {
 		try {
 			const jsonSchema = JSON.parse(data.jsonSchema);
 
-			const adaptedJsonSchema = adaptJsonSchema(jsonSchema);
+			const adaptedJsonSchema = adaptJsonSchema(jsonSchema, data.options?.targetDBVersion);
 
 			logger.log('info', 'Adaptation of JSON Schema finished.', 'Adapt JSON Schema');
 
@@ -119,7 +119,7 @@ const convertOpenAPISchemaToHackolade = (openAPISchema, fieldOrder) => {
 	const components = openAPISchema.components;
 	const definitions = dataHelper.getComponents(openAPISchema.components, fieldOrder);
 	const callbacksComponent = components && components.callbacks;
-	const modelContent = dataHelper.getModelContent(openAPISchema.paths || {}, fieldOrder, callbacksComponent);
+	const modelContent = dataHelper.getModelContent({ pathData: openAPISchema.paths || {}, webhookData: openAPISchema.webhooks, fieldOrder, callbacksComponent });
 	return { modelData, modelContent, definitions };
 };
 

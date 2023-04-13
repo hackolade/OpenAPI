@@ -47,7 +47,7 @@ const handleReferencePath = (externalDefinitions, { $ref: ref }, resolveApiExter
 
 const fixJsonSchemaPath = (pathToFile, relativePath) => {
 	const namePath = relativePath.split('/');
-	if (['properties', 'items'].includes(namePath[0])) {
+	if (['properties', 'items', 'prefixItems'].includes(namePath[0])) {
 		return `${pathToFile}#/${relativePath}`;
 	}
 

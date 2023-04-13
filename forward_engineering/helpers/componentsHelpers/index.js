@@ -22,18 +22,18 @@ const renameComponents = (components) => {
     }, {});
 };
 
-function getComponents(definitions, containers) {
+function getComponents({ definitions, containers, specVersion }) {
     const componentsData = get(definitions, 'properties', {});
 
-    const schemas = renameComponents(getSchemas(componentsData.schemas));
-    const responses = renameComponents(getResponses(componentsData.responses));
-    const parameters = renameComponents(getParameters(componentsData.parameters));
-    const examples = renameComponents(getExamples(componentsData.examples));
-    const requestBodies = renameComponents(getRequestBodies(componentsData.requestBodies));
-    const headers = renameComponents(getHeaders(prepareHeadersComponents(componentsData.headers), true));
-    const securitySchemes = renameComponents(getSecuritySchemes(componentsData.securitySchemes));
-    const links = renameComponents(getLinks(componentsData.links));
-    const callbacks = renameComponents(getCallbacks(componentsData.callbacks, containers));
+    const schemas = renameComponents(getSchemas(componentsData.schemas, specVersion));
+    const responses = renameComponents(getResponses(componentsData.responses, specVersion));
+    const parameters = renameComponents(getParameters(componentsData.parameters, specVersion));
+    const examples = renameComponents(getExamples(componentsData.examples, specVersion));
+    const requestBodies = renameComponents(getRequestBodies(componentsData.requestBodies, specVersion));
+    const headers = renameComponents(getHeaders({ data: prepareHeadersComponents(componentsData.headers), isParentActivated: true, specVersion }));
+    const securitySchemes = renameComponents(getSecuritySchemes(componentsData.securitySchemes, specVersion));
+    const links = renameComponents(getLinks(componentsData.links, specVersion));
+    const callbacks = renameComponents(getCallbacks({ data: componentsData.callbacks, containers, specVersion }));
 
     const extensions = getExtensions(get(componentsData, `['Specification Extensions'].scopesExtensions`));
 

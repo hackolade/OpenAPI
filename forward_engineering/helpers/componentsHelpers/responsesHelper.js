@@ -4,7 +4,7 @@ const { getHeaders, getContent } = require('./parametersHelper');
 const getExtensions = require('../extensionsHelper');
 const { getRef, hasRef } = require('../typeHelper');
 
-function getResponses(data) {
+function getResponses(data, specVersion) {
 	if (!data || !data.properties) {
 		return;
 	}
@@ -13,7 +13,7 @@ function getResponses(data) {
 		.map(([key, value]) => {
 			return {
 				key,
-				value: mapResponse(value)
+				value: mapResponse({ data: value, specVersion })
 			};
 		})
 		.reduce((acc, { key, value }) => {
@@ -22,17 +22,17 @@ function getResponses(data) {
 		}, {});
 }
 
-function mapResponse(data, responseCollectionDescription, shouldResponseBeCommented = false) {
+function mapResponse({ data, responseCollectionDescription, shouldResponseBeCommented = false, specVersion }) {
 	if (!data) {
 		return;
 	} 
 	if (hasRef(data)) {
-		return getRef(data);
+		return getRef(data, specVersion);
 	}
 	const description = data.description || responseCollectionDescription || '';
-	const headers = getHeaders(get(data, `properties.headers`), !shouldResponseBeCommented);
-	const content = getContent(get(data, `properties.content`), !shouldResponseBeCommented);
-	const links = getLinks(get(data, `properties.links`));
+	const headers = getHeaders({ data: get(data, `properties.headers`), isParentActivated: !shouldResponseBeCommented, specVersion });
+	const content = getContent({ data: get(data, `properties.content`), isParentActivated: !shouldResponseBeCommented, specVersion });
+	const links = getLinks(get(data, `properties.links`), specVersion);
 	const extensions = getExtensions(data.scopesExtensions);
 	const response = {};
 	if (shouldResponseBeCommented) {

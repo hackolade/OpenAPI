@@ -3,7 +3,7 @@ const { getRef, hasRef } = require('../typeHelper');
 const getExtensions = require('../extensionsHelper');
 const { mapServer } = require('../serversHelper');
 
-function getLinks(data) {
+function getLinks(data, specVersion) {
     if (!data || !data.properties) {
 		return;
 	}
@@ -12,7 +12,7 @@ function getLinks(data) {
 		.map(([key, value]) => {
 			return {
 				key,
-				value: mapLink(value)
+				value: mapLink(value, specVersion)
 			};
 		})
 		.reduce((acc, { key, value }) => {
@@ -21,12 +21,12 @@ function getLinks(data) {
 		}, {});
 }
 
-function mapLink(data) {
+function mapLink(data, specVersion) {
     if (!data) {
 		return;
 	} 
 	if (hasRef(data)) {
-		return getRef(data);
+		return getRef(data, specVersion);
     }
     
     const { operationRef, operationId, description, server, scopesExtensions } = data;
@@ -71,5 +71,4 @@ function mapParameters(data) {
 
 module.exports = {
     getLinks,
-    mapLink
 };
