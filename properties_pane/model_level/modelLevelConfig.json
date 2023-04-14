@@ -387,7 +387,12 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "text",
 				"propertyFormat": "uri",
 				"shouldValidate": true,
-				"propertyTooltip": ""
+				"propertyTooltip": "",
+				"dependency": {
+					"level": "model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
 			},
 			{
 				"propertyName": "servers",
