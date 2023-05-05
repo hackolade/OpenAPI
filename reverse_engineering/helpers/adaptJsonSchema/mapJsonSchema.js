@@ -34,7 +34,7 @@ const mapJsonSchema = (jsonSchema, callback) => {
 	}
 	const mapper = partial(mapJsonSchema, partial.placeholder, callback);
 	const propertiesLike = [ 'properties', 'definitions', 'patternProperties' ];
-	const itemsLike = [ 'items', 'oneOf', 'allOf', 'anyOf', 'not' ];
+	const itemsLike = [ 'items', 'prefixItems', 'oneOf', 'allOf', 'anyOf', 'not' ];
 	
 	const copyJsonSchema = Object.assign({}, jsonSchema);
 	const jsonSchemaWithNewProperties = applyTo(propertiesLike, copyJsonSchema, partial(mapProperties, partial.placeholder, mapper));
