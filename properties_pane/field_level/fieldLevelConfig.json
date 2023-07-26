@@ -1395,7 +1395,32 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "checkbox",
 				"enableForReference": true
 			},
-			"comments"
+			"comments",
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex":"^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				]
+			}
 		],
 		"null": [
 			{
