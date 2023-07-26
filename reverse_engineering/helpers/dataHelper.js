@@ -582,6 +582,18 @@ const convertFormatToMode = schema => {
 	}
 };
 
+const handleSchemaExtensions = (schema) => {
+	const mappedExtensionsObject = getExtensionsObject(schema);
+	const schemaWithoutExtensions = Object.keys(schema).reduce((accumulator, property) => {
+		if (property.startsWith(EXTENSION_SYMBOL)) {
+			return accumulator;
+		}
+		return Object.assign({}, accumulator, {[property]: schema[property]});
+	}, {});
+
+	return Object.assign({}, schemaWithoutExtensions, mappedExtensionsObject);
+};
+
 const handleSchemaProps = (schema, fieldOrder) => {
 	if (!schema) {
 		schema = {
@@ -590,7 +602,8 @@ const handleSchemaProps = (schema, fieldOrder) => {
 	}
 
 	const fixedSchema = convertFormatToMode(setMissedType(schema));
-	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(fixedSchema);
+	const schemaWithExtensions = handleSchemaExtensions(fixedSchema);
+	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(schemaWithExtensions);
 	const schemaWithChoices = handleSchemaChoices(schemaWithAdditionalPropertiesData, fieldOrder);
 	const reorderedSchema = commonHelper.reorderFields(schemaWithChoices, fieldOrder);
 	const schemaWithHandledProperties = Object.keys(reorderedSchema).reduce((accumulator, property) => {
