@@ -1512,13 +1512,6 @@ making sure that you maintain a proper JSON format.
 			},
 			"comments",
 			{
-				"propertyName": "nullable",
-				"propertyKeyword": "nullable",
-				"propertyType": "checkbox",
-				"enableForReference": true
-			},
-			"comments",
-			{
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
