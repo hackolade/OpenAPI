@@ -584,6 +584,9 @@ const convertFormatToMode = schema => {
 
 const handleSchemaExtensions = (schema) => {
 	const mappedExtensionsObject = getExtensionsObject(schema);
+	if (!Array.isArray(mappedExtensionsObject.scopesExtensions) || mappedExtensionsObject.scopesExtensions.length === 0) {
+		return schema;
+	}
 	const schemaWithoutExtensions = Object.keys(schema).reduce((accumulator, property) => {
 		if (property.startsWith(EXTENSION_SYMBOL)) {
 			return accumulator;
