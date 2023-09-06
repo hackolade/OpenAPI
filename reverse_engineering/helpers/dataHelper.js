@@ -641,7 +641,8 @@ const handleDefinitionSchemaProps = (schema, fieldOrder) => {
 
 	const fixedSchema = convertFormatToMode(setMissedType(schema));
 	const schemaWithAdditionalPropertiesData = handleAdditionalProperties(fixedSchema);
-	const reorderedSchema = commonHelper.reorderFields(schemaWithAdditionalPropertiesData, fieldOrder);
+	const schemaWithExtensions = handleSchemaExtensions(schemaWithAdditionalPropertiesData);
+	const reorderedSchema = commonHelper.reorderFields(schemaWithExtensions, fieldOrder);
 	const schemaWithHandledProperties = Object.keys(reorderedSchema).reduce((accumulator, property) => {
 		if (property === 'example') {
 			property = 'sample';
