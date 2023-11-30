@@ -22,8 +22,8 @@
 			},
 			"disableMultipleTypes": {
 				"dependencies": [
-					{ "dependency":
-						{
+					{
+						"dependency": {
 							"level": "model",
 							"key": "dbVersion",
 							"value": "3.1.0"
@@ -59,6 +59,13 @@
 				"jsonSchema": true,
 				"plugin": true,
 				"apiSchema": false
+			},
+			"forwardEngineering": {
+				"jsonSchema": {
+					"keepParentType": {
+						"integer": "integer"
+					}
+				}
 			},
 			"disablePatternField": false,
 			"disableChoices": {
@@ -100,11 +107,15 @@
 			"jsonSchemaSpec": {
 				"version": "draft-2020-12",
 				"schema": "https://json-schema.org/draft/2020-12/schema",
-				"targetDBVersions": ["3.1.0"]
+				"targetDBVersions": [
+					"3.1.0"
+				]
 			},
 			"erdDefinitions": {
 				"enabled": true,
-				"propertyNames": ["schemas"]
+				"propertyNames": [
+					"schemas"
+				]
 			}
 		}
 	},
