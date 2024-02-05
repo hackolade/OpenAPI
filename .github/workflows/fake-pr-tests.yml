@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: LouisBrunner/checks-action@v2.0.0
         with:
-          name: Run PR tests (Plugins)
+          name: Run PR tests (Plugins) (Plugins)
           conclusion: success
           token: ${{ secrets.GITHUB_TOKEN }}
