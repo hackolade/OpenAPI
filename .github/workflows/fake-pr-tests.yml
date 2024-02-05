@@ -2,14 +2,17 @@ name: PR tests
 on:
   pull_request:
     types: [auto_merge_enabled]
+  workflow_dispatch:
 
 jobs:
   skip:
     name: Report fake success for PR tests
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
     steps:
-      - uses: LouisBrunner/checks-action@v1.6.1
+      - uses: LouisBrunner/checks-action@v2.0.0
         with:
-          name: Run PR tests (Plugins) (Plugins)
+          name: Run PR tests (Plugins)
           conclusion: success
           token: ${{ secrets.GITHUB_TOKEN }}
