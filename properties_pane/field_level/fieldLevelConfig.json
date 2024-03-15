@@ -368,7 +368,7 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
-				"propertyType": "text",
+				"propertyType": "dynamicField",
 				"shouldValidate": true
 			},
 			{
@@ -683,7 +683,7 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
-				"propertyType": "text",
+				"propertyType": "dynamicField",
 				"shouldValidate": true
 			},
 			{
@@ -994,7 +994,7 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
-				"propertyType": "text",
+				"propertyType": "dynamicField",
 				"shouldValidate": true
 			},
 			{
@@ -1364,7 +1364,7 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
-				"propertyType": "text",
+				"propertyType": "dynamicField",
 				"shouldValidate": true
 			},
 			{
@@ -1532,7 +1532,7 @@ making sure that you maintain a proper JSON format.
 			{
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
-				"propertyType": "text",
+				"propertyType": "dynamicField",
 				"shouldValidate": true
 			},
 			"comments",
