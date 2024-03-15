@@ -2,7 +2,7 @@ const get = require('lodash.get');
 const getExtensions = require('../extensionsHelper');
 const { mapSchema } = require('./schemasHelper');
 const { getExamples } = require('./examplesHelper');
-const { getRef, hasRef, hasChoice, parseExample } = require('../typeHelper');
+const { getRef, hasRef, hasChoice, correctType } = require('../typeHelper');
 const { commentDeactivatedItemInner } = require('../commentsHelper');
 const { activateItem } = require('../commonHelper');
 
@@ -32,7 +32,7 @@ function mapParameter({ data, required, isParentActivated = false, specVersion})
 	const schemaKeyword = getSchemaKeyword(data.properties);
 	const isActivated = data.isActivated && isParentActivated;
 	const schema = mapSchema({ data: get(data, ['properties', schemaKeyword]), key: 'schema', isParentActivated: isActivated, specVersion });
-	const example = getExampleWithCorrectType({ example: data.sample, schemaType: schema.type });
+	const example = correctType(data.sample, schema.type);
 
 	const parameter = {
 		name: data.parameterName,
@@ -213,40 +213,6 @@ function getSchemaKeyword(properties = {}) {
 
 	const schemaKey = Object.keys(properties).find(key => !restRequestPropNames.includes(key));
 	return schemaKey;
-}
-
-function getExampleWithCorrectType({ example, schemaType }) {
-  const parsedExample = parseExample(example);
-
-  switch (schemaType) {
-    case 'string':
-      if (typeof parsedExample === 'string') {
-        return parsedExample;
-      }
-      break;
-    case 'number':
-    case 'integer':
-      if (!isNaN(parsedExample)) {
-        return parsedExample;
-      }
-      break;
-    case 'array':
-      if (Array.isArray(parsedExample)) {
-        return parsedExample;
-      }
-      break;
-    case 'object':
-      if (typeof parsedExample === 'object' && parsedExample !== null) {
-        return parsedExample;
-      }
-      break;
-    case 'boolean':
-      if (typeof parsedExample === 'boolean') {
-        return parsedExample;
-      }
-  }
-
-  return example;
 }
 
 module.exports = {
