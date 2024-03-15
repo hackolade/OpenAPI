@@ -369,7 +369,26 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "dynamicField",
-				"shouldValidate": true
+				"shouldValidate": true,
+				"dependency": {
+					"level":"model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "dynamicField",
+				"shouldValidate": true,
+				"dependency": {
+					"type": "not",
+					"values": [{
+						"level":"model",
+						"key": "dbVersion",
+						"value": "3.1.0"
+					}]
+				}
 			},
 			{
 				"propertyName": "nullable",
@@ -684,7 +703,26 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "dynamicField",
-				"shouldValidate": true
+				"shouldValidate": true,
+				"dependency": {
+					"level":"model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "dynamicField",
+				"shouldValidate": true,
+				"dependency": {
+					"type": "not",
+					"values": [{
+						"level":"model",
+						"key": "dbVersion",
+						"value": "3.1.0"
+					}]
+				}
 			},
 			{
 				"propertyName": "nullable",
@@ -995,7 +1033,26 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "dynamicField",
-				"shouldValidate": true
+				"shouldValidate": true,
+				"dependency": {
+					"level":"model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "dynamicField",
+				"shouldValidate": true,
+				"dependency": {
+					"type": "not",
+					"values": [{
+						"level":"model",
+						"key": "dbVersion",
+						"value": "3.1.0"
+					}]
+				}
 			},
 			{
 				"propertyName": "nullable",
@@ -1365,7 +1422,26 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "dynamicField",
-				"shouldValidate": true
+				"shouldValidate": true,
+				"dependency": {
+					"level":"model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "dynamicField",
+				"shouldValidate": true,
+				"dependency": {
+					"type": "not",
+					"values": [{
+						"level":"model",
+						"key": "dbVersion",
+						"value": "3.1.0"
+					}]
+				}
 			},
 			{
 				"propertyName": "nullable",
@@ -1533,7 +1609,26 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "example (deprecated)",
 				"propertyKeyword": "sample",
 				"propertyType": "dynamicField",
-				"shouldValidate": true
+				"shouldValidate": true,
+				"dependency": {
+					"level":"model",
+					"key": "dbVersion",
+					"value": "3.1.0"
+				}
+			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "dynamicField",
+				"shouldValidate": true,
+				"dependency": {
+					"type": "not",
+					"values": [{
+						"level":"model",
+						"key": "dbVersion",
+						"value": "3.1.0"
+					}]
+				}
 			},
 			"comments",
 			{
@@ -1796,8 +1891,43 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "details",
 				"template": "textAreaJson",
 				"dependency": {
-					"key": "subtype",
-					"value": "schema"
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"level": "model",
+							"key": "dbVersion",
+							"value": "3.1.0"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "details",
+				"template": "textAreaJson",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"level": "model",
+									"key": "dbVersion",
+									"value": "3.1.0"
+								}
+							]
+						}
+					]
 				}
 			},
 			"comments",
@@ -2207,8 +2337,43 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "details",
 				"template": "textAreaJson",
 				"dependency": {
-					"key": "subtype",
-					"value": "schema"
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"level": "model",
+							"key": "dbVersion",
+							"value": "3.1.0"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "example",
+				"propertyKeyword": "sample",
+				"propertyType": "details",
+				"template": "textAreaJson",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"level": "model",
+									"key": "dbVersion",
+									"value": "3.1.0"
+								}
+							]
+						}
+					]
 				}
 			},
 			{
