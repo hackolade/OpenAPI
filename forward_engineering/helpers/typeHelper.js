@@ -350,5 +350,6 @@ module.exports = {
 	getType,
 	getRef,
 	hasRef,
-	hasChoice
+	hasChoice,
+	parseExample,
 };
