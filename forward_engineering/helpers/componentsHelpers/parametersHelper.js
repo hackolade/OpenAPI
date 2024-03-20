@@ -2,9 +2,10 @@ const get = require('lodash.get');
 const getExtensions = require('../extensionsHelper');
 const { mapSchema } = require('./schemasHelper');
 const { getExamples } = require('./examplesHelper');
-const { getRef, hasRef, hasChoice, correctType } = require('../typeHelper');
+const { getRef, hasRef, hasChoice } = require('../typeHelper');
 const { commentDeactivatedItemInner } = require('../commentsHelper');
 const { activateItem } = require('../commonHelper');
+const { parseExampleValueByDataType } = require('./exampleDataHelper');
 
 function getParameters(data, specVersion) {
 	if (!data || !data.properties) {
@@ -32,7 +33,7 @@ function mapParameter({ data, required, isParentActivated = false, specVersion})
 	const schemaKeyword = getSchemaKeyword(data.properties);
 	const isActivated = data.isActivated && isParentActivated;
 	const schema = mapSchema({ data: get(data, ['properties', schemaKeyword]), key: 'schema', isParentActivated: isActivated, specVersion });
-	const example = correctType(data.sample, schema.type);
+	const example = parseExampleValueByDataType(data.sample, schema.type);
 
 	const parameter = {
 		name: data.parameterName,

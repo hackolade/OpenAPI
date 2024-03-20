@@ -2,6 +2,7 @@ const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
 const { commentDeactivatedItemInner } = require('./commentsHelper');
 const { isTargetVersionJSONSchemaCompatible, getArrayItems } = require('./sharedHelper');
+const { parseExampleValueByDataType } = require('./componentsHelpers/exampleDataHelper');
 
 const CONDITIONAL_ITEM_NAME = '<conditional>';
 
@@ -191,7 +192,7 @@ function getPrimitiveTypeProps(data, specVersion) {
 		xml: getXml(data.xml),
 		readOnly: data.readOnly || undefined,
 		writeOnly: data.writeOnly || undefined,
-		example: correctType(data.sample, data.type),
+		example: parseExampleValueByDataType(data.sample, data.type),
 		examples: data.examples,
 		...getExtensions(data.scopesExtensions)
 	};
@@ -346,45 +347,10 @@ function getDiscriminator(discriminator) {
 	};
 }
 
-function correctType(value, type) {
-  const parsedValue = parseExample(value);
-
-  switch (type) {
-    case 'string':
-      if (typeof parsedValue === 'string') {
-        return parsedValue;
-      }
-      break;
-    case 'number':
-    case 'integer':
-      if (!isNaN(parsedValue)) {
-        return parsedValue;
-      }
-      break;
-    case 'array':
-      if (Array.isArray(parsedValue)) {
-        return parsedValue;
-      }
-      break;
-    case 'object':
-      if (typeof parsedValue === 'object' && parsedValue !== null) {
-        return parsedValue;
-      }
-      break;
-    case 'boolean':
-      if (typeof parsedValue === 'boolean') {
-        return parsedValue;
-      }
-  }
-
-  return value;
-}
-
 module.exports = {
 	getType,
 	getRef,
 	hasRef,
 	hasChoice,
 	parseExample,
-	correctType,
 };
