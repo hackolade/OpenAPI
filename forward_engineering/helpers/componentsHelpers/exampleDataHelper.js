@@ -1,39 +1,45 @@
-const { parseExample } = require('./../typeHelper');
+function parseExample(data) {
+	try {
+		return JSON.parse(data);
+	} catch (err) {
+		return data;
+	}
+}
 
 function parseExampleValueByDataType(value, type) {
-  const parsedValue = parseExample(value);
+	const parsedValue = parseExample(value);
 
-  switch (type) {
-    case 'string':
-      if (typeof parsedValue === 'string') {
-        return parsedValue;
-      }
-      break;
-    case 'number':
-    case 'integer':
-      if (!isNaN(parsedValue)) {
-        return parsedValue;
-      }
-      break;
-    case 'array':
-      if (Array.isArray(parsedValue)) {
-        return parsedValue;
-      }
-      break;
-    case 'object':
-      if (typeof parsedValue === 'object' && parsedValue !== null) {
-        return parsedValue;
-      }
-      break;
-    case 'boolean':
-      if (typeof parsedValue === 'boolean') {
-        return parsedValue;
-      }
-  }
+	switch (type) {
+		case 'string':
+			if (typeof parsedValue === 'string') {
+				return parsedValue;
+			}
+			break;
+		case 'number':
+		case 'integer':
+			if (!isNaN(parsedValue)) {
+				return parsedValue;
+			}
+			break;
+		case 'array':
+			if (Array.isArray(parsedValue)) {
+				return parsedValue;
+			}
+			break;
+		case 'object':
+			if (typeof parsedValue === 'object' && parsedValue !== null) {
+				return parsedValue;
+			}
+			break;
+		case 'boolean':
+			if (typeof parsedValue === 'boolean') {
+				return parsedValue;
+			}
+	}
 
-  return value;
+	return value;
 }
 
 module.exports = {
-  parseExampleValueByDataType
+	parseExampleValueByDataType
 };
