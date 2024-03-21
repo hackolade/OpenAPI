@@ -5,6 +5,7 @@ const { getExamples } = require('./examplesHelper');
 const { getRef, hasRef, hasChoice } = require('../typeHelper');
 const { commentDeactivatedItemInner } = require('../commentsHelper');
 const { activateItem } = require('../commonHelper');
+const { parseExampleValueByDataType } = require('./exampleDataHelper');
 
 function getParameters(data, specVersion) {
 	if (!data || !data.properties) {
@@ -31,6 +32,9 @@ function mapParameter({ data, required, isParentActivated = false, specVersion})
 	}
 	const schemaKeyword = getSchemaKeyword(data.properties);
 	const isActivated = data.isActivated && isParentActivated;
+	const schema = mapSchema({ data: get(data, ['properties', schemaKeyword]), key: 'schema', isParentActivated: isActivated, specVersion });
+	const example = parseExampleValueByDataType(data.sample, schema.type);
+
 	const parameter = {
 		name: data.parameterName,
 		in: getIn(data.type),
@@ -41,8 +45,8 @@ function mapParameter({ data, required, isParentActivated = false, specVersion})
 		style: data.style,
 		explode: data.explode,
 		allowReserved: data.allowReserved,
-		schema: mapSchema({ data: get(data, ['properties', schemaKeyword]), key: 'schema', isParentActivated: isActivated, specVersion }),
-		example: data.sample,
+		schema,
+		example,
 		examples: getExamples(get(data, 'properties.examples'), specVersion),
 		content: getContent({ data: get(data, 'properties.content'), isParentActivated: isActivated, specVersion })
 	};

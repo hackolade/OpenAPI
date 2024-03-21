@@ -2,6 +2,7 @@ const get = require('lodash.get');
 const getExtensions = require('./extensionsHelper');
 const { commentDeactivatedItemInner } = require('./commentsHelper');
 const { isTargetVersionJSONSchemaCompatible, getArrayItems } = require('./sharedHelper');
+const { parseExampleValueByDataType } = require('./componentsHelpers/exampleDataHelper');
 
 const CONDITIONAL_ITEM_NAME = '<conditional>';
 
@@ -191,7 +192,7 @@ function getPrimitiveTypeProps(data, specVersion) {
 		xml: getXml(data.xml),
 		readOnly: data.readOnly || undefined,
 		writeOnly: data.writeOnly || undefined,
-		example: data.sample,
+		example: parseExampleValueByDataType(data.sample, data.type),
 		examples: data.examples,
 		...getExtensions(data.scopesExtensions)
 	};
@@ -350,5 +351,6 @@ module.exports = {
 	getType,
 	getRef,
 	hasRef,
-	hasChoice
+	hasChoice,
+	parseExample,
 };
