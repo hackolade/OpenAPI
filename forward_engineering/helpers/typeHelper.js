@@ -53,7 +53,7 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				readOnly: data.readOnly || undefined,
 				writeOnly: data.writeOnly || undefined,
 				example: parseExample(data.sample) || (!data.examples ? getArrayItemsExample(getArrayItems({ items, prefixItems, specVersion })) : undefined),
-				examples: data.examples,
+				...(isTargetVersionJSONSchemaCompatible(specVersion) && { examples: data.examples }),
 				xml: getXml(data.xml)
 			};
 			const arrayChoices = getChoices(data, key, specVersion);
@@ -78,7 +78,7 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				readOnly: data.readOnly,
 				writeOnly: data.writeOnly || undefined,
 				example: parseExample(data.sample),
-				examples: data.examples,
+				...(isTargetVersionJSONSchemaCompatible(specVersion) && { examples: data.examples }),
 				xml: getXml(data.xml)
 			};
 			const objectChoices = getChoices(data, key, specVersion);
@@ -193,7 +193,7 @@ function getPrimitiveTypeProps(data, specVersion) {
 		readOnly: data.readOnly || undefined,
 		writeOnly: data.writeOnly || undefined,
 		example: parseExampleValueByDataType(data.sample, data.type),
-		examples: data.examples,
+		...(isTargetVersionJSONSchemaCompatible(specVersion) && { examples: data.examples }),
 		...getExtensions(data.scopesExtensions)
 	};
 
