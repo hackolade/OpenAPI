@@ -13,9 +13,8 @@
         "type": "or",
         "values": [
           {
-            "key": "dbVersion",
-            "value": "3.1.0",
-            "level": "model"
+            "key": "withRequestBody",
+            "value": true
           },
           {
             "type": "or",
@@ -35,10 +34,6 @@
               {
                 "key": "collectionName",
                 "value": "options"
-              },
-              {
-                "key": "collectionName",
-                "value": "trace"
               },
               {
                 "key": "collectionName",

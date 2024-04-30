@@ -498,6 +498,42 @@ making sure that you maintain a proper JSON format.
         "hidden": true
       },
       {
+        "propertyName": "Include request body",
+        "propertyKeyword": "withRequestBody",
+        "propertyType": "checkbox",
+        "propertyTooltip": "Request body does not have well-defined semantics and should be avoided if possible",
+        "snippetDependency": {
+          "name": "requestStructure"
+        },
+        "dependency": {
+          "type": "and",
+          "values": [
+            {
+              "key": "dbVersion",
+              "value": "3.1.0",
+              "level": "model"
+            },
+            {
+              "type": "or",
+              "values": [
+                {
+                  "key": "collectionName",
+                  "value": "get"
+                },
+                {
+                  "key": "collectionName",
+                  "value": "delete"
+                },
+                {
+                  "key": "collectionName",
+                  "value": "head"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
         "propertyName": "Activated",
         "propertyKeyword": "isActivated",
         "propertyType": "checkbox",
