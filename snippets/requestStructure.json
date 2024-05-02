@@ -13,8 +13,30 @@
         "type": "or",
         "values": [
           {
-            "key": "withRequestBody",
-            "value": true
+            "type": "and",
+            "values": [
+              {
+                "key": "withRequestBody",
+                "value": true
+              },
+              {
+                "type": "or",
+                "values": [
+                  {
+                    "key": "collectionName",
+                    "value": "get"
+                  },
+                  {
+                    "key": "collectionName",
+                    "value": "delete"
+                  },
+                  {
+                    "key": "collectionName",
+                    "value": "head"
+                  }
+                ]
+              }
+            ]
           },
           {
             "type": "or",
