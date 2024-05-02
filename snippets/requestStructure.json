@@ -1,31 +1,97 @@
 {
-	"name": "requestStructure",
-	"properties": [{
-		"name": "parameters",
-		"type": "array",
-		"subtype": "anyParameter"
-	}, {
-		"name": "requestBody",
-		"type": "requestBody",
-		"properties": [{
-			"name": "application/json",
-			"type": "media",
-			"properties": [{
-				"name": "schema",
-				"type": "object"
-			}, {
-				"name": "examples",
-				"type": "object",
-				"subtype": "example"
-			}, {
-				"name": "encoding",
-				"type": "object",
-				"subtype": "encoding"
-			}]
-		}]
-	}, {
-		"name": "callbacks",
-		"type": "operationObject",
-		"subtype": "callback"
-	}]
+  "name": "requestStructure",
+  "properties": [
+    {
+      "name": "parameters",
+      "type": "array",
+      "subtype": "anyParameter"
+    },
+    {
+      "name": "requestBody",
+      "type": "requestBody",
+      "dependency": {
+        "type": "or",
+        "values": [
+          {
+            "type": "and",
+            "values": [
+              {
+                "key": "withRequestBody",
+                "value": true
+              },
+              {
+                "type": "or",
+                "values": [
+                  {
+                    "key": "collectionName",
+                    "value": "get"
+                  },
+                  {
+                    "key": "collectionName",
+                    "value": "delete"
+                  },
+                  {
+                    "key": "collectionName",
+                    "value": "head"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "or",
+            "values": [
+              {
+                "key": "collectionName",
+                "value": "post"
+              },
+              {
+                "key": "collectionName",
+                "value": "patch"
+              },
+              {
+                "key": "collectionName",
+                "value": "put"
+              },
+              {
+                "key": "collectionName",
+                "value": "options"
+              },
+              {
+                "key": "collectionName",
+                "value": "$ref"
+              }
+            ]
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "application/json",
+          "type": "media",
+          "properties": [
+            {
+              "name": "schema",
+              "type": "object"
+            },
+            {
+              "name": "examples",
+              "type": "object",
+              "subtype": "example"
+            },
+            {
+              "name": "encoding",
+              "type": "object",
+              "subtype": "encoding"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "callbacks",
+      "type": "operationObject",
+      "subtype": "callback"
+    }
+  ]
 }

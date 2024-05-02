@@ -7,6 +7,7 @@ const REQUEST = 'request';
 const RESPONSE = 'response';
 const EXTENSION_SYMBOL = 'x-';
 const REQUEST_TYPE = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', '$ref'];
+const REQUEST_TYPES_WITH_BODY =  ['put', 'post', 'options', 'patch', '$ref'];
 
 const getExtensions = (schema) => {
 	const isExtension = (keyword) => keyword.substring(0, 2) === EXTENSION_SYMBOL;
@@ -732,7 +733,8 @@ const handleRequestData = (requestData, request, fieldOrder) => {
 	const responses = requestData.responses;
 	const entityData = getEntityData(requestData, REQUEST);
 	const parametersData = getParametersData(requestData.parameters, fieldOrder);
-	const requestBody = handleRequestBody(requestData.requestBody || {}, fieldOrder);
+	const requestBody = requestData.requestBody ? handleRequestBody(requestData.requestBody, fieldOrder) : undefined;
+	const withRequestBody =  REQUEST_TYPES_WITH_BODY.includes(request) ? undefined : !!requestBody;
 	const callbacksData = handleObject(handleCallback, requestData.callbacks);
 	const requestSchema = {
 		parameters: {
@@ -754,7 +756,8 @@ const handleRequestData = (requestData, request, fieldOrder) => {
 		subtype: 'requestBody',
 		collectionName: request,
 		properties: requestSchema,
-		isActivated: true
+		isActivated: true,
+		withRequestBody,
 	});
 	return { jsonSchema, responses };
 };
