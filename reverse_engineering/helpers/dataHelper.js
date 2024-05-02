@@ -732,7 +732,8 @@ const handleRequestData = (requestData, request, fieldOrder) => {
 	const responses = requestData.responses;
 	const entityData = getEntityData(requestData, REQUEST);
 	const parametersData = getParametersData(requestData.parameters, fieldOrder);
-	const requestBody = handleRequestBody(requestData.requestBody || {}, fieldOrder);
+	const requestBody = requestData.requestBody ? handleRequestBody(requestData.requestBody, fieldOrder) : undefined;
+	const withRequestBody = !!requestBody;
 	const callbacksData = handleObject(handleCallback, requestData.callbacks);
 	const requestSchema = {
 		parameters: {
@@ -754,7 +755,8 @@ const handleRequestData = (requestData, request, fieldOrder) => {
 		subtype: 'requestBody',
 		collectionName: request,
 		properties: requestSchema,
-		isActivated: true
+		isActivated: true,
+		withRequestBody,
 	});
 	return { jsonSchema, responses };
 };
