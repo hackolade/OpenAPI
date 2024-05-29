@@ -41,5 +41,5 @@ function parseExampleValueByDataType(value, type) {
 }
 
 module.exports = {
-	parseExampleValueByDataType
+	parseExampleValueByDataType,
 };

@@ -1,16 +1,20 @@
 {
 	"name": "parameter",
 	"parentType": "document",
-	"properties": [{
-		"name": "schema",
-		"type": "object"
-	}, {
-		"name": "content",
-		"type": "object",
-		"subtype": "media"
-	}, {
-		"name": "examples",
-		"type": "object",
-		"subtype": "example"
-	}]
+	"properties": [
+		{
+			"name": "schema",
+			"type": "object"
+		},
+		{
+			"name": "content",
+			"type": "object",
+			"subtype": "media"
+		},
+		{
+			"name": "examples",
+			"type": "object",
+			"subtype": "example"
+		}
+	]
 }

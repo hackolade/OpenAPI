@@ -13,26 +13,38 @@ function getType({ data, key, isParentActivated = false, specVersion }) {
 
 	if (Array.isArray(data.type)) {
 		if (isTargetVersionJSONSchemaCompatible(specVersion)) {
-			return data.type.reduce((acc, type) => {
-				const propsForType = getType({ data: { ...data, type }, key: '', isParentActivated, specVersion })
-				acc = { ...propsForType, ...acc };
-				return acc;
-			}, { type: data.type });
+			return data.type.reduce(
+				(acc, type) => {
+					const propsForType = getType({ data: { ...data, type }, key: '', isParentActivated, specVersion });
+					acc = { ...propsForType, ...acc };
+					return acc;
+				},
+				{ type: data.type },
+			);
 		}
-		return getType({ data: Object.assign({}, data, { type: data.type[0] }), key: '', isParentActivated, specVersion });
+		return getType({
+			data: Object.assign({}, data, { type: data.type[0] }),
+			key: '',
+			isParentActivated,
+			specVersion,
+		});
 	}
 
 	if (hasRef(data)) {
 		return commentDeactivatedItemInner(getRef(data, specVersion), data.isActivated, isParentActivated);
 	}
-	
-	return commentDeactivatedItemInner(getTypeProps({ data, key, isParentActivated, specVersion }), data.isActivated, isParentActivated);
+
+	return commentDeactivatedItemInner(
+		getTypeProps({ data, key, isParentActivated, specVersion }),
+		data.isActivated,
+		isParentActivated,
+	);
 }
 
 function getTypeProps({ data, key, isParentActivated, specVersion }) {
 	const { type, properties, items, prefixItems, required, isActivated } = data;
 
-    const extensions = getExtensions(data.scopesExtensions);
+	const extensions = getExtensions(data.scopesExtensions);
 
 	switch (type) {
 		case 'array': {
@@ -40,7 +52,12 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				type,
 				title: data.title || undefined,
 				description: data.description || undefined,
-				...getArrayItemsProps({ items, prefixItems, isParentActivated: isActivated && isParentActivated, specVersion }),
+				...getArrayItemsProps({
+					items,
+					prefixItems,
+					isParentActivated: isActivated && isParentActivated,
+					specVersion,
+				}),
 				unevaluatedItems: data.unevaluatedItems || undefined,
 				collectionFormat: data.collectionFormat,
 				minItems: data.minItems,
@@ -52,9 +69,13 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				minContains: data.minContains,
 				readOnly: data.readOnly || undefined,
 				writeOnly: data.writeOnly || undefined,
-				example: parseExample(data.sample) || (!data.examples ? getArrayItemsExample(getArrayItems({ items, prefixItems, specVersion })) : undefined),
+				example:
+					parseExample(data.sample) ||
+					(!data.examples
+						? getArrayItemsExample(getArrayItems({ items, prefixItems, specVersion }))
+						: undefined),
 				...(isTargetVersionJSONSchemaCompatible(specVersion) && { examples: data.examples }),
-				xml: getXml(data.xml)
+				xml: getXml(data.xml),
 			};
 			const arrayChoices = getChoices(data, key, specVersion);
 
@@ -79,7 +100,7 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 				writeOnly: data.writeOnly || undefined,
 				example: parseExample(data.sample),
 				...(isTargetVersionJSONSchemaCompatible(specVersion) && { examples: data.examples }),
-				xml: getXml(data.xml)
+				xml: getXml(data.xml),
 			};
 			const objectChoices = getChoices(data, key, specVersion);
 			const conditionalProperties = getConditionalProperties(data, specVersion);
@@ -90,7 +111,12 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 			if (!properties || properties.length === 0) {
 				return;
 			}
-			return getType({ data: properties[Object.keys(properties)[0]], key: '', isParentActivated: isActivated && isParentActivated, specVersion });
+			return getType({
+				data: properties[Object.keys(properties)[0]],
+				key: '',
+				isParentActivated: isActivated && isParentActivated,
+				specVersion,
+			});
 		default:
 			return getPrimitiveTypeProps(data, specVersion);
 	}
@@ -100,10 +126,10 @@ function getRef({ $ref, refDescription, description, summary, referenceDiff }, s
 	if (isTargetVersionJSONSchemaCompatible(specVersion)) {
 		const descriptionValue = refDescription || referenceDiff?.refDescription || description;
 		const summaryValue = summary || referenceDiff?.summary;
-		return { $ref, summary: summaryValue, description: descriptionValue }
+		return { $ref, summary: summaryValue, description: descriptionValue };
 	}
 	return { $ref };
-};
+}
 
 function hasRef(data = {}) {
 	return data.$ref ? true : false;
@@ -118,7 +144,10 @@ function getArrayItemsProps({ items, prefixItems, isParentActivated, specVersion
 
 function getArrayItemsPropsOpenAPISpec({ items, isParentActivated, specVersion }) {
 	if (Array.isArray(items)) {
-		return Object.assign({}, items.length > 0 ? getType({ data: items[0], key: '', isParentActivated, specVersion }) : {});
+		return Object.assign(
+			{},
+			items.length > 0 ? getType({ data: items[0], key: '', isParentActivated, specVersion }) : {},
+		);
 	}
 	return Object.assign({}, items ? getType({ data: items, key: '', isParentActivated, specVersion }) : {});
 }
@@ -127,16 +156,16 @@ function getArrayItemsPropsJSONSchemaSpec({ items, prefixItems, isParentActivate
 	if (Array.isArray(prefixItems) || typeof items === 'boolean') {
 		if (!prefixItems) {
 			return {
-				items
+				items,
 			};
 		}
 		return {
 			prefixItems: prefixItems.map(item => getType({ data: item, key: '', isParentActivated, specVersion })),
-			items
+			items,
 		};
 	}
 	return {
-		items: getType({ data: items, key: '', isParentActivated, specVersion })
+		items: getType({ data: items, key: '', isParentActivated, specVersion }),
 	};
 }
 
@@ -152,7 +181,7 @@ function getObjectProperties(properties, isParentActivated, specVersion) {
 		acc[propName] = commentDeactivatedItemInner(
 			getType({ data: properties[propName], key: propName, isParentActivated, specVersion }),
 			properties[propName].isActivated,
-			isParentActivated
+			isParentActivated,
 		);
 		return acc;
 	}, {});
@@ -163,13 +192,17 @@ function getXml(data) {
 		return undefined;
 	}
 
-	return Object.assign({}, {
-		name: data.xmlName,
-		namespace: data.xmlNamespace,
-		prefix: data.xmlPrefix,
-		attribute: data.xmlAttribute,
-		wrapped: data.xmlWrapped
-	}, getExtensions(data.scopesExtensions));
+	return Object.assign(
+		{},
+		{
+			name: data.xmlName,
+			namespace: data.xmlNamespace,
+			prefix: data.xmlPrefix,
+			attribute: data.xmlAttribute,
+			wrapped: data.xmlWrapped,
+		},
+		getExtensions(data.scopesExtensions),
+	);
 }
 
 function getPrimitiveTypeProps(data, specVersion) {
@@ -194,45 +227,45 @@ function getPrimitiveTypeProps(data, specVersion) {
 		writeOnly: data.writeOnly || undefined,
 		example: parseExampleValueByDataType(data.sample, data.type),
 		...(isTargetVersionJSONSchemaCompatible(specVersion) && { examples: data.examples }),
-		...getExtensions(data.scopesExtensions)
+		...getExtensions(data.scopesExtensions),
 	};
 
-	return addIfTrue(properties, 'nullable', isTargetVersionJSONSchemaCompatible(specVersion) ? false: data.nullable);
+	return addIfTrue(properties, 'nullable', isTargetVersionJSONSchemaCompatible(specVersion) ? false : data.nullable);
 }
 
 function getAdditionalProperties(data) {
-	const getAdditionalPropsObject = (data) => {
+	const getAdditionalPropsObject = data => {
 		if (!data) {
 			return;
 		}
 		if (data.additionalPropertiesObjectType === 'integer') {
 			return {
 				type: data.additionalPropertiesObjectType,
-				format: data.additionalPropertiesIntegerFormat
-			}
+				format: data.additionalPropertiesIntegerFormat,
+			};
 		}
 		return { type: data.additionalPropertiesObjectType };
-	}
+	};
 
 	if (!data.additionalPropControl) {
 		return;
 	}
-	
+
 	if (data.additionalPropControl === 'Boolean') {
 		return data.additionalProperties || undefined;
 	}
-	
+
 	return getAdditionalPropsObject(data);
 }
 
 function getChoices(data, key, specVersion) {
 	const mapChoice = (item, key, specVersion) => {
-		const choiceValue = get(item, `properties.${key}`); 
+		const choiceValue = get(item, `properties.${key}`);
 		if (choiceValue) {
 			return getType({ data: choiceValue, specVersion });
 		}
 		return getType({ data: item, specVersion });
-	}
+	};
 
 	if (!data) {
 		return;
@@ -240,16 +273,19 @@ function getChoices(data, key, specVersion) {
 	const { allOf, anyOf, oneOf, not } = data;
 	const multipleChoices = ['allOf', 'anyOf', 'oneOf', 'not'];
 
-	return multipleChoices.reduce((acc, choice) => {
-		if (acc[choice]) {
-			if (choice === 'not') {
-				acc[choice] = mapChoice(acc[choice], key, specVersion);
-			} else {
-				acc[choice] = acc[choice].map(item => mapChoice(item, key, specVersion)); 
+	return multipleChoices.reduce(
+		(acc, choice) => {
+			if (acc[choice]) {
+				if (choice === 'not') {
+					acc[choice] = mapChoice(acc[choice], key, specVersion);
+				} else {
+					acc[choice] = acc[choice].map(item => mapChoice(item, key, specVersion));
+				}
 			}
-		}
-		return acc;
-	}, { allOf, anyOf, oneOf, not });
+			return acc;
+		},
+		{ allOf, anyOf, oneOf, not },
+	);
 }
 
 function getConditionalProperties(data, specVersion) {
@@ -261,9 +297,12 @@ function getConditionalProperties(data, specVersion) {
 		return;
 	}
 	return Object.keys(conditionalProperties.properties).reduce((acc, propName) => {
-		const conditionalItem = getType({ data: { ...conditionalProperties.properties[propName], type: 'object' }, specVersion });
+		const conditionalItem = getType({
+			data: { ...conditionalProperties.properties[propName], type: 'object' },
+			specVersion,
+		});
 		if (!isConditionalItemEmpty(conditionalItem)) {
-			acc[propName] = conditionalItem; 
+			acc[propName] = conditionalItem;
 		}
 		return acc;
 	}, {});
@@ -291,7 +330,7 @@ function hasChoice(data) {
 function parseExample(data) {
 	try {
 		return JSON.parse(data);
-	} catch(err) {
+	} catch (err) {
 		return data;
 	}
 }
@@ -299,7 +338,7 @@ function parseExample(data) {
 function parseJSONValue(data) {
 	try {
 		return JSON.parse(data);
-	} catch(err) {
+	} catch (err) {
 		return undefined;
 	}
 }
@@ -310,20 +349,22 @@ function addIfTrue(data, propertyName, value) {
 	}
 
 	return Object.assign({}, data, {
-		[propertyName]: value
+		[propertyName]: value,
 	});
 }
 
 function getArrayItemsExample(items) {
 	const supportedDataTypes = ['object', 'string', 'number', 'integer', 'boolean'];
 	if (Array.isArray(items) && items.length > 1) {
-		const itemsExample = items.filter(item => item.isActivated !== false).reduce((acc, item) => {
-			if (supportedDataTypes.includes(item.type) && item.sample) {
-				const example = item.type === 'object' ? parseExample(item.sample) : item.sample;
-				return acc.concat(example);
-			}
-			return acc;
-		}, []);
+		const itemsExample = items
+			.filter(item => item.isActivated !== false)
+			.reduce((acc, item) => {
+				if (supportedDataTypes.includes(item.type) && item.sample) {
+					const example = item.type === 'object' ? parseExample(item.sample) : item.sample;
+					return acc.concat(example);
+				}
+				return acc;
+			}, []);
 		if (itemsExample.length > 1) {
 			return itemsExample;
 		}
@@ -335,15 +376,17 @@ function getDiscriminator(discriminator) {
 	if (!discriminator || !discriminator.propertyName) {
 		return null;
 	}
-	const mapping = (!discriminator.mapping || discriminator.mapping.length === 0) ? null : discriminator.mapping.reduce((acc, mappingItem) => {
-		acc[mappingItem.discriminatorValue] = mappingItem.discriminatorSchema;
-		return acc;
-	}, {});
+	const mapping =
+		!discriminator.mapping || discriminator.mapping.length === 0
+			? null
+			: discriminator.mapping.reduce((acc, mappingItem) => {
+					acc[mappingItem.discriminatorValue] = mappingItem.discriminatorSchema;
+					return acc;
+				}, {});
 
 	return {
 		propertyName: discriminator.propertyName,
-		...(mapping && { mapping })
-
+		...(mapping && { mapping }),
 	};
 }
 

@@ -27,14 +27,7 @@
 	},
 	"subtypes": {
 		"structuralSchema": {
-			"childValueType": [
-				"string",
-				"number",
-				"integer",
-				"boolean",
-				"array",
-				"object"
-			]
+			"childValueType": ["string", "number", "integer", "boolean", "array", "object"]
 		}
 	}
 }

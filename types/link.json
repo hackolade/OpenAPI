@@ -23,9 +23,7 @@
 	},
 	"subtypes": {
 		"expression": {
-			"childValueType": [
-				"expression"
-			]
+			"childValueType": ["expression"]
 		}
 	}
 }

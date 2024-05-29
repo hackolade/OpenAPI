@@ -40,7 +40,7 @@
  * }
  */
 {
-  "modify": {
-    "entity": [["setIncludeRequestBodyProperty"]]
-  }
+	"modify": {
+		"entity": [["setIncludeRequestBodyProperty"]]
+	}
 }

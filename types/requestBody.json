@@ -28,9 +28,7 @@
 	},
 	"subtypes": {
 		"media": {
-			"childValueType": [
-				"media"
-			]
+			"childValueType": ["media"]
 		}
 	}
 }

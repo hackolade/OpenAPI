@@ -36,12 +36,7 @@
 			]
 		},
 		"anyParameter": {
-			"childValueType": [
-				"parameter (path)",
-				"parameter (query)",
-				"parameter (header)",
-				"parameter (cookie)"
-			]
+			"childValueType": ["parameter (path)", "parameter (query)", "parameter (header)", "parameter (cookie)"]
 		}
 	}
 }

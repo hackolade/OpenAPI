@@ -4,11 +4,12 @@ const partial = require('lodash.partial');
 const add = (obj, properties) => Object.assign({}, obj, properties);
 
 const mapJsonSchema = (jsonSchema, callback) => {
-	const mapProperties = (properties, mapper) => Object.keys(properties).reduce((newProperties, propertyName) => {
-		return add(newProperties, {
-			[propertyName]: mapper(properties[propertyName])
-		});
-	}, {});
+	const mapProperties = (properties, mapper) =>
+		Object.keys(properties).reduce((newProperties, propertyName) => {
+			return add(newProperties, {
+				[propertyName]: mapper(properties[propertyName]),
+			});
+		}, {});
 	const mapItems = (items, mapper) => {
 		if (Array.isArray(items)) {
 			return items.map(jsonSchema => mapper(jsonSchema));
@@ -23,9 +24,9 @@ const mapJsonSchema = (jsonSchema, callback) => {
 			if (!jsonSchema[propertyName]) {
 				return jsonSchema;
 			}
-	
+
 			return Object.assign({}, jsonSchema, {
-				[propertyName]: mapper(jsonSchema[propertyName])
+				[propertyName]: mapper(jsonSchema[propertyName]),
 			});
 		}, jsonSchema);
 	};
@@ -33,12 +34,20 @@ const mapJsonSchema = (jsonSchema, callback) => {
 		return jsonSchema;
 	}
 	const mapper = partial(mapJsonSchema, partial.placeholder, callback);
-	const propertiesLike = [ 'properties', 'definitions', 'patternProperties' ];
-	const itemsLike = [ 'items', 'prefixItems', 'oneOf', 'allOf', 'anyOf', 'not' ];
-	
+	const propertiesLike = ['properties', 'definitions', 'patternProperties'];
+	const itemsLike = ['items', 'prefixItems', 'oneOf', 'allOf', 'anyOf', 'not'];
+
 	const copyJsonSchema = Object.assign({}, jsonSchema);
-	const jsonSchemaWithNewProperties = applyTo(propertiesLike, copyJsonSchema, partial(mapProperties, partial.placeholder, mapper));
-	const newJsonSchema = applyTo(itemsLike, jsonSchemaWithNewProperties, partial(mapItems, partial.placeholder, mapper));
+	const jsonSchemaWithNewProperties = applyTo(
+		propertiesLike,
+		copyJsonSchema,
+		partial(mapProperties, partial.placeholder, mapper),
+	);
+	const newJsonSchema = applyTo(
+		itemsLike,
+		jsonSchemaWithNewProperties,
+		partial(mapItems, partial.placeholder, mapper),
+	);
 
 	return callback(newJsonSchema);
 };

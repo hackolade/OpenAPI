@@ -1,45 +1,45 @@
 const mapJsonSchema = require('./mapJsonSchema');
-const commonHelper = require('../commonHelper')
+const commonHelper = require('../commonHelper');
 
-const convertToString = (jsonSchema) => {
+const convertToString = jsonSchema => {
 	return Object.assign({}, jsonSchema, {
 		type: 'string',
-		nullable: true
+		nullable: true,
 	});
 };
 
 const convertMultipleTypeToType = jsonSchema => {
 	const type = jsonSchema.type.find(item => item !== 'null');
-	
+
 	if (!type) {
 		return convertToString(jsonSchema);
 	} else if (!jsonSchema.type.includes('null')) {
 		return {
 			...jsonSchema,
-			type
-		}
-	} 
+			type,
+		};
+	}
 
 	return {
 		...jsonSchema,
 		type,
-		nullable: true
-	}
-}
+		nullable: true,
+	};
+};
 
-const handleNumericType = (jsonSchema) => {
+const handleNumericType = jsonSchema => {
 	if (jsonSchema.mode === 'int') {
 		return {
 			...jsonSchema,
-			type: 'integer'
-		}
+			type: 'integer',
+		};
 	}
 	if (jsonSchema.mode === 'decimal') {
 		return {
 			...jsonSchema,
 			type: 'number',
-			mode: 'double'
-		}
+			mode: 'double',
+		};
 	}
 
 	return jsonSchema;
@@ -47,7 +47,7 @@ const handleNumericType = (jsonSchema) => {
 
 const adaptSchema = (jsonSchema, targetDBVersion) => {
 	const isJSONSchemaCompatibleTargetVersion = targetDBVersion?.split('.')?.[1] >= '1'; // 3.1.0 or higher
-	return mapJsonSchema(jsonSchema, (jsonSchemaItem) => {
+	return mapJsonSchema(jsonSchema, jsonSchemaItem => {
 		if (Array.isArray(jsonSchemaItem.type) && !isJSONSchemaCompatibleTargetVersion) {
 			return convertMultipleTypeToType(jsonSchemaItem);
 		} else if (jsonSchemaItem.type === 'number') {
@@ -55,7 +55,7 @@ const adaptSchema = (jsonSchema, targetDBVersion) => {
 		} else if (jsonSchemaItem.type === 'null' && !isJSONSchemaCompatibleTargetVersion) {
 			return convertToString(jsonSchemaItem);
 		}
-		
+
 		return jsonSchemaItem;
 	});
 };
@@ -70,9 +70,9 @@ const adaptJsonSchema = (data, logger, callback) => {
 		logger.log('info', 'Adaptation of JSON Schema finished.', 'Adapt JSON Schema');
 
 		callback(null, {
-			jsonSchema: JSON.stringify(adaptedJsonSchema)
+			jsonSchema: JSON.stringify(adaptedJsonSchema),
 		});
-	} catch(e) {
+	} catch (e) {
 		callback(commonHelper.handleErrorObject(e, 'Adapt JSON Schema'), data);
 	}
 };

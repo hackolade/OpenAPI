@@ -18,5 +18,5 @@ function mapSchema({ data, key, isParentActivated = false, specVersion }) {
 
 module.exports = {
 	getSchemas,
-	mapSchema
-}
+	mapSchema,
+};

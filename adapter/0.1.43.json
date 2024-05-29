@@ -40,7 +40,7 @@
  * }
  */
 
- {
+{
 	"modify": {
 		"field": [["removePropertyDuplicates", "responses", "application/json"]]
 	}

@@ -1,9 +1,11 @@
 {
 	"name": "encoding",
 	"parentType": "document",
-	"properties": [{
-		"name": "headers",
-		"type": "object",
-		"subtype": "header"
-	}]
+	"properties": [
+		{
+			"name": "headers",
+			"type": "object",
+			"subtype": "header"
+		}
+	]
 }

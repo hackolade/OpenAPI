@@ -40,19 +40,19 @@
  * }
  */
 {
-    "modify": {
-        "field": [
-            [
-                "convertPropertyValueToType",
-                {
-                    "fieldKeyword": "sample",
-                    "convertToType": "number",
-                    "dependency": {
-                        "key": "type",
-                        "value": "numeric"
-                    }
-                }
-            ]
-        ]
-    }
+	"modify": {
+		"field": [
+			[
+				"convertPropertyValueToType",
+				{
+					"fieldKeyword": "sample",
+					"convertToType": "number",
+					"dependency": {
+						"key": "type",
+						"value": "numeric"
+					}
+				}
+			]
+		]
+	}
 }

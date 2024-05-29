@@ -9,7 +9,7 @@ const { getServers } = require('./helpers/serversHelper');
 const getExtensions = require('./helpers/extensionsHelper');
 const handleReferencePath = require('./helpers/handleReferencePath');
 const mapJsonSchema = require('../reverse_engineering/helpers/adaptJsonSchema/mapJsonSchema');
-const path=require('path');
+const path = require('path');
 
 module.exports = {
 	generateModelScript(data, logger, cb) {
@@ -37,8 +37,15 @@ module.exports = {
 			const paths = getPaths(pathContainers, containersIdsFromCallbacks, specVersion);
 			const webhooks = getPaths(webhookContainers, containersIdsFromCallbacks, specVersion);
 			const definitions = JSON.parse(data.modelDefinitions) || {};
-			const definitionsWithHandledReferences = mapJsonSchema(definitions, handleRef(externalDefinitions, resolveApiExternalRefs));
-			const components = getComponents({ definitions: definitionsWithHandledReferences, containers: data.containers, specVersion });
+			const definitionsWithHandledReferences = mapJsonSchema(
+				definitions,
+				handleRef(externalDefinitions, resolveApiExternalRefs),
+			);
+			const components = getComponents({
+				definitions: definitionsWithHandledReferences,
+				containers: data.containers,
+				specVersion,
+			});
 			const security = commonHelper.mapSecurity(modelSecurity);
 			const tags = commonHelper.mapTags(modelTags);
 			const externalDocs = commonHelper.mapExternalDocs(modelExternalDocs);
@@ -53,7 +60,7 @@ module.exports = {
 				components,
 				security,
 				tags,
-				externalDocs
+				externalDocs,
 			};
 			const extensions = getExtensions(data.modelData[0].scopesExtensions);
 
@@ -97,8 +104,9 @@ module.exports = {
 					parsedScript = JSON.parse(filteredScript);
 			}
 
-			validationHelper.validate(replaceRelativePathByAbsolute(parsedScript, targetScriptOptions.modelDirectory))
-				.then((messages) => {
+			validationHelper
+				.validate(replaceRelativePathByAbsolute(parsedScript, targetScriptOptions.modelDirectory))
+				.then(messages => {
 					cb(null, messages);
 				})
 				.catch(err => {
@@ -109,7 +117,7 @@ module.exports = {
 
 			cb(e.message);
 		}
-	}
+	},
 };
 
 const addCommentsSigns = (string, format) => {
@@ -118,39 +126,46 @@ const addCommentsSigns = (string, format) => {
 	const innerCommentStart = /hackoladeInnerCommentStart/i;
 	const innerCommentEnd = /hackoladeInnerCommentEnd/i;
 	const innerCommentStartYamlArrayItem = /- hackoladeInnerCommentStart/i;
-	
-	const { result } = string.split('\n').reduce(({ isCommented, result }, line, index, array) => {
-		if (commentsStart.test(line) || innerCommentStart.test(line)) {
-			if (innerCommentStartYamlArrayItem.test(line)) {
-				const lineBeginsAt = array[index + 1].search(/\S/);
-				array[index + 1] = array[index + 1].slice(0, lineBeginsAt) + '- ' + array[index + 1].slice(lineBeginsAt);
-			}
-			return { isCommented: true, result: result };
-		}
-		if (commentsEnd.test(line)) {
-			return { isCommented: false, result };
-		}
-		if (innerCommentEnd.test(line)) {
-			if (format === 'json') {
-				array[index + 1] = '# ' + array[index + 1];
-			}
-			return { isCommented: false, result };
-		}
 
-		const isNextLineInnerCommentStart = index + 1 < array.length && innerCommentStart.test(array[index + 1]);
-		if ((isCommented || isNextLineInnerCommentStart) && !innerCommentStartYamlArrayItem.test(array[index + 1])) {
-			result = result + '# ' + line + '\n';
-		} else {
-			result = result + line + '\n';
-		}
+	const { result } = string.split('\n').reduce(
+		({ isCommented, result }, line, index, array) => {
+			if (commentsStart.test(line) || innerCommentStart.test(line)) {
+				if (innerCommentStartYamlArrayItem.test(line)) {
+					const lineBeginsAt = array[index + 1].search(/\S/);
+					array[index + 1] =
+						array[index + 1].slice(0, lineBeginsAt) + '- ' + array[index + 1].slice(lineBeginsAt);
+				}
+				return { isCommented: true, result: result };
+			}
+			if (commentsEnd.test(line)) {
+				return { isCommented: false, result };
+			}
+			if (innerCommentEnd.test(line)) {
+				if (format === 'json') {
+					array[index + 1] = '# ' + array[index + 1];
+				}
+				return { isCommented: false, result };
+			}
 
-		return { isCommented, result };
-	}, { isCommented: false, result: '' });
+			const isNextLineInnerCommentStart = index + 1 < array.length && innerCommentStart.test(array[index + 1]);
+			if (
+				(isCommented || isNextLineInnerCommentStart) &&
+				!innerCommentStartYamlArrayItem.test(array[index + 1])
+			) {
+				result = result + '# ' + line + '\n';
+			} else {
+				result = result + line + '\n';
+			}
+
+			return { isCommented, result };
+		},
+		{ isCommented: false, result: '' },
+	);
 
 	return result;
-}
+};
 
-const removeCommentLines = (scriptString) => {
+const removeCommentLines = scriptString => {
 	const isCommentedLine = /^\s*#\s+/i;
 
 	return scriptString
@@ -158,25 +173,25 @@ const removeCommentLines = (scriptString) => {
 		.filter(line => !isCommentedLine.test(line))
 		.join('\n')
 		.replace(/(.*?),\s*(\}|])/g, '$1$2');
-}
+};
 
-const replaceRelativePathByAbsolute=(script, modelDirectory)=>{
-    if(!modelDirectory || typeof modelDirectory !== 'string'){
-        return script;
-    }
-    const stringifiedScript=JSON.stringify(script);
-    const fixedScript= stringifiedScript.replace(/("\$ref":\s*)"(.*?(?<!\\))"/g, (match, refGroup, relativePath)=>{
-        const isAbsolutePath=relativePath.startsWith('file:');
-        const isInternetLink=relativePath.startsWith('http:') || relativePath.startsWith('https:');
-        const isModelRef=relativePath.startsWith('#');
-        if(isAbsolutePath || isInternetLink || isModelRef){
-            return match
-        }
-        const absolutePath=path.join(path.dirname(modelDirectory), relativePath).replace(/\\/g, '/');
-        return `${refGroup}"file://${absolutePath}"`
-    });
-    return JSON.parse(fixedScript);
-}
+const replaceRelativePathByAbsolute = (script, modelDirectory) => {
+	if (!modelDirectory || typeof modelDirectory !== 'string') {
+		return script;
+	}
+	const stringifiedScript = JSON.stringify(script);
+	const fixedScript = stringifiedScript.replace(/("\$ref":\s*)"(.*?(?<!\\))"/g, (match, refGroup, relativePath) => {
+		const isAbsolutePath = relativePath.startsWith('file:');
+		const isInternetLink = relativePath.startsWith('http:') || relativePath.startsWith('https:');
+		const isModelRef = relativePath.startsWith('#');
+		if (isAbsolutePath || isInternetLink || isModelRef) {
+			return match;
+		}
+		const absolutePath = path.join(path.dirname(modelDirectory), relativePath).replace(/\\/g, '/');
+		return `${refGroup}"file://${absolutePath}"`;
+	});
+	return JSON.parse(fixedScript);
+};
 
 const handleRefInContainers = (containers, externalDefinitions, resolveApiExternalRefs) => {
 	return containers.map(container => {
@@ -184,27 +199,29 @@ const handleRefInContainers = (containers, externalDefinitions, resolveApiExtern
 			const updatedSchemas = Object.keys(container.jsonSchema).reduce((schemas, id) => {
 				const json = container.jsonSchema[id];
 				try {
-					const updatedSchema = mapJsonSchema(JSON.parse(json), handleRef(externalDefinitions, resolveApiExternalRefs));
+					const updatedSchema = mapJsonSchema(
+						JSON.parse(json),
+						handleRef(externalDefinitions, resolveApiExternalRefs),
+					);
 
 					return {
 						...schemas,
-						[id]: JSON.stringify(updatedSchema)
+						[id]: JSON.stringify(updatedSchema),
 					};
 				} catch (err) {
-					return { ...schemas, [id]: json }
+					return { ...schemas, [id]: json };
 				}
 			}, {});
 
 			return {
 				...container,
-				jsonSchema: updatedSchemas
+				jsonSchema: updatedSchemas,
 			};
 		} catch (err) {
 			return container;
 		}
 	});
 };
-
 
 const handleRef = (externalDefinitions, resolveApiExternalRefs) => field => {
 	if (!field.$ref) {
@@ -215,7 +232,7 @@ const handleRef = (externalDefinitions, resolveApiExternalRefs) => field => {
 		return ref;
 	}
 
-	return { ...field, ...ref }; 
+	return { ...field, ...ref };
 };
 
 const separatePathAndWebhooks = containers => {
@@ -230,4 +247,4 @@ const separatePathAndWebhooks = containers => {
 	});
 
 	return { pathContainers, webhookContainers };
-}
+};

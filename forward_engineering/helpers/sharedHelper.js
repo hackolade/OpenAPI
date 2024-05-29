@@ -22,4 +22,4 @@ module.exports = {
 	isTargetVersionJSONSchemaCompatible,
 	getArrayItems,
 	isNotEmptyString,
-}
+};
