@@ -124,6 +124,7 @@
         "@apidevtools/swagger-parser": "10.1.0",
         "comment-json": "4.1.0",
         "js-yaml": "3.14.1",
+        "lodash": "4.17.21",
         "lodash.get": "4.4.2",
         "lodash.isplainobject": "4.0.6",
         "lodash.partial": "4.2.1",
@@ -142,8 +143,8 @@
     },
     "devDependencies": {
         "@hackolade/hck-esbuild-plugins-pack": "0.0.1",
-        "@typescript-eslint/parser": "7.11.0",
         "@typescript-eslint/eslint-plugin": "7.11.0",
+        "@typescript-eslint/parser": "7.11.0",
         "esbuild": "0.20.2",
         "esbuild-plugin-clean": "1.0.1",
         "eslint": "8.57.0",
