@@ -1,8 +1,17 @@
-
 const getExtensions = require('./extensionsHelper');
 const { isNotEmptyString } = require('./sharedHelper');
 
-function getInfo({ description, version, modelVersion, title = '', termsOfService, contact, license, infoExtensions, summary }) {
+function getInfo({
+	description,
+	version,
+	modelVersion,
+	title = '',
+	termsOfService,
+	contact,
+	license,
+	infoExtensions,
+	summary,
+}) {
 	const info = {
 		title,
 		summary,
@@ -10,7 +19,7 @@ function getInfo({ description, version, modelVersion, title = '', termsOfServic
 		termsOfService,
 		contact: getContact(contact),
 		license: getLicense(license),
-		version: version || modelVersion
+		version: version || modelVersion,
 	};
 
 	const extensions = getExtensions(infoExtensions);
@@ -25,7 +34,7 @@ function getContact(contact) {
 	const contactObj = {
 		name: contact.contactName,
 		url: contact.contactURL,
-		email: contact.contactemail
+		email: contact.contactemail,
 	};
 	const extensions = getExtensions(contact.contactExtensions);
 
@@ -33,7 +42,7 @@ function getContact(contact) {
 }
 
 function getLicense(license) {
-	const getLicenseData = (license) => {
+	const getLicenseData = license => {
 		if (isNotEmptyString(license.licenseIdentifier)) {
 			return {
 				identifier: license.licenseIdentifier,
@@ -41,7 +50,7 @@ function getLicense(license) {
 		}
 		if (isNotEmptyString(license.licenseURL)) {
 			return {
-				url: license.licenseURL
+				url: license.licenseURL,
 			};
 		}
 		return {};

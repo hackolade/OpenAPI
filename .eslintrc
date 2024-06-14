@@ -1,0 +1,55 @@
+{
+	"extends": ["prettier"],
+	"env": {
+		"node": true,
+		"es2022": true
+	},
+	"plugins": ["import", "unused-imports", "@typescript-eslint"],
+	"rules": {
+		"no-cond-assign": "error",
+		"no-const-assign": "error",
+		"no-dupe-args": "error",
+		"no-dupe-keys": "error",
+		"no-duplicate-case": "error",
+		"no-unreachable": "error",
+		"eqeqeq": "error",
+		"no-var": "error",
+		"no-undef": "error",
+		"no-bitwise": "warn",
+		"import/no-unresolved": [
+			"error"
+		],
+		"import/named": "error",
+		"import/default": "error",
+		"import/no-self-import": "error",
+		"no-unused-vars": "off",
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"off",
+			{
+				"vars": "all",
+				"varsIgnorePattern": "^(React$|__)",
+				"argsIgnorePattern": ".*"
+			}
+		],
+		"no-debugger": "error"
+	},
+	"overrides": [
+		{
+			"files": ["*.ts"],
+			"extends": ["plugin:@typescript-eslint/recommended"],
+			"parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"project": "./tsconfig.json"
+			}
+		}
+	],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".js", ".ts", ".cjs", ".mjs"]
+			}
+		}
+	},
+	"root": true
+}

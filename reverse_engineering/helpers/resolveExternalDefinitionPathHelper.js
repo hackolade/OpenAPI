@@ -4,10 +4,13 @@ const resolvePath = (data, callback) => {
 		path = path.slice(1);
 	}
 	if (!path[0]) {
-		return callback({
-			title: 'Resolve external definition path error',
-			message: 'External definition path is not valid'
-		}, data.path || '');
+		return callback(
+			{
+				title: 'Resolve external definition path error',
+				message: 'External definition path is not valid',
+			},
+			data.path || '',
+		);
 	}
 	if (path[0] === 'components' || path[0] === 'definitions') {
 		return callback(null, 'definitions' + addPropertiesToPath(path.slice(1)));
@@ -23,8 +26,9 @@ const resolvePath = (data, callback) => {
 	return callback(null, `${bucket}/${request}${addPropertiesToPath(path.slice(3))}`);
 };
 
-const addPropertiesToPath = path => path.length ? '/properties/' + path.filter(item => item !== 'properties').join('/properties/') : '';
+const addPropertiesToPath = path =>
+	path.length ? '/properties/' + path.filter(item => item !== 'properties').join('/properties/') : '';
 
 module.exports = {
-	resolvePath
+	resolvePath,
 };

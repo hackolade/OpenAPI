@@ -3,20 +3,17 @@ function getExtensions(data = []) {
 		return {};
 	}
 
-	return data
-		.filter(filterExtensionsByPrefix)
-		.reduce((acc, { extensionPattern, extensionValue }) => {
-			let parsedValue;
-			try {
-				parsedValue = JSON.parse(extensionValue);
-			} catch(err) {
-				parsedValue = extensionValue;
-			}
-			acc[extensionPattern] = parsedValue;
+	return data.filter(filterExtensionsByPrefix).reduce((acc, { extensionPattern, extensionValue }) => {
+		let parsedValue;
+		try {
+			parsedValue = JSON.parse(extensionValue);
+		} catch (err) {
+			parsedValue = extensionValue;
+		}
+		acc[extensionPattern] = parsedValue;
 
-			return acc;
-		}, {});
-
+		return acc;
+	}, {});
 }
 
 function filterExtensionsByPrefix({ extensionPattern }) {

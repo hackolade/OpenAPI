@@ -13,7 +13,7 @@ function getResponses(data, specVersion) {
 		.map(([key, value]) => {
 			return {
 				key,
-				value: mapResponse({ data: value, specVersion })
+				value: mapResponse({ data: value, specVersion }),
 			};
 		})
 		.reduce((acc, { key, value }) => {
@@ -25,13 +25,21 @@ function getResponses(data, specVersion) {
 function mapResponse({ data, responseCollectionDescription, shouldResponseBeCommented = false, specVersion }) {
 	if (!data) {
 		return;
-	} 
+	}
 	if (hasRef(data)) {
 		return getRef(data, specVersion);
 	}
 	const description = data.description || responseCollectionDescription || '';
-	const headers = getHeaders({ data: get(data, `properties.headers`), isParentActivated: !shouldResponseBeCommented, specVersion });
-	const content = getContent({ data: get(data, `properties.content`), isParentActivated: !shouldResponseBeCommented, specVersion });
+	const headers = getHeaders({
+		data: get(data, `properties.headers`),
+		isParentActivated: !shouldResponseBeCommented,
+		specVersion,
+	});
+	const content = getContent({
+		data: get(data, `properties.content`),
+		isParentActivated: !shouldResponseBeCommented,
+		specVersion,
+	});
 	const links = getLinks(get(data, `properties.links`), specVersion);
 	const extensions = getExtensions(data.scopesExtensions);
 	const response = {};
@@ -40,7 +48,7 @@ function mapResponse({ data, responseCollectionDescription, shouldResponseBeComm
 	}
 
 	Object.assign(response, { description, headers, content, links }, extensions);
-	
+
 	if (shouldResponseBeCommented) {
 		response[`hackoladeInnerCommentEnd`] = true;
 	}
@@ -50,5 +58,5 @@ function mapResponse({ data, responseCollectionDescription, shouldResponseBeComm
 
 module.exports = {
 	getResponses,
-	mapResponse
-}
+	mapResponse,
+};

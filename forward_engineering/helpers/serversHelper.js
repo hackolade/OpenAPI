@@ -15,7 +15,7 @@ function mapServer(data) {
 	const serverData = {
 		url: data.serverURL,
 		description: data.serverDescription,
-		variables: mapVariables(data.serverVariables)
+		variables: mapVariables(data.serverVariables),
 	};
 	const extensions = getExtensions(data.scopesExtensions);
 
@@ -33,8 +33,8 @@ function mapVariables(variables = []) {
 				enum: mapEnum(item.serverVariableEnum, 'serverVariableEnumValue'),
 				default: item.serverVariableDefault,
 				description: item.serverVariableDescription,
-				name: item.serverVariableName
-			}
+				name: item.serverVariableName,
+			};
 			const variableExtensions = getExtensions(item.scopesExtensions);
 
 			return Object.assign({}, variable, variableExtensions);
@@ -49,5 +49,5 @@ function mapVariables(variables = []) {
 
 module.exports = {
 	getServers,
-	mapServer
+	mapServer,
 };

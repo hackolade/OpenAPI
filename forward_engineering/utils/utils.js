@@ -1,5 +1,4 @@
 function removeEmptyObjectFields(inputObj) {
-
 	const obj = JSON.parse(JSON.stringify(inputObj));
 
 	const isObjectFieldWithNotEmptyValue = key =>
@@ -10,25 +9,22 @@ function removeEmptyObjectFields(inputObj) {
 
 	return Object.keys(obj)
 		.filter(isObjectFieldWithNotEmptyValue)
-		.reduce(
-			(newObj, key) => {
-				const isObjectAndNotArray = typeof obj[key] === 'object' && !Array.isArray(obj[key]);
-				if (isObjectAndNotArray) {
-					return Object.assign(newObj, {
-						[key]: removeEmptyObjectFields(obj[key])
-				  	});
-				}
-					return Object.assign(newObj, { [key]: obj[key] })
-			},
-			{}
-		);
+		.reduce((newObj, key) => {
+			const isObjectAndNotArray = typeof obj[key] === 'object' && !Array.isArray(obj[key]);
+			if (isObjectAndNotArray) {
+				return Object.assign(newObj, {
+					[key]: removeEmptyObjectFields(obj[key]),
+				});
+			}
+			return Object.assign(newObj, { [key]: obj[key] });
+		}, {});
 }
 
-const prepareName = (name) => {
-	return (name || '').replace(/\ /ig, '_');
+const prepareName = name => {
+	return (name || '').replace(/\ /gi, '_');
 };
 
-const prepareReferenceName = (ref) => {
+const prepareReferenceName = ref => {
 	const refParts = ref.split('/');
 	const name = refParts.pop();
 	const preparedName = prepareName(name);
@@ -41,5 +37,5 @@ const prepareReferenceName = (ref) => {
 module.exports = {
 	removeEmptyObjectFields,
 	prepareName,
-	prepareReferenceName
+	prepareReferenceName,
 };

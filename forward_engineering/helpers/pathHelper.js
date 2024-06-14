@@ -69,7 +69,10 @@ function getRequestData({
 		.map(data => {
 			const isRequestActivated = data.isActivated && isPathActivated;
 			const requestBodyPropKeyword = getRequestBodyPropKeyword(data.properties);
-			const isRequestBodySupported = getIsRequestBodySupported({ collectionName: data.collectionName, specVersion });
+			const isRequestBodySupported = getIsRequestBodySupported({
+				collectionName: data.collectionName,
+				specVersion,
+			});
 			const extensions = getExtensions(data.scopesExtensions);
 
 			const request = {
@@ -89,7 +92,7 @@ function getRequestData({
 							required: get(data, 'required', []).includes(requestBodyPropKeyword),
 							isParentActivated: isRequestActivated,
 							specVersion,
-					  })
+						})
 					: undefined,
 				responses: mapResponses({
 					collections,

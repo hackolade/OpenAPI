@@ -2,47 +2,58 @@
 	"name": "definitions",
 	"subtype": "snippetChildrenOnly",
 	"parentType": "definitions",
-	"properties": [{
-		"name": "schemas",
-		"type": "componentObject",
-		"subtype": "schema",
-		"hackoladeMeta": {
-			"source": true
+	"properties": [
+		{
+			"name": "schemas",
+			"type": "componentObject",
+			"subtype": "schema",
+			"hackoladeMeta": {
+				"source": true
+			}
+		},
+		{
+			"name": "responses",
+			"type": "componentObject",
+			"subtype": "response"
+		},
+		{
+			"name": "parameters",
+			"type": "componentObject",
+			"subtype": "anyParameter"
+		},
+		{
+			"name": "examples",
+			"type": "componentObject",
+			"subtype": "example"
+		},
+		{
+			"name": "requestBodies",
+			"type": "componentObject",
+			"subtype": "request"
+		},
+		{
+			"name": "headers",
+			"type": "componentObject",
+			"subtype": "header"
+		},
+		{
+			"name": "securitySchemes",
+			"type": "componentObject",
+			"subtype": "securityScheme"
+		},
+		{
+			"name": "links",
+			"type": "componentObject",
+			"subtype": "link"
+		},
+		{
+			"name": "callbacks",
+			"type": "componentObject",
+			"subtype": "callback"
+		},
+		{
+			"name": "Specification Extensions",
+			"type": "extensions"
 		}
-	},{
-		"name": "responses",
-		"type": "componentObject",
-		"subtype": "response"
-	},{
-		"name": "parameters",
-		"type": "componentObject",
-		"subtype": "anyParameter"
-	},{
-		"name": "examples",
-		"type": "componentObject",
-		"subtype": "example"
-	},{
-		"name": "requestBodies",
-		"type": "componentObject",
-		"subtype": "request"
-	},{
-		"name": "headers",
-		"type": "componentObject",
-		"subtype": "header"
-	},{
-		"name": "securitySchemes",
-		"type": "componentObject",
-		"subtype": "securityScheme"
-	},{
-		"name": "links",
-		"type": "componentObject",
-		"subtype": "link"
-	},{
-		"name": "callbacks",
-		"type": "componentObject",
-		"subtype": "callback"
-	},{
-		"name": "Specification Extensions",
-		"type": "extensions"
-	}]
+	]
 }

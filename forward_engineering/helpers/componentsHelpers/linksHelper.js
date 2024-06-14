@@ -4,7 +4,7 @@ const getExtensions = require('../extensionsHelper');
 const { mapServer } = require('../serversHelper');
 
 function getLinks(data, specVersion) {
-    if (!data || !data.properties) {
+	if (!data || !data.properties) {
 		return;
 	}
 
@@ -12,7 +12,7 @@ function getLinks(data, specVersion) {
 		.map(([key, value]) => {
 			return {
 				key,
-				value: mapLink(value, specVersion)
+				value: mapLink(value, specVersion),
 			};
 		})
 		.reduce((acc, { key, value }) => {
@@ -22,53 +22,53 @@ function getLinks(data, specVersion) {
 }
 
 function mapLink(data, specVersion) {
-    if (!data) {
+	if (!data) {
 		return;
-	} 
+	}
 	if (hasRef(data)) {
 		return getRef(data, specVersion);
-    }
-    
-    const { operationRef, operationId, description, server, scopesExtensions } = data;
+	}
 
-    const parametersData = get(data, 'properties.parameters', {});
-    const requestBodyData = get(data, 'properties.requestBody', {});
+	const { operationRef, operationId, description, server, scopesExtensions } = data;
 
-    if (!parametersData.properties && !requestBodyData.expression) {
-        return;
-    }
+	const parametersData = get(data, 'properties.parameters', {});
+	const requestBodyData = get(data, 'properties.requestBody', {});
 
-    const linkData = {
-        operationRef: operationId ? undefined : operationRef,
-        operationId,
-        parameters: mapParameters(parametersData),
-        requestBody: requestBodyData ? requestBodyData.expression : undefined,
-        description,
-        server: mapServer(server)
-    };
-    const extensions = getExtensions(scopesExtensions);
+	if (!parametersData.properties && !requestBodyData.expression) {
+		return;
+	}
 
-    return Object.assign({}, linkData, extensions);
+	const linkData = {
+		operationRef: operationId ? undefined : operationRef,
+		operationId,
+		parameters: mapParameters(parametersData),
+		requestBody: requestBodyData ? requestBodyData.expression : undefined,
+		description,
+		server: mapServer(server),
+	};
+	const extensions = getExtensions(scopesExtensions);
+
+	return Object.assign({}, linkData, extensions);
 }
 
 function mapParameters(data) {
-    if (!data) {
-        return;
-    }
+	if (!data) {
+		return;
+	}
 
-    return Object.entries(data.properties)
-    .map(([key, value]) => {
-        return {
-            key,
-            value: value.expression
-        };
-    })
-    .reduce((acc, { key, value }) => {
-        acc[key] = value;
-        return acc;
-    }, {});
+	return Object.entries(data.properties)
+		.map(([key, value]) => {
+			return {
+				key,
+				value: value.expression,
+			};
+		})
+		.reduce((acc, { key, value }) => {
+			acc[key] = value;
+			return acc;
+		}, {});
 }
 
 module.exports = {
-    getLinks,
+	getLinks,
 };

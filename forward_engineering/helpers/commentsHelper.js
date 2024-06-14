@@ -1,12 +1,12 @@
 const commentFlags = {
 	inner: {
 		start: 'hackoladeInnerCommentStart',
-		end: 'hackoladeInnerCommentEnd'
+		end: 'hackoladeInnerCommentEnd',
 	},
 	outer: {
 		start: 'hackoladeCommentStart',
-		end: 'hackoladeCommentEnd'
-	}
+		end: 'hackoladeCommentEnd',
+	},
 };
 
 function commentDeactivatedItem(item, isActivated, isParentActivated, commentFlagNames) {
@@ -18,7 +18,7 @@ function commentDeactivatedItem(item, isActivated, isParentActivated, commentFla
 		return {
 			[commentFlagNames.start]: true,
 			...item,
-			[commentFlagNames.end]: true
+			[commentFlagNames.end]: true,
 		};
 	}
 

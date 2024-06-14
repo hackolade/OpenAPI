@@ -10,7 +10,7 @@ function getExamples(data, specVersion) {
 		.map(([key, value]) => {
 			return {
 				key,
-				value: mapExample(value, specVersion)
+				value: mapExample(value, specVersion),
 			};
 		})
 		.reduce((acc, { key, value }) => {
@@ -22,30 +22,30 @@ function getExamples(data, specVersion) {
 function mapExample(data, specVersion) {
 	if (!data) {
 		return;
-	} 
+	}
 	if (hasRef(data)) {
 		return getRef(data, specVersion);
 	}
-	
+
 	const { summary, description, value, externalValue, scopesExtensions } = data;
 	let parsedValue;
 	try {
 		parsedValue = JSON.parse(value);
-	} catch(err) {
+	} catch (err) {
 		parsedValue = value;
 	}
-    const example = {
-        summary,
-        description,
-        value: parsedValue,
-        externalValue
-    };
-    const extensions = getExtensions(scopesExtensions);
+	const example = {
+		summary,
+		description,
+		value: parsedValue,
+		externalValue,
+	};
+	const extensions = getExtensions(scopesExtensions);
 
-    return Object.assign({}, example, extensions);
+	return Object.assign({}, example, extensions);
 }
 
 module.exports = {
 	getExamples,
-	mapExample
-}
+	mapExample,
+};

@@ -6,9 +6,7 @@ function mapEnum(enums, key) {
 	if (!enums) {
 		return;
 	}
-	return enums
-		.filter(item => item[key])
-		.map(item => item[key]);
+	return enums.filter(item => item[key]).map(item => item[key]);
 }
 
 function mapExternalDocs({ externalDocsUrl, externalDocsDescription, scopesExtensions } = {}) {
@@ -17,7 +15,7 @@ function mapExternalDocs({ externalDocsUrl, externalDocsDescription, scopesExten
 	}
 	const externalDocs = {
 		description: externalDocsDescription,
-		url: externalDocsUrl
+		url: externalDocsUrl,
 	};
 	const externalDocsExtensions = getExtensions(scopesExtensions);
 
@@ -30,7 +28,7 @@ function mapExternalTagDocs({ tagExternalDocsUrl, tagExternalDocsDescription } =
 	}
 	return {
 		description: tagExternalDocsDescription,
-		url: tagExternalDocsUrl
+		url: tagExternalDocsUrl,
 	};
 }
 
@@ -42,7 +40,7 @@ function mapTags(tags = []) {
 		const tagObj = {
 			name: tag.tagName,
 			description: tag.tagDescription,
-			externalDocs: mapExternalTagDocs(tag.externalDocs)
+			externalDocs: mapExternalTagDocs(tag.externalDocs),
 		};
 		const tagExtensions = getExtensions(tag.scopesExtensions);
 
@@ -58,7 +56,7 @@ function mapSecurity(security = []) {
 		.filter(({ securityRequirementName }) => securityRequirementName)
 		.map(({ securityRequirementName, securityRequirementOperation = [] }) => {
 			return {
-				[securityRequirementName]: securityRequirementOperation.filter(item => item)
+				[securityRequirementName]: securityRequirementOperation.filter(item => item),
 			};
 		});
 }
@@ -77,9 +75,8 @@ function getContainersIdsForCallbacks(data) {
 
 function getContainersIdsFromRequestCallbacks(containers = []) {
 	return containers.reduce((acc, container) => {
-		const collections = container.entities
-			.map(collectionId => JSON.parse(container.jsonSchema[collectionId]));
-		
+		const collections = container.entities.map(collectionId => JSON.parse(container.jsonSchema[collectionId]));
+
 		const containerIds = collections
 			.filter(({ entityType }) => entityType === 'request')
 			.reduce((acc, collection) => {
@@ -88,15 +85,14 @@ function getContainersIdsFromRequestCallbacks(containers = []) {
 				acc = [...acc, ...containersIdsFromCallbacks];
 				return acc;
 			}, []);
-		
+
 		acc = [...acc, ...containerIds];
 		return acc;
 	}, []);
 }
 
 function getContainersIdsFromCallbacks(callbacks = {}) {
-	return Object.entries(callbacks)
-	.reduce((acc, [key, value]) => {
+	return Object.entries(callbacks).reduce((acc, [key, value]) => {
 		if (hasRef(value) || !value.bucketId) {
 			return acc;
 		}
@@ -111,7 +107,7 @@ function activateItem(item) {
 	}
 	return {
 		...item,
-		isActivated: true
+		isActivated: true,
 	};
 }
 

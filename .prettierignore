@@ -1,0 +1,6 @@
+.git
+.vscode
+.idea
+release
+node_modules
+package.json

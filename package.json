@@ -1,124 +1,160 @@
 {
-	"name": "OpenAPI",
-	"version": "0.1.73",
-	"versionDate": "2024-05-14",
-	"author": "hackolade",
-	"engines": {
-		"hackolade": "6.9.11",
-		"hackoladePlugin": "1.0.0"
-	},
-	"contributes": {
-		"target": {
-			"applicationTarget": "OPENAPI",
-			"title": "OpenAPI",
-			"versions": [
-				"3.0.3",
-				"3.1.0"
-			]
-		},
-		"features": {
-			"nestedCollections": {
-				"level": 1
-			},
-			"disableMultipleTypes": {
-				"dependencies": [
-					{
-						"dependency": {
-							"level": "model",
-							"key": "dbVersion",
-							"value": "3.1.0"
-						},
-						"value": false
-					}
-				],
-				"defaultValue": true
-			},
-			"disableMultipleNonScalarTypes": false,
-			"enableReverseEngineering": {
-				"jsonDocument": {
-					"entities": false,
-					"model_definitions": true
-				},
-				"jsonSchema": {
-					"entities": false,
-					"model_definitions": true
-				},
-				"ddl": {
-					"entities": false,
-					"model_definitions": true
-				},
-				"xsd": {
-					"entities": false,
-					"model_definitions": true
-				},
-				"plugin": true
-			},
-			"disableDenormalization": true,
-			"enableForwardEngineering": {
-				"jsonDocument": true,
-				"jsonSchema": true,
-				"plugin": true,
-				"apiSchema": false
-			},
-			"forwardEngineering": {
-				"jsonSchema": {
-					"keepParentType": {
-						"integer": "integer"
-					}
-				}
-			},
-			"disablePatternField": false,
-			"disableChoices": {
-				"anyOf": false,
-				"oneOf": false,
-				"not": false
-			},
-			"enableJsonType": false,
-			"disableNamingConvention": {
-				"entityLevel": true,
-				"containerLevel": true,
-				"fieldLevel": {
-					"componentObject": true,
-					"operationObject": true,
-					"extensions": true,
-					"media": true
-				}
-			},
-			"disableChildren": {
-				"entityLevel": true
-			},
-			"disableDefinitions": {
-				"internal": true
-			},
-			"disableRelationships": false,
-			"relationships": {
-				"definitionRelationships": true
-			},
-			"disableJsonPreview": false,
-			"enableErdToggle": true,
-			"enableStackedNestedCollections": true,
-			"externalDefinitionsFromTargetSchema": true,
-			"apiTarget": true,
-			"FEScriptCommentsSupported": true,
-			"displayOptions": {
-				"hideNonNullableAttributes": true
-			},
-			"openModelDefinitionsTabIfNoCollections": true,
-			"jsonSchemaSpec": {
-				"version": "draft-2020-12",
-				"schema": "https://json-schema.org/draft/2020-12/schema",
-				"targetDBVersions": [
-					"3.1.0"
-				]
-			},
-			"erdDefinitions": {
-				"enabled": true,
-				"propertyNames": [
-					"schemas"
-				]
-			}
-		}
-	},
-	"description": "Hackolade plugin for OpenAPI",
-	"disabled": false
+    "name": "OpenAPI",
+    "version": "0.2.1",
+    "author": "hackolade",
+    "engines": {
+        "hackolade": "6.9.11",
+        "hackoladePlugin": "1.0.0"
+    },
+    "contributes": {
+        "target": {
+            "applicationTarget": "OPENAPI",
+            "title": "OpenAPI",
+            "versions": [
+                "3.0.3",
+                "3.1.0"
+            ]
+        },
+        "features": {
+            "nestedCollections": {
+                "level": 1
+            },
+            "disableMultipleTypes": {
+                "dependencies": [
+                    {
+                        "dependency": {
+                            "level": "model",
+                            "key": "dbVersion",
+                            "value": "3.1.0"
+                        },
+                        "value": false
+                    }
+                ],
+                "defaultValue": true
+            },
+            "disableMultipleNonScalarTypes": false,
+            "enableReverseEngineering": {
+                "jsonDocument": {
+                    "entities": false,
+                    "model_definitions": true
+                },
+                "jsonSchema": {
+                    "entities": false,
+                    "model_definitions": true
+                },
+                "ddl": {
+                    "entities": false,
+                    "model_definitions": true
+                },
+                "xsd": {
+                    "entities": false,
+                    "model_definitions": true
+                },
+                "plugin": true
+            },
+            "disableDenormalization": true,
+            "enableForwardEngineering": {
+                "jsonDocument": true,
+                "jsonSchema": true,
+                "plugin": true,
+                "apiSchema": false
+            },
+            "forwardEngineering": {
+                "jsonSchema": {
+                    "keepParentType": {
+                        "integer": "integer"
+                    }
+                }
+            },
+            "disablePatternField": false,
+            "disableChoices": {
+                "anyOf": false,
+                "oneOf": false,
+                "not": false
+            },
+            "enableJsonType": false,
+            "disableNamingConvention": {
+                "entityLevel": true,
+                "containerLevel": true,
+                "fieldLevel": {
+                    "componentObject": true,
+                    "operationObject": true,
+                    "extensions": true,
+                    "media": true
+                }
+            },
+            "disableChildren": {
+                "entityLevel": true
+            },
+            "disableDefinitions": {
+                "internal": true
+            },
+            "disableRelationships": false,
+            "relationships": {
+                "definitionRelationships": true
+            },
+            "disableJsonPreview": false,
+            "enableErdToggle": true,
+            "enableStackedNestedCollections": true,
+            "externalDefinitionsFromTargetSchema": true,
+            "apiTarget": true,
+            "FEScriptCommentsSupported": true,
+            "displayOptions": {
+                "hideNonNullableAttributes": true
+            },
+            "openModelDefinitionsTabIfNoCollections": true,
+            "jsonSchemaSpec": {
+                "version": "draft-2020-12",
+                "schema": "https://json-schema.org/draft/2020-12/schema",
+                "targetDBVersions": [
+                    "3.1.0"
+                ]
+            },
+            "erdDefinitions": {
+                "enabled": true,
+                "propertyNames": [
+                    "schemas"
+                ]
+            }
+        }
+    },
+    "description": "Hackolade plugin for OpenAPI",
+    "disabled": false,
+    "dependencies": {
+        "@apidevtools/swagger-parser": "10.1.0",
+        "comment-json": "4.1.0",
+        "js-yaml": "3.13.1",
+        "lodash": "4.17.21",
+        "lodash.get": "4.4.2",
+        "lodash.isplainobject": "4.0.6",
+        "lodash.partial": "4.2.1",
+        "node-uuid": "1.4.7"
+    },
+    "lint-staged": {
+        "*.{js,json}": "prettier --write"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "npx lint-staged",
+        "pre-push": "npx eslint ."
+    },
+    "scripts": {
+        "lint": "eslint . --max-warnings=0",
+        "package": "node esbuild.package.js"
+    },
+    "devDependencies": {
+        "@hackolade/hck-esbuild-plugins-pack": "0.0.1",
+        "@typescript-eslint/eslint-plugin": "7.11.0",
+        "@typescript-eslint/parser": "7.11.0",
+        "esbuild": "0.20.2",
+        "esbuild-plugin-clean": "1.0.1",
+        "eslint": "8.57.0",
+        "eslint-config-prettier": "9.1.0",
+        "eslint-formatter-teamcity": "^1.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-prettier": "5.1.3",
+        "eslint-plugin-unused-imports": "3.2.0",
+        "lint-staged": "14.0.1",
+        "prettier": "3.2.5",
+        "simple-git-hooks": "2.11.1"
+    }
 }

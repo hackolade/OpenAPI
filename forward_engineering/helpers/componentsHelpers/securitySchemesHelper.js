@@ -1,139 +1,138 @@
 const getExtensions = require('../extensionsHelper');
 const { getRef, hasRef } = require('../typeHelper');
 
-const isEmpty = (item) => {
-    if (!item) {
-        return true;
-    }
+const isEmpty = item => {
+	if (!item) {
+		return true;
+	}
 
-    if (Array.isArray(item)) {
-        return item.length === 0;
-    }
+	if (Array.isArray(item)) {
+		return item.length === 0;
+	}
 
-    if (typeof item === 'object') {
-        return Object.keys(item).length === 0;
-    }
+	if (typeof item === 'object') {
+		return Object.keys(item).length === 0;
+	}
 
-    return false;
+	return false;
 };
 
-const cleanUp = (obj) => {
-    if (typeof obj === 'object' && obj !== null) {
-        return Object.keys(obj).reduce((acc, key) => {
-            const value = cleanUp(obj[key]);
-            if (isEmpty(value)) {
-                return acc;
-            }
+const cleanUp = obj => {
+	if (typeof obj === 'object' && obj !== null) {
+		return Object.keys(obj).reduce((acc, key) => {
+			const value = cleanUp(obj[key]);
+			if (isEmpty(value)) {
+				return acc;
+			}
 
-            return Object.assign({}, acc, { [key]: value });
-        }, {});
-    }
+			return Object.assign({}, acc, { [key]: value });
+		}, {});
+	}
 
-    return obj;
+	return obj;
 };
 
 function getSecuritySchemes(data, specVersion) {
-    if (!data || !data.properties) {
-        return;
-    }
+	if (!data || !data.properties) {
+		return;
+	}
 
-    return Object.entries(data.properties)
-        .map(([key, value]) => {
-            return { key, value: mapSecurityScheme(value, specVersion) };
-        })
-        .reduce((acc, { key, value }) => {
-            acc[key] = value;
-            return acc;
-        }, {});
+	return Object.entries(data.properties)
+		.map(([key, value]) => {
+			return { key, value: mapSecurityScheme(value, specVersion) };
+		})
+		.reduce((acc, { key, value }) => {
+			acc[key] = value;
+			return acc;
+		}, {});
 }
 
 function mapSecurityScheme(data, specVersion) {
-    if (!data) {
+	if (!data) {
 		return;
-	} 
+	}
 	if (hasRef(data)) {
 		return getRef(data, specVersion);
-    }
-    
-    let securitySchemeProps = {};
-    switch (data.schemeType) {
-        case 'apiKey':
-            securitySchemeProps = {
-                name: data.apiKeyName,
-                in: data.in
-            };
-            break;
-        case 'http':
-            securitySchemeProps = {
-                scheme: data.scheme,
-                bearerFormat: data.bearerFormat
-            };
-            break;
-        case 'oauth2':
-            const flows = mapOAuthFlows(data.flows);
+	}
 
-            securitySchemeProps = { flows };
-            break;
-        case 'openIdConnect':
-            securitySchemeProps = {
-                openIdConnectUrl: data.openIdConnectUrl
-            };
-            break;
-    }
+	let securitySchemeProps = {};
+	switch (data.schemeType) {
+		case 'apiKey':
+			securitySchemeProps = {
+				name: data.apiKeyName,
+				in: data.in,
+			};
+			break;
+		case 'http':
+			securitySchemeProps = {
+				scheme: data.scheme,
+				bearerFormat: data.bearerFormat,
+			};
+			break;
+		case 'oauth2':
+			const flows = mapOAuthFlows(data.flows);
 
-    const commonFields = {
-        type: data.schemeType,
-        description: data.description
-    };
-    const extensions = getExtensions(data.scopesExtensions);
+			securitySchemeProps = { flows };
+			break;
+		case 'openIdConnect':
+			securitySchemeProps = {
+				openIdConnectUrl: data.openIdConnectUrl,
+			};
+			break;
+	}
 
-    return Object.assign({}, securitySchemeProps, commonFields, extensions);
+	const commonFields = {
+		type: data.schemeType,
+		description: data.description,
+	};
+	const extensions = getExtensions(data.scopesExtensions);
+
+	return Object.assign({}, securitySchemeProps, commonFields, extensions);
 }
 
 function mapOAuthFlows(data) {
-    if (!data) {
-        return;
-    }
-    const flowsNames = ['implicit', 'password', 'clientCredentials', 'authorizationCode'];
-    const flows = flowsNames.reduce((flows, flowName) => {
-        let flow;
-        if (data[flowName]) {
-            flow = mapOAuthFlowObject(data[flowName]);
-        }
+	if (!data) {
+		return;
+	}
+	const flowsNames = ['implicit', 'password', 'clientCredentials', 'authorizationCode'];
+	const flows = flowsNames.reduce((flows, flowName) => {
+		let flow;
+		if (data[flowName]) {
+			flow = mapOAuthFlowObject(data[flowName]);
+		}
 
-        if (!isEmpty(flow)) {
-            flows[flowName] = flow;
-        }
+		if (!isEmpty(flow)) {
+			flows[flowName] = flow;
+		}
 
-        return flows;
-    }, {});
+		return flows;
+	}, {});
 
-    const extensions = getExtensions(data.scopesExtensions);
+	const extensions = getExtensions(data.scopesExtensions);
 
-    return cleanUp(Object.assign({}, flows, extensions));
+	return cleanUp(Object.assign({}, flows, extensions));
 }
 
 function mapOAuthFlowObject({ authorizationUrl, tokenUrl, refreshUrl, scopes, scopesExtensions }) {
-    const flow = {
-        authorizationUrl,
-        tokenUrl,
-        refreshUrl,
-        scopes: mapScopes(scopes)
-    };
-    const extensions = getExtensions(scopesExtensions);
+	const flow = {
+		authorizationUrl,
+		tokenUrl,
+		refreshUrl,
+		scopes: mapScopes(scopes),
+	};
+	const extensions = getExtensions(scopesExtensions);
 
-    return Object.assign({}, flow, extensions);
+	return Object.assign({}, flow, extensions);
 }
 
 function mapScopes(data) {
-    if (!data) return;
-    return data
-        .reduce((acc, { scopeName, scopeDescription }) => {
-            acc[scopeName] = scopeDescription;
-            return acc;
-        }, {});
+	if (!data) return;
+	return data.reduce((acc, { scopeName, scopeDescription }) => {
+		acc[scopeName] = scopeDescription;
+		return acc;
+	}, {});
 }
 
 module.exports = {
-    getSecuritySchemes,
+	getSecuritySchemes,
 };

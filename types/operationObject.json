@@ -32,68 +32,37 @@
 			"childValueType": {}
 		},
 		"request": {
-			"childValueType": [
-				"requestBody"
-			]
+			"childValueType": ["requestBody"]
 		},
 		"media": {
-			"childValueType": [
-				"media"
-			]
+			"childValueType": ["media"]
 		},
 		"header": {
-			"childValueType": [
-				"header"
-			]
+			"childValueType": ["header"]
 		},
 		"example": {
-			"childValueType": [
-				"example"
-			]
+			"childValueType": ["example"]
 		},
 		"response": {
-			"childValueType": [
-				"response"
-			]
+			"childValueType": ["response"]
 		},
 		"link": {
-			"childValueType": [
-				"link"
-			]
+			"childValueType": ["link"]
 		},
 		"callback": {
-			"childValueType": [
-				"callback"
-			]
+			"childValueType": ["callback"]
 		},
 		"expression": {
-			"childValueType": [
-				"expression"
-			]
+			"childValueType": ["expression"]
 		},
 		"securityScheme": {
-			"childValueType": [
-				"securityScheme"
-			]
+			"childValueType": ["securityScheme"]
 		},
 		"schema": {
-			"childValueType": [
-				"string",
-				"number",
-				"integer",
-				"boolean",
-				"array",
-				"object",
-				"reference"
-			]
+			"childValueType": ["string", "number", "integer", "boolean", "array", "object", "reference"]
 		},
 		"anyParameter": {
-			"childValueType": [
-				"parameter (path)",
-				"parameter (query)",
-				"parameter (header)",
-				"parameter (cookie)"
-			]
+			"childValueType": ["parameter (path)", "parameter (query)", "parameter (header)", "parameter (cookie)"]
 		}
 	}
 }
