@@ -1,0 +1,22 @@
+# https://github.com/marketplace/actions/jira-description
+# Requires a JIRA REST api token: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+# https://id.atlassian.com/manage-profile/security/api-tokens to generate one with you username
+# Configure the JIRA_TOKEN secret as a repository action secret as described below:
+#   follow the pattern: <username>:<api token from jira>
+name: jira-description-action
+on:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  add-jira-description:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cakeinpanic/jira-description-action@v0.4.0
+        name: jira-description-action
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          jira-token: ${{ secrets.JIRA_TOKEN }}
+          jira-base-url: https://hackolade.atlassian.net
+          skip-branches: '^(develop|main|master)$' #optional 
+          jira-project-key: 'HCK' #optional
+          use: 'both'
