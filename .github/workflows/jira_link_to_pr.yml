@@ -20,3 +20,4 @@ jobs:
           skip-branches: '^(develop|main|master)$' #optional 
           jira-project-key: 'HCK' #optional
           use: 'both'
+          fail-when-jira-issue-not-found: false
