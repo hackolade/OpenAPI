@@ -1,18 +1,23 @@
-name: PR tests
+# https://github.com/marketplace/actions/jira-description
+# Requires a JIRA REST api token: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+# https://id.atlassian.com/manage-profile/security/api-tokens to generate one with you username
+# Configure the JIRA_TOKEN secret as a repository action secret as described below:
+#   follow the pattern: <username>:<api token from jira>
+name: jira-description-action
 on:
   pull_request:
-    types: [auto_merge_enabled]
-  workflow_dispatch:
-
+    types: [opened, reopened]
 jobs:
-  skip:
-    name: Report fake success for PR tests
+  add-jira-description:
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
     steps:
-      - uses: LouisBrunner/checks-action@v2.0.0
+      - uses: cakeinpanic/jira-description-action@v0.9.0
+        name: jira-description-action
         with:
-          name: Run PR tests (Plugins) (Plugins)
-          conclusion: success
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          jira-token: ${{ secrets.JIRA_TOKEN }}
+          jira-base-url: https://hackolade.atlassian.net
+          skip-branches: '^(develop|main|master)$' #optional 
+          jira-project-key: 'HCK' #optional
+          use: 'both'
+          fail-when-jira-issue-not-found: false
