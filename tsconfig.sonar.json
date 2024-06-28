@@ -1,0 +1,16 @@
+{
+	"extends": "./tsconfig",
+	"include": [
+		"adapter/**/*",
+		"api/**/*",
+		"central_pane/**/*",
+		"forward_engineering/**/*",
+		"localization/**/*",
+		"polyglot/**/*",
+		"properties_pane/**/*",
+		"reverse_engineering/**/*",
+		"types/**/*",
+		"validation/**/*",
+	],
+	"exclude": ["**/node_modules/**", "**/*.spec.*"]
+}
