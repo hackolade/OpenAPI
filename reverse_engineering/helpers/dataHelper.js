@@ -706,13 +706,14 @@ const handleParameter = (parameter, parameterName, fieldOrder) => {
 	};
 
 	const parameterSchemaObject = getSchemaObject(parameter, fieldOrder);
-	const parameterContent = getContentObject(parameter, fieldOrder);
-	const parameterExamples = getExamplesObject(parameter, fieldOrder);
+	const parameterContent = getContentObject(parameter);
+	const parameterExamples = getExamplesObject(parameter);
 	const parameterType = getParameterType(parameter);
-	const parameterProperties = Object.assign({}, parameterSchemaObject.properties || {}, {
+	const parameterProperties = {
+		...(parameterSchemaObject.properties || {}),
 		content: parameterContent,
 		examples: parameterExamples,
-	});
+	};
 	const newParameter = Object.assign({}, parameterSchemaObject, parameter, {
 		name: parameterName || parameter.name,
 		parameterName: parameter.name,
@@ -827,7 +828,7 @@ const getEntities = (pathData, containers, fieldOrder) => {
 		const entitiesNames = Object.keys(containerData).filter(item => REQUEST_TYPE.includes(item));
 		const entities = entitiesNames.reduce((accumulator, request) => {
 			const requestData = containerData[request];
-			const { jsonSchema, responses } = handleRequestData(requestData, request, container.name, fieldOrder);
+			const { jsonSchema, responses } = handleRequestData(requestData, request, fieldOrder);
 			const responseSchemas = Object.keys(responses || {}).map(response => {
 				return handleResponseData(responses[response], response, request, fieldOrder);
 			});
