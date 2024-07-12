@@ -85,7 +85,7 @@ const reorderFields = (data, filedOrder) => {
 
 const sortObject = obj => {
 	return Object.keys(obj || {})
-		.sort()
+		.sort((a, b) => a?.localeCompare(b))
 		.reduce((acc, key) => {
 			if (CHOICES.includes(key)) {
 				acc[key] = obj[key];
