@@ -7,12 +7,10 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
-    if: github.event.pusher.name == 'bigorn0'
+    if: github.event.pusher.name == 'pdesmarets'
     env:
         AUTHOR: ${{ github.event.pusher.name }}
     steps:
-      - name: notify
-        run: echo "${AUTHOR}"
       - name: notify slack
         id: slack
         uses: slackapi/slack-github-action@v1.26.0
