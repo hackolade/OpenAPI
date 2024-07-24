@@ -2,9 +2,9 @@
 * Copyright © 2016-2017 by IntegrIT S.A. dba Hackolade.  All rights reserved.
 *
 * The copyright to the computer software herein is the property of IntegrIT S.A.
-* The software may be used and/or copied only with the written permission of 
-* IntegrIT S.A. or in accordance with the terms and conditions stipulated in 
-* the agreement/contract under which the software has been supplied. 
+* The software may be used and/or copied only with the written permission of
+* IntegrIT S.A. or in accordance with the terms and conditions stipulated in
+* the agreement/contract under which the software has been supplied.
 
 
 In order to define custom properties for any object's properties pane, you may copy/paste from the following,
@@ -78,8 +78,8 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 // “groupInput” can have the following states - 0 items, 1 item, and many items.
-// “blockInput” has only 2 states - 0 items or 1 item. 
-// This gives us an easy way to represent it as an object and not as an array internally which is beneficial for processing 
+// “blockInput” has only 2 states - 0 items or 1 item.
+// This gives us an easy way to represent it as an object and not as an array internally which is beneficial for processing
 // and forward-engineering in particular.
 			{
 				"propertyName": "Block",
@@ -111,7 +111,7 @@ making sure that you maintain a proper JSON format.
 				"shouldValidate": false,
 				"propertyType": "fieldList",
 				"template": "orderedList"
-			}, 
+			},
 			{
 				"propertyName": "List with attribute",
 				"propertyKeyword": "keyListOrder",
@@ -2476,8 +2476,8 @@ making sure that you maintain a proper JSON format.
 				"fieldType": "coupled",
 				"dependency": {
 					"level": "parent",
-					"key": "name",
-					"value": "responses"
+					"key": "entityType",
+					"value": "response"
 				},
 				"disabledOnCondition": {
 					"level": "parent",
@@ -2491,8 +2491,8 @@ making sure that you maintain a proper JSON format.
 				"fieldType": "coupled",
 				"dependency": {
 					"level": "parent",
-					"key": "name",
-					"value": "responses"
+					"key": "entityType",
+					"value": "response"
 				},
 				"disabledOnCondition": {
 					"level": "parent",
