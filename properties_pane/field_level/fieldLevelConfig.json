@@ -2474,6 +2474,7 @@ making sure that you maintain a proper JSON format.
 				"fieldName": "Name",
 				"fieldKeyword": "name",
 				"fieldType": "coupled",
+				"preserveOnCleanDependencies": true,
 				"dependency": {
 					"level": "parent",
 					"key": "entityType",
@@ -2489,6 +2490,7 @@ making sure that you maintain a proper JSON format.
 				"fieldName": "Technical name",
 				"fieldKeyword": "code",
 				"fieldType": "coupled",
+				"preserveOnCleanDependencies": true,
 				"dependency": {
 					"level": "parent",
 					"key": "entityType",
