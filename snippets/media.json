@@ -1,16 +1,20 @@
 {
 	"name": "media",
 	"parentType": "document",
-	"properties": [{
-		"name": "schema",
-		"type": "object"
-	}, {
-		"name": "examples",
-		"type": "object",
-		"subtype": "example"
-	}, {
-		"name": "encoding",
-		"type": "object",
-		"subtype": "encoding"
-	}]
+	"properties": [
+		{
+			"name": "schema",
+			"type": "object"
+		},
+		{
+			"name": "examples",
+			"type": "object",
+			"subtype": "example"
+		},
+		{
+			"name": "encoding",
+			"type": "object",
+			"subtype": "encoding"
+		}
+	]
 }

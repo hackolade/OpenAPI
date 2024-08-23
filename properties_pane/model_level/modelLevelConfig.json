@@ -145,9 +145,7 @@ making sure that you maintain a proper JSON format.
 				"propertyKeyword": "dbVendor",
 				"propertyTooltip": "DB vendor",
 				"propertyType": "select",
-				"options": [
-					"OpenAPI"
-				],
+				"options": ["OpenAPI"],
 				"disabledOption": true
 			},
 			{
@@ -162,7 +160,7 @@ making sure that you maintain a proper JSON format.
 					{ "name": "3.0.1", "value": "3.0.1", "isDisabled": true },
 					{ "name": "3.0.0", "value": "3.0.0", "isDisabled": true }
 				],
-				"dependency" : {
+				"dependency": {
 					"key": "dbVersion",
 					"value": "3.1.0"
 				}
@@ -179,12 +177,14 @@ making sure that you maintain a proper JSON format.
 					{ "name": "3.0.1", "value": "3.0.1" },
 					{ "name": "3.0.0", "value": "3.0.0" }
 				],
-				"dependency" : {
+				"dependency": {
 					"type": "not",
-					"values": [{
-						"key": "dbVersion",
-						"value": "3.1.0"
-					}]
+					"values": [
+						{
+							"key": "dbVersion",
+							"value": "3.1.0"
+						}
+					]
 				}
 			},
 			{
@@ -207,11 +207,10 @@ making sure that you maintain a proper JSON format.
 				"template": "textarea",
 				"markdown": false,
 				"propertyTooltip": "A short summary of the API",
-				"dependency" : {
+				"dependency": {
 					"key": "dbVersion",
 					"value": "3.1.0"
 				}
-
 			},
 			{
 				"propertyName": "terms of service",
@@ -256,7 +255,7 @@ making sure that you maintain a proper JSON format.
 								"propertyKeyword": "extensionPattern",
 								"shouldValidate": true,
 								"propertyType": "text",
-								"regex":"^x-"
+								"regex": "^x-"
 							},
 							{
 								"propertyName": "value",
@@ -291,7 +290,7 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false,
 						"propertyTooltip": "An SPDX license expression for the API. The identifier field is mutually exclusive of the url field",
-						"dependency" : {
+						"dependency": {
 							"type": "and",
 							"values": [
 								{
@@ -327,7 +326,7 @@ making sure that you maintain a proper JSON format.
 						"propertyType": "text",
 						"propertyFormat": "uri",
 						"propertyTooltip": "A URL to the license used for the API. This MUST be in the form of a URL. The url field is mutually exclusive of the identifier field (OpenAPI 3.1.x).",
-						"dependency" : {
+						"dependency": {
 							"type": "or",
 							"values": [
 								{
@@ -358,7 +357,7 @@ making sure that you maintain a proper JSON format.
 								"propertyKeyword": "extensionPattern",
 								"shouldValidate": true,
 								"propertyType": "text",
-								"regex":"^x-"
+								"regex": "^x-"
 							},
 							{
 								"propertyName": "value",
@@ -391,7 +390,7 @@ making sure that you maintain a proper JSON format.
 						"propertyKeyword": "extensionPattern",
 						"shouldValidate": true,
 						"propertyType": "text",
-						"regex":"^x-"
+						"regex": "^x-"
 					},
 					{
 						"propertyName": "value",
@@ -492,7 +491,7 @@ making sure that you maintain a proper JSON format.
 										"propertyKeyword": "extensionPattern",
 										"shouldValidate": true,
 										"propertyType": "text",
-										"regex":"^x-"
+										"regex": "^x-"
 									},
 									{
 										"propertyName": "value",
@@ -506,7 +505,8 @@ making sure that you maintain a proper JSON format.
 								]
 							}
 						]
-					},{
+					},
+					{
 						"propertyName": "extensions",
 						"propertyType": "group",
 						"propertyKeyword": "scopesExtensions",
@@ -518,7 +518,7 @@ making sure that you maintain a proper JSON format.
 								"propertyKeyword": "extensionPattern",
 								"shouldValidate": true,
 								"propertyType": "text",
-								"regex":"^x-"
+								"regex": "^x-"
 							},
 							{
 								"propertyName": "value",
@@ -606,7 +606,7 @@ making sure that you maintain a proper JSON format.
 										"propertyKeyword": "extensionPattern",
 										"shouldValidate": true,
 										"propertyType": "text",
-										"regex":"^x-"
+										"regex": "^x-"
 									},
 									{
 										"propertyName": "value",
@@ -633,7 +633,7 @@ making sure that you maintain a proper JSON format.
 								"propertyKeyword": "extensionPattern",
 								"shouldValidate": true,
 								"propertyType": "text",
-								"regex":"^x-"
+								"regex": "^x-"
 							},
 							{
 								"propertyName": "value",
@@ -682,7 +682,7 @@ making sure that you maintain a proper JSON format.
 								"propertyKeyword": "extensionPattern",
 								"shouldValidate": true,
 								"propertyType": "text",
-								"regex":"^x-"
+								"regex": "^x-"
 							},
 							{
 								"propertyName": "value",
@@ -709,7 +709,7 @@ making sure that you maintain a proper JSON format.
 						"propertyKeyword": "extensionPattern",
 						"shouldValidate": true,
 						"propertyType": "text",
-						"regex":"^x-"
+						"regex": "^x-"
 					},
 					{
 						"propertyName": "value",

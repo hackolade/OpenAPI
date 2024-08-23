@@ -18,19 +18,11 @@
 		"additionalProperties": false,
 		"enum": [],
 		"subtype": "structuralSchema",
-		"hackoladeMeta": {
-		}
+		"hackoladeMeta": {}
 	},
 	"subtypes": {
 		"structuralSchema": {
-			"childValueType": [
-				"string",
-				"number",
-				"integer",
-				"boolean",
-				"array",
-				"object"
-			]
+			"childValueType": ["string", "number", "integer", "boolean", "array", "object"]
 		}
 	}
 }

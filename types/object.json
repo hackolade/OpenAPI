@@ -38,42 +38,28 @@
 			]
 		},
 		"encoding": {
-			"childValueType": [
-				"encoding"
-			]
+			"childValueType": ["encoding"]
 		},
 		"media": {
-			"childValueType": [
-				"media"
-			]
+			"childValueType": ["media"]
 		},
 		"example": {
-			"childValueType": [
-				"example"
-			]
+			"childValueType": ["example"]
 		},
 		"header": {
-			"childValueType": [
-				"header"
-			]
+			"childValueType": ["header"]
 		},
 		"link": {
-			"childValueType": [
-				"link"
-			]
+			"childValueType": ["link"]
 		},
 		"snippetChildrenOnly": {
 			"childValueType": {}
 		},
 		"requestBody": {
-			"childValueType": [
-				"requestBody"
-			]
+			"childValueType": ["requestBody"]
 		},
 		"response": {
-			"childValueType": [
-				"response"
-			]
+			"childValueType": ["response"]
 		}
 	}
 }

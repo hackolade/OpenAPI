@@ -40,7 +40,7 @@
  * }
  */
 
- {
+{
 	"modify": {
 		"field": [["setRelationshipPropertiesToField"]]
 	}

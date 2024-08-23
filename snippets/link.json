@@ -1,12 +1,15 @@
 {
 	"name": "link",
 	"parentType": "document",
-	"properties": [{
-		"name": "parameters",
-		"type": "operationObject",
-		"subtype": "expression"
-	}, {
-		"name": "requestBody",
-		"type": "expression"
-	}]
+	"properties": [
+		{
+			"name": "parameters",
+			"type": "operationObject",
+			"subtype": "expression"
+		},
+		{
+			"name": "requestBody",
+			"type": "expression"
+		}
+	]
 }
