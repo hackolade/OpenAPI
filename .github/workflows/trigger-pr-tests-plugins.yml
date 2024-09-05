@@ -1,0 +1,19 @@
+name: Trigger PR tests (Plugins)
+
+on:
+  pull_request:
+    types: [auto_merge_enabled]
+
+jobs:
+  trigger-pr-tests-plugins:
+    name: Trigger PR tests (Plugins)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call TeamCity API endpoint
+        run: |
+          curl \
+            -X POST \
+            -H 'Authorization: Bearer ${{ secrets.TEAMCITY_TRIGGER_TESTS_TOKEN }}' \
+            -H 'Content-Type: application/json' \
+            -d '{"branchName": "pull/${{ github.event.number }}", "buildType": {"id": "${{ vars.TEAMCITY_BUILD_ID_FOR_TESTING_PLUGIN_PR }}"}}' \
+            ${{ vars.TEAMCITY_API_URL }}/buildQueue
