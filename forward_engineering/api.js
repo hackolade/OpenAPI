@@ -15,13 +15,15 @@ module.exports = {
 	generateModelScript(data, logger, cb) {
 		try {
 			const {
-				dbVersion: specVersion,
+				dbVersion,
 				externalDocs: modelExternalDocs,
 				tags: modelTags,
 				security: modelSecurity,
 				servers: modelServers,
 				jsonSchemaDialect,
 			} = data.modelData[0];
+			const appTargetVersion = data?.options?.appTargetVersion;
+			const specVersion = appTargetVersion ?? dbVersion;
 
 			const containersIdsFromCallbacks = commonHelper.getContainersIdsForCallbacks(data);
 
