@@ -10,6 +10,7 @@ const getExtensions = require('./helpers/extensionsHelper');
 const handleReferencePath = require('./helpers/handleReferencePath');
 const mapJsonSchema = require('../reverse_engineering/helpers/adaptJsonSchema/mapJsonSchema');
 const path = require('path');
+const versions = require('../package.json').contributes.target.versions;
 
 module.exports = {
 	generateModelScript(data, logger, cb) {
@@ -23,7 +24,7 @@ module.exports = {
 				jsonSchemaDialect,
 			} = data.modelData[0];
 			const apiTargetVersion = data?.options?.apiTargetVersion;
-			const specVersion = apiTargetVersion ?? dbVersion;
+			const specVersion = apiTargetVersion && versions.includes(apiTargetVersion) ? apiTargetVersion : dbVersion;
 
 			const containersIdsFromCallbacks = commonHelper.getContainersIdsForCallbacks(data);
 
