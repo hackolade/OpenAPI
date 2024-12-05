@@ -22,8 +22,8 @@ module.exports = {
 				servers: modelServers,
 				jsonSchemaDialect,
 			} = data.modelData[0];
-			const appTargetVersion = data?.options?.appTargetVersion;
-			const specVersion = appTargetVersion ?? dbVersion;
+			const apiTargetVersion = data?.options?.apiTargetVersion;
+			const specVersion = apiTargetVersion ?? dbVersion;
 
 			const containersIdsFromCallbacks = commonHelper.getContainersIdsForCallbacks(data);
 
