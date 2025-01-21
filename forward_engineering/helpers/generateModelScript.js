@@ -122,7 +122,7 @@ function generateModelScript(data, logger, cb) {
 		};
 		const extensions = getExtensions(data.modelData[0].scopesExtensions);
 
-		const resultSchema = Object.assign({}, openApiSchema, extensions);
+		const resultSchema = { ...openApiSchema, ...extensions };
 
 		switch (data.targetScriptOptions.format) {
 			case 'yaml': {
