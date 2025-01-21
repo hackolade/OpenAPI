@@ -147,6 +147,7 @@
         "@typescript-eslint/parser": "7.11.0",
         "esbuild": "0.20.2",
         "esbuild-plugin-clean": "1.0.1",
+        "esbuild-plugin-copy": "2.1.1",
         "eslint": "8.57.0",
         "eslint-config-prettier": "9.1.0",
         "eslint-formatter-teamcity": "^1.0.0",

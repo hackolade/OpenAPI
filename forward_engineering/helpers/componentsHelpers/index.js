@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const { getSchemas } = require('./schemasHelper');
 const { getRequestBodies } = require('./requestBodiesHelper');
 const { getResponses } = require('./responsesHelper');

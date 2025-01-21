@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const { getRef, hasRef } = require('../typeHelper');
 const getExtensions = require('../extensionsHelper');
 const { mapServer } = require('../serversHelper');

@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const commonHelper = require('./commonHelper');
 const getExtensions = require('./extensionsHelper');
 const { getServers } = require('./serversHelper');

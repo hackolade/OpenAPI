@@ -1,5 +1,4 @@
-const isPlainObject = require('lodash.isplainobject');
-const partial = require('lodash.partial');
+const { isPlainObject, partial } = require('lodash');
 
 const add = (obj, properties) => Object.assign({}, obj, properties);
 

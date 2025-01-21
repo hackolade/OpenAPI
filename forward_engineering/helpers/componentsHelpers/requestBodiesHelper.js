@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const { getContent } = require('./parametersHelper');
 const getExtensions = require('../extensionsHelper');
 const { getRef, hasRef } = require('../typeHelper');
