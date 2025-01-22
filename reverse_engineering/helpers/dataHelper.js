@@ -229,7 +229,7 @@ const getContainersFromCallbacks = callbacks => {
 };
 
 const getContainers = ({ pathData, callbacks, webhookNames }) => {
-	let updatedPathData = Object.assign({}, pathData);
+	let updatedPathData = { ...pathData };
 	const containers = Object.keys(pathData).reduce((accum, key) => {
 		const path = pathData[key];
 		const extensionsObject = getExtensionsObject(path, 'extensions');
@@ -238,18 +238,15 @@ const getContainers = ({ pathData, callbacks, webhookNames }) => {
 			return accum.concat(getContainersFromRequestCallbacks(path[requestName]));
 		}, []);
 		const containersData = requestCallbacksPathsData.map(pathData => {
-			updatedPathData = Object.assign({}, updatedPathData, { [pathData.data.name]: pathData.callbackPath });
+			updatedPathData = { ...updatedPathData, [pathData.data.name]: pathData.callbackPath };
 			return pathData.data;
 		});
 		const isWebhook = webhookNames.includes(key);
-		return accum.concat(
-			Object.assign(
-				{},
-				{ name: key, summary: path.summary, ...(isWebhook && { webhook: true }) },
-				extensionsObject,
-			),
-			containersData,
-		);
+		return [
+			...accum,
+			{ name: key, summary: path.summary, ...(isWebhook && { webhook: true }), ...extensionsObject },
+			...containersData,
+		];
 	}, []);
 
 	if (callbacks) {
@@ -258,7 +255,7 @@ const getContainers = ({ pathData, callbacks, webhookNames }) => {
 			return accum.concat(callbacksData);
 		}, []);
 		const componentCallbacksContainers = componentCallbacksPathData.map(pathData => {
-			updatedPathData = Object.assign({}, updatedPathData, { [pathData.data.name]: pathData.callbackPath });
+			updatedPathData = { ...updatedPathData, [pathData.data.name]: pathData.callbackPath };
 			return pathData.data;
 		});
 		return { containers: containers.concat(componentCallbacksContainers), updatedPathData };
@@ -269,7 +266,8 @@ const getContainers = ({ pathData, callbacks, webhookNames }) => {
 
 const handleExample = data => {
 	const value = getExampleStringValue(data.value);
-	return Object.assign({}, data, { type: 'example', value });
+
+	return { ...data, type: 'example', value };
 };
 
 const getSchemaObject = (data, fieldOrder) => {
@@ -280,7 +278,7 @@ const getSchemaObject = (data, fieldOrder) => {
 	if (schemaChoice) {
 		return { [schemaChoice]: schemaWithChoices[schemaChoice] };
 	}
-	return { properties: { schema: Object.assign({}, schema, { subtype: 'schema' }) } };
+	return { properties: { schema: { ...schema, subtype: 'schema' } } };
 };
 
 const getExamplesObject = data => {

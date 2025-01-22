@@ -23,7 +23,7 @@ function getInfo({
 	};
 
 	const extensions = getExtensions(infoExtensions);
-	return Object.assign({}, info, extensions);
+	return { ...info, ...extensions };
 }
 
 function getContact(contact) {
@@ -38,7 +38,7 @@ function getContact(contact) {
 	};
 	const extensions = getExtensions(contact.contactExtensions);
 
-	return Object.assign({}, contactObj, extensions);
+	return { ...contactObj, ...extensions };
 }
 
 function getLicense(license) {

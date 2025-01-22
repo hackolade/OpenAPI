@@ -19,7 +19,7 @@ function mapServer(data) {
 	};
 	const extensions = getExtensions(data.scopesExtensions);
 
-	return Object.assign({}, serverData, extensions);
+	return { ...serverData, ...extensions };
 }
 
 function mapVariables(variables = []) {
@@ -37,13 +37,13 @@ function mapVariables(variables = []) {
 			};
 			const variableExtensions = getExtensions(item.scopesExtensions);
 
-			return Object.assign({}, variable, variableExtensions);
+			return { ...variable, ...variableExtensions };
 		})
 		.reduce((acc, item) => {
 			const { name } = item;
 			delete item.name;
 
-			return Object.assign({}, acc, { [name]: item });
+			return { ...acc, [name]: item };
 		}, {});
 }
 

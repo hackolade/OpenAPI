@@ -15,11 +15,13 @@ const renameComponents = components => {
 		return components;
 	}
 
-	return Object.keys(components).reduce((result, componentName) => {
-		return Object.assign({}, result, {
+	return Object.keys(components).reduce(
+		(result, componentName) => ({
+			...result,
 			[prepareName(componentName)]: components[componentName],
-		});
-	}, {});
+		}),
+		{},
+	);
 };
 
 function getComponents({ definitions, containers, specVersion }) {
@@ -39,21 +41,18 @@ function getComponents({ definitions, containers, specVersion }) {
 
 	const extensions = getExtensions(get(componentsData, `['Specification Extensions'].scopesExtensions`));
 
-	return Object.assign(
-		{},
-		{
-			schemas,
-			responses,
-			parameters,
-			examples,
-			requestBodies,
-			headers,
-			securitySchemes,
-			links,
-			callbacks,
-		},
-		extensions,
-	);
+	return {
+		schemas,
+		responses,
+		parameters,
+		examples,
+		requestBodies,
+		headers,
+		securitySchemes,
+		links,
+		callbacks,
+		...extensions,
+	};
 }
 
 module.exports = getComponents;

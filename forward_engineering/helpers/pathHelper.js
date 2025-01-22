@@ -53,7 +53,7 @@ function getRequestsForContainer({ container, containers, containersPath = [], i
 
 	const containerExtensions = getExtensions(contactExtensions);
 
-	return Object.assign({}, containerData, additionalContainerData, containerExtensions);
+	return { ...containerData, ...additionalContainerData, ...containerExtensions };
 }
 
 function getRequestData({
@@ -200,8 +200,7 @@ function getCallbacks({ data, containers, containerId, containersPath = [], spec
 			return { [key]: { [value.callbackExpression]: callbackData, ...extensions } };
 		})
 		.reduce((acc, item) => {
-			acc = Object.assign({}, acc, item);
-			return acc;
+			return { ...acc, ...item };
 		}, {});
 }
 

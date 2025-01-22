@@ -42,7 +42,7 @@ function mapExample(data, specVersion) {
 	};
 	const extensions = getExtensions(scopesExtensions);
 
-	return Object.assign({}, example, extensions);
+	return { ...example, ...extensions };
 }
 
 module.exports = {

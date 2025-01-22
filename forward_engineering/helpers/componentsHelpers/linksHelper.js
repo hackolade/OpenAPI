@@ -48,7 +48,7 @@ function mapLink(data, specVersion) {
 	};
 	const extensions = getExtensions(scopesExtensions);
 
-	return Object.assign({}, linkData, extensions);
+	return { ...linkData, ...extensions };
 }
 
 function mapParameters(data) {

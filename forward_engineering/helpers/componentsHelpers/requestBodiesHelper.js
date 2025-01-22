@@ -49,7 +49,7 @@ function mapRequestBody({ data, required, isParentActivated = false, specVersion
 	};
 	const extensions = getExtensions(data.scopesExtensions);
 
-	return commentDeactivatedItemInner(Object.assign({}, requestBody, extensions), data.isActivated, isParentActivated);
+	return commentDeactivatedItemInner({ ...requestBody, ...extensions }, data.isActivated, isParentActivated);
 }
 
 function getIsRequestBodySupported({ collectionName, specVersion }) {
