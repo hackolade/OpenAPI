@@ -21,11 +21,11 @@ const getError = errorItem => {
 };
 
 const at = message => {
-	if (message.path && message.path.length) {
+	if (message.path?.length) {
 		return ' at #/' + message.path.join('/');
-	} else {
-		return '';
 	}
+
+	return '';
 };
 
 const indent = (message, depth = 1) => '\t'.repeat(2 * depth) + message;
@@ -46,7 +46,7 @@ const getInnerErrors = (inner, depth = 0) => {
 	).join('\n');
 };
 
-const uniqStrings = items => Object.keys(items.reduce((result, item) => Object.assign({}, result, { [item]: '' }), {}));
+const uniqStrings = items => Object.keys(items.reduce((result, item) => ({ ...result, [item]: '' }), {}));
 
 const getValidatorErrors = error => {
 	if (!error) {
@@ -55,16 +55,16 @@ const getValidatorErrors = error => {
 
 	if (Array.isArray(error.details)) {
 		return error.details.map(getError);
-	} else {
-		return [
-			{
-				type: 'error',
-				label: error.name,
-				title: error.message,
-				context: '',
-			},
-		];
 	}
+
+	return [
+		{
+			type: 'error',
+			label: error.name,
+			title: error.message,
+			context: '',
+		},
+	];
 };
 
 const validate = (script, options = {}) =>
@@ -85,9 +85,9 @@ const validate = (script, options = {}) =>
 						},
 					},
 				]);
-			} else {
-				resolve(errors);
 			}
+
+			resolve(errors);
 		});
 	});
 
@@ -116,6 +116,8 @@ const checkPathParameters = schema => {
 		const requests = schema.paths[pathName] || {};
 
 		return pathParameters.reduce((errors, parameter) => {
+			const findParam = param => param.name === parameter && param.in === 'path';
+
 			return requestNames
 				.filter(requestName => requests[requestName])
 				.reduce((errors, requestName) => {
@@ -125,7 +127,7 @@ const checkPathParameters = schema => {
 						return errors.concat(createPathParameterError(pathName, parameter));
 					}
 
-					const param = request.parameters.find(param => param.name === parameter && param.in === 'path');
+					const param = request.parameters.find(findParam);
 
 					if (param) {
 						return errors;

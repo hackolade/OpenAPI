@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const getExtensions = require('../extensionsHelper');
 const { mapSchema } = require('./schemasHelper');
 const { getExamples } = require('./examplesHelper');
@@ -60,7 +60,7 @@ function mapParameter({ data, required, isParentActivated = false, specVersion }
 	};
 	const extensions = getExtensions(data.scopesExtensions);
 
-	return commentDeactivatedItemInner(Object.assign({}, parameter, extensions), data.isActivated, isParentActivated);
+	return commentDeactivatedItemInner({ ...parameter, ...extensions }, data.isActivated, isParentActivated);
 }
 
 function getIn(parameterType) {
@@ -186,7 +186,7 @@ function mapMediaTypeObject({ data, isParentActivated = false, specVersion }) {
 	const mediaTypeObj = { schema, examples, encoding, example };
 	const extensions = getExtensions(data.scopesExtensions);
 
-	return Object.assign({}, mediaTypeObj, extensions);
+	return { ...mediaTypeObj, ...extensions };
 }
 
 function mapEncoding({ data, specVersion }) {
@@ -209,7 +209,7 @@ function mapEncoding({ data, specVersion }) {
 			};
 			const extensions = getExtensions(value.scopesExtensions);
 
-			return { key, value: Object.assign({}, encodingObj, extensions) };
+			return { key, value: { ...encodingObj, ...extensions } };
 		})
 		.reduce((acc, { key, value }) => {
 			acc[key] = value;

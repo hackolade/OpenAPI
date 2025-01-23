@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const getExtensions = require('./extensionsHelper');
 const { commentDeactivatedItemInner } = require('./commentsHelper');
 const { isTargetVersionJSONSchemaCompatible, getArrayItems } = require('./sharedHelper');
@@ -23,7 +23,7 @@ function getType({ data, key, isParentActivated = false, specVersion }) {
 			);
 		}
 		return getType({
-			data: Object.assign({}, data, { type: data.type[0] }),
+			data: { ...data, type: data.type[0] },
 			key: '',
 			isParentActivated,
 			specVersion,
@@ -79,7 +79,7 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 			};
 			const arrayChoices = getChoices(data, key, specVersion);
 
-			return Object.assign({}, arrayProps, arrayChoices, extensions);
+			return { ...arrayProps, ...arrayChoices, ...extensions };
 		}
 		case 'object': {
 			const discriminator = getDiscriminator(data.discriminator);
@@ -105,7 +105,7 @@ function getTypeProps({ data, key, isParentActivated, specVersion }) {
 			const objectChoices = getChoices(data, key, specVersion);
 			const conditionalProperties = getConditionalProperties(data, specVersion);
 
-			return Object.assign({}, objectProps, objectChoices, conditionalProperties, extensions);
+			return { ...objectProps, ...objectChoices, ...conditionalProperties, ...extensions };
 		}
 		case 'parameter':
 			if (!properties || properties.length === 0) {
@@ -132,7 +132,7 @@ function getRef({ $ref, refDescription, description, summary, referenceDiff }, s
 }
 
 function hasRef(data = {}) {
-	return data.$ref ? true : false;
+	return !!data.$ref;
 }
 
 function getArrayItemsProps({ items, prefixItems, isParentActivated, specVersion }) {
@@ -144,12 +144,11 @@ function getArrayItemsProps({ items, prefixItems, isParentActivated, specVersion
 
 function getArrayItemsPropsOpenAPISpec({ items, isParentActivated, specVersion }) {
 	if (Array.isArray(items)) {
-		return Object.assign(
-			{},
-			items.length > 0 ? getType({ data: items[0], key: '', isParentActivated, specVersion }) : {},
-		);
+		return {
+			...(items.length > 0 ? getType({ data: items[0], key: '', isParentActivated, specVersion }) : {}),
+		};
 	}
-	return Object.assign({}, items ? getType({ data: items, key: '', isParentActivated, specVersion }) : {});
+	return { ...(items ? getType({ data: items, key: '', isParentActivated, specVersion }) : {}) };
 }
 
 function getArrayItemsPropsJSONSchemaSpec({ items, prefixItems, isParentActivated, specVersion }) {
@@ -192,17 +191,14 @@ function getXml(data) {
 		return undefined;
 	}
 
-	return Object.assign(
-		{},
-		{
-			name: data.xmlName,
-			namespace: data.xmlNamespace,
-			prefix: data.xmlPrefix,
-			attribute: data.xmlAttribute,
-			wrapped: data.xmlWrapped,
-		},
-		getExtensions(data.scopesExtensions),
-	);
+	return {
+		name: data.xmlName,
+		namespace: data.xmlNamespace,
+		prefix: data.xmlPrefix,
+		attribute: data.xmlAttribute,
+		wrapped: data.xmlWrapped,
+		...getExtensions(data.scopesExtensions),
+	};
 }
 
 function getPrimitiveTypeProps(data, specVersion) {
@@ -348,9 +344,10 @@ function addIfTrue(data, propertyName, value) {
 		return data;
 	}
 
-	return Object.assign({}, data, {
+	return {
+		...data,
 		[propertyName]: value,
-	});
+	};
 }
 
 function getArrayItemsExample(items) {

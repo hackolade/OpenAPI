@@ -5,7 +5,7 @@ const dataHelper = require('./helpers/dataHelper');
 const errorHelper = require('./helpers/errorHelper');
 const { adaptJsonSchema } = require('./helpers/adaptJsonSchema/adaptJsonSchema');
 const resolveExternalDefinitionPathHelper = require('./helpers/resolveExternalDefinitionPathHelper');
-const validationHelper = require('../forward_engineering/helpers/validationHelper');
+const validationHelper = require('../forward_engineering/helpers/validation/helper');
 
 module.exports = {
 	reFromFile(data, logger, callback) {

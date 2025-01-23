@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const getExtensions = require('./extensionsHelper');
 const { hasRef } = require('./typeHelper');
 
@@ -19,13 +19,14 @@ function mapExternalDocs({ externalDocsUrl, externalDocsDescription, scopesExten
 	};
 	const externalDocsExtensions = getExtensions(scopesExtensions);
 
-	return Object.assign({}, externalDocs, externalDocsExtensions);
+	return { ...externalDocs, ...externalDocsExtensions };
 }
 
 function mapExternalTagDocs({ tagExternalDocsUrl, tagExternalDocsDescription } = {}) {
 	if (!tagExternalDocsUrl) {
 		return;
 	}
+
 	return {
 		description: tagExternalDocsDescription,
 		url: tagExternalDocsUrl,
@@ -36,6 +37,7 @@ function mapTags(tags = []) {
 	if (tags.length === 0) {
 		return;
 	}
+
 	return tags.map(tag => {
 		const tagObj = {
 			name: tag.tagName,
@@ -44,7 +46,7 @@ function mapTags(tags = []) {
 		};
 		const tagExtensions = getExtensions(tag.scopesExtensions);
 
-		return Object.assign({}, tagObj, tagExtensions);
+		return { ...tagObj, ...tagExtensions };
 	});
 }
 
@@ -52,6 +54,7 @@ function mapSecurity(security = []) {
 	if (security.length === 0) {
 		return;
 	}
+
 	return security
 		.filter(({ securityRequirementName }) => securityRequirementName)
 		.map(({ securityRequirementName, securityRequirementOperation = [] }) => {

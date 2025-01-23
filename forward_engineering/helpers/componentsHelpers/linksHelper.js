@@ -1,4 +1,4 @@
-const get = require('lodash.get');
+const { get } = require('lodash');
 const { getRef, hasRef } = require('../typeHelper');
 const getExtensions = require('../extensionsHelper');
 const { mapServer } = require('../serversHelper');
@@ -48,7 +48,7 @@ function mapLink(data, specVersion) {
 	};
 	const extensions = getExtensions(scopesExtensions);
 
-	return Object.assign({}, linkData, extensions);
+	return { ...linkData, ...extensions };
 }
 
 function mapParameters(data) {

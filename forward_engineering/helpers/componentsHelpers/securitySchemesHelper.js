@@ -25,7 +25,7 @@ const cleanUp = obj => {
 				return acc;
 			}
 
-			return Object.assign({}, acc, { [key]: value });
+			return { ...acc, [key]: value };
 		}, {});
 	}
 
