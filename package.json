@@ -1,6 +1,6 @@
 {
     "name": "OpenAPI",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "author": "hackolade",
     "engines": {
         "hackolade": "6.9.11",
@@ -140,7 +140,7 @@
     "scripts": {
         "lint": "eslint . --max-warnings=0",
         "package": "node esbuild.package.js",
-		"postinstall": "npx simple-git-hooks"
+        "postinstall": "npx simple-git-hooks"
     },
     "devDependencies": {
         "@hackolade/hck-esbuild-plugins-pack": "0.0.1",
