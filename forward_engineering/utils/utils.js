@@ -12,11 +12,12 @@ function removeEmptyObjectFields(inputObj) {
 		.reduce((newObj, key) => {
 			const isObjectAndNotArray = typeof obj[key] === 'object' && !Array.isArray(obj[key]);
 			if (isObjectAndNotArray) {
-				return Object.assign(newObj, {
+				return {
+					...newObj,
 					[key]: removeEmptyObjectFields(obj[key]),
-				});
+				};
 			}
-			return Object.assign(newObj, { [key]: obj[key] });
+			return { ...newObj, [key]: obj[key] };
 		}, {});
 }
 

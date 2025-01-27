@@ -237,8 +237,7 @@ function getSchemaKeyword(properties = {}) {
 		return defaultKeyword;
 	}
 
-	const schemaKey = Object.keys(properties).find(key => !restRequestPropNames.includes(key));
-	return schemaKey;
+	return Object.keys(properties).find(key => !restRequestPropNames.includes(key));
 }
 
 module.exports = {

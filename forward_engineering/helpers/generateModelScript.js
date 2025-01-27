@@ -56,8 +56,12 @@ const handleRefInContainers = (containers, externalDefinitions, resolveApiExtern
 const separatePathAndWebhooks = containers => {
 	const pathContainers = [];
 	const webhookContainers = [];
-	console.log('containers', containers);
+
 	containers.forEach(container => {
+		if (!container.containerData?.[0]) {
+			return;
+		}
+
 		if (container.containerData?.[0]?.webhook) {
 			webhookContainers.push(container);
 		} else {
