@@ -58,10 +58,6 @@ const separatePathAndWebhooks = containers => {
 	const webhookContainers = [];
 
 	containers.forEach(container => {
-		if (!container.containerData?.[0]) {
-			return;
-		}
-
 		if (container.containerData?.[0]?.webhook) {
 			webhookContainers.push(container);
 		} else {
