@@ -10,7 +10,7 @@ const { getArrayItems } = require('./sharedHelper');
 
 function getPaths(containers, containersIdsForCallbacks = [], specVersion) {
 	return containers
-		.filter(({ id }) => !containersIdsForCallbacks.includes(id))
+		.filter(({ id, containerData }) => !containersIdsForCallbacks.includes(id))
 		.reduce((acc, container, index) => {
 			const { name, isActivated } = container.containerData[0];
 			const containerData = getRequestsForContainer({

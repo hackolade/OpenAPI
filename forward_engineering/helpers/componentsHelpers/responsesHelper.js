@@ -42,12 +42,14 @@ function mapResponse({ data, responseCollectionDescription, shouldResponseBeComm
 	});
 	const links = getLinks(get(data, `properties.links`), specVersion);
 	const extensions = getExtensions(data.scopesExtensions);
-	const response = {};
-	if (shouldResponseBeCommented) {
-		response[`hackoladeInnerCommentStart`] = true;
-	}
-
-	Object.assign(response, { description, headers, content, links }, extensions);
+	const response = {
+		...(shouldResponseBeCommented && { hackoladeInnerCommentStart: true }),
+		description,
+		headers,
+		content,
+		links,
+		...extensions,
+	};
 
 	if (shouldResponseBeCommented) {
 		response[`hackoladeInnerCommentEnd`] = true;
