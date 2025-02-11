@@ -50,6 +50,7 @@
                     "entities": false,
                     "model_definitions": true
                 },
+                "powerDesigner": false,
                 "plugin": true
             },
             "disableDenormalization": true,
