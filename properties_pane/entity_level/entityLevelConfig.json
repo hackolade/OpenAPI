@@ -482,6 +482,167 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
+				"fieldName": "$ref",
+				"fieldKeyword": "refPath",
+				"shouldValidate": true,
+				"fieldTooltip": "ref path",
+				"fieldType": "details",
+				"template": "selectPolyglotDefinition",
+				"changeAction": "changePolyglotReferencePath",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "refPath",
+							"exist": true
+						},
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"key": "entityType",
+									"value": "response"
+								}
+							]
+						}
+					]
+				},
+				"disabledOnCondition": [
+					{
+						"type": "and",
+						"values": [
+							{
+								"env": "browser"
+							},
+							{
+								"type": "or",
+								"values": [
+									{
+										"key": "refType",
+										"value": "external"
+									},
+									{
+										"key": "refType",
+										"value": "polyglot"
+									}
+								]
+							},
+							{
+								"type": "not",
+								"values": [
+									{
+										"key": "entityType",
+										"value": "response"
+									}
+								]
+							}
+						]
+					}
+				],
+				"enableForReference": true
+			},
+			{
+				"propertyName": "$ref",
+				"propertyKeyword": "refPath",
+				"propertyValidate": false,
+				"propertyType": "referencePath",
+				"enableForReference": true,
+				"readonly": false,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"type": "or",
+							"values": [
+								{
+									"key": "refPath",
+									"exist": false
+								},
+								{
+									"key": "refType",
+									"value": "model"
+								}
+							]
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"key": "entityType",
+									"value": "response"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"fieldName": "$ref",
+				"fieldKeyword": "refPath",
+				"shouldValidate": true,
+				"fieldTooltip": "Edit ref path",
+				"fieldType": "details",
+				"template": "showExternalDefinition",
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "refPath",
+							"exist": true
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"key": "entityType",
+									"value": "response"
+								}
+							]
+						}
+					]
+				},
+				"enableForReference": true,
+				"changeAction": "changeReferencePath"
+			},
+			{
+				"fieldName": "Reference description",
+				"fieldKeyword": "refDescription",
+				"shouldValidate": false,
+				"fieldTooltip": "This description is specific to this instance of the definition",
+				"skipTooltipPrefix": true,
+				"fieldType": "details",
+				"template": "textarea",
+				"changeAction": "changeCollectionProperty",
+				"valueType": "string",
+				"enableForReference": true,
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "type",
+							"value": "reference"
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"key": "entityType",
+									"value": "response"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
 				"propertyKeyword": "additionalProperties",
 				"propertyName": "Additional Properties",
 				"propertyType": "checkbox",
