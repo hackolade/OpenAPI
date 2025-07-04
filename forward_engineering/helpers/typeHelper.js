@@ -248,7 +248,7 @@ function getAdditionalProperties(data) {
 	}
 
 	if (data.additionalPropControl === 'Boolean') {
-		return data.additionalProperties && undefined;
+		return Boolean(data.additionalProperties) && undefined;
 	}
 
 	return getAdditionalPropsObject(data);
