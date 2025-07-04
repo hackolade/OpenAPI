@@ -247,9 +247,8 @@ function getAdditionalProperties(data) {
 		return;
 	}
 
-	const additionalProperties = Boolean(data.additionalProperties);
-	if (data.additionalPropControl === 'Boolean' && !additionalProperties) {
-		return additionalProperties;
+	if (data.additionalPropControl === 'Boolean') {
+		return data.additionalProperties && undefined;
 	}
 
 	return getAdditionalPropsObject(data);
