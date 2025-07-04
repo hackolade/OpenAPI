@@ -248,7 +248,11 @@ function getAdditionalProperties(data) {
 	}
 
 	if (data.additionalPropControl === 'Boolean') {
-		return Boolean(data.additionalProperties) && undefined;
+		/**
+		 * additionalProperties property should be omitted when the value is equal to "true" because it is enabled by default.
+		 * In case the property is missing or false it is explicitly included with "false" value
+		 */
+		return data.additionalProperties ? undefined : false;
 	}
 
 	return getAdditionalPropsObject(data);
