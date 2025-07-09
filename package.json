@@ -51,6 +51,7 @@
                     "model_definitions": true
                 },
                 "powerDesigner": false,
+				"mermaid": false,
                 "plugin": true
             },
             "disableDenormalization": true,
