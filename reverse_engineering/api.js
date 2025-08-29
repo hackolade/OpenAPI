@@ -171,7 +171,7 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) =>
 				const currentEntities = modelContent.entities[container.name];
 				return [
 					...accumulator,
-					...currentEntities.map(entity => {
+					...currentEntities.map((entity, index) => {
 						const packageData = {
 							objectNames: {
 								collectionName: entity.collectionName,
@@ -179,8 +179,8 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) =>
 							doc: {
 								dbName: container.name,
 								collectionName: entity.collectionName,
-								modelDefinitions: definitions,
 								bucketInfo: container,
+								...(index === 0 && { modelDefinitions: definitions }),
 							},
 							jsonSchema: JSON.stringify(entity),
 						};
