@@ -231,6 +231,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -607,6 +608,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -935,6 +937,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -1263,6 +1266,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -1470,6 +1474,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -1631,6 +1636,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -1934,6 +1940,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -2375,6 +2382,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -2443,6 +2451,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -2522,6 +2531,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -2666,6 +2676,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -2737,6 +2748,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -2795,6 +2807,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -2876,6 +2889,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -3337,6 +3351,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -3405,6 +3420,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -3568,6 +3584,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -3679,6 +3696,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -3761,6 +3779,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -3843,6 +3862,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
@@ -3925,6 +3945,7 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "extensions",
 				"propertyType": "group",
 				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
 				"shouldValidate": true,
 				"propertyTooltip": "",
 				"structure": [
