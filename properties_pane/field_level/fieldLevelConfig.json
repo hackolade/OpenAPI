@@ -250,7 +250,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -626,7 +678,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			}
 		],
 		"number": [
@@ -954,7 +1058,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			}
 		],
 		"integer": [
@@ -1282,7 +1438,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			}
 		],
 		"boolean": [
@@ -1489,7 +1697,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			}
 		],
 		"null": [
@@ -1650,7 +1910,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			}
 		],
 		"array": [
@@ -1955,8 +2267,74 @@ making sure that you maintain a proper JSON format.
 					}
 				],
 				"dependency": {
-					"key": "subtype",
-					"value": "schema"
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"key": "refType",
+									"value": "polyglot"
+								},
+								{
+									"key": "refType",
+									"value": "external"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "or",
+							"values": [
+								{
+									"key": "refType",
+									"value": "polyglot"
+								},
+								{
+									"key": "refType",
+									"value": "external"
+								}
+							]
+						}
+					]
 				}
 			}
 		],
@@ -2396,8 +2774,74 @@ making sure that you maintain a proper JSON format.
 					}
 				],
 				"dependency": {
-					"key": "subtype",
-					"value": "schema"
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "not",
+							"values": [
+								{
+									"key": "refType",
+									"value": "polyglot"
+								},
+								{
+									"key": "refType",
+									"value": "external"
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "and",
+					"values": [
+						{
+							"key": "subtype",
+							"value": "schema"
+						},
+						{
+							"type": "or",
+							"values": [
+								{
+									"key": "refType",
+									"value": "polyglot"
+								},
+								{
+									"key": "refType",
+									"value": "external"
+								}
+							]
+						}
+					]
 				}
 			},
 			"comments",
@@ -2462,7 +2906,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -2541,7 +3037,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -2685,7 +3233,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -2756,7 +3356,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -2814,7 +3466,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -2895,7 +3599,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -3356,7 +4112,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -3424,7 +4232,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			}
 		],
 		"link": [
@@ -3587,7 +4447,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			}
 		],
 		"expression": [
@@ -3698,7 +4610,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -3780,7 +4744,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -3862,7 +4878,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
@@ -3944,7 +5012,59 @@ making sure that you maintain a proper JSON format.
 						"template": "textarea",
 						"markdown": false
 					}
-				]
+				],
+				"dependency": {
+					"type": "not",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "extensions",
+				"propertyType": "group",
+				"propertyKeyword": "scopesExtensions",
+				"enableForReference": true,
+				"shouldValidate": true,
+				"propertyTooltip": "",
+				"structure": [
+					{
+						"propertyName": "pattern",
+						"propertyKeyword": "extensionPattern",
+						"shouldValidate": true,
+						"propertyType": "text",
+						"regex": "^x-"
+					},
+					{
+						"propertyName": "value",
+						"propertyKeyword": "extensionValue",
+						"propertyValidate": false,
+						"propertyTooltip": "Popup for multi-line text entry",
+						"propertyType": "details",
+						"template": "textarea",
+						"markdown": false
+					}
+				],
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "refType",
+							"value": "polyglot"
+						},
+						{
+							"key": "refType",
+							"value": "external"
+						}
+					]
+				}
 			},
 			{
 				"propertyKeyword": "subtype",
