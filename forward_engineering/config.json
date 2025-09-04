@@ -43,5 +43,7 @@
 			"value": false
 		}
 	],
-	"isApiSchema": true
+	"isApiSchema": true,
+	"disableJSONDataGeneration": true,
+	"disableAttributesSorting": true
 }

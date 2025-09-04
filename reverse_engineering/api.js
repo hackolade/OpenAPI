@@ -167,11 +167,16 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) =>
 		try {
 			const convertedData = convertOpenAPISchemaToHackolade(openAPISchema, fieldOrder);
 			const { modelData, modelContent, definitions } = convertedData;
+			let modelDefinitionsWereSet = false;
 			const hackoladeData = modelContent.containers.reduce((accumulator, container) => {
 				const currentEntities = modelContent.entities[container.name];
 				return [
 					...accumulator,
 					...currentEntities.map((entity, index) => {
+						const shouldSetModelDefinitions = !modelDefinitionsWereSet;
+						if (shouldSetModelDefinitions) {
+							modelDefinitionsWereSet = true;
+						}
 						const packageData = {
 							objectNames: {
 								collectionName: entity.collectionName,
@@ -180,7 +185,7 @@ const handleOpenAPIData = (openAPISchema, fieldOrder) =>
 								dbName: container.name,
 								collectionName: entity.collectionName,
 								bucketInfo: container,
-								...(index === 0 && { modelDefinitions: definitions }),
+								...(shouldSetModelDefinitions && { modelDefinitions: definitions }),
 							},
 							jsonSchema: JSON.stringify(entity),
 						};

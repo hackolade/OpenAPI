@@ -117,7 +117,8 @@
                 "propertyNames": [
                     "schemas"
                 ]
-            }
+            },
+            "collapseEntityAttributesInRE": true
         }
     },
     "description": "Hackolade plugin for OpenAPI",
