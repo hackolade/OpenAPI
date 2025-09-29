@@ -18,7 +18,7 @@
 	"TOOLBAR___ADD_ATTRIBUTE": "Add Attribute",
 	"TOOLBAR___INSERT_FIELD": "Insert Field",
 	"TOOLBAR___APPEND_FIELD": "Append Field",
-	"TOOLBAR___TOGGLE_FIELD_DETAILS": "Toggle field details",
+	"TOOLBAR___FIELD_DETAILS": "Field details",
 	"TOOLBAR___SHOW_FOREIGN_MASTER": "Toggle foreign master",
 	"TOOLBAR___SHOW_MODEL_VIEW": "Toggle model views",
 	"TOOLBAR___DISTRIBUTE_ORTHOGONALLY": "Distribute resources orthogonally",
