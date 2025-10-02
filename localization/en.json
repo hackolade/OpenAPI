@@ -153,5 +153,20 @@
 	"MODAL_WINDOW___FE_SCRIPT_OPTION_CREATE": "Kibana Script",
 	"DEFINITIONS___MODEL_DEFINITION_ROOT_ELEMENT_NAME": "components",
 	"CONTEXT_MENU___CONVERT_TO_DEFINITION": "Convert to Component",
-	"CONTEXT_MENU___REPLACE_BY_DEFINITION": "Replace by Component"
+	"CONTEXT_MENU___REPLACE_BY_DEFINITION": "Replace by Component",
+
+	"MAIN_MENU___ATTRIBUTES": "Attribute in Request Boxes",
+	"MAIN_MENU___DESCRIPTIONS": "Description in Request Boxes",
+	"MAIN_MENU___HIDE_ALL_ATTRIBUTES": "Empty Request Boxes",
+	"MAIN_MENU___REQUIRED_ATTRIBUTES": "Required Attributes",
+	"MAIN_MENU___NULLABLE_ATTRIBUTES": "Nullable Attributes",
+	"TOOLBAR___ATTRIBUTES": "Attribute in request boxes",
+	"TOOLBAR___DESCRIPTIONS": "Description in request boxes",
+	"TOOLBAR___HIDE_ALL_ATTRIBUTES": "Empty request boxes",
+	"TOOLBAR___REQUIRED_ATTRIBUTES": "Required attributes",
+	"TOOLBAR___NULLABLE_ATTRIBUTES": "Nullable attributes",
+	"MODAL_WINDOW___OPTIONS_DISPLAY_ERD_V_ENTITY_BOX_CONTENT": "Display of request box content",
+	"MODAL_WINDOW___OPTIONS_DISPLAY_ERD_V_FIELDS": "Attributes",
+	"MODAL_WINDOW___OPTIONS_DISPLAY_REQUIRED_ATTRIBUTES": "Required attributes",
+	"MODAL_WINDOW___OPTIONS_DISPLAY_NULLABLE_ATTRIBUTES": "Nullable attributes"
 }
