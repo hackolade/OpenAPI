@@ -101,9 +101,6 @@
             "externalDefinitionsFromTargetSchema": true,
             "apiTarget": true,
             "FEScriptCommentsSupported": true,
-            "displayOptions": {
-                "hideNonNullableAttributes": true
-            },
             "openModelDefinitionsTabIfNoCollections": true,
             "jsonSchemaSpec": {
                 "version": "draft-2020-12",
