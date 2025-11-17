@@ -12,7 +12,7 @@ function validate(data, logger, cb) {
 
 		switch (targetScriptOptions.format) {
 			case 'yaml':
-				parsedScript = yaml.safeLoad(filteredScript);
+				parsedScript = yaml.load(filteredScript);
 				break;
 			case 'json':
 			default:

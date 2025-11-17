@@ -126,7 +126,7 @@ function generateModelScript(data, logger, cb) {
 
 		switch (data.targetScriptOptions.format) {
 			case 'yaml': {
-				const schema = yaml.safeDump(resultSchema, { skipInvalid: true });
+				const schema = yaml.dump(resultSchema, { skipInvalid: true });
 				const schemaWithComments = addCommentsSigns(schema, 'yaml');
 				cb(null, schemaWithComments);
 				break;
