@@ -129,7 +129,7 @@
         "@apidevtools/swagger-parser": "10.1.0",
         "comment-json": "4.1.0",
         "js-yaml": "4.1.1",
-        "lodash": "4.17.21",
+        "lodash": "4.17.23",
         "lodash.get": "4.4.2",
         "lodash.isplainobject": "4.0.6",
         "lodash.partial": "4.2.1",
