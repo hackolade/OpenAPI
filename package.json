@@ -139,7 +139,7 @@
         "*.{js,json}": "prettier --write"
     },
     "simple-git-hooks": {
-        "pre-commit": "npx lint-staged",
+        "pre-commit": "npm run package && npx lint-staged",
         "pre-push": "npx eslint ."
     },
     "scripts": {
