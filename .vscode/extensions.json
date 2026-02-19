@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "sonarsource.sonarlint-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "vitest.explorer",
+    "oxc.oxc-vscode"
+  ]
+}

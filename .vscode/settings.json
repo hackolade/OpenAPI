@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "oxc.enable": true,
+  "oxc.typeAware": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxlint": "always"
+  },
+  "cSpell.words": ["ianvs", "jridgewell", "oxfmt", "oxlint", "tsgolint"]
+}

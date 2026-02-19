@@ -1,4 +1,6 @@
-.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .antlr
 .idea
 node_modules
