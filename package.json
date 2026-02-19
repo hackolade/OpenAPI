@@ -159,5 +159,8 @@
         "simple-git-hooks": "2.13.1",
         "oxlint": "1.38.0",
         "oxlint-tsgolint": "0.10.1"
+    },
+    "overrides": {
+        "minimatch": "10.2.1"
     }
 }
