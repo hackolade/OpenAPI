@@ -1,0 +1,33 @@
+{
+	"$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/crates/oxc_linter/src/schemas/oxlint.schema.json",
+	"categories": {
+		"correctness": "error",
+		"suspicious": "error",
+		"perf": "error",
+		"pedantic": "warn"
+	},
+	"rules": {
+		"max-classes-per-file": "off",
+		"max-lines": "off",
+		"max-lines-per-function": "off",
+		"no-bitwise": "warn",
+		"require-await": "off",
+		"strict-boolean-expressions": "off",
+		"unicorn/require-module-specifiers": "off"
+	},
+	"ignorePatterns": [
+		"**/*.config.*",
+		"**/*.d.ts",
+		"**/*.e2e.ts",
+		"**/*.spec.ts",
+		".git",
+		".idea",
+		".vscode",
+		"build",
+		"forward_engineering/node_modules",
+		"node_modules",
+		"out/**/*",
+		"release",
+		"reverse_engineering/node_modules"
+	]
+}
