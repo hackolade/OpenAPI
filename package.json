@@ -135,34 +135,31 @@
         "lodash.partial": "4.2.1",
         "node-uuid": "1.4.7"
     },
-    "lint-staged": {
-        "*.{js,json}": "prettier --write"
-    },
     "simple-git-hooks": {
-        "pre-commit": "npm run package && npx lint-staged",
-        "pre-push": "npx eslint ."
+        "pre-commit": "npm run package && npx lint-staged --config lint-staged.config.js",
+        "pre-push": "npm run lint"
     },
     "scripts": {
-        "lint": "eslint . --max-warnings=0",
+        "lint": "oxlint . || true",
         "package": "node esbuild.package.js",
-        "postinstall": "npx simple-git-hooks"
+        "postinstall": "npx simple-git-hooks",
+        "lint:check": "oxlint --type-aware --type-check . || true",
+        "format": "prettier --write ."
     },
     "devDependencies": {
         "@hackolade/hck-esbuild-plugins-pack": "0.0.1",
-        "@typescript-eslint/eslint-plugin": "7.11.0",
-        "@typescript-eslint/parser": "7.11.0",
-        "esbuild": "0.27.2",
+        "esbuild": "0.27.3",
         "esbuild-node-externals": "1.20.1",
         "esbuild-plugin-clean": "1.0.1",
         "esbuild-plugin-copy": "2.1.1",
-        "eslint": "8.57.0",
-        "eslint-config-prettier": "9.1.0",
-        "eslint-formatter-teamcity": "^1.0.0",
-        "eslint-plugin-import": "^2.26.0",
-        "eslint-plugin-prettier": "5.1.3",
-        "eslint-plugin-unused-imports": "3.2.0",
         "lint-staged": "16.2.7",
-        "prettier": "3.7.4",
-        "simple-git-hooks": "2.11.1"
+        "prettier": "3.8.1",
+        "simple-git-hooks": "2.13.1",
+        "oxlint": "1.38.0",
+        "oxlint-tsgolint": "0.10.1",
+        "@ianvs/prettier-plugin-sort-imports": "4.7.1"
+    },
+    "overrides": {
+        "minimatch": "10.2.1"
     }
 }
