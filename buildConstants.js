@@ -7,19 +7,19 @@ const EXCLUDED_FILES = [
 	'.github',
 	'.DS_Store',
 	'.editorconfig',
-	'.eslintignore',
-	'.eslintrc',
 	'.git',
 	'.gitignore',
 	'.vscode',
 	'.idea',
 	'.prettierignore',
-	'.prettierrc',
 	'.dockerignore',
+	'.oxlintrc.json',
 	'build',
 	'release',
 	'node_modules',
 	'package-lock.json',
+	'prettier.config.js',
+	'lint-staged.config.js',
 ];
 
 module.exports = {
