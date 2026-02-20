@@ -14,10 +14,12 @@ const EXCLUDED_FILES = [
 	'.prettierignore',
 	'.dockerignore',
 	'.oxlintrc.json',
+	'.sonarlint',
+	'.sonarcloud.properties',
+	'tsconfig.json',
 	'build',
 	'release',
 	'node_modules',
-	'package-lock.json',
 	'prettier.config.js',
 	'lint-staged.config.js',
 ];
