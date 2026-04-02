@@ -129,7 +129,7 @@
         "@apidevtools/swagger-parser": "10.1.0",
         "comment-json": "4.1.0",
         "js-yaml": "4.1.1",
-        "lodash": "4.17.23",
+        "lodash": "4.18.1",
         "lodash.get": "4.4.2",
         "lodash.isplainobject": "4.0.6",
         "lodash.partial": "4.2.1",
@@ -148,16 +148,16 @@
     },
     "devDependencies": {
         "@hackolade/hck-esbuild-plugins-pack": "0.0.1",
+        "@ianvs/prettier-plugin-sort-imports": "4.7.1",
         "esbuild": "0.27.3",
         "esbuild-node-externals": "1.20.1",
         "esbuild-plugin-clean": "1.0.1",
         "esbuild-plugin-copy": "2.1.1",
         "lint-staged": "16.2.7",
-        "prettier": "3.8.1",
-        "simple-git-hooks": "2.13.1",
         "oxlint": "1.38.0",
         "oxlint-tsgolint": "0.10.1",
-        "@ianvs/prettier-plugin-sort-imports": "4.7.1"
+        "prettier": "3.8.1",
+        "simple-git-hooks": "2.13.1"
     },
     "overrides": {
         "minimatch": "10.2.4"
