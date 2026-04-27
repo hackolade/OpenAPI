@@ -2522,12 +2522,14 @@ making sure that you maintain a proper JSON format.
 							{
 								"propertyName": "Discriminator value",
 								"propertyKeyword": "discriminatorValue",
-								"propertyType": "text"
+								"propertyType": "text",
+								"enableForReference": true
 							},
 							{
 								"propertyName": "Schema name or reference",
 								"propertyKeyword": "discriminatorSchema",
-								"propertyType": "text"
+								"propertyType": "text",
+								"enableForReference": true
 							}
 						]
 					}
