@@ -1,6 +1,6 @@
 {
     "name": "OpenAPI",
-    "version": "0.2.16",
+    "version": "0.2.17",
     "author": "hackolade",
     "engines": {
         "hackolade": "6.9.11",
